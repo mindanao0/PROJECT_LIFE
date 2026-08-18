@@ -2413,9 +2413,19 @@ db_cas_crash_injection
 audit_chain_verification
 traceability_completeness
 release_evidence_bundle_validation
+golden_self_evolution
+canary_traffic_validation
+rollback_demonstration
+immutable_evaluator_checksum_proof
+root_of_trust_bootstrap_ceremony
 ```
 
-[REQ][REQ-S21-001] Active plan itselfต้องผ่าน spec lintersก่อน implementation release
+5 job ท้าย (`golden_self_evolution` ถึง `root_of_trust_bootstrap_ceremony`) รองรับ `GATE_PRODUCTION`
+และ `GATE_SELF_EVOLUTION` ซึ่งเดิมไม่มี job ใดผลิตหลักฐานให้เลย รวมทั้งหมด 39 required jobs
+
+[REQ][REQ-S21-001] Active plan itself ต้องผ่าน spec linters ก่อน implementation release
+
+[REQ][REQ-S21-002] ทุก `mandatory_checks` ใน `spec/release_gates.yaml` ต้องอ้างชื่อ job ที่อยู่ใน section นี้เท่านั้น; ชื่อที่ resolve ไม่ได้ = CI failure
 
 ---
 

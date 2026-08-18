@@ -12,7 +12,7 @@
 # REQ-S22-004 requires real status, never auto-PASS.
 
 spec_version: "10.2.2"
-total_requirements: 178
+total_requirements: 179
 digest_algorithm: "SHA-256/NFC"
 
 requirements:
@@ -1664,7 +1664,19 @@ requirements:
     section: 21
     section_title: "CI & Conformance Matrix"
     status: "REQ"
-    text_digest: "sha256:b9217d190ae24e89e51ddd42b47953e371a5dbe616e9a8645e318e34732965c6"
+    text_digest: "sha256:a8bb47bcdbb4ebd07cbb390fb9d9be122be263c33bf8d72b792be8a5dbc8becf"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S21-002"
+    section: 21
+    section_title: "CI & Conformance Matrix"
+    status: "REQ"
+    text_digest: "sha256:d5caa4ea24ac741b1837370967117ab07f25a4634aab5a975b467f88727f4f34"
     verification_method: "PENDING"
     schema_refs: []
     protocol_refs: []

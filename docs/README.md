@@ -147,7 +147,7 @@
 - 📄 **[TROUBLESHOOTING_AND_REASON_CODES.md](09_operations_and_sre/TROUBLESHOOTING_AND_REASON_CODES.md)** : ดิกชันนารี Reason Codes และคู่มือแก้ปัญหา
 - 📄 **[PERFORMANCE_BUDGETS_AND_BENCHMARKS.md](09_operations_and_sre/PERFORMANCE_BUDGETS_AND_BENCHMARKS.md)** : งบประมาณเวลาประมวลผล (Latency Budgets) และ Memory Footprint
 - 📄 **[DISASTER_RECOVERY_AND_WAL.md](09_operations_and_sre/DISASTER_RECOVERY_AND_WAL.md)** : สถาปัตยกรรม SQLite WAL และเกณฑ์ RTO ≤ 60s, RPO ≤ 1 Gen
-- 📄 **[CI_CD_AUTOMATION_34_JOBS.md](09_operations_and_sre/CI_CD_AUTOMATION_34_JOBS.md)** : รายชื่อ CI Pipeline Jobs ครบทั้ง 34 ตัว
+- 📄 **[CI_CD_AUTOMATION_JOBS.md](09_operations_and_sre/CI_CD_AUTOMATION_JOBS.md)** : รายชื่อ CI Pipeline Jobs ครบทั้ง 34 ตัว
 - 📄 **[SPEC_LINTERS_SUITE.md](09_operations_and_sre/SPEC_LINTERS_SUITE.md)** : สเปกเครื่องมือตรวจสอบสเปกอัตโนมัติ 8 ตัว
 
 ---

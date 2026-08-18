@@ -7,6 +7,9 @@ LINT-10 (REQ-S01-009): audit/evidence/quarantine/recovery rows must never be
   destroyed by a cascading delete.
 LINT-11 (REQ-S16-001): benchmarks/golden/manifest.yaml is the canonical corpus
   registry; case directories and every derived table must agree with it.
+LINT-13 (REQ-S21-002): every mandatory_check in spec/release_gates.yaml and every
+  job in tools/ci_matrix.yaml must name a job declared in Active Contract section 21,
+  and no release gate may require a maturity level that itself requires that gate.
 LINT-12: prose state lists anywhere in the repo must not use a state name that
   spec/fsm_states_57.yaml has retired. Prose drift is what made LINT-09 miss the
   first time: the DDL was fixed while the narrative kept the old vocabulary.
@@ -233,12 +236,66 @@ def main() -> int:
                 f"{case['expected_disposition']!r} is not a terminal state of any FSM"
             )
 
+    # --- LINT-13: CI job names must resolve, and gates must not cycle ----------
+    spec_md = (ROOT / "build/spec/Evolution_Engine_Active_Spec_10_2_2.md").read_text(encoding="utf-8")
+    start = spec_md.find("# 21. CI")
+    end = spec_md.find("# 22.", start)
+    canonical_jobs = set(re.findall(r"^([a-z][a-z0-9_]{6,})$", spec_md[start:end], re.M))
+    if not canonical_jobs:
+        findings.append("LINT-13 could not read the job list from Active Contract section 21")
+
+    ci = yaml.safe_load((ROOT / "tools/ci_matrix.yaml").read_text(encoding="utf-8"))
+    ci_jobs = {j for stage in ci["stages"] for j in stage["jobs"]}
+    for job in sorted(ci_jobs - canonical_jobs):
+        findings.append(f"LINT-13 tools/ci_matrix.yaml: job {job!r} is not declared in section 21")
+    for job in sorted(canonical_jobs - ci_jobs):
+        findings.append(f"LINT-13 tools/ci_matrix.yaml: job {job!r} from section 21 is in no stage")
+    if ci.get("total_pipeline_jobs") != len(ci_jobs):
+        findings.append(
+            f"LINT-13 tools/ci_matrix.yaml: total_pipeline_jobs={ci.get('total_pipeline_jobs')} "
+            f"but {len(ci_jobs)} jobs are listed"
+        )
+
+    gates = yaml.safe_load((ROOT / "spec/release_gates.yaml").read_text(encoding="utf-8"))["release_gates"]
+    ladder = yaml.safe_load((ROOT / "spec/maturity.yaml").read_text(encoding="utf-8"))["maturity_ladder"]
+    level_index = {m["level"]: i for i, m in enumerate(ladder)}
+    gate_min = {g["name"]: g["minimum_maturity"] for g in gates}
+    for gate in gates:
+        for check in gate["mandatory_checks"]:
+            if check not in canonical_jobs:
+                findings.append(
+                    f"LINT-13 spec/release_gates.yaml: {gate['name']} requires check {check!r}, "
+                    f"which is not a job in section 21"
+                )
+        if gate["minimum_maturity"] not in level_index:
+            findings.append(
+                f"LINT-13 spec/release_gates.yaml: {gate['name']} minimum_maturity "
+                f"{gate['minimum_maturity']!r} is not a level in spec/maturity.yaml"
+            )
+        for pre in gate.get("prerequisites", []):
+            if pre not in gate_min:
+                findings.append(f"LINT-13 {gate['name']}: unknown prerequisite {pre!r}")
+            elif level_index.get(gate_min[pre], -1) > level_index.get(gate["minimum_maturity"], -1):
+                findings.append(
+                    f"LINT-13 {gate['name']} needs {gate['minimum_maturity']} but its prerequisite "
+                    f"{pre} needs {gate_min[pre]} — a gate cannot require a level above its own"
+                )
+        # the level a gate unlocks must not be the level it demands
+        for m in ladder:
+            gate_words = gate["name"].replace("GATE_", "").lower().split("_")
+            if all(w in m["gate"].lower() or w in m["name"].lower() for w in gate_words):
+                if m["level"] == gate["minimum_maturity"]:
+                    findings.append(
+                        f"LINT-13 circular: {gate['name']} requires {m['level']} while "
+                        f"{m['level']} is defined by passing {gate['name']}"
+                    )
+
     if findings:
         print(f"BLOCKER: {len(findings)} finding(s)\n")
         for f in findings:
             print(f"  - {f}")
         return 1
-    print("LINT-09..12: PASS — vocabularies agree across yaml/schema/DDL/prose, evidence is retention-safe, corpus matches manifest")
+    print("LINT-09..13: PASS — vocabularies agree, evidence is retention-safe, corpus matches manifest, CI job names resolve")
     return 0
 
 

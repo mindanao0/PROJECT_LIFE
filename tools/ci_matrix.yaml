@@ -1,57 +1,66 @@
+# CI job names are canonical in build/spec/Evolution_Engine_Active_Spec_10_2_2.md section 21.
+# This file only groups them into pipeline stages. Adding or renaming a job here without
+# changing section 21 is a REQ-S21-002 violation.
+
 version: "10.2.2"
-total_pipeline_jobs: 34
+total_pipeline_jobs: 39
 
 stages:
   - stage: "spec_verification"
     jobs_count: 8
     jobs:
-      - lint_json_schemas
-      - lint_markdown_links
-      - lint_requirements_traceability
-      - lint_fsm_graphs
-      - lint_sql_triggers
-      - lint_seccomp_matrix
-      - lint_conformance_matrices
-      - lint_equations_bijections
+      - spec_utf8_control_char_lint
+      - spec_heading_classification_lint
+      - spec_single_active_version_lint
+      - spec_no_historical_normative_freeze_lint
+      - spec_active_view_byte_match
+      - spec_archive_checksum_match
+      - spec_requirement_id_unique_and_complete
+      - spec_requirement_digest_change_guard
 
-  - stage: "unit_and_protocols"
-    jobs_count: 8
+  - stage: "schema_and_protocol"
+    jobs_count: 4
     jobs:
-      - test_python_312_protocols
-      - test_mypy_strict_typecheck
-      - test_pyright_conformance
-      - test_ast_visitors_static
-      - test_mutation_operators_m01_m08
-      - test_quantum_rotation_m09
-      - test_polyglot_native_m10
-      - test_sqlite_ddl_and_triggers
+      - schema_registry_exact_26
+      - schema_meta_validation
+      - schema_valid_invalid_vectors
+      - protocol_type_check
 
-  - stage: "property_based_testing"
+  - stage: "fsm_config_and_unit"
     jobs_count: 6
     jobs:
-      - pbt_pareto_dominance_hypothesis
-      - pbt_tree_edit_distance_triangle
-      - pbt_ucb1_bandit_regret_bounds
-      - pbt_cas_storage_fsync_idempotency
-      - pbt_recovery_fsm_reconciliation
-      - pbt_canonical_decimal_lossless
+      - fsm_reachability_and_terminal_tests
+      - config_argv_only_validation
+      - config_resolution_precedence_validation
+      - config_decimal_and_weight_semantics
+      - vertical_slice_deterministic_replay
+      - unit_tests
 
-  - stage: "security_and_sandbox"
-    jobs_count: 6
+  - stage: "security_and_persistence"
+    jobs_count: 10
     jobs:
-      - security_profile_a_namespaces
-      - security_cgroups_v2_oom_kill
-      - security_seccomp_bpf_syscall_traps
-      - security_ed25519_multisig_verification
-      - security_threat_quarantine_triggers
-      - security_airgap_network_egress
+      - integration_tests
+      - sandbox_profile_a_capability_probes
+      - sandbox_profile_a_kernel_backend_matrix
+      - sandbox_negative_security_corpus
+      - crypto_profile_test_vectors
+      - golden_core
+      - golden_security
+      - golden_reliability
+      - replay_tests
+      - db_migration_tests
 
-  - stage: "golden_benchmarks"
-    jobs_count: 6
+  - stage: "golden_and_release"
+    jobs_count: 11
     jobs:
-      - golden_mvp01_mvp03_cli_pipeline
-      - golden_mvp04_mvp06_graph_math_orm
-      - golden_mvp07_mvp09_crypto_simd_filter
-      - golden_mvp10_mvp12_p2p_alife_sandbox
-      - golden_mvp13_mvp14_refactor_self_evolve
-      - golden_r4_replay_determinism_match
+      - db_foreign_key_and_state_constraints
+      - db_index_query_plan_assertions
+      - db_cas_crash_injection
+      - audit_chain_verification
+      - traceability_completeness
+      - release_evidence_bundle_validation
+      - golden_self_evolution
+      - canary_traffic_validation
+      - rollback_demonstration
+      - immutable_evaluator_checksum_proof
+      - root_of_trust_bootstrap_ceremony

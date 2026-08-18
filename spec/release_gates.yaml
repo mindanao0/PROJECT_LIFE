@@ -1,28 +1,44 @@
+# mandatory_checks must name jobs from Active Contract section 21 (REQ-S21-002).
+# minimum_maturity names the level BELOW the one this gate unlocks, so that
+# M12 requiring GATE_PRODUCTION and GATE_PRODUCTION requiring M12 can no longer
+# form a cycle.
+
 release_gates:
   - name: "GATE_CORE"
     minimum_maturity: "M10"
     mandatory_checks:
-      - "schemas_meta_validation"
+      - "spec_requirement_id_unique_and_complete"
+      - "schema_registry_exact_26"
+      - "schema_meta_validation"
+      - "schema_valid_invalid_vectors"
       - "protocol_type_check"
-      - "fsm_reachability_proof"
-      - "db_migration_and_fk_tests"
-      - "sandbox_profile_a_probes"
-      - "golden_corpus_mvp01_to_mvp13"
-      - "traceability_completeness_178"
-      - "signed_evidence_bundle"
+      - "fsm_reachability_and_terminal_tests"
+      - "db_migration_tests"
+      - "db_foreign_key_and_state_constraints"
+      - "db_index_query_plan_assertions"
+      - "db_cas_crash_injection"
+      - "sandbox_profile_a_capability_probes"
+      - "sandbox_negative_security_corpus"
+      - "golden_core"
+      - "golden_security"
+      - "golden_reliability"
+      - "replay_tests"
+      - "audit_chain_verification"
+      - "traceability_completeness"
+      - "release_evidence_bundle_validation"
 
   - name: "GATE_PRODUCTION"
-    minimum_maturity: "M12"
+    minimum_maturity: "M11"
     prerequisites: ["GATE_CORE"]
     mandatory_checks:
       - "canary_traffic_validation"
-      - "automated_rollback_demonstration"
-      - "ed25519_multisig_2_of_3_quorum"
+      - "rollback_demonstration"
+      - "crypto_profile_test_vectors"
 
   - name: "GATE_SELF_EVOLUTION"
-    minimum_maturity: "M13"
+    minimum_maturity: "M12"
     prerequisites: ["GATE_CORE", "GATE_PRODUCTION"]
     mandatory_checks:
       - "immutable_evaluator_checksum_proof"
       - "root_of_trust_bootstrap_ceremony"
-      - "self_evolution_quarantine_invariants"
+      - "golden_self_evolution"
