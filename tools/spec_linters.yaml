@@ -1,5 +1,5 @@
 version: "10.2.2"
-total_linters: 14
+total_linters: 15
 
 linters:
   - linter_id: "LINT-01"
@@ -89,5 +89,12 @@ linters:
     name: "DeclaredCountLinter"
     target: "spec/version_manifest.yaml, spec/traceability.yaml, tools/spec_linters.yaml"
     rule: "Every count declared in spec/version_manifest.yaml subsystems must equal the number actually present in the repo (schemas, protocols, tables, indices, FSMs, states, corpus cases, requirements, CI jobs, linters), and traceability entry counts must match the Active Contract."
+    implementation: "tools/lint_state_vocabulary.py"
+    severity: "BLOCKER"
+
+  - linter_id: "LINT-15"
+    name: "ConfigExampleValidationLinter"
+    target: "docs/**/*.md, build/spec/*.md, schemas/26_engine_config.schema.json"
+    rule: "Every evolution.yaml example printed anywhere in the repo must validate against schemas/26_engine_config.schema.json, so an example copied by a user cannot be rejected by `evolve validate`."
     implementation: "tools/lint_state_vocabulary.py"
     severity: "BLOCKER"

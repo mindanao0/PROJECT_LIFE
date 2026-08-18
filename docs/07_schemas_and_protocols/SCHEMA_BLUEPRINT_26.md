@@ -52,6 +52,6 @@
 │ 23 │ release_gate.schema.json         │ gate_name, maturity_level_verified, decision, evidence_dig  │
 │ 24 │ quarantine_record.schema.json    │ quarantine_record_id, candidate_id, reason_code, evidence   │
 │ 25 │ memory_record.schema.json        │ memory_id, ast_pattern_hash, reward_score_decimal           │
-│ 26 │ engine_config.schema.json        │ version, evolution, metrics, selection, sandbox, stopping   │
+│ 26 │ engine_config.schema.json        │ project, evolution, metrics, selection, sandbox, deployment,│
 └────┴──────────────────────────────────┴─────────────────────────────────────────────────────────────┘
 ```

@@ -13,6 +13,9 @@ LINT-13 (REQ-S21-002): every mandatory_check in spec/release_gates.yaml and ever
 LINT-14: every count declared in spec/version_manifest.yaml must equal the number
   actually present. Hand-asserted counts drifting from reality is the single most
   common defect class in this repo.
+LINT-15: every evolution.yaml example printed in the docs must validate against
+  schemas/26_engine_config.schema.json. A quickstart whose config is rejected by
+  `evolve validate` is worse than no quickstart.
 LINT-12: prose state lists anywhere in the repo must not use a state name that
   spec/fsm_states_57.yaml has retired. Prose drift is what made LINT-09 miss the
   first time: the DDL was fixed while the narrative kept the old vocabulary.
@@ -340,12 +343,42 @@ def main() -> int:
             f"Active Contract declares {len(canonical_req_ids)} requirements"
         )
 
+    # --- LINT-15: documented config examples must validate ---------------------
+    try:
+        from jsonschema import Draft202012Validator
+    except ImportError:
+        findings.append("LINT-15 skipped: jsonschema is not installed")
+    else:
+        cfg_schema = json.loads((ROOT / "schemas/26_engine_config.schema.json").read_text(encoding="utf-8"))
+        Draft202012Validator.check_schema(cfg_schema)
+        validator = Draft202012Validator(cfg_schema)
+        sources = sorted(ROOT.glob("docs/**/*.md")) + sorted(ROOT.glob("*.md"))
+        sources.append(ROOT / "build/spec/Evolution_Engine_Active_Spec_10_2_2.md")
+        checked = 0
+        for path in sources:
+            for block in re.findall(r"```yaml\n(.*?)```", path.read_text(encoding="utf-8"), re.S):
+                try:
+                    doc = yaml.safe_load(block)
+                except yaml.YAMLError:
+                    continue
+                if not isinstance(doc, dict) or "evolution" not in doc or "sandbox" not in doc:
+                    continue
+                checked += 1
+                for err in validator.iter_errors(doc):
+                    where = "/" + "/".join(str(x) for x in err.path)
+                    findings.append(
+                        f"LINT-15 {path.relative_to(ROOT)}: config example fails "
+                        f"26_engine_config.schema.json at {where}: {err.message}"
+                    )
+        if checked == 0:
+            findings.append("LINT-15 found no evolution.yaml example to validate")
+
     if findings:
         print(f"BLOCKER: {len(findings)} finding(s)\n")
         for f in findings:
             print(f"  - {f}")
         return 1
-    print("LINT-09..14: PASS — vocabularies agree, evidence is retention-safe, corpus matches manifest, CI job names resolve, declared counts are real")
+    print("LINT-09..15: PASS — vocabularies agree, evidence is retention-safe, corpus matches manifest, CI job names resolve, declared counts are real, config examples validate")
     return 0
 
 

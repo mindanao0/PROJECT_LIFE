@@ -101,6 +101,7 @@ deployment:
 
 # เงื่อนไขการหยุดทำงาน (Stopping Criteria)
 stopping:
+  target_rule: null              # ไม่มีเงื่อนไขเป้าหมาย; ระบุเป็น string ได้ถ้าต้องการ
   max_generations: 50
   max_stagnation: 15
   max_runtime_seconds: 1800      # 30 minutes
