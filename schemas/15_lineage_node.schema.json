@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolution-engine.org/schemas/15_lineage_node.schema.json",
+  "title": "LineageNode",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "candidate_id",
+    "generation_index",
+    "source_hash",
+    "depth"
+  ],
+  "properties": {
+    "candidate_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "generation_index": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "source_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "depth": {
+      "type": "integer",
+      "minimum": 0
+    }
+  }
+}

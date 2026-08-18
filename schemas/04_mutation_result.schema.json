@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolution-engine.org/schemas/04_mutation_result.schema.json",
+  "title": "MutationResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "mutation_attempt_id",
+    "mutation_id",
+    "status",
+    "source_before_hash",
+    "source_after_hash",
+    "duration_ms"
+  ],
+  "properties": {
+    "mutation_attempt_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "mutation_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["SUCCESS", "SYNTAX_INVALID", "INVARIANT_VIOLATION", "NOOP"]
+    },
+    "source_before_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_after_hash": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "ast_delta_bytes": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "duration_ms": {
+      "type": "number",
+      "minimum": 0.0
+    }
+  }
+}

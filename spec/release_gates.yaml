@@ -1,0 +1,28 @@
+release_gates:
+  - name: "GATE_CORE"
+    minimum_maturity: "M10"
+    mandatory_checks:
+      - "schemas_meta_validation"
+      - "protocol_type_check"
+      - "fsm_reachability_proof"
+      - "db_migration_and_fk_tests"
+      - "sandbox_profile_a_probes"
+      - "golden_corpus_mvp01_to_mvp13"
+      - "traceability_completeness_178"
+      - "signed_evidence_bundle"
+
+  - name: "GATE_PRODUCTION"
+    minimum_maturity: "M12"
+    prerequisites: ["GATE_CORE"]
+    mandatory_checks:
+      - "canary_traffic_validation"
+      - "automated_rollback_demonstration"
+      - "ed25519_multisig_2_of_3_quorum"
+
+  - name: "GATE_SELF_EVOLUTION"
+    minimum_maturity: "M13"
+    prerequisites: ["GATE_CORE", "GATE_PRODUCTION"]
+    mandatory_checks:
+      - "immutable_evaluator_checksum_proof"
+      - "root_of_trust_bootstrap_ceremony"
+      - "self_evolution_quarantine_invariants"

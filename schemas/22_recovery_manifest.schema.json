@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolution-engine.org/schemas/22_recovery_manifest.schema.json",
+  "title": "RecoveryManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "recovery_id",
+    "run_id",
+    "recovery_status",
+    "recovered_generation_index",
+    "cas_objects_rebuilt",
+    "resumed_state",
+    "recovered_at"
+  ],
+  "properties": {
+    "recovery_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "run_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "recovery_status": {
+      "type": "string",
+      "enum": ["SUCCESS", "PARTIAL", "FAILED", "SAFE_MODE"]
+    },
+    "recovered_generation_index": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "cas_objects_rebuilt": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "resumed_state": {
+      "type": "string"
+    },
+    "recovered_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

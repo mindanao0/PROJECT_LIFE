@@ -1,0 +1,10 @@
+project_id: "00000000-0000-0000-0003-000000000003"
+case_id: "MVP-03"
+name: "rest_api_service"
+language: "python"
+primary_objective: "request_latency_p99"
+target_speedup: "1.8x"
+entrypoint: "app.py"
+test_suite: "tests/test_api.py"
+allowed_mutations: ["M01", "M02", "M07", "M08"]
+sandbox_profile: "PROFILE_A_LINUX"

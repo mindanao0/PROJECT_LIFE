@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolution-engine.org/schemas/13_oracle_result.schema.json",
+  "title": "OracleResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "oracle_result_id",
+    "candidate_id",
+    "oracle_version",
+    "tests_total",
+    "tests_passed",
+    "tests_failed",
+    "verdict"
+  ],
+  "properties": {
+    "oracle_result_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "candidate_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "oracle_version": {
+      "type": "string"
+    },
+    "tests_total": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "tests_passed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "tests_failed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "verdict": {
+      "type": "string",
+      "enum": ["PASSED", "FAILED", "TIMEOUT", "CRASHED", "QUARANTINED"]
+    }
+  }
+}

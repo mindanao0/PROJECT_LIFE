@@ -1,0 +1,57 @@
+version: "10.2.2"
+total_pipeline_jobs: 34
+
+stages:
+  - stage: "spec_verification"
+    jobs_count: 8
+    jobs:
+      - lint_json_schemas
+      - lint_markdown_links
+      - lint_requirements_traceability
+      - lint_fsm_graphs
+      - lint_sql_triggers
+      - lint_seccomp_matrix
+      - lint_conformance_matrices
+      - lint_equations_bijections
+
+  - stage: "unit_and_protocols"
+    jobs_count: 8
+    jobs:
+      - test_python_312_protocols
+      - test_mypy_strict_typecheck
+      - test_pyright_conformance
+      - test_ast_visitors_static
+      - test_mutation_operators_m01_m08
+      - test_quantum_rotation_m09
+      - test_polyglot_native_m10
+      - test_sqlite_ddl_and_triggers
+
+  - stage: "property_based_testing"
+    jobs_count: 6
+    jobs:
+      - pbt_pareto_dominance_hypothesis
+      - pbt_tree_edit_distance_triangle
+      - pbt_ucb1_bandit_regret_bounds
+      - pbt_cas_storage_fsync_idempotency
+      - pbt_recovery_fsm_reconciliation
+      - pbt_canonical_decimal_lossless
+
+  - stage: "security_and_sandbox"
+    jobs_count: 6
+    jobs:
+      - security_profile_a_namespaces
+      - security_cgroups_v2_oom_kill
+      - security_seccomp_bpf_syscall_traps
+      - security_ed25519_multisig_verification
+      - security_threat_quarantine_triggers
+      - security_airgap_network_egress
+
+  - stage: "golden_benchmarks"
+    jobs_count: 6
+    jobs:
+      - golden_mvp01_mvp03_cli_pipeline
+      - golden_mvp04_mvp06_graph_math_orm
+      - golden_mvp07_mvp09_crypto_simd_filter
+      - golden_mvp10_mvp12_p2p_alife_sandbox
+      - golden_mvp13_mvp14_refactor_self_evolve
+      - golden_r4_replay_determinism_match

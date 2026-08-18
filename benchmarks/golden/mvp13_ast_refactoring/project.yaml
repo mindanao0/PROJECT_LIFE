@@ -1,0 +1,10 @@
+project_id: "00000000-0000-0000-0013-000000000013"
+case_id: "MVP-13"
+name: "ast_refactoring_optimizer"
+language: "python"
+primary_objective: "structural_delta_ratio"
+target_speedup: "1.7x"
+entrypoint: "refactor.py"
+test_suite: "tests/test_refactor.py"
+allowed_mutations: ["M05", "M06", "M07"]
+sandbox_profile: "PROFILE_A_LINUX"

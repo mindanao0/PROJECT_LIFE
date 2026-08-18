@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolution-engine.org/schemas/03_mutation.schema.json",
+  "title": "MutationDescriptor",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "mutation_id",
+    "strategy_id",
+    "parent_candidate_id",
+    "seed",
+    "operator_name",
+    "created_at"
+  ],
+  "properties": {
+    "mutation_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "strategy_id": {
+      "type": "string",
+      "enum": ["M01", "M02", "M03", "M04", "M05", "M06", "M07", "M08", "M09", "M10"]
+    },
+    "parent_candidate_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "operator_name": {
+      "type": "string"
+    },
+    "target_ast_location": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "file_path": { "type": "string" },
+        "lineno": { "type": "integer", "minimum": 1 },
+        "col_offset": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

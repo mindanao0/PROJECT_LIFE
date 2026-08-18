@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolution-engine.org/schemas/12_metric_result.schema.json",
+  "title": "MetricResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "metric_result_id",
+    "candidate_id",
+    "objective_id",
+    "estimate_decimal",
+    "variance_decimal",
+    "sample_count",
+    "measured_at"
+  ],
+  "properties": {
+    "metric_result_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "candidate_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "objective_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "estimate_decimal": {
+      "type": "string",
+      "pattern": "^-?[0-9]+\\.[0-9]{6}$"
+    },
+    "variance_decimal": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]{6}$"
+    },
+    "sample_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "measured_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

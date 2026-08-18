@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolution-engine.org/schemas/24_quarantine_record.schema.json",
+  "title": "QuarantineRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "quarantine_record_id",
+    "candidate_id",
+    "reason_code",
+    "severity",
+    "evidence_snapshot_hash",
+    "quarantined_at"
+  ],
+  "properties": {
+    "quarantine_record_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "candidate_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "reason_code": {
+      "type": "string"
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]
+    },
+    "evidence_snapshot_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "quarantined_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

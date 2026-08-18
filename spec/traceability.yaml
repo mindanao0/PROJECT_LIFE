@@ -1,0 +1,91 @@
+spec_version: "10.2.2"
+total_requirements: 178
+requirements_summary:
+  S00_system_scope:
+    range: "REQ-S00-001 .. REQ-S00-003"
+    count: 3
+    status: "REQ"
+  S01_core_principles:
+    range: "REQ-S01-001 .. REQ-S01-011"
+    count: 11
+    status: "REQ"
+  S02_authority_and_lifecycle:
+    range: "REQ-S02-001 .. REQ-S02-009"
+    count: 9
+    status: "REQ"
+  S03_runtime_boundaries:
+    range: "REQ-S03-001 .. REQ-S03-005"
+    count: 5
+    status: "REQ"
+  S04_repository_layout:
+    range: "REQ-S04-001 .. REQ-S04-004"
+    count: 4
+    status: "REQ"
+  S05_configuration_invariants:
+    range: "REQ-S05-001 .. REQ-S05-005"
+    count: 5
+    status: "REQ"
+  S06_data_and_schemas:
+    range: "REQ-S06-001 .. REQ-S06-003"
+    count: 3
+    status: "REQ"
+  S07_typed_protocols:
+    range: "REQ-S07-001 .. REQ-S07-003"
+    count: 3
+    status: "REQ"
+  S08_finite_state_machines:
+    range: "REQ-S08-001 .. REQ-S08-005"
+    count: 5
+    status: "REQ"
+  S09_ast_and_mutations:
+    range: "REQ-S09-001 .. REQ-S09-005"
+    count: 5
+    status: "REQ"
+  S10_metrics_and_pareto:
+    range: "REQ-S10-001 .. REQ-S10-010"
+    count: 10
+    status: "REQ"
+  S11_hashing_and_serialization:
+    range: "REQ-S11-001 .. REQ-S11-002"
+    count: 2
+    status: "REQ"
+  S12_hardened_sandbox:
+    range: "REQ-S12-001 .. REQ-S12-020"
+    count: 20
+    status: "REQ"
+  S13_database_persistence:
+    range: "REQ-S13-001 .. REQ-S13-009"
+    count: 9
+    status: "REQ"
+  S14_cas_storage_engine:
+    range: "REQ-S14-001 .. REQ-S14-002"
+    count: 2
+    status: "REQ"
+  S15_public_cli_and_sdk:
+    range: "REQ-S15-001 .. REQ-S15-007"
+    count: 7
+    status: "REQ"
+  S16_golden_test_corpus:
+    range: "REQ-S16-001 .. REQ-S16-004"
+    count: 4
+    status: "REQ"
+  S17_flaky_and_anti_gaming:
+    range: "REQ-S17-001 .. REQ-S17-003"
+    count: 3
+    status: "REQ"
+  S18_evidence_and_release:
+    range: "REQ-S18-001 .. REQ-S18-005"
+    count: 5
+    status: "REQ"
+  S19_audit_and_lineage:
+    range: "REQ-S19-001 .. REQ-S19-008"
+    count: 8
+    status: "REQ"
+  S20_negative_security_proof:
+    range: "REQ-S20-001 .. REQ-S20-003"
+    count: 3
+    status: "REQ"
+  S21_to_S30_maturity_and_gates:
+    range: "REQ-S21-001 .. REQ-S30-002"
+    count: 52
+    status: "REQ"

@@ -1,0 +1,51 @@
+version: "10.2.2"
+total_linters: 8
+
+linters:
+  - linter_id: "LINT-01"
+    name: "ClosedWorldSchemaLinter"
+    target: "schemas/*.schema.json"
+    rule: "Ensure all schemas have additionalProperties: false and draft 2020-12 meta-schema"
+    severity: "BLOCKER"
+
+  - linter_id: "LINT-02"
+    name: "MonotonicTraceabilityLinter"
+    target: "docs/10_governance_and_roadmap/REQUIREMENTS_TRACEABILITY_178.md"
+    rule: "Verify exactly 178 monotonic requirement IDs without gaps or duplicates"
+    severity: "BLOCKER"
+
+  - linter_id: "LINT-03"
+    name: "FsmStateCompletenessLinter"
+    target: "docs/02_fsm_and_lifecycles/*.md"
+    rule: "Verify all 57 states across 5 FSMs have valid transitions and no deadlocks"
+    severity: "BLOCKER"
+
+  - linter_id: "LINT-04"
+    name: "SqlTriggerIntegrityLinter"
+    target: "docs/03_storage_and_database/INTEGRITY_TRIGGERS.md"
+    rule: "Validate polymorphic reference triggers and gapless sequence checks"
+    severity: "BLOCKER"
+
+  - linter_id: "LINT-05"
+    name: "DecimalFormatLinter"
+    target: "docs/domains/*.md"
+    rule: "Ensure no IEEE 754 float expressions are serialized without scale bounds"
+    severity: "BLOCKER"
+
+  - linter_id: "LINT-06"
+    name: "SeccompMatrixCoverageLinter"
+    target: "docs/06_security_and_sandboxing/SECCOMP_BPF_FILTERING.md"
+    rule: "Verify all 6 prohibited syscall categories are covered by kill filters"
+    severity: "BLOCKER"
+
+  - linter_id: "LINT-07"
+    name: "BitIdenticalReplayLinter"
+    target: "docs/01_architecture/VISION_AND_PRINCIPLES.md"
+    rule: "Assert R4 bit-identical determinism requirement is enforced across all runners"
+    severity: "BLOCKER"
+
+  - linter_id: "LINT-08"
+    name: "MaturityGatesClosureLinter"
+    target: "spec/maturity.yaml"
+    rule: "Verify all release gates M0 to M13 are monotonically ordered"
+    severity: "BLOCKER"

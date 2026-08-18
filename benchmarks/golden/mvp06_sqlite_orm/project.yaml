@@ -1,0 +1,10 @@
+project_id: "00000000-0000-0000-0006-000000000006"
+case_id: "MVP-06"
+name: "sqlite_orm_wrapper"
+language: "python"
+primary_objective: "query_latency_us"
+target_speedup: "2.2x"
+entrypoint: "orm.py"
+test_suite: "tests/test_orm.py"
+allowed_mutations: ["M05", "M07", "M08"]
+sandbox_profile: "PROFILE_A_LINUX"

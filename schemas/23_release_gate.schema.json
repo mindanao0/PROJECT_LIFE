@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolution-engine.org/schemas/23_release_gate.schema.json",
+  "title": "ReleaseGateRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "gate_id",
+    "gate_name",
+    "maturity_level_verified",
+    "decision",
+    "evidence_digest",
+    "verified_at"
+  ],
+  "properties": {
+    "gate_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "gate_name": {
+      "type": "string"
+    },
+    "maturity_level_verified": {
+      "type": "string",
+      "enum": ["M0", "M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10", "M11", "M12", "M13"]
+    },
+    "decision": {
+      "type": "string",
+      "enum": ["PASS", "FAIL", "WAIVED"]
+    },
+    "evidence_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "verified_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

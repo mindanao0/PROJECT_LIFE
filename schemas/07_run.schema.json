@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolution-engine.org/schemas/07_run.schema.json",
+  "title": "RunManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "project_id",
+    "master_seed",
+    "config_hash",
+    "policy_hash",
+    "run_state",
+    "created_at"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "project_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "master_seed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "config_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "policy_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "run_state": {
+      "type": "string",
+      "enum": [
+        "INITIATED",
+        "CONFIG_LOADED",
+        "PREFLIGHT_PASSED",
+        "RUNNING",
+        "PAUSED",
+        "GENERATION_COMMITTED",
+        "CHECKPOINTING",
+        "COMPLETED",
+        "FAILED",
+        "ABORTED",
+        "RECOVERING"
+      ]
+    },
+    "current_generation": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "completed_at": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    }
+  }
+}

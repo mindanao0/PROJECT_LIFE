@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolution-engine.org/schemas/10_capability_contract.schema.json",
+  "title": "CapabilityContract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "capability_id",
+    "project_id",
+    "required_capabilities",
+    "enforcement_mode"
+  ],
+  "properties": {
+    "capability_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "project_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "required_capabilities": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "enforcement_mode": {
+      "type": "string",
+      "enum": ["STRICT", "PERMISSIVE", "AUDIT_ONLY"]
+    }
+  }
+}

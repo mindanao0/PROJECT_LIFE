@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolution-engine.org/schemas/11_objective.schema.json",
+  "title": "ObjectiveDefinition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "objective_id",
+    "name",
+    "direction",
+    "unit",
+    "tolerance_margin_decimal"
+  ],
+  "properties": {
+    "objective_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "name": {
+      "type": "string"
+    },
+    "direction": {
+      "type": "string",
+      "enum": ["MINIMIZE", "MAXIMIZE"]
+    },
+    "unit": {
+      "type": "string"
+    },
+    "tolerance_margin_decimal": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]{6}$"
+    }
+  }
+}

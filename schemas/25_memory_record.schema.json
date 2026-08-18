@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolution-engine.org/schemas/25_memory_record.schema.json",
+  "title": "HippocampalMemoryRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "memory_id",
+    "ast_pattern_hash",
+    "embedding_vector",
+    "reward_score_decimal",
+    "access_count",
+    "created_at"
+  ],
+  "properties": {
+    "memory_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "ast_pattern_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "embedding_vector": {
+      "type": "array",
+      "items": { "type": "number" },
+      "minItems": 16,
+      "maxItems": 128
+    },
+    "reward_score_decimal": {
+      "type": "string",
+      "pattern": "^-?[0-9]+\\.[0-9]{6}$"
+    },
+    "access_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

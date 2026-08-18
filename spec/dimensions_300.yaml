@@ -1,0 +1,154 @@
+version: "10.2.2"
+total_domains: 30
+total_dimensions: 300
+
+domains:
+  - domain_id: "DOMAIN-01"
+    name: "Offline-First & Determinism Foundations"
+    dimensions_range: "DIM-001..DIM-010"
+    equations_range: "EQ-001..EQ-010"
+
+  - domain_id: "DOMAIN-02"
+    name: "Concurrency & Single-Writer Coordinator"
+    dimensions_range: "DIM-011..DIM-020"
+    equations_range: "EQ-011..EQ-020"
+
+  - domain_id: "DOMAIN-03"
+    name: "Finite State Machine Dynamics (5 FSMs)"
+    dimensions_range: "DIM-021..DIM-030"
+    equations_range: "EQ-021..EQ-030"
+
+  - domain_id: "DOMAIN-04"
+    name: "Data Schemas & Exact JSON Contracts"
+    dimensions_range: "DIM-031..DIM-040"
+    equations_range: "EQ-031..EQ-040"
+
+  - domain_id: "DOMAIN-05"
+    name: "Architecture Protocols & Public SDK Surfaces"
+    dimensions_range: "DIM-041..DIM-050"
+    equations_range: "EQ-041..EQ-050"
+
+  - domain_id: "DOMAIN-06"
+    name: "Python 3.12 Deep AST/CST Semantic Parsing"
+    dimensions_range: "DIM-051..DIM-060"
+    equations_range: "EQ-051..EQ-060"
+
+  - domain_id: "DOMAIN-07"
+    name: "Static Pre-Execution Safety Invariant Visitors"
+    dimensions_range: "DIM-061..DIM-070"
+    equations_range: "EQ-061..EQ-070"
+
+  - domain_id: "DOMAIN-08"
+    name: "Atomic Syntax & Control Flow Mutations (M01-M04)"
+    dimensions_range: "DIM-071..DIM-080"
+    equations_range: "EQ-071..EQ-080"
+
+  - domain_id: "DOMAIN-09"
+    name: "Architectural Refactoring & Inlining (M05-M08)"
+    dimensions_range: "DIM-081..DIM-090"
+    equations_range: "EQ-081..EQ-090"
+
+  - domain_id: "DOMAIN-10"
+    name: "Polyglot Native Accelerator Compilation (M10)"
+    dimensions_range: "DIM-091..DIM-100"
+    equations_range: "EQ-091..EQ-100"
+
+  - domain_id: "DOMAIN-11"
+    name: "Multi-Objective Pareto Dominance & Fast Sorting"
+    dimensions_range: "DIM-101..DIM-110"
+    equations_range: "EQ-101..EQ-110"
+
+  - domain_id: "DOMAIN-12"
+    name: "Population Diversity & Tree Edit Distances"
+    dimensions_range: "DIM-111..DIM-120"
+    equations_range: "EQ-111..EQ-120"
+
+  - domain_id: "DOMAIN-13"
+    name: "Statistical Tests (Welch, TOST, Holm, FDR)"
+    dimensions_range: "DIM-121..DIM-130"
+    equations_range: "EQ-121..EQ-130"
+
+  - domain_id: "DOMAIN-14"
+    name: "Multi-Armed Bandit Dynamic Strategy (UCB1)"
+    dimensions_range: "DIM-131..DIM-140"
+    equations_range: "EQ-131..EQ-140"
+
+  - domain_id: "DOMAIN-15"
+    name: "Quantum-Inspired Qubit Superposition Search (M09)"
+    dimensions_range: "DIM-141..DIM-150"
+    equations_range: "EQ-141..EQ-150"
+
+  - domain_id: "DOMAIN-16"
+    name: "Evolutionary Stagnation & Escalation Ladders"
+    dimensions_range: "DIM-151..DIM-160"
+    equations_range: "EQ-151..EQ-160"
+
+  - domain_id: "DOMAIN-17"
+    name: "ALife Ecosystems & Niche Energy Dynamics"
+    dimensions_range: "DIM-161..DIM-170"
+    equations_range: "EQ-161..EQ-170"
+
+  - domain_id: "DOMAIN-18"
+    name: "Distributed P2P Swarm & Gossip Island Migration"
+    dimensions_range: "DIM-171..DIM-180"
+    equations_range: "EQ-171..EQ-180"
+
+  - domain_id: "DOMAIN-19"
+    name: "Long-Term Hippocampal Memory Replay"
+    dimensions_range: "DIM-181..DIM-190"
+    equations_range: "EQ-181..EQ-190"
+
+  - domain_id: "DOMAIN-20"
+    name: "Multi-File Dependency Graph Analyzers"
+    dimensions_range: "DIM-191..DIM-200"
+    equations_range: "EQ-191..EQ-200"
+
+  - domain_id: "DOMAIN-21"
+    name: "PROFILE_A_LINUX Kernel Namespaces Isolation"
+    dimensions_range: "DIM-201..DIM-210"
+    equations_range: "EQ-201..EQ-210"
+
+  - domain_id: "DOMAIN-22"
+    name: "cgroups v2 Quotas, CPU Pinning & Memory Ceilings"
+    dimensions_range: "DIM-211..DIM-220"
+    equations_range: "EQ-211..EQ-220"
+
+  - domain_id: "DOMAIN-23"
+    name: "Seccomp BPF Syscall Filtering Matrix"
+    dimensions_range: "DIM-221..DIM-230"
+    equations_range: "EQ-221..EQ-230"
+
+  - domain_id: "DOMAIN-24"
+    name: "Cryptographic Trust (EE-CRYPTO-1, Ed25519)"
+    dimensions_range: "DIM-231..DIM-240"
+    equations_range: "EQ-231..EQ-240"
+
+  - domain_id: "DOMAIN-25"
+    name: "Threat Vectors, Defense & Automated Quarantine"
+    dimensions_range: "DIM-241..DIM-250"
+    equations_range: "EQ-241..EQ-250"
+
+  - domain_id: "DOMAIN-26"
+    name: "Relational SQLite Schema & Triggers"
+    dimensions_range: "DIM-251..DIM-260"
+    equations_range: "EQ-251..EQ-260"
+
+  - domain_id: "DOMAIN-27"
+    name: "Content-Addressed Storage & 2PC Durability"
+    dimensions_range: "DIM-261..DIM-270"
+    equations_range: "EQ-261..EQ-270"
+
+  - domain_id: "DOMAIN-28"
+    name: "7-Tier Testing & Property-Based Fuzzing"
+    dimensions_range: "DIM-271..DIM-280"
+    equations_range: "EQ-271..EQ-280"
+
+  - domain_id: "DOMAIN-29"
+    name: "SRE Operations, Latency & Chaos Recovery"
+    dimensions_range: "DIM-281..DIM-290"
+    equations_range: "EQ-281..EQ-290"
+
+  - domain_id: "DOMAIN-30"
+    name: "Governance, Ethics, IP & Self-Evolution (M13)"
+    dimensions_range: "DIM-291..DIM-300"
+    equations_range: "EQ-291..EQ-300"

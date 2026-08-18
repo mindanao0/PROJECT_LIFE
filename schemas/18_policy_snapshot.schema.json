@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolution-engine.org/schemas/18_policy_snapshot.schema.json",
+  "title": "PolicySnapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "policy_snapshot_id",
+    "policy_version",
+    "policy_hash",
+    "sandbox_profile",
+    "created_at"
+  ],
+  "properties": {
+    "policy_snapshot_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "policy_version": {
+      "type": "string"
+    },
+    "policy_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "sandbox_profile": {
+      "type": "string",
+      "enum": ["PROFILE_A_LINUX", "PROFILE_B_CONTAINER"]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

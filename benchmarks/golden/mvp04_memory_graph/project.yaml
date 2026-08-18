@@ -1,0 +1,10 @@
+project_id: "00000000-0000-0000-0004-000000000004"
+case_id: "MVP-04"
+name: "memory_graph_engine"
+language: "python"
+primary_objective: "peak_memory_mb"
+target_speedup: "1.4x"
+entrypoint: "graph.py"
+test_suite: "tests/test_graph.py"
+allowed_mutations: ["M06", "M08"]
+sandbox_profile: "PROFILE_A_LINUX"

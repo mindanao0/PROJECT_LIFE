@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolution-engine.org/schemas/19_provenance_certificate.schema.json",
+  "title": "ProvenanceCertificate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "certificate_id",
+    "candidate_id",
+    "root_source_hash",
+    "candidate_source_hash",
+    "signatures",
+    "issued_at"
+  ],
+  "properties": {
+    "certificate_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "candidate_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "root_source_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "candidate_source_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "signatures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["key_id", "signature_hex"],
+        "properties": {
+          "key_id": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "signature_hex": { "type": "string", "pattern": "^[0-9a-f]{128}$" }
+        }
+      }
+    },
+    "issued_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

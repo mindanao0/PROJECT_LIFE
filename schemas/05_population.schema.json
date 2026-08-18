@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolution-engine.org/schemas/05_population.schema.json",
+  "title": "PopulationManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "population_id",
+    "generation_id",
+    "candidate_ids",
+    "population_size",
+    "created_at"
+  ],
+  "properties": {
+    "population_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "generation_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "candidate_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "population_size": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "mean_diversity_score": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]{6}$"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+project_id: "00000000-0000-0000-0005-000000000005"
+case_id: "MVP-05"
+name: "math_numerical_solver"
+language: "python"
+primary_objective: "solve_time_ms"
+target_speedup: "3.0x"
+entrypoint: "solver.py"
+test_suite: "tests/test_solver.py"
+allowed_mutations: ["M01", "M02", "M05", "M07"]
+sandbox_profile: "PROFILE_A_LINUX"

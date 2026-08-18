@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolution-engine.org/schemas/16_lineage_edge.schema.json",
+  "title": "LineageEdge",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "parent_candidate_id",
+    "child_candidate_id",
+    "mutation_id",
+    "relationship_type"
+  ],
+  "properties": {
+    "parent_candidate_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "child_candidate_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "mutation_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "relationship_type": {
+      "type": "string",
+      "enum": ["MUTATION", "CROSSOVER", "IMMIGRANT", "RECOVERY"]
+    }
+  }
+}

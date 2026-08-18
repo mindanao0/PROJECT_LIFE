@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolution-engine.org/schemas/09_project_manifest.schema.json",
+  "title": "ProjectManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "project_id",
+    "name",
+    "language",
+    "project_version",
+    "source_root",
+    "entrypoint_files"
+  ],
+  "properties": {
+    "project_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "language": {
+      "type": "string",
+      "enum": ["python", "polyglot_python_rust", "polyglot_python_c"]
+    },
+    "project_version": {
+      "type": "string"
+    },
+    "source_root": {
+      "type": "string"
+    },
+    "entrypoint_files": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

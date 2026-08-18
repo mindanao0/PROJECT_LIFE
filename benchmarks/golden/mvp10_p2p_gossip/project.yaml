@@ -1,0 +1,10 @@
+project_id: "00000000-0000-0000-0010-000000000010"
+case_id: "MVP-10"
+name: "p2p_gossip_island"
+language: "python"
+primary_objective: "network_bandwidth_kb"
+target_speedup: "1.6x"
+entrypoint: "node.py"
+test_suite: "tests/test_swarm.py"
+allowed_mutations: ["M05", "M07", "M08"]
+sandbox_profile: "PROFILE_A_LINUX"

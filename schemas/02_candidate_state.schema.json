@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolution-engine.org/schemas/02_candidate_state.schema.json",
+  "title": "CandidateStateEnum",
+  "type": "string",
+  "enum": [
+    "CREATED",
+    "MATERIALIZED",
+    "STATIC_VALIDATED",
+    "POLICY_VALIDATED",
+    "SECURITY_VALIDATED",
+    "SANDBOX_READY",
+    "EXECUTING",
+    "EXECUTED",
+    "TESTING",
+    "ORACLE_VERIFIED",
+    "CAPABILITY_VERIFIED",
+    "METRIC_EVALUATED",
+    "EVIDENCE_VERIFIED",
+    "ELIGIBLE",
+    "SELECTED",
+    "REJECTED",
+    "QUARANTINED"
+  ]
+}

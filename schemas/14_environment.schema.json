@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolution-engine.org/schemas/14_environment.schema.json",
+  "title": "EnvironmentFingerprint",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "environment_hash",
+    "os_name",
+    "kernel_release",
+    "cpu_architecture",
+    "cpython_version"
+  ],
+  "properties": {
+    "environment_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "os_name": { "type": "string" },
+    "kernel_release": { "type": "string" },
+    "cpu_architecture": { "type": "string" },
+    "cpython_version": { "type": "string" }
+  }
+}

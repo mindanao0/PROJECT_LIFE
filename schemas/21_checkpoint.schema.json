@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolution-engine.org/schemas/21_checkpoint.schema.json",
+  "title": "CheckpointManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "checkpoint_id",
+    "run_id",
+    "generation_id",
+    "generation_index",
+    "db_wal_lsn",
+    "manifest_hash",
+    "created_at"
+  ],
+  "properties": {
+    "checkpoint_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "run_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "generation_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "generation_index": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "db_wal_lsn": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "manifest_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

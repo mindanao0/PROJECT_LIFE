@@ -1,0 +1,10 @@
+project_id: "00000000-0000-0000-0012-000000000012"
+case_id: "MVP-12"
+name: "alife_predator_prey_sim"
+language: "python"
+primary_objective: "coevolutionary_fitness"
+target_speedup: "2.5x"
+entrypoint: "alife.py"
+test_suite: "tests/test_alife.py"
+allowed_mutations: ["M01", "M02", "M04", "M08"]
+sandbox_profile: "PROFILE_A_LINUX"

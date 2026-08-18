@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evolution-engine.org/schemas/06_generation.schema.json",
+  "title": "GenerationManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "generation_id",
+    "run_id",
+    "generation_index",
+    "status",
+    "population_manifest_hash",
+    "pareto_front_size",
+    "created_at"
+  ],
+  "properties": {
+    "generation_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "run_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "generation_index": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "status": {
+      "type": "string",
+      "enum": ["ACTIVE", "COMMITTED", "FAILED"]
+    },
+    "population_manifest_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "pareto_front_size": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "hypervolume_indicator": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]{6}$"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

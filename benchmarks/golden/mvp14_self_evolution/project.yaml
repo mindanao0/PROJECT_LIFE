@@ -1,0 +1,11 @@
+project_id: "00000000-0000-0000-0014-000000000014"
+case_id: "MVP-14"
+name: "engine_self_evolution"
+language: "python"
+primary_objective: "generational_hypervolume_gain"
+target_speedup: "1.2x"
+entrypoint: "self_evolve.py"
+test_suite: "tests/test_self_evolution.py"
+allowed_mutations: ["M01", "M02", "M05", "M06", "M07", "M08", "M09", "M10"]
+sandbox_profile: "PROFILE_A_LINUX"
+frozen_evaluator_hash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
