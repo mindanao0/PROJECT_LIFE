@@ -47,7 +47,7 @@ document_precedence:
 
   - rank: 2
     source: "build/spec/Evolution_Engine_Active_Spec_10_2_2.md"
-    role: "The Active Contract. Sole home of the 178 [REQ] declarations. Where it
+    role: "The Active Contract. Sole home of the 179 [REQ] declarations. Where it
            describes data that rank 1 also holds, rank 1 wins and the contract
            must be corrected."
     normative: true

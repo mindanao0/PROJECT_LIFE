@@ -1,5 +1,5 @@
 version: "10.2.2"
-total_linters: 13
+total_linters: 14
 
 linters:
   - linter_id: "LINT-01"
@@ -10,8 +10,8 @@ linters:
 
   - linter_id: "LINT-02"
     name: "MonotonicTraceabilityLinter"
-    target: "docs/10_governance_and_roadmap/REQUIREMENTS_TRACEABILITY_178.md"
-    rule: "Verify exactly 178 monotonic requirement IDs without gaps or duplicates"
+    target: "docs/10_governance_and_roadmap/REQUIREMENTS_TRACEABILITY.md"
+    rule: "Verify exactly 179 monotonic requirement IDs without gaps or duplicates"
     severity: "BLOCKER"
 
   - linter_id: "LINT-03"
@@ -82,5 +82,12 @@ linters:
     name: "CiJobNameResolutionLinter"
     target: "spec/release_gates.yaml, tools/ci_matrix.yaml, spec/maturity.yaml"
     rule: "Every mandatory_check and every pipeline job must name a job declared in Active Contract section 21, every section-21 job must appear in a stage, and no release gate may require a maturity level that is itself defined by passing that gate. Enforces REQ-S21-002."
+    implementation: "tools/lint_state_vocabulary.py"
+    severity: "BLOCKER"
+
+  - linter_id: "LINT-14"
+    name: "DeclaredCountLinter"
+    target: "spec/version_manifest.yaml, spec/traceability.yaml, tools/spec_linters.yaml"
+    rule: "Every count declared in spec/version_manifest.yaml subsystems must equal the number actually present in the repo (schemas, protocols, tables, indices, FSMs, states, corpus cases, requirements, CI jobs, linters), and traceability entry counts must match the Active Contract."
     implementation: "tools/lint_state_vocabulary.py"
     severity: "BLOCKER"

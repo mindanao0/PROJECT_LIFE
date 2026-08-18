@@ -155,5 +155,5 @@
 ### 🤝 [10_governance_and_roadmap/](10_governance_and_roadmap) — ธรรมาภิบาลและการกำกับดูแล
 - 📄 **[MATURITY_LADDER_M0_M13.md](10_governance_and_roadmap/MATURITY_LADDER_M0_M13.md)** : บันไดความสมบูรณ์ 14 ขั้น (M0 ถึง M13) และ Release Gates
 - 📄 **[GOVERNED_SPEC_CHANGE.md](10_governance_and_roadmap/GOVERNED_SPEC_CHANGE.md)** : กระบวนการขอแก้ไขสเปกอย่างเป็นทางการ
-- 📄 **[REQUIREMENTS_TRACEABILITY_178.md](10_governance_and_roadmap/REQUIREMENTS_TRACEABILITY_178.md)** : ตารางแจกแจง Requirement ครบทั้ง 178 ข้อ
+- 📄 **[REQUIREMENTS_TRACEABILITY.md](10_governance_and_roadmap/REQUIREMENTS_TRACEABILITY.md)** : ตารางแจกแจง Requirement ครบทั้ง 179 ข้อ
 - 📄 **[GLOSSARY_AND_TERMINOLOGY.md](10_governance_and_roadmap/GLOSSARY_AND_TERMINOLOGY.md)** : พจนานุกรมคำศัพท์เฉพาะทางมาตรฐาน

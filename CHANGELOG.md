@@ -10,7 +10,7 @@ and this project adheres to the Evolution Engine Canonical Versioning Policy.
 ## [10.2.2] - 2026-08-18 (Plan 10.2.2 Implementation-Start Canonical Release)
 
 ### Added
-- **Sequential Requirement IDs:** 178 canonical machine-checkable Requirement IDs (`REQ-S00-001` through `REQ-S30-002`) across all active sections.
+- **Sequential Requirement IDs:** 179 canonical machine-checkable Requirement IDs (`REQ-S00-001` through `REQ-S30-002`) across all active sections.
 - **Relational Integrity in SQLite DDL:** Added unique natural key constraints to `test_definitions`, `capability_definitions`, `objective_definitions`, `oracle_results`, `policy_snapshots`, and `environment_manifests`.
 - **Generated Active-Spec View:** Defined `build/spec/Evolution_Engine_Active_Spec_10_2_2.md` derived from canonical `ACTIVE_SPEC_BEGIN` and `ACTIVE_SPEC_END` markers.
 - **Detailed FSMs:** Formalized Run FSM (11 states), Recovery FSM (9 states), Governance FSM (12 states), Candidate FSM (17 states), and Deployment FSM (8 states).

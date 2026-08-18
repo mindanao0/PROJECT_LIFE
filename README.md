@@ -31,4 +31,4 @@
 - 📁 **[docs/07_schemas_and_protocols/](docs/07_schemas_and_protocols)** — 26 JSON Schemas Blueprint, 22 Typed Protocols, SDK, CLI
 - 📁 **[docs/08_testing_and_verification/](docs/08_testing_and_verification)** — QA 7 Tiers, Hypothesis PBT, 14 Golden Cases, Signed Evidence
 - 📁 **[docs/09_operations_and_sre/](docs/09_operations_and_sre)** — Reason Codes, Latency Budgets, WAL Recovery, 34 CI Jobs
-- 📁 **[docs/10_governance_and_roadmap/](docs/10_governance_and_roadmap)** — Maturity M0-M13, Governed Change, 178 Requirement Traceability
+- 📁 **[docs/10_governance_and_roadmap/](docs/10_governance_and_roadmap)** — Maturity M0-M13, Governed Change, 179 Requirement Traceability

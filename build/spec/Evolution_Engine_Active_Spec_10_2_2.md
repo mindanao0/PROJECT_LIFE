@@ -2678,7 +2678,7 @@ current_evidence_status:
   cli_unique_in_this_document: true
   sdk_unique_in_this_document: true
   requirement_id_contract_defined: true
-  active_requirement_ids_defined: 178
+  active_requirement_ids_defined: 179
   generated_active_view_contract_defined: true
   db_ddl_count_defined_in_this_document: 29
   schema_registry_count_defined_in_this_document: 26
@@ -2843,7 +2843,7 @@ Canonical Run FSMs: 1
 Canonical Recovery FSMs: 1
 Canonical Governance FSMs: 1
 Canonical deployment FSMs: 1
-Active normative Requirement IDs: 178
+Active normative Requirement IDs: 179
 Relational tables specified: 29
 Schema registry entries: 26
 Golden corpus cases: 14

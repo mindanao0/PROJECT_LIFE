@@ -8,11 +8,11 @@ subsystems:
   schemas_count: 26
   protocols_count: 22
   sqlite_tables_count: 29
-  sqlite_indices_count: 33
+  sqlite_indices_count: 57
   fsm_count: 5
   total_fsm_states: 57
   mutation_operators_count: 10
   golden_corpus_cases: 14
-  requirement_ids_count: 178
-  ci_jobs_count: 34
-  spec_linters_count: 8
+  requirement_ids_count: 179
+  ci_jobs_count: 39
+  spec_linters_count: 14

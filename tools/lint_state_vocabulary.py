@@ -10,6 +10,9 @@ LINT-11 (REQ-S16-001): benchmarks/golden/manifest.yaml is the canonical corpus
 LINT-13 (REQ-S21-002): every mandatory_check in spec/release_gates.yaml and every
   job in tools/ci_matrix.yaml must name a job declared in Active Contract section 21,
   and no release gate may require a maturity level that itself requires that gate.
+LINT-14: every count declared in spec/version_manifest.yaml must equal the number
+  actually present. Hand-asserted counts drifting from reality is the single most
+  common defect class in this repo.
 LINT-12: prose state lists anywhere in the repo must not use a state name that
   spec/fsm_states_57.yaml has retired. Prose drift is what made LINT-09 miss the
   first time: the DDL was fixed while the narrative kept the old vocabulary.
@@ -241,6 +244,7 @@ def main() -> int:
     start = spec_md.find("# 21. CI")
     end = spec_md.find("# 22.", start)
     canonical_jobs = set(re.findall(r"^([a-z][a-z0-9_]{6,})$", spec_md[start:end], re.M))
+    canonical_req_ids = set(re.findall(r"\[(?:REQ|IMPL|TEST|EVID)\]\[(REQ-S\d{2}-\d{3})\]", spec_md))
     if not canonical_jobs:
         findings.append("LINT-13 could not read the job list from Active Contract section 21")
 
@@ -290,12 +294,58 @@ def main() -> int:
                         f"{m['level']} is defined by passing {gate['name']}"
                     )
 
+    # --- LINT-14: declared counts must equal real counts -----------------------
+    manifest_counts = yaml.safe_load(
+        (ROOT / "spec/version_manifest.yaml").read_text(encoding="utf-8"))["subsystems"]
+    protocols_doc = (ROOT / "docs/07_schemas_and_protocols/TYPED_PROTOCOLS_22.md").read_text(encoding="utf-8")
+    corpus_cases = yaml.safe_load(
+        (ROOT / "benchmarks/golden/manifest.yaml").read_text(encoding="utf-8"))["cases"]
+    linters = yaml.safe_load((ROOT / "tools/spec_linters.yaml").read_text(encoding="utf-8"))
+    ddl_sql = sql_blocks(ROOT / "docs/03_storage_and_database/SQLITE_DDL_29_TABLES.md")
+
+    actual = {
+        "schemas_count": len(list((ROOT / "schemas").glob("*.json"))),
+        "protocols_count": len(set(re.findall(r"class ([A-Z]\w+)\(Protocol\)", protocols_doc))),
+        "sqlite_tables_count": len(re.findall(r"CREATE TABLE", ddl_sql)),
+        "sqlite_indices_count": len(re.findall(r"CREATE (?:UNIQUE )?INDEX", ddl_sql)),
+        "fsm_count": len(fsms),
+        "total_fsm_states": sum(len(f["states"]) for f in fsms.values()),
+        "golden_corpus_cases": len(corpus_cases),
+        "requirement_ids_count": len(canonical_req_ids),
+        "ci_jobs_count": len(canonical_jobs),
+        "spec_linters_count": linters["total_linters"],
+    }
+    for key, real in actual.items():
+        declared = manifest_counts.get(key)
+        if declared is None:
+            findings.append(f"LINT-14 spec/version_manifest.yaml: missing count {key!r} (actual {real})")
+        elif declared != real:
+            findings.append(
+                f"LINT-14 spec/version_manifest.yaml: {key} declares {declared} but {real} exist"
+            )
+    if len(linters["linters"]) != linters["total_linters"]:
+        findings.append(
+            f"LINT-14 tools/spec_linters.yaml: total_linters={linters['total_linters']} "
+            f"but {len(linters['linters'])} are defined"
+        )
+    trace = yaml.safe_load((ROOT / "spec/traceability.yaml").read_text(encoding="utf-8"))
+    if trace["total_requirements"] != len(trace["requirements"]):
+        findings.append(
+            f"LINT-14 spec/traceability.yaml: total_requirements={trace['total_requirements']} "
+            f"but {len(trace['requirements'])} entries"
+        )
+    if len(trace["requirements"]) != len(canonical_req_ids):
+        findings.append(
+            f"LINT-14 spec/traceability.yaml has {len(trace['requirements'])} entries but the "
+            f"Active Contract declares {len(canonical_req_ids)} requirements"
+        )
+
     if findings:
         print(f"BLOCKER: {len(findings)} finding(s)\n")
         for f in findings:
             print(f"  - {f}")
         return 1
-    print("LINT-09..13: PASS — vocabularies agree, evidence is retention-safe, corpus matches manifest, CI job names resolve")
+    print("LINT-09..14: PASS — vocabularies agree, evidence is retention-safe, corpus matches manifest, CI job names resolve, declared counts are real")
     return 0
 
 

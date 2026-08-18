@@ -416,7 +416,7 @@
 
 ### 🔹 Domain 30: Price's Selection, Category Theory & M13 Self
 - **`EQ-291` [Requirement Lifecycle Formal Transition]:** $\text{Status} \in \{\text{REQ}, \text{IMP}, \text{TEST}, \text{EVID}\}$
-- **`EQ-292` [178 Unique Requirement IDs Monotonicity]:** $|\mathcal{R}| \equiv 178, \quad \text{Index}(R_k) = k$
+- **`EQ-292` [179 Unique Requirement IDs Monotonicity]:** $|\mathcal{R}| \equiv 179, \quad \text{Index}(R_k) = k$
 - **`EQ-293` [Governed Spec Change Multi-Party Quorum]:** $|\text{Approvers}| \ge 2 \land \text{Author} \notin \text{Approvers}$
 - **`EQ-294` [Machine-Readable Traceability Bijection]:** $\forall r \in \mathcal{R}, \quad |\text{Tests}(r)| \ge 1 \land |\text{Evidence}(r)| \ge 1$
 - **`EQ-295` [Open Source License Apache-2.0 Conformance]:** $\text{License} \equiv \text{"Apache-2.0"}$
