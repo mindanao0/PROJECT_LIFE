@@ -7,6 +7,9 @@ LINT-10 (REQ-S01-009): audit/evidence/quarantine/recovery rows must never be
   destroyed by a cascading delete.
 LINT-11 (REQ-S16-001): benchmarks/golden/manifest.yaml is the canonical corpus
   registry; case directories and every derived table must agree with it.
+LINT-12: prose state lists anywhere in the repo must not use a state name that
+  spec/fsm_states_57.yaml has retired. Prose drift is what made LINT-09 miss the
+  first time: the DDL was fixed while the narrative kept the old vocabulary.
 
 Exit code 0 = pass, 1 = BLOCKER findings.
 """
@@ -150,6 +153,42 @@ def main() -> int:
                 f"schema-only={sorted(actual - expected)} FSM-only={sorted(expected - actual)}"
             )
 
+    # --- LINT-12: no retired state name may survive anywhere in the repo -------
+    live = set()
+    for fsm in fsms.values():
+        live |= set(fsm["states"])
+    retired = {
+        # run
+        "VALIDATING", "READY", "PAUSING", "STOPPING", "STOPPED",
+        # recovery
+        "REQUESTED", "VALIDATING_INPUTS", "RECONSTRUCTING_CAS", "RECONCILING_DB",
+        "VERIFYING_AUDIT", "REPLAYING_GENERATION", "RECOVERED",
+        # governance ("DRAFT" is deliberately excluded: it is also the name of
+        # maturity level M0 in spec/maturity.yaml, so the token is ambiguous)
+        "AUTHORITY_CHECKED", "SAFETY_REVIEWED", "TRACEABILITY_UPDATED",
+        "VERSIONED", "EVIDENCE_INVALIDATED", "GATES_RUNNING", "ACCEPTED", "WITHDRAWN",
+        # deployment
+        "STAGED", "CANARY", "VALIDATED", "APPROVED", "ACTIVE", "PROMOTED",
+    } - live
+    scan_globs = ["build/spec/*.md", "docs/**/*.md", "spec/*.yaml", "schemas/*.json"]
+    for pattern in scan_globs:
+        for path in sorted(ROOT.glob(pattern)):
+            if path.name == "lint_state_vocabulary.py":
+                continue
+            text = path.read_text(encoding="utf-8")
+            for state in sorted(retired):
+                # only flag it when used as a state token: quoted, backticked or in an arrow
+                hits = re.findall(
+                    rf"(?:'{state}'|`{state}`|^\s*{state}\s*$"
+                    rf"|(?:->|\||,)\s*{state}\b|\b{state}\s*->)",
+                    text, re.M)
+                if hits:
+                    rel = path.relative_to(ROOT)
+                    findings.append(
+                        f"LINT-12 {rel}: retired state name {state!r} still used "
+                        f"({len(hits)} occurrence(s)) — not in spec/fsm_states_57.yaml"
+                    )
+
     # --- LINT-11: golden corpus directories must match the canonical manifest ----
     corpus = ROOT / "benchmarks/golden"
     manifest = yaml.safe_load((corpus / "manifest.yaml").read_text(encoding="utf-8"))["cases"]
@@ -199,7 +238,7 @@ def main() -> int:
         for f in findings:
             print(f"  - {f}")
         return 1
-    print("LINT-09 / LINT-10 / LINT-11: PASS — vocabularies agree, evidence is retention-safe, corpus matches manifest")
+    print("LINT-09..12: PASS — vocabularies agree across yaml/schema/DDL/prose, evidence is retention-safe, corpus matches manifest")
     return 0
 
 

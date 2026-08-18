@@ -680,7 +680,7 @@ requirements:
     section: 8
     section_title: "Candidate Lifecycle & Evaluation Pipeline"
     status: "REQ"
-    text_digest: "sha256:4e45bf67de4ae710213f0784c28faf97e7fe4daac359e52a236869f517040d51"
+    text_digest: "sha256:c0e97874db3db24caff56f67f11485fe14d945fb042a6011f3ead053dc9c87d6"
     verification_method: "PENDING"
     schema_refs: []
     protocol_refs: []
@@ -728,7 +728,7 @@ requirements:
     section: 8
     section_title: "Candidate Lifecycle & Evaluation Pipeline"
     status: "REQ"
-    text_digest: "sha256:5c007fe888717547add3a5b769ea9d98b3c8fe061d1b2ffc9a1b02bd71ed22d2"
+    text_digest: "sha256:fb3c5ec0dbc5d587ed7ed37627be0a6212a7939bc98d7a0a33346d8a21e19533"
     verification_method: "PENDING"
     schema_refs: []
     protocol_refs: []
@@ -740,7 +740,7 @@ requirements:
     section: 8
     section_title: "Candidate Lifecycle & Evaluation Pipeline"
     status: "REQ"
-    text_digest: "sha256:ecb995320f11bafdb482016425347cd7543e72ce68d4dafc82adf648a2098cd9"
+    text_digest: "sha256:29839caec8af7bcbaf6f75b0c77e77b92b640988b726f19e1170e83179d10cb4"
     verification_method: "PENDING"
     schema_refs: []
     protocol_refs: []
@@ -776,7 +776,7 @@ requirements:
     section: 8
     section_title: "Candidate Lifecycle & Evaluation Pipeline"
     status: "REQ"
-    text_digest: "sha256:8230fc1be80b9073f3a94fc545e30e80f0a80dddc75b320116518c193f50682f"
+    text_digest: "sha256:94c1ad49c6e605e05e4b1b1a755834dd25e970a0bc647e2d81ec6dda8ba2b390"
     verification_method: "PENDING"
     schema_refs: []
     protocol_refs: []
@@ -1556,7 +1556,7 @@ requirements:
     section: 19
     section_title: "Deployment & Governance"
     status: "REQ"
-    text_digest: "sha256:a330f7ac802899168553f657fa237b205731e8022aaacbb3d2bba7ca208526e9"
+    text_digest: "sha256:9bd10eecbf4522a9220d8e606ef712d9f0032220d937a9a683cd6dacaec79488"
     verification_method: "PENDING"
     schema_refs: []
     protocol_refs: []

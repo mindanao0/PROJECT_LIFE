@@ -1,228 +1,38 @@
 # 02 — Finite State Machines (FSM) Specification
 
-> **Active Requirements Covered:** `REQ-S08-001` .. `REQ-S08-012`, `REQ-S14-001` .. `REQ-S14-002`, `REQ-S19-001` .. `REQ-S19-003`  
-> **Authority Level:** NORMATIVE
-
-Evolution Engine ควบคุมวงจรชีวิตของ Entity สำคัญทุกตัวด้วย Finite State Machine ที่มีนิยามชัดเจน (Formal, Deterministic, Reachable และปราศจาก Deadlock) จำนวน 5 ชุดหลัก:
-
----
-
-## 1. Candidate Lifecycle State Machine (17 States)
-
-ควบคุมวงจรชีวิตตั้งแต่สร้าง Candidate Code จนถึงการประเมินและคัดเลือก
-
-```text
-       ┌───────────┐
-       │  CREATED  │
-       └─────┬─────┘
-             │
-             ▼
-       ┌──────────────┐
-       │ MATERIALIZED │
-       └─────┬────────┘
-             │
-             ▼
-     ┌──────────────────┐
-     │ STATIC_VALIDATED │
-     └───────┬──────────┘
-             │
-             ▼
-     ┌──────────────────┐
-     │ POLICY_VALIDATED │
-     └───────┬──────────┘
-             │
-             ▼
-    ┌────────────────────┐
-    │ SECURITY_VALIDATED ├────────────────┐
-    └────────┬───────────┘                │
-             │                            │
-             ▼                            ▼
-      ┌───────────────┐            ┌─────────────┐
-      │ SANDBOX_READY │            │ QUARANTINED │ (Terminal for security breach)
-      └──────┬────────┘            └─────────────┘
-             │                            ▲
-             ▼                            │
-        ┌───────────┐                     │
-        │ EXECUTING ├─────────────────────┘
-        └────┬──────┘
-             │
-             ▼
-        ┌───────────┐
-        │  EXECUTED │
-        └────┬──────┘
-             │
-             ▼
-        ┌───────────┐
-        │  TESTING  │
-        └────┬──────┘
-             │
-             ▼
-     ┌─────────────────┐
-     │ ORACLE_VERIFIED │
-     └───────┬─────────┘
-             │
-             ▼
-   ┌─────────────────────┐
-   │ CAPABILITY_VERIFIED │
-   └─────────┬───────────┘
-             │
-             ▼
-    ┌──────────────────┐
-    │ METRIC_EVALUATED │
-    └────────┬─────────┘
-             │
-             ▼
-    ┌───────────────────┐
-    │ EVIDENCE_VERIFIED │
-    └────────┬──────────┘
-             │
-             ▼
-        ┌──────────┐
-        │ ELIGIBLE │
-        └────┬─────┘
-             │
-   ┌─────────┴─────────┐
-   ▼                   ▼
-┌──────────┐     ┌──────────┐
-│ SELECTED │     │ REJECTED │
-└──────────┘     └──────────┘
-(Terminal Elite) (Terminal Invalid/Failed)
-```
-
-- **All States:** `CREATED`, `MATERIALIZED`, `STATIC_VALIDATED`, `POLICY_VALIDATED`, `SECURITY_VALIDATED`, `SANDBOX_READY`, `EXECUTING`, `EXECUTED`, `TESTING`, `ORACLE_VERIFIED`, `CAPABILITY_VERIFIED`, `METRIC_EVALUATED`, `EVIDENCE_VERIFIED`, `ELIGIBLE`, `SELECTED`, `REJECTED`, `QUARANTINED`
-- **Terminal States:** `SELECTED`, `REJECTED`, `QUARANTINED`
-- **Execution Outcomes (ไม่ใช่ lifecycle state):** `SUCCESS`, `TIMEOUT`, `CRASHED`, `OOM`, `RESOURCE_EXCEEDED`, `SECURITY_VIOLATION`
-  - `TIMEOUT / CRASHED / OOM / RESOURCE_EXCEEDED` $\rightarrow$ Map to `REJECTED`
-  - `SECURITY_VIOLATION` $\rightarrow$ Map to `QUARANTINED`
+> **Authority Level:** POINTER — this file is not normative.
+> **Canonical machine-readable source:** [`spec/fsm_states_57.yaml`](../spec/fsm_states_57.yaml)
+> **Canonical narrative source:** [`docs/02_fsm_and_lifecycles/`](./02_fsm_and_lifecycles/)
+> **Binding requirements:** [`build/spec/Evolution_Engine_Active_Spec_10_2_2.md`](../build/spec/Evolution_Engine_Active_Spec_10_2_2.md) sections 8.1–8.5, 14.1 and 19.2
 
 ---
 
-## 2. Run State Machine (11 States)
+## Why this file no longer holds state definitions
 
-ควบคุมวงจรชีวิตของการรัน Evolution Engine 1 รอบการประมวลผล
+ไฟล์นี้เคยนิยาม state ของทั้ง 5 FSM ซ้ำกับ `docs/02_fsm_and_lifecycles/` และเมื่อฝั่งหนึ่งถูกแก้อีกฝั่งไม่ถูกแก้ตาม
+ทั้งสองชุดจึงขัดกัน — Recovery FSM ไม่ตรงกันแม้แต่ชื่อเดียว และ Run FSM ตรงกัน 5 จาก 11
 
-```text
-         ┌─────────┐
-         │ CREATED │
-         └────┬────┘
-              │
-              ▼
-        ┌────────────┐
-        │ VALIDATING ├───────────────┐
-        └─────┬──────┘               │
-              │                      │
-              ▼                      ▼
-           ┌───────┐             ┌────────┐
-           │ READY │             │ FAILED │ (Terminal)
-           └───┬───┘             └────────┘
-               │                      ▲
-               ▼                      │
-     ┌───────────────────┐            │
-     │      RUNNING      ├────────────┤
-     └──┬───┬────────┬───┘            │
-        │   │        │                │
-┌───────┘   │        └────────────┐   │
-│           ▼                     │   │
-│      ┌─────────┐           ┌────┴───┴───┐
-│      │ PAUSING │           │ RECOVERING │
-│      └────┬────┘           └────┬───┬───┘
-│           │                     │   │
-│           ▼                     │   │
-│       ┌────────┐                │   │
-│       │ PAUSED ├────────────────┘   │
-│       └───┬────┘                    │
-│           │                         │
-│           ▼                         │
-│      ┌──────────┐                   │
-│      │ STOPPING ├───────────────────┘
-│      └────┬─────┘
-│           │
-▼           ▼
-┌──────────────────┐       ┌───────────┐
-│     STOPPED      │       │ COMPLETED │
-└──────────────────┘       └───────────┘
-(Terminal User Stop)       (Terminal Success)
-```
-
-- **Transitions:**
-  - `CREATED` $\rightarrow$ `VALIDATING` | `STOPPED`
-  - `VALIDATING` $\rightarrow$ `READY` | `FAILED`
-  - `READY` $\rightarrow$ `RUNNING` | `STOPPED`
-  - `RUNNING` $\rightarrow$ `PAUSING` | `STOPPING` | `COMPLETED` | `FAILED` | `RECOVERING`
-  - `PAUSING` $\rightarrow$ `PAUSED` | `FAILED` | `RECOVERING`
-  - `PAUSED` $\rightarrow$ `RUNNING` | `STOPPING` | `RECOVERING`
-  - `STOPPING` $\rightarrow$ `STOPPED` | `FAILED` | `RECOVERING`
-  - `RECOVERING` $\rightarrow$ `RUNNING` | `PAUSED` | `STOPPED` | `FAILED`
-- **Terminal States:** `STOPPED`, `COMPLETED`, `FAILED`
+ตามลำดับอำนาจใน [`spec/authority.yaml`](../spec/authority.yaml) ไฟล์ใน `docs/` เป็น L8
+จึงห้ามนิยาม state vocabulary เอง ต้องอ้างไปยัง `spec/fsm_states_57.yaml` เท่านั้น
 
 ---
 
-## 3. Recovery State Machine (9 States)
+## Where each FSM is defined
 
-ควบคุมขั้นตอนการกู้คืนสถานะหลังระบบขัดข้องหรือเกิด Crash
+| FSM | States | Narrative | Binding requirements |
+|---|---|---|---|
+| Candidate Lifecycle | 17 | [`CANDIDATE_FSM.md`](./02_fsm_and_lifecycles/CANDIDATE_FSM.md) | §8.1, `REQ-S08-001`, `REQ-S08-002` |
+| Run Lifecycle | 11 | [`RUN_FSM.md`](./02_fsm_and_lifecycles/RUN_FSM.md) | §8.3, `REQ-S08-003` .. `REQ-S08-006` |
+| Recovery | 9 | [`RECOVERY_FSM.md`](./02_fsm_and_lifecycles/RECOVERY_FSM.md) | §8.4, `REQ-S08-007` .. `REQ-S08-009` |
+| Governance | 12 | [`GOVERNANCE_FSM.md`](./02_fsm_and_lifecycles/GOVERNANCE_FSM.md) | §8.5, `REQ-S08-010` .. `REQ-S08-012` |
+| Deployment | 8 | [`DEPLOYMENT_FSM.md`](./02_fsm_and_lifecycles/DEPLOYMENT_FSM.md) | §19.2, `REQ-S19-001` .. `REQ-S19-003` |
 
-```text
-  ┌───────────┐
-  │ REQUESTED │
-  └─────┬─────┘
-        │
-        ▼
-┌───────────────────┐
-│ VALIDATING_INPUTS │
-└───────┬───────────┘
-        │
-        ▼
-┌────────────────────┐
-│ RECONSTRUCTING_CAS │
-└───────┬────────────┘
-        │
-        ▼
-┌──────────────────┐
-│  RECONCILING_DB  │
-└───────┬──────────┘
-        │
-        ▼
-┌──────────────────┐
-│ VERIFYING_AUDIT  │
-└───────┬──────────┘
-        │
-        ├─────────────────────────────┐
-        ▼                             ▼
-┌──────────────────────┐        ┌───────────┐
-│ REPLAYING_GENERATION │        │ RECOVERED │ (Terminal verified state)
-└───────┬──────────────┘        └───────────┘
-        │                             ▲
-        └─────────────────────────────┘
-```
+รวม 57 states — ตรวจอัตโนมัติด้วย `LINT-09` ใน [`tools/lint_state_vocabulary.py`](../tools/lint_state_vocabulary.py)
+ซึ่ง assert ว่า `spec/fsm_states_57.yaml`, JSON Schema enums, SQLite `CHECK` constraints และ prose ของ Active Spec
+ใช้คำเดียวกันทั้งหมด
 
-- **Transitions:** ทุกขั้นตอนมีทางออกไปยัง `FAILED` หรือ `QUARANTINED` เมื่อตรวจพบข้อมูลเสียหายที่กู้ไม่ได้
-- **Terminal States:** `RECOVERED`, `FAILED`, `QUARANTINED`
-- **[REQ-S08-007]** สถานะ `RECOVERED` ต้องคืน verified resume target (`RUNNING`, `PAUSED` หรือ `STOPPED`)
+## Persistence
 
----
-
-## 4. Governance State Machine (12 States)
-
-ควบคุมการอนุมัติและปรับเปลี่ยนสเปก/นโยบาย (Governed Specification Change)
-
-```text
-DRAFT -> IMPACT_ANALYZED -> AUTHORITY_CHECKED -> SAFETY_REVIEWED 
--> TRACEABILITY_UPDATED -> APPROVED -> VERSIONED -> EVIDENCE_INVALIDATED 
--> GATES_RUNNING -> ACCEPTED | REJECTED | WITHDRAWN
-```
-
-- **Terminal States:** `ACCEPTED`, `REJECTED`, `WITHDRAWN`
-- **[REQ-S08-010]** ผู้เสนอการแก้ไข (Author) ห้ามเป็นผู้อนุมัติคนเดียว (Sole Approver) สำหรับการแก้ไขที่มีผลต่อระดับ L0–L3
-
----
-
-## 5. Deployment State Machine (8 States)
-
-ควบคุมการส่งออกและการโปรโมต Candidate ไปใช้งานจริง
-
-```text
-ARCHIVED -> STAGED -> CANARY -> VALIDATED -> APPROVED -> ACTIVE -> SUPERSEDED | ROLLED_BACK
-```
-
-- **Terminal States:** `SUPERSEDED`, `ROLLED_BACK`
-- **[REQ-S19-001]** หากพบความผิดปกติระหว่าง `CANARY` (เช่น Error rate $> 1.0\%$, Latency regression $> 15\%$, Crash count $> 0$) ให้ตัดสถานะไปที่ `ROLLED_BACK` ทันที
+State ถูกเก็บใน 29-table SQLite schema — ดู [`SQLITE_DDL_29_TABLES.md`](./03_storage_and_database/SQLITE_DDL_29_TABLES.md)
+คอลัมน์ `runs.run_state`, `candidates.candidate_state`, `deployments.deployment_state`
+และ `recovery_records.recovery_status` มี `CHECK` constraint ที่ต้องตรงกับ `spec/fsm_states_57.yaml` เสมอ

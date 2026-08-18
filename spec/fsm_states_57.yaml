@@ -61,7 +61,7 @@ fsms:
   governance_fsm:
     states_count: 12
     initial_state: "PROPOSAL_SUBMITTED"
-    terminal_states: ["EVIDENCE_ARCHIVED", "REJECTED", "SUPERSEDED"]
+    terminal_states: ["REJECTED", "SUPERSEDED"]
     states:
       - PROPOSAL_SUBMITTED
       - LINTERS_PASSED

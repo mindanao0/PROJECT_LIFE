@@ -1,5 +1,5 @@
 version: "10.2.2"
-total_linters: 11
+total_linters: 12
 
 linters:
   - linter_id: "LINT-01"
@@ -68,5 +68,12 @@ linters:
     name: "GoldenCorpusManifestLinter"
     target: "benchmarks/golden/**"
     rule: "benchmarks/golden/manifest.yaml is the canonical corpus registry. Directory names, project.yaml fields and expected dispositions must all agree with it, and every disposition must be a declared FSM terminal state. Enforces REQ-S16-001."
+    implementation: "tools/lint_state_vocabulary.py"
+    severity: "BLOCKER"
+
+  - linter_id: "LINT-12"
+    name: "RetiredStateNameLinter"
+    target: "build/spec/*.md, docs/**/*.md, spec/*.yaml, schemas/*.json"
+    rule: "No state name retired from spec/fsm_states_57.yaml may still appear as a state token in prose, YAML or JSON. Catches the narrative-vs-DDL drift that LINT-09 alone does not see."
     implementation: "tools/lint_state_vocabulary.py"
     severity: "BLOCKER"

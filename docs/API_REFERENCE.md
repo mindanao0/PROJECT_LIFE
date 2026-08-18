@@ -56,7 +56,7 @@ class EvolutionEngine:
 
     def pause_run(self, run_id: RunId) -> RunState:
         """
-        พักการทำงานของ Run ชั่วคราว (Transition: RUNNING -> PAUSING -> PAUSED).
+        พักการทำงานของ Run ชั่วคราว (Transition: RUNNING -> PAUSED).
         """
         ...
 

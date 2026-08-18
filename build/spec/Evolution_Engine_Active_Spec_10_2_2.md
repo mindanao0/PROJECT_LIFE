@@ -846,41 +846,44 @@ SECURITY_VIOLATION -> QUARANTINED
 Run states:
 
 ```text
-CREATED
-VALIDATING
-READY
+INITIATED
+CONFIG_LOADED
+PREFLIGHT_PASSED
 RUNNING
-PAUSING
 PAUSED
-STOPPING
-STOPPED
+GENERATION_COMMITTED
+CHECKPOINTING
 COMPLETED
 FAILED
+ABORTED
 RECOVERING
 ```
 
 Canonical transitions:
 
 ```text
-CREATED -> VALIDATING | STOPPED
-VALIDATING -> READY | FAILED
-READY -> RUNNING | STOPPED
-RUNNING -> PAUSING | STOPPING | COMPLETED | FAILED | RECOVERING
-PAUSING -> PAUSED | FAILED | RECOVERING
-PAUSED -> RUNNING | STOPPING | RECOVERING
-STOPPING -> STOPPED | FAILED | RECOVERING
-RECOVERING -> RUNNING | PAUSED | STOPPED | FAILED
+INITIATED -> CONFIG_LOADED
+CONFIG_LOADED -> PREFLIGHT_PASSED | FAILED
+PREFLIGHT_PASSED -> RUNNING | FAILED
+RUNNING -> PAUSED | GENERATION_COMMITTED | FAILED | ABORTED
+PAUSED -> RUNNING | ABORTED
+GENERATION_COMMITTED -> RUNNING | CHECKPOINTING
+CHECKPOINTING -> COMPLETED | FAILED
+RECOVERING -> RUNNING | COMPLETED | FAILED
+<any non-terminal state> -> RECOVERING
 ```
+
+`<any non-terminal state> -> RECOVERING` เกิดได้เฉพาะตอน coordinator restart พบ unclean run เท่านั้น
 
 Terminal states:
 
 ```text
-STOPPED
 COMPLETED
 FAILED
+ABORTED
 ```
 
-[REQ][REQ-S08-003] `pause_run` รับได้เฉพาะ `RUNNING`; `resume_run` รับได้เฉพาะ `PAUSED`; `stop_run` รับได้จาก `CREATED`, `READY`, `RUNNING`, `PAUSING` หรือ `PAUSED`
+[REQ][REQ-S08-003] `pause_run` รับได้เฉพาะ `RUNNING`; `resume_run` รับได้เฉพาะ `PAUSED`; `abort_run` รับได้จาก `RUNNING` หรือ `PAUSED` เท่านั้น
 
 [REQ][REQ-S08-004] คำสั่งซ้ำที่ state เป้าหมายอยู่แล้วต้องตอบแบบ idempotent พร้อม audit receipt แต่ห้ามสร้าง state transition ปลอม
 
@@ -895,39 +898,41 @@ FAILED
 Recovery states:
 
 ```text
-REQUESTED
-VALIDATING_INPUTS
-RECONSTRUCTING_CAS
-RECONCILING_DB
-VERIFYING_AUDIT
-REPLAYING_GENERATION
-RECOVERED
-FAILED
-QUARANTINED
+DETECT_CRASH
+SCAN_WAL_AND_CAS
+VERIFY_LAST_GEN_HASH
+ROLLBACK_UNCOMMITTED
+REPLAY_COMMITTED
+ENTER_EMERGENCY_SAFE_MODE
+RECONSTRUCT_FROM_CAS
+RECONCILE_DB_STATE
+RESTORED_READY
 ```
 
 Canonical transitions:
 
 ```text
-REQUESTED -> VALIDATING_INPUTS
-VALIDATING_INPUTS -> RECONSTRUCTING_CAS | FAILED | QUARANTINED
-RECONSTRUCTING_CAS -> RECONCILING_DB | FAILED | QUARANTINED
-RECONCILING_DB -> VERIFYING_AUDIT | FAILED | QUARANTINED
-VERIFYING_AUDIT -> REPLAYING_GENERATION | RECOVERED | FAILED | QUARANTINED
-REPLAYING_GENERATION -> RECOVERED | FAILED | QUARANTINED
+DETECT_CRASH -> SCAN_WAL_AND_CAS
+SCAN_WAL_AND_CAS -> VERIFY_LAST_GEN_HASH
+VERIFY_LAST_GEN_HASH -> ROLLBACK_UNCOMMITTED | ENTER_EMERGENCY_SAFE_MODE
+ROLLBACK_UNCOMMITTED -> REPLAY_COMMITTED
+REPLAY_COMMITTED -> RECONCILE_DB_STATE
+ENTER_EMERGENCY_SAFE_MODE -> RECONSTRUCT_FROM_CAS
+RECONSTRUCT_FROM_CAS -> RECONCILE_DB_STATE
+RECONCILE_DB_STATE -> RESTORED_READY | ENTER_EMERGENCY_SAFE_MODE
 ```
 
 Terminal states:
 
 ```text
-RECOVERED
-FAILED
-QUARANTINED
+RESTORED_READY
 ```
 
-[REQ][REQ-S08-007] `RECOVERED` ต้องคืน verified resume target (`RUNNING`, `PAUSED` หรือ `STOPPED`) และ recovery evidence; ห้าม infer เป้าหมายจาก unverified cache
+Recovery ที่จบไม่ได้จะค้างอยู่ที่ `ENTER_EMERGENCY_SAFE_MODE` ซึ่งต้องมี operator ตัดสินใจ ไม่ใช่ retry อัตโนมัติ
 
-[REQ][REQ-S08-008] digest mismatch, audit gap ที่ repair ไม่ได้, ambiguous generation head หรือ policy/environment mismatch ต้องไป `QUARANTINED` ไม่ใช่ retry-as-success
+[REQ][REQ-S08-007] `RESTORED_READY` ต้องคืน verified resume target (`RUNNING`, `PAUSED` หรือ `COMPLETED`) และ recovery evidence; ห้าม infer เป้าหมายจาก unverified cache
+
+[REQ][REQ-S08-008] digest mismatch, audit gap ที่ repair ไม่ได้, ambiguous generation head หรือ policy/environment mismatch ต้องไป `ENTER_EMERGENCY_SAFE_MODE` ไม่ใช่ retry-as-success
 
 [REQ][REQ-S08-009] Recovery step ต้อง idempotent และบันทึก input/output digest เพื่อ resume หลัง crash ได้โดยไม่ทำ durable record ซ้ำ
 
@@ -938,45 +943,47 @@ QUARANTINED
 Governance states:
 
 ```text
-DRAFT
+PROPOSAL_SUBMITTED
+LINTERS_PASSED
 IMPACT_ANALYZED
-AUTHORITY_CHECKED
-SAFETY_REVIEWED
-TRACEABILITY_UPDATED
-APPROVED
-VERSIONED
-EVIDENCE_INVALIDATED
-GATES_RUNNING
-ACCEPTED
+MULTI_PARTY_REVIEW
+VOTING_OPEN
+QUORUM_REACHED
+SIGNATURES_COLLECTED
+RATIFIED_CANONICAL
+SCHEMA_MIGRATED
+EVIDENCE_ARCHIVED
 REJECTED
-WITHDRAWN
+SUPERSEDED
 ```
 
 Canonical transitions:
 
 ```text
-DRAFT -> IMPACT_ANALYZED | WITHDRAWN
-IMPACT_ANALYZED -> AUTHORITY_CHECKED | REJECTED | WITHDRAWN
-AUTHORITY_CHECKED -> SAFETY_REVIEWED | REJECTED | WITHDRAWN
-SAFETY_REVIEWED -> TRACEABILITY_UPDATED | REJECTED | WITHDRAWN
-TRACEABILITY_UPDATED -> APPROVED | REJECTED | WITHDRAWN
-APPROVED -> VERSIONED
-VERSIONED -> EVIDENCE_INVALIDATED
-EVIDENCE_INVALIDATED -> GATES_RUNNING
-GATES_RUNNING -> ACCEPTED | REJECTED
+PROPOSAL_SUBMITTED -> LINTERS_PASSED | REJECTED
+LINTERS_PASSED -> IMPACT_ANALYZED | REJECTED
+IMPACT_ANALYZED -> MULTI_PARTY_REVIEW | REJECTED
+MULTI_PARTY_REVIEW -> VOTING_OPEN | REJECTED
+VOTING_OPEN -> QUORUM_REACHED | REJECTED
+QUORUM_REACHED -> SIGNATURES_COLLECTED | REJECTED
+SIGNATURES_COLLECTED -> RATIFIED_CANONICAL | REJECTED
+RATIFIED_CANONICAL -> SCHEMA_MIGRATED
+SCHEMA_MIGRATED -> EVIDENCE_ARCHIVED
+EVIDENCE_ARCHIVED -> SUPERSEDED
 ```
+
+`EVIDENCE_ARCHIVED -> SUPERSEDED` ถูก trigger จากการ ratify proposal ใหม่ที่แทนที่ฉบับนี้ ไม่ใช่จากตัว proposal เอง
 
 Terminal states:
 
 ```text
-ACCEPTED
 REJECTED
-WITHDRAWN
+SUPERSEDED
 ```
 
 [REQ][REQ-S08-010] change author ห้ามเป็น sole approver ของ change ที่กระทบ L0-L3; reviewer identity, role, decision และ proposal digest ต้องอยู่ใน audit evidence
 
-[REQ][REQ-S08-011] `ACCEPTED` ต้อง bind exact spec version, changed Requirement IDs, invalidated evidence และ gate results; approval ของ digest เก่าห้ามใช้กับเนื้อหาใหม่
+[REQ][REQ-S08-011] `RATIFIED_CANONICAL` ต้อง bind exact spec version, changed Requirement IDs, invalidated evidence และ gate results; approval ของ digest เก่าห้ามใช้กับเนื้อหาใหม่
 
 [REQ][REQ-S08-012] `spec/fsm/run.yaml`, `recovery.yaml` และ `governance.yaml` ต้อง encode state/transition/terminal sets ตรง section นี้และผ่าน reachability, illegal-transition และ terminal-state tests
 
@@ -2213,24 +2220,24 @@ Permissions:
 ## 19.2 Deployment FSM [NORMATIVE]
 
 ```text
-ARCHIVED -> STAGED
-STAGED -> CANARY | ROLLED_BACK
-CANARY -> VALIDATED | ROLLED_BACK
-VALIDATED -> APPROVED | ROLLED_BACK
-APPROVED -> ACTIVE | ROLLED_BACK
-ACTIVE -> SUPERSEDED | ROLLED_BACK
+EXPORT_PREPARED -> SIGNATURE_VERIFIED | ROLLED_BACK
+SIGNATURE_VERIFIED -> PACKAGE_BUNDLED | ROLLED_BACK
+PACKAGE_BUNDLED -> CANARY_PROVISIONED | ARCHIVED_PRODUCTION | ROLLED_BACK
+CANARY_PROVISIONED -> CANARY_EVALUATING | ROLLED_BACK
+CANARY_EVALUATING -> PROMOTED_FULL_TRAFFIC | ROLLED_BACK
+PROMOTED_FULL_TRAFFIC -> ARCHIVED_PRODUCTION | ROLLED_BACK
 ```
+
+`PACKAGE_BUNDLED -> ARCHIVED_PRODUCTION` เป็นเส้นทางของ mode `SAFE_EXPORT_ONLY` ซึ่งจบโดยไม่แตะ traffic จริง
 
 Terminal states:
 
 ```text
-SUPERSEDED
+ARCHIVED_PRODUCTION
 ROLLED_BACK
 ```
 
-`PROMOTED` ถูกยกเลิกจาก active state vocabulary
-
-[REQ][REQ-S19-001] threshold violation ระหว่าง `CANARY` ต้อง transition เป็น `ROLLED_BACK` โดยตรงและสร้าง rollback evidence; ห้ามผ่าน `VALIDATED` หรือ `APPROVED`
+[REQ][REQ-S19-001] threshold violation ระหว่าง `CANARY_EVALUATING` ต้อง transition เป็น `ROLLED_BACK` โดยตรงและสร้าง rollback evidence; ห้ามผ่าน `PROMOTED_FULL_TRAFFIC`
 
 [REQ][REQ-S19-002] invalid Deployment transition ต้อง fail closed และบันทึก attempted transition โดยห้ามแก้ target environment
 
