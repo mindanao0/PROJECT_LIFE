@@ -1,7 +1,8 @@
 # The 300 Canonical Master Mathematical Equations Suite
 
 > **Subsystem:** Complete Mathematical & Theoretical Canon  
-> **Authority Level:** NORMATIVE MATHEMATICAL MASTER SPECIFICATION  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** MATHEMATICAL MASTER SPECIFICATION
 > **Total Canonical Equations:** Exactly 300 Master Equations (`EQ-001` .. `EQ-300`)  
 > **Mapping Matrix:** 1-to-1 Bijection with the 300 Engineering Dimensions (`DIM-001` .. `DIM-300`)
 

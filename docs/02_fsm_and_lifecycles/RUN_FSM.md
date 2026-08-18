@@ -1,6 +1,7 @@
 # Run Lifecycle FSM Specification (11 States)
 
-> **Authority Level:** NORMATIVE FSM SPECIFICATION (L2 Authority)  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** FSM SPECIFICATION (L2 Authority)
 > **Target Subsystem:** Run Coordinator & Engine Orchestrator  
 > **Governing Equations:** `EQ-023` (Stochastic Operator Matrix), `EQ-009` (Logical Determinism R1), `EQ-030` (Audit Transition Chain)
 

@@ -1,7 +1,8 @@
 # 09 — Maturity Ladder, Release Gates & Unified v1 Implementation Roadmap
 
 > **Active Requirements Covered:** `REQ-S21-001` .. `REQ-S30-002` (Unified v1 Full Scope)  
-> **Authority Level:** NORMATIVE (Integrated Core v1 Architecture)
+> **Authority Level:** OVERVIEW — rank 5 in `spec/authority.yaml` document_precedence. Not normative.  
+> **Canonical source:** [`spec/maturity.yaml และ spec/release_gates.yaml`](../spec/maturity.yaml) — เมื่อขัดกัน ให้ยึดฝั่งนั้น
 
 ---
 

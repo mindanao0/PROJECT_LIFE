@@ -1,7 +1,8 @@
 # Architecture Decision Records (ADRs)
 
 > **Subsystem:** Architectural Governance & Design Rationale  
-> **Authority Level:** NORMATIVE MASTER RECORDS  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** MASTER RECORDS
 > **Status:** Active / Accepted
 
 ---

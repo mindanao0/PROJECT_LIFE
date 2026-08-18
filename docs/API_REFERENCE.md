@@ -66,7 +66,7 @@ class EvolutionEngine:
         """
         ...
 
-    def stop_run(self, run_id: RunId) -> RunState:
+    def abort_run(self, run_id: RunId) -> RunState:
         """
         สั่งหยุดการทำงานของ Run อย่างปลอดภัยและบันทึก Checkpoint สุดท้าย.
         """

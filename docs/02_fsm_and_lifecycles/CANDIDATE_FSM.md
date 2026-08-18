@@ -1,7 +1,8 @@
 # Candidate Lifecycle Finite State Machine (17 States)
 
 > **Subsystem:** Candidate State & Verification Lifecycle  
-> **Authority Level:** NORMATIVE (`REQ-S08-001`)
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** `REQ-S08-001`
 
 ---
 

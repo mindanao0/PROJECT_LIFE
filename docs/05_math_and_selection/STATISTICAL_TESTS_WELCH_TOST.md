@@ -1,7 +1,8 @@
 # Statistical Hypothesis Testing (Welch, TOST & Holm-Bonferroni)
 
 > **Subsystem:** Statistical Rigor & Equivalence Testing  
-> **Authority Level:** NORMATIVE (`REQ-S10-002` .. `REQ-S10-004`)
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** `REQ-S10-002` .. `REQ-S10-004`
 
 ---
 

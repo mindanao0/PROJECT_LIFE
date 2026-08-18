@@ -1,7 +1,8 @@
 # Linux Namespaces & cgroups v2 Enforcement
 
 > **Subsystem:** Process, Memory & CPU Isolation  
-> **Authority Level:** NORMATIVE (`REQ-S12-002`, `REQ-S12-004`)
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** `REQ-S12-002`, `REQ-S12-004`
 
 ---
 

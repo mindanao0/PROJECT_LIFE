@@ -1,6 +1,7 @@
 # Seccomp BPF System Call Filtering Specification
 
-> **Authority Level:** NORMATIVE SECURITY SPECIFICATION (L1 Authority)  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** SECURITY SPECIFICATION (L1 Authority)
 > **Target Subsystem:** Kernel Syscall Filter & Process Hardening  
 > **Governing Equations:** `EQ-221` .. `EQ-230` (Seccomp BPF Bounds)
 

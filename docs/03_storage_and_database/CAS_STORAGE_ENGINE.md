@@ -1,6 +1,7 @@
 # Content-Addressed Storage (CAS) Engine Specification
 
-> **Authority Level:** NORMATIVE STORAGE SPECIFICATION (L5 Authority)  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** STORAGE SPECIFICATION (L5 Authority)
 > **Target Subsystem:** CAS Storage Subsystem (`.evolution/cas/`)  
 > **Governing Equations:** `EQ-261` (CAS 2-Tier Sharding), `EQ-262` (Atomic Temp-Fsync-Rename), `EQ-263` (Zero Torn Reads)
 

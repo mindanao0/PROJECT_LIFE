@@ -1,7 +1,8 @@
 # Multi-Armed Bandit Dynamic Strategy (UCB1)
 
 > **Subsystem:** Adaptive Mutation Operator Selection  
-> **Authority Level:** NORMATIVE (`REQ-S09-004`)
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** `REQ-S09-004`
 
 ---
 

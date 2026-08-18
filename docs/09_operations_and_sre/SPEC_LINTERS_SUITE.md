@@ -1,7 +1,8 @@
 # Automated Specification Linters Suite Specification
 
 > **Subsystem:** Static Specification Integrity Checkers  
-> **Authority Level:** NORMATIVE (`REQ-S02-009`)
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** `REQ-S02-009`
 
 ---
 

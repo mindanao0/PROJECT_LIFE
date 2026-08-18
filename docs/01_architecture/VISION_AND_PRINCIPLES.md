@@ -1,7 +1,8 @@
 # Vision, Principles, Authority Hierarchy & System Identity
 
 > **Subsystem:** Core System Identity  
-> **Authority Level:** NORMATIVE (`REQ-S00-001` .. `REQ-S03-005`)  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** `REQ-S00-001` .. `REQ-S03-005`
 > **Lineage:** Plan 10.2.2 Unified Core Architecture
 
 ---

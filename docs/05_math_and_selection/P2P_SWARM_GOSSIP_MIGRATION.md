@@ -1,7 +1,8 @@
 # Distributed P2P Evolutionary Swarm & Gossip Island Migration
 
 > **Subsystem:** Decentralized P2P Scaling & Swarm Consensus  
-> **Authority Level:** NORMATIVE (Integrated Core v1 Architecture)
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** Integrated Core v1 Architecture
 
 ---
 

@@ -1,6 +1,7 @@
 # Quantum Rotation Gate Mutation Operator Specification (M09)
 
-> **Authority Level:** NORMATIVE COMPILER SPECIFICATION (L4 Authority)  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** COMPILER SPECIFICATION (L4 Authority)
 > **Target Subsystem:** Quantum-Inspired Mutation Pipeline  
 > **Governing Equations:** `EQ-141` .. `EQ-150` (Quantum Probability & Annealing Schedule)
 

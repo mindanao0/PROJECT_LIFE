@@ -1,7 +1,8 @@
 # Signed Release Evidence Bundling Protocol
 
 > **Subsystem:** Release Evidence & Verification Manifests  
-> **Authority Level:** NORMATIVE (`REQ-S18-001` .. `REQ-S18-005`)
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** `REQ-S18-001` .. `REQ-S18-003`
 
 ---
 

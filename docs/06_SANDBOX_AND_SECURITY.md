@@ -1,7 +1,8 @@
 # 06 — Hardened Sandbox Isolation, Seccomp & Security Policy
 
 > **Active Requirements Covered:** `REQ-S12-001` .. `REQ-S12-020`, `REQ-S20-001`  
-> **Authority Level:** NORMATIVE (Integrated & Reconciled)
+> **Authority Level:** OVERVIEW — rank 5 in `spec/authority.yaml` document_precedence. Not normative.  
+> **Canonical source:** [`docs/06_security_and_sandboxing/`](./06_security_and_sandboxing/) — เมื่อขัดกัน ให้ยึดฝั่งนั้น
 
 Evolution Engine มีหน้าที่ประเมินและรัน Candidate Programs ซึ่งอาจมีบั๊ก การกินทรัพยากรไม่สิ้นสุด (Infinite Loop / Fork Bomb) หรือมีโค้ดอันตราย ดังนั้นการรัน Candidate ทุกตัวจะต้องกระทำใน **Hardened Isolation Boundary** ที่รัดกุมในระดับ OS Kernel
 

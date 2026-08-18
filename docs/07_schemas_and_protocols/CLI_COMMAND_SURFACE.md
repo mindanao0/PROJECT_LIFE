@@ -1,6 +1,8 @@
 # CLI Command Surface Specification (`evolve`)
 
-> **Authority Level:** NORMATIVE PUBLIC CLI SPECIFICATION (L4 Authority)  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Canonical verbs:** `build/spec/Evolution_Engine_Active_Spec_10_2_2.md` §6.1 — 14 คำสั่ง ห้ามเพิ่ม/ลดที่นี่  
+> **Scope:** PUBLIC CLI SPECIFICATION (L4 Authority)
 > **Target Subsystem:** Command Line Interface Surface  
 > **Governing Equations:** `EQ-047` (CLI Exit Codes), `EQ-048` (JSON stdout Envelope)
 

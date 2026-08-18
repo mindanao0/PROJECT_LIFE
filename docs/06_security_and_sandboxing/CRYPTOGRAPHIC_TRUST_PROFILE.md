@@ -1,6 +1,7 @@
 # Cryptographic Trust Profile Specification (EE-CRYPTO-1)
 
-> **Authority Level:** NORMATIVE SECURITY SPECIFICATION (L0 Authority)  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** SECURITY SPECIFICATION (L0 Authority)
 > **Target Subsystem:** Cryptographic Key Management & Verification  
 > **Governing Equations:** `EQ-231` .. `EQ-240` (Ed25519, Twisted Edwards Curve, Multisig 2-of-3)
 

@@ -1,6 +1,7 @@
 # Two-Phase Generation Commit Protocol (2PC) Specification
 
-> **Authority Level:** NORMATIVE STORAGE SPECIFICATION (L5 Authority)  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** STORAGE SPECIFICATION (L5 Authority)
 > **Target Subsystem:** Coordinator Commit Protocol & Persistence Orchestrator  
 > **Governing Equations:** `EQ-264` (7-State 2PC Loop), `EQ-265` (Generation Manifest Durability), `EQ-266` (Atomic Rollback)
 

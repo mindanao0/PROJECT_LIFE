@@ -1,9 +1,10 @@
 # Mathematical, Statistical & Algorithmic Reference (300 Canonical Equations)
 
 > **Subsystem:** Mathematical Formulations, Pareto Selection, Information Geometry, Statistical Physics & Cryptography  
-> **Authority Level:** NORMATIVE MATHEMATICAL REFERENCE  
-> **Master 300 Equations Document:** 📄 **[docs/05_math_and_selection/300_CANONICAL_MATHEMATICAL_EQUATIONS.md](file:///Users/natdanai/Code/playground5/docs/05_math_and_selection/300_CANONICAL_MATHEMATICAL_EQUATIONS.md)**  
-> **50 Grand Master Formulations:** 📄 **[docs/05_math_and_selection/ADVANCED_MATHEMATICAL_FORMULAS.md](file:///Users/natdanai/Code/playground5/docs/05_math_and_selection/ADVANCED_MATHEMATICAL_FORMULAS.md)**
+> **Authority Level:** OVERVIEW — rank 5 in `spec/authority.yaml` document_precedence. Pointer material only.  
+> **Scope:** MATHEMATICAL REFERENCE
+> **Master 300 Equations Document:** 📄 **[docs/05_math_and_selection/300_CANONICAL_MATHEMATICAL_EQUATIONS.md](05_math_and_selection/300_CANONICAL_MATHEMATICAL_EQUATIONS.md)**  
+> **50 Grand Master Formulations:** 📄 **[docs/05_math_and_selection/ADVANCED_MATHEMATICAL_FORMULAS.md](05_math_and_selection/ADVANCED_MATHEMATICAL_FORMULAS.md)**
 
 เอกสารฉบับนี้รวบรวมและสรุปภาพรวมนิยามทางคณิตศาสตร์ สูตรการคำนวณ อัลกอริทึมการคัดเลือก ทฤษฎีกราฟ ฟิสิกส์สถิติ พันธุศาสตร์ และการเข้ารหัสครบทั้ง **300 มหาสมการแม่บท (`EQ-001` ถึง `EQ-300`)** ซึ่งจับคู่แบบ 1-ต่อ-1 เข้ากับมิติวิศวกรรมทั้ง 300 มิติ (`DIM-001` ถึง `DIM-300`) ของ **Evolution Engine**
 

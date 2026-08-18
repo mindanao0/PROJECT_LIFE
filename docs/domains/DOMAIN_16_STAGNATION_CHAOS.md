@@ -3,7 +3,8 @@
 > **Domain Index:** `DOMAIN-16`  
 > **Engineering Scope:** `DIM-151` .. `DIM-160`  
 > **Mathematical Equations:** `EQ-151` .. `EQ-160`  
-> **Authority Level:** NORMATIVE MASTER SPECIFICATION
+> **Authority Level:** OVERVIEW — rank 5 in `spec/authority.yaml` document_precedence. Pointer material only.  
+> **Scope:** MASTER SPECIFICATION
 
 ---
 

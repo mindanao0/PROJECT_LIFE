@@ -1,7 +1,8 @@
 # Evolutionary Stagnation & 4-Tier Escalation Ladder
 
 > **Subsystem:** Stagnation Recovery & Diversity Reseeding  
-> **Authority Level:** NORMATIVE (`REQ-S10-010`)
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** `REQ-S10-010`
 
 ---
 

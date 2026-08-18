@@ -1,7 +1,8 @@
 # 05 — Metrics, Statistics, Multi-Objective Pareto, P2P Swarm & ALife Ecosystems
 
 > **Active Requirements Covered:** `REQ-S10-001` .. `REQ-S10-010`, `REQ-S11-001` .. `REQ-S11-002` (Unified v1 Full Scope)  
-> **Authority Level:** NORMATIVE (Integrated Core v1 Architecture)
+> **Authority Level:** OVERVIEW — rank 5 in `spec/authority.yaml` document_precedence. Not normative.  
+> **Canonical source:** [`docs/05_math_and_selection/`](./05_math_and_selection/) — เมื่อขัดกัน ให้ยึดฝั่งนั้น
 
 Evolution Engine v1 รวมกลไกการคัดเลือกแบบหลายมิติ (**Pareto Selection**), การกระจายการประมวลผลแบบฝูง (**Distributed P2P Swarm**), และการจำลองระบบนิเวศชีวิตประดิษฐ์ (**Artificial-Life Ecosystem Co-evolution**) เข้าเป็นแกนหลักของการค้นหา
 

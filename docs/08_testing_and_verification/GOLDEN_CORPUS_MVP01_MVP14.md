@@ -1,6 +1,7 @@
 # Golden Corpus Benchmark Specification (MVP-01 to MVP-14)
 
-> **Authority Level:** NORMATIVE BENCHMARK SPECIFICATION (L6 Authority)  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** BENCHMARK SPECIFICATION (L6 Authority)
 > **Target Subsystem:** Benchmark Corpus & Golden Verification Suite  
 > **Governing Equations:** `EQ-273` (14 Golden Projects Conformance), `EQ-280` (R4 Replay Identity)
 

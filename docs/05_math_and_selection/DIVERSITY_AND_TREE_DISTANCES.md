@@ -1,7 +1,8 @@
 # Population Diversity & Tree Edit Distances
 
 > **Subsystem:** Diversity Preservation Science  
-> **Authority Level:** NORMATIVE (`REQ-S10-006`)
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** `REQ-S10-006`
 
 ---
 

@@ -1,7 +1,8 @@
 # 01 — Vision, Principles, Authority & Unified v1 Architecture
 
 > **Active Requirements Covered:** `REQ-S00-001` .. `REQ-S03-005` (Unified v1 Full Scope)  
-> **Authority Level:** NORMATIVE (Integrated Core v1 Architecture)
+> **Authority Level:** OVERVIEW — rank 5 in `spec/authority.yaml` document_precedence. Not normative.  
+> **Canonical source:** [`docs/01_architecture/`](./01_architecture/) — เมื่อขัดกัน ให้ยึดฝั่งนั้น
 
 ---
 

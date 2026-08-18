@@ -1,7 +1,8 @@
 # Flaky Test Detection, Isolation Boundary & Anti-Gaming Protocols
 
 > **Subsystem:** Test Reliability & Non-Gaming Protocols  
-> **Authority Level:** NORMATIVE (`REQ-S17-001` .. `REQ-S17-003`)
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** `REQ-S17-001` .. `REQ-S17-003`
 
 ---
 

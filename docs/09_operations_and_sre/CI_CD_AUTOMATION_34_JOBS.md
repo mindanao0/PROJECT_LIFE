@@ -1,7 +1,8 @@
 # Continuous Integration Matrix: Complete 34 Jobs Specification
 
 > **Subsystem:** CI/CD Automation & Quality Gate Enforcement  
-> **Authority Level:** NORMATIVE (`REQ-S02-009`, `REQ-S21-001`)
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** `REQ-S02-009`, `REQ-S21-001`
 
 ---
 

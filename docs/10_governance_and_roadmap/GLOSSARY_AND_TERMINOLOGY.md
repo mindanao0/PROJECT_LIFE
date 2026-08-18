@@ -1,7 +1,8 @@
 # Ubiquitous Domain Terminology & Glossary
 
 > **Subsystem:** Standard System Vocabulary & Cross-Team Alignment  
-> **Authority Level:** NORMATIVE MASTER GLOSSARY
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** MASTER GLOSSARY
 
 ---
 

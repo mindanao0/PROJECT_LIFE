@@ -1,6 +1,7 @@
 # Threat Vectors, Defense & Automated Quarantine Specification
 
-> **Authority Level:** NORMATIVE SECURITY SPECIFICATION (L0 Authority)  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** SECURITY SPECIFICATION (L0 Authority)
 > **Target Subsystem:** Threat Detection & Quarantine Subsystem  
 > **Governing Equations:** `EQ-241` .. `EQ-250` (Threat Modeling & Quarantine Probability)
 

@@ -1,6 +1,7 @@
 # Deployment & Canary Rollout FSM Specification (8 States)
 
-> **Authority Level:** NORMATIVE FSM SPECIFICATION (L2 Authority)  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** FSM SPECIFICATION (L2 Authority)
 > **Target Subsystem:** Safe Export & Production Canary Rollout  
 > **Governing Equations:** `EQ-026` (Canary Traffic Split), `EQ-027` (Hazard Function Rollback), `EQ-289` (Self-Containment)
 

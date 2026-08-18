@@ -1,7 +1,8 @@
 # 03 — Database Schema (29 Tables), Integrity Triggers & CAS Persistence
 
 > **Active Requirements Covered:** `REQ-S13-001` .. `REQ-S13-009`, `REQ-S14-001` .. `REQ-S14-002`  
-> **Authority Level:** NORMATIVE (Integrated Core v1 Architecture)
+> **Authority Level:** OVERVIEW — rank 5 in `spec/authority.yaml` document_precedence. Not normative.  
+> **Canonical source:** [`docs/03_storage_and_database/`](./03_storage_and_database/) — เมื่อขัดกัน ให้ยึดฝั่งนั้น
 
 สถาปัตยกรรมการจัดเก็บข้อมูลของ Evolution Engine แบ่งหน้าที่ออกเป็น 2 ชั้นอย่างชัดเจน:
 1. **SQLite Database (Relational Engine):** เก็บโครงสร้าง Metadata, สถานะของกระบวนการ, ผลการประเมิน, ความสัมพันธ์ Lineage และ Index สำหรับ Audit

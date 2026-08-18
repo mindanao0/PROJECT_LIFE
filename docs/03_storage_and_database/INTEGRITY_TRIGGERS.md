@@ -1,6 +1,7 @@
 # SQLite Integrity Triggers & Polymorphic Validation Specification
 
-> **Authority Level:** NORMATIVE STORAGE SPECIFICATION (L5 Authority)  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** STORAGE SPECIFICATION (L5 Authority)
 > **Target Subsystem:** Relational Storage Engine (`.evolution/db.sqlite`)  
 > **Governing Equations:** `EQ-253` (Polymorphic Trigger Verification), `EQ-254` (Monotonic Audit Sequence Increment)
 

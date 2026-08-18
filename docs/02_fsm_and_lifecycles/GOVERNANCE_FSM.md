@@ -1,6 +1,7 @@
 # Governance & Governed Spec Change FSM Specification (12 States)
 
-> **Authority Level:** NORMATIVE FSM SPECIFICATION (L2 Authority)  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** FSM SPECIFICATION (L2 Authority)
 > **Target Subsystem:** Specification Governance & Traceability Engine  
 > **Governing Equations:** `EQ-025` (Governance Quorum Function), `EQ-293` (Multi-Party Quorum), `EQ-292` (178 Monotonic Requirements)
 

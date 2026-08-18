@@ -1,7 +1,8 @@
 # PROFILE_A_LINUX Security Specification & Conformance Matrix
 
 > **Subsystem:** Hardened OS-Level Sandbox Baseline  
-> **Authority Level:** NORMATIVE (`REQ-S12-001` .. `REQ-S12-020`)
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** `REQ-S12-001` .. `REQ-S12-020`
 
 ---
 

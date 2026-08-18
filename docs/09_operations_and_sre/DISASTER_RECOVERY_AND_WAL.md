@@ -1,7 +1,8 @@
 # Disaster Recovery, Crash Semantics & SQLite WAL Architecture
 
 > **Subsystem:** Reliability, Disaster Recovery & Storage Durability  
-> **Authority Level:** NORMATIVE (`REQ-S13-008`, `REQ-S14-002`)
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** `REQ-S13-008`, `REQ-S14-002`
 
 ---
 

@@ -1,6 +1,7 @@
 # Polyglot Native Accelerator Compilation Operator Specification (M10)
 
-> **Authority Level:** NORMATIVE COMPILER SPECIFICATION (L4 Authority)  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** COMPILER SPECIFICATION (L4 Authority)
 > **Target Subsystem:** Polyglot Native Bridge & SIMD Accelerator  
 > **Governing Equations:** `EQ-091` .. `EQ-100` (UAST Homomorphism, Rust Safety, SIMD AVX-512)
 

@@ -1,6 +1,7 @@
 # Recovery & Crash Resilience FSM Specification (9 States)
 
-> **Authority Level:** NORMATIVE FSM SPECIFICATION (L2 Authority)  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** FSM SPECIFICATION (L2 Authority)
 > **Target Subsystem:** Disaster Recovery & Storage Reconciler  
 > **Governing Equations:** `EQ-024` (Recovery Idempotency Loop), `EQ-285` (Disaster Recovery SLOs: RTO $\le 60$s, RPO $\le 1$ Gen), `EQ-267` (DB Reconstruction)
 

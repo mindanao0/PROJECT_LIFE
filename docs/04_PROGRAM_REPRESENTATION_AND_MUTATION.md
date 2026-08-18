@@ -1,7 +1,8 @@
 # 04 — Program Representation, AST Safety Invariants & Unified Mutation Engine
 
 > **Active Requirements Covered:** `REQ-S09-001` .. `REQ-S09-005` (Unified v1 Full Scope)  
-> **Authority Level:** NORMATIVE (Integrated Core v1 Architecture)
+> **Authority Level:** OVERVIEW — rank 5 in `spec/authority.yaml` document_precedence. Not normative.  
+> **Canonical source:** [`docs/04_representation_and_mutation/`](./04_representation_and_mutation/) — เมื่อขัดกัน ให้ยึดฝั่งนั้น
 
 Evolution Engine v1 รวมความสามารถในการกลายพันธุ์ทั้งแบบมาตรฐานไวยากรณ์ (Syntax Tree Mutations), การประยุกต์ทฤษฎีควอนตัม (Quantum-Inspired Rotation), และการแปลงข้ามภาษา (Cross-Language AST Subtree Bridges) เข้าเป็นหนึ่งเดียวใน Core
 

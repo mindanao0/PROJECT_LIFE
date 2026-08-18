@@ -1,7 +1,8 @@
 # Unified Engine Exception Hierarchy & Diagnostic Classes
 
 > **Subsystem:** Error Handling, Recovery & Diagnostic Telemetry  
-> **Authority Level:** NORMATIVE (`REQ-S07-003`, `REQ-S08-003`)
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** `REQ-S07-003`, `REQ-S08-003`
 
 ---
 

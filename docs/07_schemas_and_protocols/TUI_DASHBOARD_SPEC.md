@@ -1,7 +1,8 @@
 # Terminal User Interface (TUI) Dashboard Specification
 
 > **Subsystem:** Interactive Operations & SRE Telemetry  
-> **Authority Level:** NORMATIVE SPECIFICATION (`REQ-S07-004`)  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** TUI presentation layer — ยังไม่มี requirement ผูกใน Active Contract
 > **Governing Equations:** `EQ-288` (TUI Refresh Rate $\ge 10\text{Hz}$), `EQ-106` (Live Hypervolume), `EQ-018` (Worker Telemetry)
 
 ---

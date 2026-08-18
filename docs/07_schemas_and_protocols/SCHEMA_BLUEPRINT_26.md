@@ -1,7 +1,8 @@
 # Exact 26 JSON Schema Registry Blueprint
 
 > **Subsystem:** Data Contracts (JSON Schema Draft 2020-12)  
-> **Authority Level:** NORMATIVE (`REQ-S06-001`, `REQ-S06-002`)
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** `REQ-S06-001`, `REQ-S06-002`
 
 ---
 

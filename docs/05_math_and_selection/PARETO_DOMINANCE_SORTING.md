@@ -1,7 +1,8 @@
 # Multi-Objective Pareto Dominance & Fast Sorting ($O(MN^2)$)
 
 > **Subsystem:** Multi-Objective Pareto Selection  
-> **Authority Level:** NORMATIVE (`REQ-S10-001` .. `REQ-S10-005`)
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** `REQ-S10-001` .. `REQ-S10-005`
 
 ---
 

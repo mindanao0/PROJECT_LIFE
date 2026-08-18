@@ -1,7 +1,8 @@
 # The 50 Grand Master Equations & Mathematical Formulations Suite
 
 > **Subsystem:** Optimization, Graph Theory, Information Geometry, Statistical Physics, Population Genetics & Cryptography  
-> **Authority Level:** NORMATIVE MATHEMATICAL SPECIFICATION  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** MATHEMATICAL SPECIFICATION
 > **Total Canonical Equations:** Exactly 50 Grand Master Equations (`EQ-01` .. `EQ-50`)
 
 เอกสารฉบับนี้รวบรวม **50 มหาสมการคณิตศาสตร์ สถิติอนุมาน ทฤษฎีกราฟ ฟิสิกส์สถิติ พันธุศาสตร์ประชากร เรขาคณิตสารสนเทศ และการเข้ารหัส (The 50 Grand Master Equations)** ที่ใช้ในการคำนวณ วัดผล วิเคราะห์โครงสร้าง และควบคุมความปลอดภัยของ **Evolution Engine** อย่างเป็นทางการ

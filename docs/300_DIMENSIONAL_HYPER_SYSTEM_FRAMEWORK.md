@@ -1,10 +1,11 @@
 # 300-Dimensional Hyper-System Engineering Framework & Equation Mapping
 
-> **Authority Level:** NORMATIVE MASTER SPECIFICATION  
+> **Authority Level:** OVERVIEW — rank 5 in `spec/authority.yaml` document_precedence. Pointer material only.  
+> **Scope:** MASTER SPECIFICATION
 > **Total Atomic Dimensions:** Exactly 300 Dimensions (`DIM-001` .. `DIM-300`)  
 > **Total Mathematical Equations:** Exactly 300 Canonical Equations (`EQ-001` .. `EQ-300`)  
 > **Mapping Matrix:** 1-to-1 Exact Bijection between Engineering Dimensions and Mathematical Equations  
-> **Companion Mathematical Universe:** 🧮 **[300_CANONICAL_MATHEMATICAL_EQUATIONS.md](file:///Users/natdanai/Code/playground5/docs/05_math_and_selection/300_CANONICAL_MATHEMATICAL_EQUATIONS.md)**
+> **Companion Mathematical Universe:** 🧮 **[300_CANONICAL_MATHEMATICAL_EQUATIONS.md](05_math_and_selection/300_CANONICAL_MATHEMATICAL_EQUATIONS.md)**
 
 เอกสารฉบับนี้เป็น **สารบัญและข้อกำหนดเชิงลึก 300 มิติฉบับสมบูรณ์ (The 300-Dimensional Hyper-System Specification)** ที่ผูกโยงเข้ากับ **300 มหาสมการคณิตศาสตร์แม่บท (`EQ-001` ถึง `EQ-300`)** แบบ 1-ต่อ-1 บริบูรณ์
 
@@ -84,4 +85,4 @@
 - **`DIM-019` [Dead Worker Auto-Pruning]:** การสั่ง Kill Worker เมื่อขาด Heartbeat เกิน 5s $\leftrightarrow$ **`EQ-019`** $\text{Kill}(w) \iff \Delta t > 5.0\text{ s}$
 - **`DIM-020` [Zero-Lock DB Read Concurrency]:** การอ่านฐานข้อมูลคู่ขนานผ่าน SQLite WAL Mode $\leftrightarrow$ **`EQ-020`** $\Pr(\text{LockContention}) = 0$
 
-*(มิติที่ 021 ถึง 300 ถูกผูกโยงแบบ 1-to-1 เข้ากับสมการ EQ-021 ถึง EQ-300 ใน [300_CANONICAL_MATHEMATICAL_EQUATIONS.md](file:///Users/natdanai/Code/playground5/docs/05_math_and_selection/300_CANONICAL_MATHEMATICAL_EQUATIONS.md) อย่างสมบูรณ์แบบ)*
+*(มิติที่ 021 ถึง 300 ถูกผูกโยงแบบ 1-to-1 เข้ากับสมการ EQ-021 ถึง EQ-300 ใน [300_CANONICAL_MATHEMATICAL_EQUATIONS.md](05_math_and_selection/300_CANONICAL_MATHEMATICAL_EQUATIONS.md) อย่างสมบูรณ์แบบ)*

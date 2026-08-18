@@ -1,7 +1,8 @@
 # Governed Specification Change Process (Section 27)
 
 > **Subsystem:** Specification Change Governance & Audit Trail  
-> **Authority Level:** NORMATIVE (`REQ-S27-001` .. `REQ-S27-005`)
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** `REQ-S27-001` .. `REQ-S27-002`
 
 ---
 

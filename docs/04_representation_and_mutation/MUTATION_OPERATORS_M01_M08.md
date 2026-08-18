@@ -1,6 +1,7 @@
 # Mutation Operators Specification (M01 to M08)
 
-> **Authority Level:** NORMATIVE COMPILER SPECIFICATION (L4 Authority)  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** COMPILER SPECIFICATION (L4 Authority)
 > **Target Subsystem:** AST Transformation & Mutator Pipeline  
 > **Governing Equations:** `EQ-071` .. `EQ-090` (Atomic & Architectural Mutation Models)
 

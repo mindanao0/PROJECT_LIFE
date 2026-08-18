@@ -1,12 +1,13 @@
-# Maturity Ladder Specification (M0 to M13) & Release Gates
+# Implementation Phase Plan (PHASE-01 to PHASE-14)
 
-> **Authority Level:** NORMATIVE ROADMAP SPECIFICATION (L8 Authority)  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** ROADMAP SPECIFICATION (L8 Authority)
 > **Target Subsystem:** Release Governance & Maturity Verification  
 > **Governing Equations:** `EQ-300` (14-Level Monotonic Closure), `EQ-299` (Self-Evolution Root-of-Trust)
 
 ---
 
-## 1. Complete 14-Level Maturity Ladder Hierarchy
+## 1. Capability Delivery Order (PHASE-01 .. PHASE-14)
 
 ```text
 ┌───────┬───────────────────────────────────┬───────────────────────────────────────────────────────────────────────────┐
@@ -33,6 +34,33 @@
 
 ## 2. Monotonic Closure & Quality Gates Proof
 
-ระบบจะสามารถเลื่อนระดับ Maturity จาก $M_k$ ไปสู่ $M_{k+1}$ ได้ก็ต่อเมื่อผ่านการตรวจสอบ Release Gates ทั้งหมดของระดับ $M_k$ แบบ 100%:
-$$M_0 \longrightarrow M_1 \longrightarrow M_2 \longrightarrow \dots \longrightarrow M_{13}$$
-ห้ามข้ามขั้นตอนโดยเด็ดขาด
+PHASE ต่อไปนี้เป็นลำดับการ**ส่งมอบความสามารถ** ไม่ใช่ maturity level และไม่ใช่ release gate
+$$\text{PHASE-01} \longrightarrow \text{PHASE-02} \longrightarrow \dots \longrightarrow \text{PHASE-14}$$
+maturity level M0–M13 ที่ใช้ตัดสิน release gate อยู่ใน `spec/maturity.yaml` เท่านั้น ดูตารางข้อ 3
+
+---
+
+## 3. Canonical Maturity Ladder (M0–M13)
+
+> Derived from [`spec/maturity.yaml`](../../spec/maturity.yaml). แก้ที่ไฟล์นั้นเท่านั้น ห้ามแก้ตารางนี้โดยตรง
+
+| Level | Name | Gate |
+|---|---|---|
+| **M0** | `DRAFT` | UTF-8 encoding valid, no corrupted control characters |
+| **M1** | `ARCHITECTURE` | Architecture interfaces and single-writer concurrency defined |
+| **M2** | `REQUIREMENTS_CANONICAL` | All 178 Requirement IDs monotonically checked and compliant |
+| **M3** | `SCHEMAS` | 26 JSON Schemas Draft 2020-12 valid with test fixtures |
+| **M4** | `PROTOCOLS` | 22 Typed Python Protocols with zero type errors |
+| **M5** | `FSM_AND_CONFIG` | FSM transition matrix reachability & Vertical Slice MVP-01 pass |
+| **M6** | `SECURITY` | PROFILE_A_LINUX passes capabilities probes on Linux matrix |
+| **M7** | `PERSISTENCE` | 29 SQLite tables installable from scratch with zero FK violations |
+| **M8** | `RECOVERY` | 2PC Commit crash chaos injection matrix 100% recovered |
+| **M9** | `CORE_GOLDEN` | Golden Corpus cases MVP-01 to MVP-07 pass |
+| **M10** | `SECURITY_RELIABILITY_GOLDEN` | Negative security (MVP-08..10), reliability (MVP-11..12) and swarm (MVP-13) pass |
+| **M11** | `EXECUTION_READY` | GATE_CORE passed, traceability complete, evidence bundle signed |
+| **M12** | `PRODUCTION` | Governed canary deployment, 2-of-3 Ed25519 multisig quorum |
+| **M13** | `SELF_EVOLUTION` | Immutable evaluator root-of-trust bootstrap verified |
+
+`GATE_CORE`, `GATE_PRODUCTION` และ `GATE_SELF_EVOLUTION` อยู่ใน [`spec/release_gates.yaml`](../../spec/release_gates.yaml)
+
+PHASE-xx ข้างบนกับ M0–M13 เป็นคนละแกน: PHASE บอกว่าสร้างอะไรก่อนหลัง ส่วน M บอกว่าปล่อยของได้เมื่อไหร่

@@ -39,4 +39,4 @@
 26. engine_config.schema.json
 ```
 
-- รายละเอียดและข้อกำหนดฟิลด์ของแต่ละ Schema สามารถดูได้ที่: 📄 **[docs/07_schemas_and_protocols/SCHEMA_BLUEPRINT_26.md](file:///Users/natdanai/Code/playground5/docs/07_schemas_and_protocols/SCHEMA_BLUEPRINT_26.md)**
+- รายละเอียดและข้อกำหนดฟิลด์ของแต่ละ Schema สามารถดูได้ที่: 📄 **[docs/07_schemas_and_protocols/SCHEMA_BLUEPRINT_26.md](../docs/07_schemas_and_protocols/SCHEMA_BLUEPRINT_26.md)**

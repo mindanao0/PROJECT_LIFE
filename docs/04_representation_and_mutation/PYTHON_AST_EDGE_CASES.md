@@ -1,7 +1,8 @@
 # Python AST Special Cases & Language Edge Handling (CPython 3.12+)
 
 > **Subsystem:** Python Language Semantics & AST Special Cases  
-> **Authority Level:** NORMATIVE (`REQ-S03-001`, `REQ-S09-001`)
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** `REQ-S03-001`, `REQ-S09-001`
 
 ---
 

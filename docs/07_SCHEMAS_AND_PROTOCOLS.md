@@ -1,7 +1,8 @@
 # 07 — Schemas, Protocols & Public Interfaces
 
 > **Active Requirements Covered:** `REQ-S06-001` .. `REQ-S07-003`, `REQ-S15-001` .. `REQ-S15-007` (Unified v1 Full Scope)  
-> **Authority Level:** NORMATIVE (Integrated Core v1 Architecture)
+> **Authority Level:** OVERVIEW — rank 5 in `spec/authority.yaml` document_precedence. Not normative.  
+> **Canonical source:** [`docs/07_schemas_and_protocols/`](./07_schemas_and_protocols/) — เมื่อขัดกัน ให้ยึดฝั่งนั้น
 
 Evolution Engine v1 นิยามอินเทอร์เฟซสาธารณะ (Public Surface), โปรโตคอลภายใน 22 โปรโตคอล (Typed Protocols) ครอบคลุมทั้ง Core Engine, Quantum Search, P2P Swarm และ ALife Ecosystem
 
@@ -16,7 +17,7 @@ evolve run           # เริ่มต้นการวิวัฒนาก
 evolve status        # ดูสถานะปัจจุบันของ Run
 evolve pause         # พักการทำงานชั่วคราว
 evolve resume        # ดำเนินการต่อจากจุดที่พัก
-evolve stop          # หยุดการทำงานอย่างปลอดภัย
+evolve abort         # ยกเลิกการรันและเข้าสู่สถานะ ABORTED
 evolve report        # สร้างรายงานผลการวิวัฒนาการและ Pareto Frontier
 evolve export        # ส่งออก Candidate โค้ด (รองรับทั้ง Pure Python และ Rust/C Native Extension)
 evolve swarm join    # เชื่อมต่อเข้าร่วม P2P Evolutionary Swarm Network
@@ -35,7 +36,7 @@ class EvolutionEngine:
     def start_run(self, project_path: str) -> RunId: ...
     def pause_run(self, run_id: RunId) -> RunState: ...
     def resume_run(self, run_id: RunId) -> RunState: ...
-    def stop_run(self, run_id: RunId) -> RunState: ...
+    def abort_run(self, run_id: RunId) -> RunState: ...
     def get_status(self, run_id: RunId) -> RunStatus: ...
     def get_report(self, run_id: RunId) -> EvolutionReport: ...
     def export_candidate(self, candidate_id: CandidateId, destination: str) -> ExportManifest: ...

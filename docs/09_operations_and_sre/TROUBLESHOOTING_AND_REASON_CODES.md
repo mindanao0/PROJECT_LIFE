@@ -1,6 +1,7 @@
 # SRE Troubleshooting & Canonical Reason Codes Specification
 
-> **Authority Level:** NORMATIVE OPERATIONS SPECIFICATION (L7 Authority)  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** OPERATIONS SPECIFICATION (L7 Authority)
 > **Target Subsystem:** Diagnostics & SRE Incident Response  
 > **Governing Equations:** `EQ-281` (Canonical Reason Codes Mapping), `EQ-282` (Doctor DB Reconciliation)
 

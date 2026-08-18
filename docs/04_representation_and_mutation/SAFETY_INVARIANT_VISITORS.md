@@ -1,6 +1,7 @@
 # Static Safety Invariant Visitors Specification
 
-> **Authority Level:** NORMATIVE COMPILER SPECIFICATION (L4 Authority)  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** COMPILER SPECIFICATION (L4 Authority)
 > **Target Subsystem:** AST Static Security Sanitizer  
 > **Governing Equations:** `EQ-061` .. `EQ-070` (Static Visitor Invariants)
 

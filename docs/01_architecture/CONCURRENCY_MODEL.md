@@ -1,7 +1,8 @@
 # Concurrency Architecture: Single-Writer Coordinator & Worker Pool
 
 > **Subsystem:** Concurrency, IPC & Data Isolation  
-> **Authority Level:** NORMATIVE (`REQ-S07-001`, `REQ-S13-001`, `REQ-S14-001`)
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** `REQ-S07-001`, `REQ-S13-001`, `REQ-S14-001`
 
 ---
 

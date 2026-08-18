@@ -625,16 +625,23 @@ Command surface:
 ```text
 evolve init
 evolve validate
+evolve preflight
 evolve run
+evolve step
 evolve status
 evolve pause
 evolve resume
-evolve stop
+evolve abort
 evolve report
 evolve export
+evolve replay
 evolve db migrate
 evolve doctor
 ```
+
+`evolve preflight` ผูกกับ Run state `PREFLIGHT_PASSED`, `evolve step` กับ `GENERATION_COMMITTED`
+และ `evolve abort` กับ terminal state `ABORTED` ตาม `spec/fsm_states_57.yaml`
+คำสั่ง `evolve stop` เดิมถูกเปลี่ยนชื่อเป็น `evolve abort` เพราะ Run FSM เลิกใช้สถานะหยุดแบบเดิมแล้ว และใช้ `ABORTED` แทน
 
 [REQ][REQ-S06-001] legacy long-form executable name ไม่ใช่ canonical executable และห้ามใช้ใน active examples
 
@@ -673,13 +680,19 @@ Required operations:
 |---|---|---|
 | create | config path/object | engine instance |
 | validate_project | project path | ValidationReport |
+| preflight | project path | PreflightReport |
 | start_run | project path | RunId |
+| step_run | RunId | GenerationSummary |
 | pause_run | RunId | RunState |
 | resume_run | RunId | RunState |
-| stop_run | RunId | RunState |
+| abort_run | RunId | RunState |
 | get_status | RunId | RunStatus |
 | get_report | RunId | EvolutionReport |
 | export_candidate | CandidateId, destination | ExportManifest |
+| replay_run | RunId, target R-level | ReproducibilityCertificate |
+
+SDK surface นี้เป็น synchronous และเป็น canonical เพียงชุดเดียว
+เอกสารใน `docs/` ห้ามประกาศ surface ที่ต่างจากตารางนี้
 
 [REQ][REQ-S06-002] Public API ห้ามคืน raw `dict`/`object` ใน stable surface
 

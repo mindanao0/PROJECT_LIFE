@@ -1,7 +1,8 @@
 # 7-Tier Quality Assurance Testing Strategy
 
 > **Subsystem:** Test Architecture & Quality Assurance  
-> **Authority Level:** NORMATIVE (`REQ-S16-001` .. `REQ-S18-005`)
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Scope:** `REQ-S16-001` .. `REQ-S16-002`, `REQ-S17-001` .. `REQ-S17-003`, `REQ-S18-001` .. `REQ-S18-003`
 
 ---
 

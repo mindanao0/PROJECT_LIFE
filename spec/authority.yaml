@@ -27,3 +27,52 @@ authority_hierarchy:
   - level: "L8"
     name: "Informative Documentation & Guides"
     enforcement: "Guides, Examples, Historical Archive"
+
+# ---------------------------------------------------------------------------
+# Document precedence.
+#
+# The L0-L8 hierarchy above says how important a CONCERN is. It does not say
+# which FILE wins when two files state the same thing differently. That gap is
+# what let the FSM vocabulary, the maturity ladder, the CLI surface and the
+# golden corpus each end up defined twice with no tie-break. The order below
+# closes it: when two sources disagree, the lower rank number wins.
+# ---------------------------------------------------------------------------
+document_precedence:
+  - rank: 1
+    source: "spec/*.yaml, schemas/*.json"
+    role: "Machine-readable canonical data. Single source of truth for state
+           vocabularies, the maturity ladder, release gates, the schema registry
+           and requirement traceability. Everything else derives from these."
+    normative: true
+
+  - rank: 2
+    source: "build/spec/Evolution_Engine_Active_Spec_10_2_2.md"
+    role: "The Active Contract. Sole home of the 178 [REQ] declarations. Where it
+           describes data that rank 1 also holds, rank 1 wins and the contract
+           must be corrected."
+    normative: true
+
+  - rank: 3
+    source: "benchmarks/golden/manifest.yaml"
+    role: "Canonical golden corpus registry (REQ-S16-001). Case directories and
+           every derived table follow it."
+    normative: true
+
+  - rank: 4
+    source: "docs/NN_topic/*.md"
+    role: "Canonical narrative and design rationale per domain. May explain and
+           expand rank 1-3 but must never contradict them."
+    normative: false
+
+  - rank: 5
+    source: "docs/NN_TOPIC.md, docs/*.md, docs/domains/*.md"
+    role: "Overview, index and guide material. Pointers only. Must not define a
+           state vocabulary, a requirement, a schema or a gate."
+    normative: false
+
+# Enforced by tools/lint_state_vocabulary.py:
+#   LINT-09 vocabularies agree across rank 1 and the DDL
+#   LINT-10 evidence tables are retention-safe
+#   LINT-11 corpus directories agree with rank 3
+#   LINT-12 no retired state name survives at any rank
+

@@ -1,7 +1,8 @@
 # 08 — Golden Corpus & Verification Architecture
 
 > **Active Requirements Covered:** `REQ-S16-001` .. `REQ-S18-003`  
-> **Authority Level:** NORMATIVE
+> **Authority Level:** OVERVIEW — rank 5 in `spec/authority.yaml` document_precedence. Not normative.  
+> **Canonical source:** [`benchmarks/golden/manifest.yaml และ docs/08_testing_and_verification/`](../benchmarks/golden/manifest.yaml) — เมื่อขัดกัน ให้ยึดฝั่งนั้น
 
 การยืนยันความถูกต้องและคุณภาพของ Evolution Engine ต้องใช้ **Golden Test Corpus** ที่มี Test Cases ครอบคลุมพฤติกรรมทุกด้าน พร้อมระบบตรวจสอบความน่าเชื่อถือผ่าน **Audit Hash Chain** และ **Evidence Bundle**
 
