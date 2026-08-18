@@ -16,6 +16,9 @@ LINT-14: every count declared in spec/version_manifest.yaml must equal the numbe
 LINT-15: every evolution.yaml example printed in the docs must validate against
   schemas/26_engine_config.schema.json. A quickstart whose config is rejected by
   `evolve validate` is worse than no quickstart.
+LINT-16: spec/equations_300.yaml and spec/dimensions_300.yaml must hold every
+  EQ and DIM that the docs define, with no dangling reference and one padding
+  convention. They previously declared 300 while holding 50 and 0.
 LINT-12: prose state lists anywhere in the repo must not use a state name that
   spec/fsm_states_57.yaml has retired. Prose drift is what made LINT-09 miss the
   first time: the DDL was fixed while the narrative kept the old vocabulary.
@@ -373,12 +376,52 @@ def main() -> int:
         if checked == 0:
             findings.append("LINT-15 found no evolution.yaml example to validate")
 
+    # --- LINT-16: equation and dimension registries must be complete -----------
+    eq_reg = yaml.safe_load((ROOT / "spec/equations_300.yaml").read_text(encoding="utf-8"))
+    dim_reg = yaml.safe_load((ROOT / "spec/dimensions_300.yaml").read_text(encoding="utf-8"))
+    eq_ids = {e["id"] for d in eq_reg["domains"] for e in d["equations"]}
+    dim_ids = {d2["id"] for d in dim_reg["domains"] for d2 in d["dimensions"]}
+    if len(eq_ids) != eq_reg["total_equations"]:
+        findings.append(
+            f"LINT-16 spec/equations_300.yaml: total_equations={eq_reg['total_equations']} "
+            f"but {len(eq_ids)} entries")
+    if len(dim_ids) != dim_reg["total_dimensions"]:
+        findings.append(
+            f"LINT-16 spec/dimensions_300.yaml: total_dimensions={dim_reg['total_dimensions']} "
+            f"but {len(dim_ids)} entries")
+    if len(dim_reg["domains"]) != dim_reg["total_domains"]:
+        findings.append(
+            f"LINT-16 spec/dimensions_300.yaml: total_domains={dim_reg['total_domains']} "
+            f"but {len(dim_reg['domains'])} domains")
+
+    referenced_eq, referenced_dim, padding = set(), set(), set()
+    for path in sorted(ROOT.glob("docs/**/*.md")) + sorted(ROOT.glob("*.md")):
+        text = path.read_text(encoding="utf-8")
+        for tok in re.findall(r"\bEQ-(\d+)\b", text):
+            referenced_eq.add(f"EQ-{int(tok):03d}")
+            padding.add(len(tok))
+        for tok in re.findall(r"\bDIM-(\d+)\b", text):
+            referenced_dim.add(f"DIM-{int(tok):03d}")
+            padding.add(len(tok))
+    if len(padding) > 1:
+        findings.append(
+            f"LINT-16 EQ/DIM ids are written with {sorted(padding)} digits in different places; "
+            f"the same identifier must have exactly one spelling")
+    for missing in sorted(referenced_eq - eq_ids):
+        findings.append(f"LINT-16 {missing} is referenced in the docs but absent from spec/equations_300.yaml")
+    for missing in sorted(referenced_dim - dim_ids):
+        findings.append(f"LINT-16 {missing} is referenced in the docs but absent from spec/dimensions_300.yaml")
+    for orphan in sorted(dim_ids):
+        eq_of = next(d2["equation"] for d in dim_reg["domains"] for d2 in d["dimensions"] if d2["id"] == orphan)
+        if eq_of not in eq_ids:
+            findings.append(f"LINT-16 {orphan} maps to {eq_of}, which is not in the equation registry")
+
     if findings:
         print(f"BLOCKER: {len(findings)} finding(s)\n")
         for f in findings:
             print(f"  - {f}")
         return 1
-    print("LINT-09..15: PASS — vocabularies agree, evidence is retention-safe, corpus matches manifest, CI job names resolve, declared counts are real, config examples validate")
+    print("LINT-09..16: PASS — vocabularies agree, evidence is retention-safe, corpus matches manifest, CI job names resolve, declared counts are real, config examples validate, EQ/DIM registries are complete")
     return 0
 
 
