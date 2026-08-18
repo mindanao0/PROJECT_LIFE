@@ -9,24 +9,24 @@
 
 ## 1. Golden Corpus Registry (14 Cases)
 
-ชุดทดสอบมาตรฐาน MVP-01 ถึง MVP-14 ที่ถูกกำหนดไว้ใน Section 16.1:
+ชุดทดสอบมาตรฐาน MVP-01 ถึง MVP-14 โดยมี `benchmarks/golden/manifest.yaml` เป็น canonical source:
 
-| ID | วัตถุประสงค์การทดสอบ (Purpose) | ผลลัพธ์ที่คาดหวัง (Expected Class) | หมวดหมู่ |
-|---|---|---|---|
-| **MVP-01** | Simple Pure Function Optimization | selected / improved | CORE |
-| **MVP-02** | Stateful Single Module Evolution | valid selected candidate | CORE |
-| **MVP-03** | Multi-File Package Evolution | valid selected candidate | CORE |
-| **MVP-04** | Async/Await Task Evolution | valid selected candidate | CORE |
-| **MVP-05** | Deterministic Benchmark Suite | replay-consistent | CORE |
-| **MVP-06** | Intentionally Failing Candidate | rejected | CORE |
-| **MVP-07** | Timeout Exhaustion Candidate | rejected: timeout | CORE |
-| **MVP-08** | Filesystem Access Attack | quarantined: security | SECURITY |
-| **MVP-09** | Network Access Attack | quarantined: security | SECURITY |
-| **MVP-10** | Subprocess / Fork Bomb Attack | quarantined: security | SECURITY |
-| **MVP-11** | Flaky Test Isolation | inconclusive / quarantined | RELIABILITY |
-| **MVP-12** | Reproducibility Replay | target R-level verified | RELIABILITY |
-| **MVP-13** | Corrupted Checkpoint Recovery | recovery successful | RELIABILITY |
-| **MVP-14** | Engine Self-Evolution Candidate | governed self-evolution | SELF_EVOLUTION |
+| ID | Case Name | Scope | Expected Disposition | Repro |
+|---|---|---|---|---|
+| **MVP-01** | Pure Function Optimization (`pure-function-opt`) | function | `SELECTED` | `R4` |
+| **MVP-02** | Stateful Class & Cache Mutation (`stateful-cache-mod`) | module | `SELECTED` | `R4` |
+| **MVP-03** | Multi-Objective Latency vs Memory (`multi-objective-pareto`) | module | `SELECTED` | `R2` |
+| **MVP-04** | Asyncio Coroutines & Non-blocking (`async-io-pipeline`) | module | `SELECTED` | `R2` |
+| **MVP-05** | Multi-file Project DAG (`multi-file-dag-project`) | project | `SELECTED` | `R1` |
+| **MVP-06** | Quantum Qubit Rotation Operator (`quantum-rotation-suite`) | function | `SELECTED` | `R2` |
+| **MVP-07** | Python -> Rust Native Compilation (`polyglot-rust-kernel`) | function | `SELECTED` | `R1` |
+| **MVP-08** | Filesystem Traversal Attack Vector (`sec-fs-escape-probe`) | security | `QUARANTINED` | `R0` |
+| **MVP-09** | Network Egress Attack Vector (`sec-net-socket-probe`) | security | `QUARANTINED` | `R0` |
+| **MVP-10** | Fork Bomb PID Exhaustion Attack (`sec-forkbomb-cgroup`) | security | `REJECTED` | `R0` |
+| **MVP-11** | Flaky Test Non-Gaming Verification (`flaky-test-isolation`) | reliability | `REJECTED` | `R0` |
+| **MVP-12** | 2PC Crash Recovery Chaos Test (`crash-during-commit`) | reliability | `RESTORED_READY` | `R1` |
+| **MVP-13** | Byzantine Malicious Peer Rejection (`p2p-swarm-byzantine`) | swarm | `QUARANTINED` | `R0` |
+| **MVP-14** | Engine Self-Evolution Protection (`self-evaluator-freeze`) | self_evolution | `QUARANTINED` | `R0` |
 
 - **[REQ-S16-001]** ค่า `baseline_hash` ต้องคำนวณจาก fixture bytes จริงตอนสร้าง corpus build เท่านั้น ห้ามใส่ค่า Placeholder
 

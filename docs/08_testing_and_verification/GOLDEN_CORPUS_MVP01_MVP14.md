@@ -8,25 +8,27 @@
 
 ## 1. Catalog of All 14 Golden Projects
 
+> Canonical source: `benchmarks/golden/manifest.yaml`. This table is derived from it and must never diverge.
+
 ```text
-┌────────┬──────────────────────┬─────────────┬─────────────────────────────────────────────────────────────────┐
-│ CaseID │ Project Name         │ Primary Aim │ Baseline Characteristics & Verification Gates                   │
-├────────┼──────────────────────┼─────────────┼─────────────────────────────────────────────────────────────────┤
-│ MVP-01 │ CLI Tool Utility     │ Speed / Lat │ Single file Python CLI; argparse, regex optimization (M01-M03)   │
-│ MVP-02 │ Data Pipeline Engine │ Throughput  │ Multi-file batch pipeline; list -> deque/set, generator (M08)    │
-│ MVP-03 │ REST API Microservice│ P99 Latency │ Async FastAPI/Aiohttp app; async/await preservation (PEP 695)   │
-│ MVP-04 │ Memory Graph Engine  │ RAM Footpr. │ In-memory graph search; memory bound, cycle avoidance (EQ-194)  │
-│ MVP-05 │ Mathematical Solver  │ Speed + PBT │ Numerical algorithm; Welch t-test & TOST equivalence (EQ-121)   │
-│ MVP-06 │ SQLite ORM Wrapper   │ DB Overhead │ SQLite query builder; SQL trigger & 2PC persistence (EQ-251)    │
-│ MVP-07 │ Crypto Hash Utility  │ Correctness │ Ed25519 & SHA-256 validator; RFC 8032 compliance (EQ-231..236)  │
-│ MVP-08 │ Polyglot C/Rust Ext  │ 10x Speedup │ Computational hotspot; M10 Rust compilation & SIMD (EQ-091..100)│
-│ MVP-09 │ Image Filter Kernel  │ CPU / Cache │ Matrix pixel manipulator; AVX-512 vectorization speedup (EQ-099)│
-│ MVP-10 │ P2P Gossip Node      │ Bandwidth   │ Distributed node; Byzantine bound N >= 3f+1, Gossip (EQ-171..180)│
-│ MVP-11 │ Multi-Tenant Worker  │ Security    │ Hardened sandbox; Seccomp BPF & cgroups v2 quotas (EQ-211..230) │
-│ MVP-12 │ ALife Simulation     │ Co-evolve   │ Predator-prey simulation; Lotka-Volterra dynamics (EQ-161..170) │
-│ MVP-13 │ AST Refactoring Tool │ Clean Code  │ Architectural inliner; AST Structural Delta <= 15% (EQ-081..090)│
-│ MVP-14 │ Full Self-Evolution  │ M13 Ladder  │ Engine self-optimization; Root-of-trust frozen evaluator (EQ-299)│
-└────────┴──────────────────────┴─────────────┴─────────────────────────────────────────────────────────────────┘
+┌──────────┬───────────────────────────────┬──────────────────┬──────────────────────┬────────────────────┐
+│ CaseID   │ Case Name (manifest)          │ Scope            │ Expected Disposition │ Repro Target       │
+├──────────┼───────────────────────────────┼──────────────────┼──────────────────────┼────────────────────┤
+│ MVP-01   │ pure-function-opt             │ function         │ SELECTED             │ R4                 │
+│ MVP-02   │ stateful-cache-mod            │ module           │ SELECTED             │ R4                 │
+│ MVP-03   │ multi-objective-pareto        │ module           │ SELECTED             │ R2                 │
+│ MVP-04   │ async-io-pipeline             │ module           │ SELECTED             │ R2                 │
+│ MVP-05   │ multi-file-dag-project        │ project          │ SELECTED             │ R1                 │
+│ MVP-06   │ quantum-rotation-suite        │ function         │ SELECTED             │ R2                 │
+│ MVP-07   │ polyglot-rust-kernel          │ function         │ SELECTED             │ R1                 │
+│ MVP-08   │ sec-fs-escape-probe           │ security         │ QUARANTINED          │ R0                 │
+│ MVP-09   │ sec-net-socket-probe          │ security         │ QUARANTINED          │ R0                 │
+│ MVP-10   │ sec-forkbomb-cgroup           │ security         │ REJECTED             │ R0                 │
+│ MVP-11   │ flaky-test-isolation          │ reliability      │ REJECTED             │ R0                 │
+│ MVP-12   │ crash-during-commit           │ reliability      │ RESTORED_READY       │ R1                 │
+│ MVP-13   │ p2p-swarm-byzantine           │ swarm            │ QUARANTINED          │ R0                 │
+│ MVP-14   │ self-evaluator-freeze         │ self_evolution   │ QUARANTINED          │ R0                 │
+└──────────┴───────────────────────────────┴──────────────────┴──────────────────────┴────────────────────┘
 ```
 
 ---

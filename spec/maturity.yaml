@@ -31,7 +31,7 @@ maturity_ladder:
     gate: "Golden Corpus cases MVP-01 to MVP-07 pass"
   - level: "M10"
     name: "SECURITY_RELIABILITY_GOLDEN"
-    gate: "Negative security (MVP-08..10) and reliability (MVP-11..13) pass"
+    gate: "Negative security (MVP-08..10), reliability (MVP-11..12) and swarm (MVP-13) pass"
   - level: "M11"
     name: "EXECUTION_READY"
     gate: "GATE_CORE passed, traceability complete, evidence bundle signed"

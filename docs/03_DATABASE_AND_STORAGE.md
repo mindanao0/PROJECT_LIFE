@@ -48,8 +48,9 @@ CREATE TABLE runs (
     policy_hash TEXT NOT NULL,
     environment_hash TEXT NOT NULL,
     run_state TEXT NOT NULL CHECK(run_state IN (
-        'CREATED','VALIDATING','READY','RUNNING','PAUSING','PAUSED',
-        'STOPPING','STOPPED','COMPLETED','FAILED','RECOVERING'
+        'INITIATED','CONFIG_LOADED','PREFLIGHT_PASSED','RUNNING','PAUSED',
+        'GENERATION_COMMITTED','CHECKPOINTING','COMPLETED','FAILED',
+        'ABORTED','RECOVERING'
     )),
     seed_hex TEXT NOT NULL,
     created_at_utc TEXT NOT NULL
@@ -295,13 +296,14 @@ CREATE TABLE checkpoints (
 -- 24. Recovery Records
 CREATE TABLE recovery_records (
     recovery_record_id TEXT PRIMARY KEY,
-    run_id TEXT NOT NULL REFERENCES runs(run_id) ON DELETE CASCADE,
+    run_id TEXT NOT NULL REFERENCES runs(run_id) ON DELETE RESTRICT,
     checkpoint_id TEXT REFERENCES checkpoints(checkpoint_id) ON DELETE SET NULL,
     started_at_utc TEXT NOT NULL,
     finished_at_utc TEXT,
     recovery_status TEXT NOT NULL CHECK(recovery_status IN (
-        'REQUESTED','VALIDATING_INPUTS','RECONSTRUCTING_CAS','RECONCILING_DB',
-        'VERIFYING_AUDIT','REPLAYING_GENERATION','RECOVERED','FAILED','QUARANTINED'
+        'DETECT_CRASH','SCAN_WAL_AND_CAS','VERIFY_LAST_GEN_HASH',
+        'ROLLBACK_UNCOMMITTED','REPLAY_COMMITTED','ENTER_EMERGENCY_SAFE_MODE',
+        'RECONSTRUCT_FROM_CAS','RECONCILE_DB_STATE','RESTORED_READY'
     )),
     evidence_artifact_id TEXT REFERENCES artifacts(artifact_id) ON DELETE RESTRICT
 );
@@ -309,8 +311,8 @@ CREATE TABLE recovery_records (
 -- 25. Evidence Records
 CREATE TABLE evidence_records (
     evidence_id TEXT PRIMARY KEY,
-    run_id TEXT NOT NULL REFERENCES runs(run_id) ON DELETE CASCADE,
-    candidate_id TEXT REFERENCES candidates(candidate_id) ON DELETE CASCADE,
+    run_id TEXT NOT NULL REFERENCES runs(run_id) ON DELETE RESTRICT,
+    candidate_id TEXT REFERENCES candidates(candidate_id) ON DELETE RESTRICT,
     evidence_type TEXT NOT NULL,
     evidence_digest TEXT NOT NULL,
     artifact_id TEXT NOT NULL REFERENCES artifacts(artifact_id) ON DELETE RESTRICT,
@@ -321,9 +323,9 @@ CREATE TABLE evidence_records (
 -- 26. Audit Events
 CREATE TABLE audit_events (
     audit_event_id TEXT PRIMARY KEY,
-    run_id TEXT REFERENCES runs(run_id) ON DELETE CASCADE,
+    run_id TEXT REFERENCES runs(run_id) ON DELETE RESTRICT,
     sequence_no INTEGER NOT NULL CHECK(sequence_no >= 0),
-    previous_event_hash TEXT,
+    previous_event_hash TEXT REFERENCES audit_events(event_hash) ON DELETE RESTRICT,
     event_hash TEXT NOT NULL UNIQUE,
     actor TEXT NOT NULL,
     event_type TEXT NOT NULL,
@@ -335,7 +337,7 @@ CREATE TABLE audit_events (
 -- 27. Quarantine Records
 CREATE TABLE quarantine_records (
     quarantine_record_id TEXT PRIMARY KEY,
-    candidate_id TEXT NOT NULL REFERENCES candidates(candidate_id) ON DELETE CASCADE,
+    candidate_id TEXT NOT NULL REFERENCES candidates(candidate_id) ON DELETE RESTRICT,
     reason_code TEXT NOT NULL,
     security_profile_version TEXT NOT NULL,
     evidence_artifact_id TEXT NOT NULL REFERENCES artifacts(artifact_id) ON DELETE RESTRICT,
@@ -351,8 +353,9 @@ CREATE TABLE deployments (
     )),
     target_environment TEXT NOT NULL,
     deployment_state TEXT NOT NULL CHECK(deployment_state IN (
-        'ARCHIVED','STAGED','CANARY','VALIDATED','APPROVED','ACTIVE',
-        'SUPERSEDED','ROLLED_BACK'
+        'EXPORT_PREPARED','SIGNATURE_VERIFIED','PACKAGE_BUNDLED',
+        'CANARY_PROVISIONED','CANARY_EVALUATING','PROMOTED_FULL_TRAFFIC',
+        'ROLLED_BACK','ARCHIVED_PRODUCTION'
     )),
     config_hash TEXT NOT NULL,
     created_at_utc TEXT NOT NULL
@@ -370,7 +373,7 @@ CREATE TABLE approval_certificates (
     certificate_artifact_id TEXT NOT NULL REFERENCES artifacts(artifact_id) ON DELETE RESTRICT
 );
 
--- Indices (33 Indices for Query Performance & Invariant Verification)
+-- Indices (56 Indices for Query Performance & Invariant Verification)
 CREATE INDEX idx_runs_project ON runs(project_id);
 CREATE INDEX idx_generations_run ON generations(run_id, generation_index);
 CREATE INDEX idx_candidates_generation ON candidates(generation_id);
@@ -404,6 +407,35 @@ CREATE INDEX idx_audit_run_sequence ON audit_events(run_id, sequence_no);
 CREATE INDEX idx_quarantine_candidate ON quarantine_records(candidate_id);
 CREATE INDEX idx_deployment_candidate_state ON deployments(candidate_id, deployment_state);
 CREATE INDEX idx_approval_deployment ON approval_certificates(deployment_id);
+
+-- Added: indices for ON DELETE RESTRICT parent scans and REQ-S13-005 query-plan assertions
+CREATE INDEX idx_approval_certificates_certificate_artifact_id ON approval_certificates(certificate_artifact_id);
+CREATE INDEX idx_audit_events_payload_artifact_id ON audit_events(payload_artifact_id);
+CREATE INDEX idx_audit_events_previous_event_hash ON audit_events(previous_event_hash);
+CREATE INDEX idx_candidates_source_artifact_id ON candidates(source_artifact_id);
+CREATE INDEX idx_capability_results_evidence_artifact_id ON capability_results(evidence_artifact_id);
+CREATE INDEX idx_checkpoints_generation_id ON checkpoints(generation_id);
+CREATE INDEX idx_checkpoints_manifest_artifact_id ON checkpoints(manifest_artifact_id);
+CREATE INDEX idx_checkpoints_random_state_artifact_id ON checkpoints(random_state_artifact_id);
+CREATE INDEX idx_environment_manifests_artifact_id ON environment_manifests(artifact_id);
+CREATE INDEX idx_evaluation_attempts_stderr_artifact_id ON evaluation_attempts(stderr_artifact_id);
+CREATE INDEX idx_evaluation_attempts_stdout_artifact_id ON evaluation_attempts(stdout_artifact_id);
+CREATE INDEX idx_evidence_records_artifact_id ON evidence_records(artifact_id);
+CREATE INDEX idx_generations_manifest_artifact_id ON generations(manifest_artifact_id);
+CREATE INDEX idx_lineage_edges_mutation_attempt_id ON lineage_edges(mutation_attempt_id);
+CREATE INDEX idx_metric_results_measurement_artifact_id ON metric_results(measurement_artifact_id);
+CREATE INDEX idx_mutation_attempts_parameters_artifact_id ON mutation_attempts(parameters_artifact_id);
+CREATE INDEX idx_oracle_results_evidence_artifact_id ON oracle_results(evidence_artifact_id);
+CREATE INDEX idx_policy_snapshots_artifact_id ON policy_snapshots(artifact_id);
+CREATE INDEX idx_quarantine_records_evidence_artifact_id ON quarantine_records(evidence_artifact_id);
+CREATE INDEX idx_recovery_records_evidence_artifact_id ON recovery_records(evidence_artifact_id);
+CREATE INDEX idx_selection_decisions_evidence_artifact_id ON selection_decisions(evidence_artifact_id);
+CREATE INDEX idx_selection_decisions_generation_id ON selection_decisions(generation_id);
+CREATE INDEX idx_test_results_evidence_artifact_id ON test_results(evidence_artifact_id);
+
+-- Added: engine-scoped audit events (run_id IS NULL) need sequence uniqueness too;
+-- SQL treats each NULL as distinct so UNIQUE(run_id, sequence_no) does not cover them.
+CREATE UNIQUE INDEX ux_audit_engine_sequence ON audit_events(sequence_no) WHERE run_id IS NULL;
 ```
 
 ---

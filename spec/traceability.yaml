@@ -1,91 +1,2154 @@
+# Requirement traceability registry — one entry per active normative requirement.
+# Generated from build/spec/Evolution_Engine_Active_Spec_10_2_2.md
+#
+# text_digest definition (closes the gap flagged by REQ-S02-008 / REQ-S02-009 / REQ-S22-002):
+#   text_digest = SHA-256( UTF-8 bytes of the NFC-normalized requirement text )
+#   The text starts at the first character after the "[STATUS][ID] " prefix and ends at the
+#   line before whichever comes first: the next requirement line, the next markdown heading,
+#   or a horizontal rule "---". Line endings are LF, trailing whitespace per line is stripped,
+#   and leading/trailing blank lines are removed.
+#
+# Downstream refs are intentionally empty: no implementation exists yet.
+# REQ-S22-004 requires real status, never auto-PASS.
+
 spec_version: "10.2.2"
 total_requirements: 178
-requirements_summary:
-  S00_system_scope:
-    range: "REQ-S00-001 .. REQ-S00-003"
-    count: 3
+digest_algorithm: "SHA-256/NFC"
+
+requirements:
+  - id: "REQ-S00-001"
+    section: 0
+    section_title: "Document Control & Active-Spec Generation"
     status: "REQ"
-  S01_core_principles:
-    range: "REQ-S01-001 .. REQ-S01-011"
-    count: 11
+    text_digest: "sha256:9381688eee29725b55407b5a2e17a3d433c7609b75b55aa294e9ebd5305c7ce5"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S00-002"
+    section: 0
+    section_title: "Document Control & Active-Spec Generation"
     status: "REQ"
-  S02_authority_and_lifecycle:
-    range: "REQ-S02-001 .. REQ-S02-009"
-    count: 9
+    text_digest: "sha256:bfd7bbd7cfb5d624e0db952dbdc1078a5d89544ad2253660274aa7f805068920"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S00-003"
+    section: 0
+    section_title: "Document Control & Active-Spec Generation"
     status: "REQ"
-  S03_runtime_boundaries:
-    range: "REQ-S03-001 .. REQ-S03-005"
-    count: 5
+    text_digest: "sha256:1fdfedeaebf65e164cecdf3a304800e544c4061d1c8f2039589f7f759feb452e"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S00-004"
+    section: 0
+    section_title: "Document Control & Active-Spec Generation"
     status: "REQ"
-  S04_repository_layout:
-    range: "REQ-S04-001 .. REQ-S04-004"
-    count: 4
+    text_digest: "sha256:3cb1c9441536c0e03e8e6626f1993fd52a780194882e134135110192e5f31723"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S00-005"
+    section: 0
+    section_title: "Document Control & Active-Spec Generation"
     status: "REQ"
-  S05_configuration_invariants:
-    range: "REQ-S05-001 .. REQ-S05-005"
-    count: 5
+    text_digest: "sha256:6dccd06175279976d663ba60254d5f77fae18fd1fe6ee2a2fbeee85ef2ce9c04"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S00-006"
+    section: 0
+    section_title: "Document Control & Active-Spec Generation"
     status: "REQ"
-  S06_data_and_schemas:
-    range: "REQ-S06-001 .. REQ-S06-003"
-    count: 3
+    text_digest: "sha256:5b024e31b9145ff52fc3a6d1ef717154e321e283d715ee99e8b93bad1e3570bb"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S00-007"
+    section: 0
+    section_title: "Document Control & Active-Spec Generation"
     status: "REQ"
-  S07_typed_protocols:
-    range: "REQ-S07-001 .. REQ-S07-003"
-    count: 3
+    text_digest: "sha256:2ccca88c1edd3425b66e60ffe1915dc2ba7314cc1393576fdc194691af1523ac"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S00-008"
+    section: 0
+    section_title: "Document Control & Active-Spec Generation"
     status: "REQ"
-  S08_finite_state_machines:
-    range: "REQ-S08-001 .. REQ-S08-005"
-    count: 5
+    text_digest: "sha256:720ce1d85e2b71d0535e9e9c9a4594fed1cf1fa0d24e86e24aa94c97c0fef3d2"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S00-009"
+    section: 0
+    section_title: "Document Control & Active-Spec Generation"
     status: "REQ"
-  S09_ast_and_mutations:
-    range: "REQ-S09-001 .. REQ-S09-005"
-    count: 5
+    text_digest: "sha256:3af2097f6dbae554dab05baabed1d5579840e23b9c051b0f1275e2849b3e17e0"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S01-001"
+    section: 1
+    section_title: "Vision & System Identity"
     status: "REQ"
-  S10_metrics_and_pareto:
-    range: "REQ-S10-001 .. REQ-S10-010"
-    count: 10
+    text_digest: "sha256:164f82ed827597f9331e81f38cebdd104b810df607bb27c42154368d277d7861"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S01-002"
+    section: 1
+    section_title: "Vision & System Identity"
     status: "REQ"
-  S11_hashing_and_serialization:
-    range: "REQ-S11-001 .. REQ-S11-002"
-    count: 2
+    text_digest: "sha256:b7e72add62d87ce5e917675bff599e53a8cfc87bdc918b568b5e7006dd6ed5a7"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S01-003"
+    section: 1
+    section_title: "Vision & System Identity"
     status: "REQ"
-  S12_hardened_sandbox:
-    range: "REQ-S12-001 .. REQ-S12-020"
-    count: 20
+    text_digest: "sha256:a4a34ae57e97f1fc3e37f5e39ed937d07d7d85f120a919122090735d48175361"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S01-004"
+    section: 1
+    section_title: "Vision & System Identity"
     status: "REQ"
-  S13_database_persistence:
-    range: "REQ-S13-001 .. REQ-S13-009"
-    count: 9
+    text_digest: "sha256:2dc992a3d509176dcfaf078f2fe259c365c42e013f8c06ddc7cb8481c2b170eb"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S01-005"
+    section: 1
+    section_title: "Vision & System Identity"
     status: "REQ"
-  S14_cas_storage_engine:
-    range: "REQ-S14-001 .. REQ-S14-002"
-    count: 2
+    text_digest: "sha256:2ddeac80bb9ef4c97bdcea74ab24ca6079dd846938f773e3e61c9cd9ea255c3b"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S01-006"
+    section: 1
+    section_title: "Vision & System Identity"
     status: "REQ"
-  S15_public_cli_and_sdk:
-    range: "REQ-S15-001 .. REQ-S15-007"
-    count: 7
+    text_digest: "sha256:a6d5d66f23e5cb44744d0216726bbaadbb4c344e67b76d7a271c5ca66531b0ad"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S01-007"
+    section: 1
+    section_title: "Vision & System Identity"
     status: "REQ"
-  S16_golden_test_corpus:
-    range: "REQ-S16-001 .. REQ-S16-004"
-    count: 4
+    text_digest: "sha256:9e7793b000ebe5e8d5209f134274b6d6cf60360f592df1332334feeee3414d68"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S01-008"
+    section: 1
+    section_title: "Vision & System Identity"
     status: "REQ"
-  S17_flaky_and_anti_gaming:
-    range: "REQ-S17-001 .. REQ-S17-003"
-    count: 3
+    text_digest: "sha256:594dfb19a52c2186345eb2093f892f2e04e97c99088eef3d51f0e1f598815d05"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S01-009"
+    section: 1
+    section_title: "Vision & System Identity"
     status: "REQ"
-  S18_evidence_and_release:
-    range: "REQ-S18-001 .. REQ-S18-005"
-    count: 5
+    text_digest: "sha256:34f9f5d6c6c730a68650c955636f323ea0066c9047288e97d42a0bbd9909ea69"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S01-010"
+    section: 1
+    section_title: "Vision & System Identity"
     status: "REQ"
-  S19_audit_and_lineage:
-    range: "REQ-S19-001 .. REQ-S19-008"
-    count: 8
+    text_digest: "sha256:7dffeda6ee13afe80be753c7346c8b04823a2c5ccb42c336987cd26657bae309"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S01-011"
+    section: 1
+    section_title: "Vision & System Identity"
     status: "REQ"
-  S20_negative_security_proof:
-    range: "REQ-S20-001 .. REQ-S20-003"
-    count: 3
+    text_digest: "sha256:a55885c24563a0fff4d6f8803c047422de3623a4bf797888ede58f4d5729ab9c"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S02-001"
+    section: 2
+    section_title: "Canonical Authority, Versioning & Requirement Status"
     status: "REQ"
-  S21_to_S30_maturity_and_gates:
-    range: "REQ-S21-001 .. REQ-S30-002"
-    count: 52
+    text_digest: "sha256:7e98a0c17aaedebe4739dcf2d9246afb85b7cac3b51f56770de1ec853b056bf6"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S02-002"
+    section: 2
+    section_title: "Canonical Authority, Versioning & Requirement Status"
     status: "REQ"
+    text_digest: "sha256:1ac27e9aef5ad35817e7da5dc498216148e6819735710129a6994610c5bcb82f"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S02-003"
+    section: 2
+    section_title: "Canonical Authority, Versioning & Requirement Status"
+    status: "REQ"
+    text_digest: "sha256:6fddcff3dd4dc280750e27b1dfa69dc1cf68c90aae069dde76b6af26545f4000"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S02-004"
+    section: 2
+    section_title: "Canonical Authority, Versioning & Requirement Status"
+    status: "REQ"
+    text_digest: "sha256:81d100c8b01f201fccf86f0793faeed49c14297bbc7a2236b001fbdb51948089"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S02-005"
+    section: 2
+    section_title: "Canonical Authority, Versioning & Requirement Status"
+    status: "REQ"
+    text_digest: "sha256:686969371f1597c0c39916d3e8cfc58a90340d7fa224e4d76fe2ebbff5f5114b"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S02-006"
+    section: 2
+    section_title: "Canonical Authority, Versioning & Requirement Status"
+    status: "REQ"
+    text_digest: "sha256:02832b92c14557c2d59348093cebde327b76cb8864daf71b9b0606bf11573ed7"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S02-007"
+    section: 2
+    section_title: "Canonical Authority, Versioning & Requirement Status"
+    status: "REQ"
+    text_digest: "sha256:1d4c89e61b924b476586c05d4636800ef221d735210acbbd6947e9ca570b8b4b"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S02-008"
+    section: 2
+    section_title: "Canonical Authority, Versioning & Requirement Status"
+    status: "REQ"
+    text_digest: "sha256:fd1afd54d45870190691665d3d71435f1717a21d6fc1ee70259c01d2f586d984"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S02-009"
+    section: 2
+    section_title: "Canonical Authority, Versioning & Requirement Status"
+    status: "REQ"
+    text_digest: "sha256:0820aceff51f24ab1f472ec1cd6f370940044e7a19ffcd66811cb5c7d2794e70"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S02-010"
+    section: 2
+    section_title: "Canonical Authority, Versioning & Requirement Status"
+    status: "REQ"
+    text_digest: "sha256:d4c43bf11a98a4a706ca854ff97c269deb86191a07108a9278c87530af512e36"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S03-001"
+    section: 3
+    section_title: "Scope, Runtime & Dependency Boundary"
+    status: "REQ"
+    text_digest: "sha256:a22412650ec0c01ed7875aafb3991d2f7ee5a89b63a314a6f66a7471c52ca622"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S03-002"
+    section: 3
+    section_title: "Scope, Runtime & Dependency Boundary"
+    status: "REQ"
+    text_digest: "sha256:0038e9197bd8355fa3b6951868bc4e50aebf9a3ffa5896a7c3317431e967f984"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S03-003"
+    section: 3
+    section_title: "Scope, Runtime & Dependency Boundary"
+    status: "REQ"
+    text_digest: "sha256:3a7029b5d154085a100fee45a3f4d9d200722dc6401d1f2643de5f90be141e13"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S03-004"
+    section: 3
+    section_title: "Scope, Runtime & Dependency Boundary"
+    status: "REQ"
+    text_digest: "sha256:d56928c5db3633901c0481eaca8fff6eae5a6363913e29818c3657d26b1c1c1f"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S03-005"
+    section: 3
+    section_title: "Scope, Runtime & Dependency Boundary"
+    status: "REQ"
+    text_digest: "sha256:e58ab0e8c900a3d12920a4626c23b36af91f09a122b8ac73ee67331f76220bff"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S04-001"
+    section: 4
+    section_title: "Canonical Repository Layout"
+    status: "REQ"
+    text_digest: "sha256:fe2d8fc46243b377fab265cc661bceac2b4f70dcfeeeeaabad21b705ab24ca6e"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S05-001"
+    section: 5
+    section_title: "Project Contract & Configuration"
+    status: "REQ"
+    text_digest: "sha256:d006ee6e4d86a16d84427e814b20e00416b0ce4900f4ddbd58e6d4426661a722"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S05-002"
+    section: 5
+    section_title: "Project Contract & Configuration"
+    status: "REQ"
+    text_digest: "sha256:ff6389108c25402c9a7c18cdaa01052b94cdce1f1d99e7a77f96c6c0787c5202"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S05-003"
+    section: 5
+    section_title: "Project Contract & Configuration"
+    status: "REQ"
+    text_digest: "sha256:15ad99df8038e5aaf1ed8d4711c4015340c5be24747b7b9876243d521aa5bdfd"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S05-004"
+    section: 5
+    section_title: "Project Contract & Configuration"
+    status: "REQ"
+    text_digest: "sha256:1e03527cf1326d24ced19e2c6817b2b6ab00e0a2a9f628e1b60a26731b0fc9bb"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S05-005"
+    section: 5
+    section_title: "Project Contract & Configuration"
+    status: "REQ"
+    text_digest: "sha256:b55e23ea8fb8a59cbc43e6f35b58283b53b7f9cc0ff3731b6fce79678c1fe118"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S05-006"
+    section: 5
+    section_title: "Project Contract & Configuration"
+    status: "REQ"
+    text_digest: "sha256:5d3e2967dce17b9bf8604932f04a7ba41dfc9b56367bebd5bf054eadc34b1fe9"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S05-007"
+    section: 5
+    section_title: "Project Contract & Configuration"
+    status: "REQ"
+    text_digest: "sha256:c778de79238491ee5e752b76c0540e4fbc5024d3e1b0736f9a4e4b9862f8985d"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S05-008"
+    section: 5
+    section_title: "Project Contract & Configuration"
+    status: "REQ"
+    text_digest: "sha256:6d2fb19b7fd595d1e1686d493b6b5d4d6bd4e84ea508aea64c82695200b4585e"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S05-009"
+    section: 5
+    section_title: "Project Contract & Configuration"
+    status: "REQ"
+    text_digest: "sha256:3aa66b8ed4752b939fe43681635a4064c942323fa7ae1345d3e79cf415fa9f1a"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S05-010"
+    section: 5
+    section_title: "Project Contract & Configuration"
+    status: "REQ"
+    text_digest: "sha256:cc6ec7b94dc3a4d31d4120db459373f22b2d2ddaa0c7935a7a5323923a002d30"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S05-011"
+    section: 5
+    section_title: "Project Contract & Configuration"
+    status: "REQ"
+    text_digest: "sha256:ab4c865a6865226e05ab88a4608f628bdda5fd4c1eeaf843157c4eafd1e0e5db"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S05-012"
+    section: 5
+    section_title: "Project Contract & Configuration"
+    status: "REQ"
+    text_digest: "sha256:89e3bdc9ce50ba1300ddd7a8e8046d376113e7956a206cc62e7c7ec58cdfe6e8"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S06-001"
+    section: 6
+    section_title: "Public CLI & SDK"
+    status: "REQ"
+    text_digest: "sha256:0174cf97af807479849c8f464631a1cb1012d83b913ff7241f1dd9040b95eca9"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S06-002"
+    section: 6
+    section_title: "Public CLI & SDK"
+    status: "REQ"
+    text_digest: "sha256:f47de685ca245ac9a59d7b86e85b4729ce444fd66f6dc6cb5868c769b17bfa09"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S07-001"
+    section: 7
+    section_title: "Canonical Types & Protocol Boundary"
+    status: "REQ"
+    text_digest: "sha256:8ab3824f1bb7fd32353d4b4081761b213b9864490c3d78e72fe8017872de24d4"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S07-002"
+    section: 7
+    section_title: "Canonical Types & Protocol Boundary"
+    status: "REQ"
+    text_digest: "sha256:8859cf4855ee22c5695cf443ac1def17ea2a13dd5537877caac0a55dba0b0240"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S07-003"
+    section: 7
+    section_title: "Canonical Types & Protocol Boundary"
+    status: "REQ"
+    text_digest: "sha256:127764e916d1ff344805555d0f3f198f99bb724dd3683a90fda5d6a8022b7641"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S08-001"
+    section: 8
+    section_title: "Candidate Lifecycle & Evaluation Pipeline"
+    status: "REQ"
+    text_digest: "sha256:277365d54534285b6dd57a8cf74aa383f021e6d072a03e7e71ec609f88fef18c"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S08-002"
+    section: 8
+    section_title: "Candidate Lifecycle & Evaluation Pipeline"
+    status: "REQ"
+    text_digest: "sha256:a5676c8ff0739c814a1b0a2a6f3f25a76e8e6084d5af1ee5bd7bba0a06473ef9"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S08-003"
+    section: 8
+    section_title: "Candidate Lifecycle & Evaluation Pipeline"
+    status: "REQ"
+    text_digest: "sha256:4e45bf67de4ae710213f0784c28faf97e7fe4daac359e52a236869f517040d51"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S08-004"
+    section: 8
+    section_title: "Candidate Lifecycle & Evaluation Pipeline"
+    status: "REQ"
+    text_digest: "sha256:eeac4f80f81ed69acfee9c9e1f63c0f1008bc484a7e71a489087a4a26deddac5"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S08-005"
+    section: 8
+    section_title: "Candidate Lifecycle & Evaluation Pipeline"
+    status: "REQ"
+    text_digest: "sha256:f9fd93886ae37312c81fd08885d427f6f7a03ae8c2ebd576c2acf1ef22bda9d8"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S08-006"
+    section: 8
+    section_title: "Candidate Lifecycle & Evaluation Pipeline"
+    status: "REQ"
+    text_digest: "sha256:971a8c7a89cd800474716388b6de7d2a2adbbb525c75cd838c4858d499030539"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S08-007"
+    section: 8
+    section_title: "Candidate Lifecycle & Evaluation Pipeline"
+    status: "REQ"
+    text_digest: "sha256:5c007fe888717547add3a5b769ea9d98b3c8fe061d1b2ffc9a1b02bd71ed22d2"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S08-008"
+    section: 8
+    section_title: "Candidate Lifecycle & Evaluation Pipeline"
+    status: "REQ"
+    text_digest: "sha256:ecb995320f11bafdb482016425347cd7543e72ce68d4dafc82adf648a2098cd9"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S08-009"
+    section: 8
+    section_title: "Candidate Lifecycle & Evaluation Pipeline"
+    status: "REQ"
+    text_digest: "sha256:1005ed4ad58328e335e0db6404d379ef90b5bee40f5d56343c1f241b465ba092"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S08-010"
+    section: 8
+    section_title: "Candidate Lifecycle & Evaluation Pipeline"
+    status: "REQ"
+    text_digest: "sha256:35a1cdc797713b2ea73fb1409d4faded1a14bac67e4885159f1c76e364299b81"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S08-011"
+    section: 8
+    section_title: "Candidate Lifecycle & Evaluation Pipeline"
+    status: "REQ"
+    text_digest: "sha256:8230fc1be80b9073f3a94fc545e30e80f0a80dddc75b320116518c193f50682f"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S08-012"
+    section: 8
+    section_title: "Candidate Lifecycle & Evaluation Pipeline"
+    status: "REQ"
+    text_digest: "sha256:9aadbb982a053437e234cd54cef16f04474a8eb01be434f150d616aabdf9979e"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S09-001"
+    section: 9
+    section_title: "Program Representation & Mutation"
+    status: "REQ"
+    text_digest: "sha256:35fbc9a131c5b7a712a6831c8899f9fa88cc0ddf57087fc68ef99ac73959b7dc"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S09-002"
+    section: 9
+    section_title: "Program Representation & Mutation"
+    status: "REQ"
+    text_digest: "sha256:53fee7a528ae4cc0fb7ba1b9a604e206844be3cf1702e2dad2072845a89d9e3b"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S09-003"
+    section: 9
+    section_title: "Program Representation & Mutation"
+    status: "REQ"
+    text_digest: "sha256:49e813aaaf316251f2a1ac5795f91ca9b07c95a88d3fd9d85988ba0a93eeeab5"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S09-004"
+    section: 9
+    section_title: "Program Representation & Mutation"
+    status: "REQ"
+    text_digest: "sha256:1bd30a48a8ac254d94178792ec707a78d7fe1a2e7de35be045461ec08316f155"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S09-005"
+    section: 9
+    section_title: "Program Representation & Mutation"
+    status: "REQ"
+    text_digest: "sha256:40ca84501b7f5bf68a45f68fae6d507a73636404bb8cf58327f5d6b253c585d9"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S10-001"
+    section: 10
+    section_title: "Metrics, Statistics & Selection"
+    status: "REQ"
+    text_digest: "sha256:e638dd307419f264b5d7105be4f8e175519d8b40418c9789cc4afeebbee5124c"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S10-002"
+    section: 10
+    section_title: "Metrics, Statistics & Selection"
+    status: "REQ"
+    text_digest: "sha256:204139833e41577be3f5cffb2f960607ec08b4088f5c4dbbab7e6a44cc3b74de"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S10-003"
+    section: 10
+    section_title: "Metrics, Statistics & Selection"
+    status: "REQ"
+    text_digest: "sha256:5b2a8fc0f14cb23861113d4783c41cf2c1f7f6cb43ee790c6186f29542e5c5e1"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S10-004"
+    section: 10
+    section_title: "Metrics, Statistics & Selection"
+    status: "REQ"
+    text_digest: "sha256:fbcf8edea876182cf42048600e2bd835bc0ed74f37654a9177b2f554738babc5"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S10-005"
+    section: 10
+    section_title: "Metrics, Statistics & Selection"
+    status: "REQ"
+    text_digest: "sha256:7f357bbbbf524446f51eab8d10d3082b3b9fd7812dbe280ad37848675414051f"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S10-006"
+    section: 10
+    section_title: "Metrics, Statistics & Selection"
+    status: "REQ"
+    text_digest: "sha256:e367806afc093f092d673da523c7b3ff95e7e700a20854f570397198f35c24b3"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S10-007"
+    section: 10
+    section_title: "Metrics, Statistics & Selection"
+    status: "REQ"
+    text_digest: "sha256:6f656d6636da36001169a454ba1002bca6e05d9efab6b3795c516c125e268980"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S10-008"
+    section: 10
+    section_title: "Metrics, Statistics & Selection"
+    status: "REQ"
+    text_digest: "sha256:6cadb632ecfc83fba334e90a384da4df678743cae1c1d0d6d83341e6465d60c4"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S10-009"
+    section: 10
+    section_title: "Metrics, Statistics & Selection"
+    status: "REQ"
+    text_digest: "sha256:a863e9d79f88842062eadce14e1997eecbecf7dc5a8fc068c578a8642bbf7f41"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S10-010"
+    section: 10
+    section_title: "Metrics, Statistics & Selection"
+    status: "REQ"
+    text_digest: "sha256:b876948fc34fcef1cb0657140224b0a04f09ccc9f01561268ca74bf668d7b97b"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S11-001"
+    section: 11
+    section_title: "Canonical Serialization, Identity & Reproducibility"
+    status: "REQ"
+    text_digest: "sha256:6ab67a4edcb90cdf142c443327d3d988d8c091e0acb5252ef69bb61cc68faedd"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S11-002"
+    section: 11
+    section_title: "Canonical Serialization, Identity & Reproducibility"
+    status: "REQ"
+    text_digest: "sha256:58c31f7c2d42a8949c64d800577ff1f07023ffe8f44f6b6961f623ba76a4e9e8"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S12-001"
+    section: 12
+    section_title: "Sandbox & Security"
+    status: "REQ"
+    text_digest: "sha256:ecac19376439318ab04e3578e3345a8f089c9b1616e0f625e54247a0a33fbb41"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S12-002"
+    section: 12
+    section_title: "Sandbox & Security"
+    status: "REQ"
+    text_digest: "sha256:85f680aa10aac640482b8e481145385abbe8123fa34aac9224a7aae63a5483f5"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S12-003"
+    section: 12
+    section_title: "Sandbox & Security"
+    status: "REQ"
+    text_digest: "sha256:76e879d9a8bb9f123d4c7038712b05a0232443eccf13bfd207f4017d07c29106"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S12-004"
+    section: 12
+    section_title: "Sandbox & Security"
+    status: "REQ"
+    text_digest: "sha256:2341b3f1ca483441fbe35ed15c1db5002c81e0effbea411b48dd42ac3a495fe4"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S12-005"
+    section: 12
+    section_title: "Sandbox & Security"
+    status: "REQ"
+    text_digest: "sha256:6347e8895423563006815d2efe91cbdcc7ca00fb617d4cc6f282bd728a1dbe0f"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S12-006"
+    section: 12
+    section_title: "Sandbox & Security"
+    status: "REQ"
+    text_digest: "sha256:09ebd92552d4609d4239945ed61be1996e8d4a9d7fb626a59f3358e010f78c4e"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S12-007"
+    section: 12
+    section_title: "Sandbox & Security"
+    status: "REQ"
+    text_digest: "sha256:d41d63d6695caba3d3af4c7884594dfe447876e595c4eeb411dca55372808d2d"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S12-008"
+    section: 12
+    section_title: "Sandbox & Security"
+    status: "REQ"
+    text_digest: "sha256:47aa19a296e048d7df3b37575fc1dcf898e27922bd28172bfced6089b3be995b"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S12-009"
+    section: 12
+    section_title: "Sandbox & Security"
+    status: "REQ"
+    text_digest: "sha256:421186b8b86f35c0b02cbfaa93208667c07fe61b1b5e04c8cb4e02e7aae74579"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S12-010"
+    section: 12
+    section_title: "Sandbox & Security"
+    status: "REQ"
+    text_digest: "sha256:0fb93d6295f4e55170905cc98d4f958a30011bec2db18a89b0f75f11363f1917"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S12-011"
+    section: 12
+    section_title: "Sandbox & Security"
+    status: "REQ"
+    text_digest: "sha256:d1225b431b0ce60b302f2aaeadc470532a9613c52e555caa4063d2f6e4742965"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S12-012"
+    section: 12
+    section_title: "Sandbox & Security"
+    status: "REQ"
+    text_digest: "sha256:5bc3473c3b254f0c018a0c6b6056e589d0370eef5edd7704a28797b66dc200e8"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S12-013"
+    section: 12
+    section_title: "Sandbox & Security"
+    status: "REQ"
+    text_digest: "sha256:32b8342f5d73f1f3f84bdf48075b930adf2a33ef4d718408be5ca04ad2000b19"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S12-014"
+    section: 12
+    section_title: "Sandbox & Security"
+    status: "REQ"
+    text_digest: "sha256:568b13a14af3495dee55d3d51d312f28a0e013859b3234f1df7b57392cb37fad"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S12-015"
+    section: 12
+    section_title: "Sandbox & Security"
+    status: "REQ"
+    text_digest: "sha256:2ec463a3cf4c47b41236e80500738b8d84263c1ff2eb9d2f8f0b9116efbb7f24"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S12-016"
+    section: 12
+    section_title: "Sandbox & Security"
+    status: "REQ"
+    text_digest: "sha256:58767e509d0e8e443001775f91af0dbaa87819107cbad800c7ce54465d325a7d"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S12-017"
+    section: 12
+    section_title: "Sandbox & Security"
+    status: "REQ"
+    text_digest: "sha256:a17004f0f45616ce06a12e3d439fb26b6a5d39d14b76305a02f76cbad54429d4"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S12-018"
+    section: 12
+    section_title: "Sandbox & Security"
+    status: "REQ"
+    text_digest: "sha256:1a584b9bac06b847d00952e75f3ef065776d3ff235d73d0a00ef25b215aafb0f"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S12-019"
+    section: 12
+    section_title: "Sandbox & Security"
+    status: "REQ"
+    text_digest: "sha256:0856ebac42552c36822d1f4706ba57647702dbbdae2011df51f92b13d7114586"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S12-020"
+    section: 12
+    section_title: "Sandbox & Security"
+    status: "REQ"
+    text_digest: "sha256:04004fae3a45a37d613f2cb2ce217dc085b168ea9af462ebbdd127ee437c0636"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S13-001"
+    section: 13
+    section_title: "Persistence Model"
+    status: "REQ"
+    text_digest: "sha256:291768cbc9edafae7a2b016d4a993ce7661e09cc5b033a84bbe3da04e4ac7c36"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S13-002"
+    section: 13
+    section_title: "Persistence Model"
+    status: "REQ"
+    text_digest: "sha256:ab7eb24d0da5b5d251678aca99c72d47635494d5f6781b3e1b5cc5bae70f514d"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S13-003"
+    section: 13
+    section_title: "Persistence Model"
+    status: "REQ"
+    text_digest: "sha256:35ea232db4e8a8a862e2d029e590bb204c79d491706a2279568c175d0bf657d0"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S13-004"
+    section: 13
+    section_title: "Persistence Model"
+    status: "REQ"
+    text_digest: "sha256:b6278a85db814aa5931921d7d13afd03c74e8a7ad10de2d84256f7dc8785c11b"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S13-005"
+    section: 13
+    section_title: "Persistence Model"
+    status: "REQ"
+    text_digest: "sha256:b227d15cbad517345987bbbb724d4f24b4b43821845f47b80e894aaa0ded5e1c"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S13-006"
+    section: 13
+    section_title: "Persistence Model"
+    status: "REQ"
+    text_digest: "sha256:9694a5065cf768064dac97d4c9b9db6a2399dd39ebac08d7f74a0be6ab7ee4df"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S13-007"
+    section: 13
+    section_title: "Persistence Model"
+    status: "REQ"
+    text_digest: "sha256:c4633e56e95fbcbfab8269d06c76dae82dd9f0a1aebbcdd2cb5abc12708829a1"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S13-008"
+    section: 13
+    section_title: "Persistence Model"
+    status: "REQ"
+    text_digest: "sha256:ce6ca4ab9d7ab510759bc7d07deb8e17ca5a9c815d24b524e789445faa0d2573"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S13-009"
+    section: 13
+    section_title: "Persistence Model"
+    status: "REQ"
+    text_digest: "sha256:4bac4a0e0245b4ea4130efbac7f3abbe8efec0ba0b58b94d4288c8d6ee3e6552"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S14-001"
+    section: 14
+    section_title: "Atomic Commit, CAS & Recovery"
+    status: "REQ"
+    text_digest: "sha256:0ce240e716c11340b54b1ecced77439b00dbc5c8d4e871f05423db09e6a83b4f"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S14-002"
+    section: 14
+    section_title: "Atomic Commit, CAS & Recovery"
+    status: "REQ"
+    text_digest: "sha256:7eb3b9548e5d6d2f0cd535fca4766da482920a5b2bdc6271fa3e1a6f868e44c3"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S15-001"
+    section: 15
+    section_title: "Canonical Schema Package"
+    status: "REQ"
+    text_digest: "sha256:bd0ed19c31f67c1a1dcf692560b4693ae8e74eadca24ed8289125ab0943d2937"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S15-002"
+    section: 15
+    section_title: "Canonical Schema Package"
+    status: "REQ"
+    text_digest: "sha256:b6b91c0deaa58486ab646c1dbd49d811ef51fa89b9550c1f6f7ee66645ca8e61"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S15-003"
+    section: 15
+    section_title: "Canonical Schema Package"
+    status: "REQ"
+    text_digest: "sha256:10d07f40e83ee91af2e4e6d348a6f95d48726e5cf87cc85b340db3967893a80a"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S15-004"
+    section: 15
+    section_title: "Canonical Schema Package"
+    status: "REQ"
+    text_digest: "sha256:085124259666d2a1f8bab7245071399fa32cf719059b726a1b82b38d17c44ccf"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S15-005"
+    section: 15
+    section_title: "Canonical Schema Package"
+    status: "REQ"
+    text_digest: "sha256:ac31224ae1c0740141897bfe3d5bdbacf2fbb37c7e69ec67e9a23567fd85552b"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S15-006"
+    section: 15
+    section_title: "Canonical Schema Package"
+    status: "REQ"
+    text_digest: "sha256:8d59cc1beb1fb59494f9f75bc644c270d4728972a7898f126aaf444967242883"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S15-007"
+    section: 15
+    section_title: "Canonical Schema Package"
+    status: "REQ"
+    text_digest: "sha256:666eccccfcf4ab34d0c4941074a14f8d260a176c21b345566508d7bf6ff554a2"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S16-001"
+    section: 16
+    section_title: "Golden Corpus"
+    status: "REQ"
+    text_digest: "sha256:187bddf979e3a40751c6286b85d3d027010016d3e48556dc7dcf46991f01ca50"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S16-002"
+    section: 16
+    section_title: "Golden Corpus"
+    status: "REQ"
+    text_digest: "sha256:f5c3eaa917566afbb18a2ee3cc68f32cf091446506c5d93587920d94a74f379e"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S17-001"
+    section: 17
+    section_title: "Flaky Tests, Holdout & Anti-Gaming"
+    status: "REQ"
+    text_digest: "sha256:0793ebb0b96f1b857399024ff688a7bc0ca9d955944e81d1f2c27eac837c5d78"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S17-002"
+    section: 17
+    section_title: "Flaky Tests, Holdout & Anti-Gaming"
+    status: "REQ"
+    text_digest: "sha256:a884fba6455b0e500a9997416811c7457ec0342f4b83c332926699e5289e674c"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S17-003"
+    section: 17
+    section_title: "Flaky Tests, Holdout & Anti-Gaming"
+    status: "REQ"
+    text_digest: "sha256:f54b94677b0fd471449044bb0ff3c650cae9ce32229c0494759d212cbbe97650"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S18-001"
+    section: 18
+    section_title: "Audit & Evidence"
+    status: "REQ"
+    text_digest: "sha256:4fe762f2af42172551b257f19e2c1975beccedbe44c36cc5467c02559dad86bf"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S18-002"
+    section: 18
+    section_title: "Audit & Evidence"
+    status: "REQ"
+    text_digest: "sha256:a8182545b46fdcb13ba555b43dfd53db05e89d04f6896d55770950afd9a5debd"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S18-003"
+    section: 18
+    section_title: "Audit & Evidence"
+    status: "REQ"
+    text_digest: "sha256:0d6769a8c586c1e60ae3bdd21a1ce00ff1b77963f1d11f67795390aeb62f15ff"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S19-001"
+    section: 19
+    section_title: "Deployment & Governance"
+    status: "REQ"
+    text_digest: "sha256:a330f7ac802899168553f657fa237b205731e8022aaacbb3d2bba7ca208526e9"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S19-002"
+    section: 19
+    section_title: "Deployment & Governance"
+    status: "REQ"
+    text_digest: "sha256:04f67386968f6d2466f82e812baa48875a23975f266b635c2c93929f02d2870a"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S19-003"
+    section: 19
+    section_title: "Deployment & Governance"
+    status: "REQ"
+    text_digest: "sha256:bf1edf9791875e44cfa3ce506ee3e2c158b74267dfc45912f1d1e7aadba621a2"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S19-004"
+    section: 19
+    section_title: "Deployment & Governance"
+    status: "REQ"
+    text_digest: "sha256:c9c854b6243c6cc59c88b9e4f0ee33694fc45a19f4a0eb1f4f1c079924155785"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S19-005"
+    section: 19
+    section_title: "Deployment & Governance"
+    status: "REQ"
+    text_digest: "sha256:375080d33c8609b888c98b47bfed060d7f43d64f0b810cb74beacbe3d7fba92c"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S19-006"
+    section: 19
+    section_title: "Deployment & Governance"
+    status: "REQ"
+    text_digest: "sha256:7a5e930eb48123ba5d2c17b21ac7c23ccaf72baf4940341f7672582c908fdce6"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S19-007"
+    section: 19
+    section_title: "Deployment & Governance"
+    status: "REQ"
+    text_digest: "sha256:ce0e09b9c9ebcf2de57282ac4447fedb36237652ceb7b4227f3ee660b268f693"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S19-008"
+    section: 19
+    section_title: "Deployment & Governance"
+    status: "REQ"
+    text_digest: "sha256:e8754632598aab74c4b1fffc735e12175320ba6772d1062d11b1fa41b3adf5e3"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S20-001"
+    section: 20
+    section_title: "Self-Evolution Root of Trust"
+    status: "REQ"
+    text_digest: "sha256:208493152103c4788d234015256796c77e31a67ce3311e0221b73b7423e7927b"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S21-001"
+    section: 21
+    section_title: "CI & Conformance Matrix"
+    status: "REQ"
+    text_digest: "sha256:b9217d190ae24e89e51ddd42b47953e371a5dbe616e9a8645e318e34732965c6"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S22-001"
+    section: 22
+    section_title: "Traceability"
+    status: "REQ"
+    text_digest: "sha256:93f3c5db841f1ed714dd98edb63cc52be6538328c1f5e4a9eff569411e0cc8c1"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S22-002"
+    section: 22
+    section_title: "Traceability"
+    status: "REQ"
+    text_digest: "sha256:50133156e96bb2939fe4bc83435d7ed8b5f6f33f0ec2242e14c319cf60934bbf"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S22-003"
+    section: 22
+    section_title: "Traceability"
+    status: "REQ"
+    text_digest: "sha256:67704b64b4beb88263f2c648fd8b729425b7f2124971736f574584f5931d435f"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S22-004"
+    section: 22
+    section_title: "Traceability"
+    status: "REQ"
+    text_digest: "sha256:f8e731fc5acba27650736326dd4e89c513cd56c98973e0e60364dfceef3cc76e"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S24-001"
+    section: 24
+    section_title: "Release Gates"
+    status: "REQ"
+    text_digest: "sha256:7c71ab0dd87ab695c8457d80fe04cc906eb4358740fcb1505797a3e74f6208bf"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-001"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:e8a6ce4c412014a0287e0d8a57271653c37c0592e943830573cd4f74f30ba0f8"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-002"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:429b7eb02bc9c5b14a36673cb8b039e3787967ce8eed6e047be883adcc223d8b"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-003"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:fc1965c4949d9f254176bcff23b0da25f81b9ecff3cab65c32c5cab3867baa51"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-004"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:c316964f9bead9e0ebfc6d46c1d222d17d036d79f9d9953d78279dc44f546833"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-005"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:938770bab1f90f775db50529fe2ee30f8a4826b6c4adf89a0680dfca897f5651"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-006"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:544a51072fe4d0f77e58430a1e4ecaba4c19d584f406d71e112b47367dac4582"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-007"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:f41f4f8ecdb50004154234788bb145049df15465250c479a5a49c7525c9cf8e4"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-008"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:c9baef91d187c24880356802da9229897a65d237dbfdf68efde7cc737edcf6e7"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-009"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:14f1e8fcded8869a13782ab4afdf64de769f2c525de4e81c9ea42486d51ec322"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-010"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:050ae742c50c9653d6c9c4d60e0e9a16e3da4043cdf9606f8aa6346c2e3ae42e"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-011"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:362d21547ee6d35d13bf03595425bba6210b511f373dc782d54b264f095b0387"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-012"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:dbea5cbd29643a0666c08bcc465f8a84d085cdec4775c02e42fb6290af161fdb"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-013"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:85fd3d14b294e49b237fda22c974f56623dae451d243db36d68025a13dd2a84a"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-014"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:6e80dd85bd97eaa501ff63c673e2d03857d82b475fce743eeef5a2584220b32c"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-015"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:9995740e53178a63e0f9074a21d1e9bc05c5ba733c49eafda86abe42a83aeff8"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-016"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:4d2766e678a85e24a9b0a53e88314ca2f217b44a7018b2834bb3bef418233fff"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-017"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:d5f804d98273f5a5dbad61dc006cfd015135636956b32b4332faa23ca6994c37"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-018"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:a520dd48f87a9dc7bd2dcf6f6b3a946f02a99e0071ec8ed50307c3427eb510d5"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-019"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:6da990633546aed106442ed8dd56d9941f92e0af19699c51cb1699cd9ec580d8"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-020"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:4b6168f2be1907135b88093dd57d124427e2010489472b12b800c566049bf34f"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-021"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:869117bcc8fc6616bdf2f2c7580e69c88704513e57e12f18b6c1d5a694458708"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-022"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:43e56909abc124980130be45cccab88952d4ebd6673701969ae67eb9a28a9629"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-023"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:637eec20be419f4abbf50dca69046f3e725b718900592177c9422d894b77ca31"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-024"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:8c3965e5a2783ea371693d70c22b530f7d0434105b08f7811189fa1514c43631"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S25-025"
+    section: 25
+    section_title: "Definition of Done"
+    status: "REQ"
+    text_digest: "sha256:61c35435abbade36f495a62d0beeec44c45a5ce107d535c6ed5814520af8a506"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S27-001"
+    section: 27
+    section_title: "Governed Specification Change"
+    status: "REQ"
+    text_digest: "sha256:019b8e4fad0607628c3301173c2315098fd0878d1669d688f2efbb642a9b7b45"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S27-002"
+    section: 27
+    section_title: "Governed Specification Change"
+    status: "REQ"
+    text_digest: "sha256:46d3fb9a3afa381997741a4bf54b2d8c5c0bb1056dd897395f9e10c03099c942"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S28-001"
+    section: 28
+    section_title: "Current Truth — What Exists vs What Is Required"
+    status: "REQ"
+    text_digest: "sha256:fdea41abf81fef033f16de2d6a1242d4b3315e580c63582c7572907651106ee5"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S29-001"
+    section: 29
+    section_title: "Implementation Order"
+    status: "REQ"
+    text_digest: "sha256:d3d39f5af9e6c10f8335a79ec5ade145663430866c80080920ecedfec4f49c34"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S29-002"
+    section: 29
+    section_title: "Implementation Order"
+    status: "REQ"
+    text_digest: "sha256:4b4faca6134e03abf6082b4f96a74c917cda4a0bee531851f13c9f7bfc1816d1"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S29-003"
+    section: 29
+    section_title: "Implementation Order"
+    status: "REQ"
+    text_digest: "sha256:2b6109d24e99d77e52779ee79f2c006058a1d4f832f7a9a1946c244759b9288b"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S29-004"
+    section: 29
+    section_title: "Implementation Order"
+    status: "REQ"
+    text_digest: "sha256:0402858f5f4b43b2c0309424ca1cbead799d0fcb36a5c1d3ae4ab7b8815a8241"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S29-005"
+    section: 29
+    section_title: "Implementation Order"
+    status: "REQ"
+    text_digest: "sha256:3bfc3a3a95b7ae88a09b600803a566d264dcb6b2de2a221da24134eb1df19eff"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S30-001"
+    section: 30
+    section_title: "Final Canonical Freeze Rule"
+    status: "REQ"
+    text_digest: "sha256:7a29e756f5309e2962fda3bdd0beff46ff682f4b7ffbe8c2c8e2725e0a652480"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []
+  - id: "REQ-S30-002"
+    section: 30
+    section_title: "Final Canonical Freeze Rule"
+    status: "REQ"
+    text_digest: "sha256:7e866d83b0aec81ad16b14279e46211a24bbc71f1308f06dfd0a8b1cd481cf4d"
+    verification_method: "PENDING"
+    schema_refs: []
+    protocol_refs: []
+    implementation_refs: []
+    test_refs: []
+    evidence_refs: []
+    release_gates: []

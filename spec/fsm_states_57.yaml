@@ -46,7 +46,7 @@ fsms:
   recovery_fsm:
     states_count: 9
     initial_state: "DETECT_CRASH"
-    terminal_states: ["RESTORED_READY", "FAILED"]
+    terminal_states: ["RESTORED_READY"]
     states:
       - DETECT_CRASH
       - SCAN_WAL_AND_CAS

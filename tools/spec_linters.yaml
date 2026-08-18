@@ -1,5 +1,5 @@
 version: "10.2.2"
-total_linters: 8
+total_linters: 11
 
 linters:
   - linter_id: "LINT-01"
@@ -48,4 +48,25 @@ linters:
     name: "MaturityGatesClosureLinter"
     target: "spec/maturity.yaml"
     rule: "Verify all release gates M0 to M13 are monotonically ordered"
+    severity: "BLOCKER"
+
+  - linter_id: "LINT-09"
+    name: "StateVocabularyConsistencyLinter"
+    target: "spec/fsm_states_57.yaml, schemas/*.schema.json, docs/**/SQLITE_DDL_29_TABLES.md"
+    rule: "Every FSM state vocabulary must be byte-identical across spec/fsm_states_57.yaml, the JSON Schema enums and the SQLite CHECK constraints. Enforces REQ-S13-004 (mismatch = CI failure)."
+    implementation: "tools/lint_state_vocabulary.py"
+    severity: "BLOCKER"
+
+  - linter_id: "LINT-10"
+    name: "EvidenceRetentionLinter"
+    target: "docs/**/*.md (SQL DDL blocks)"
+    rule: "audit_events, evidence_records, quarantine_records and recovery_records must never be reachable by ON DELETE CASCADE. Enforces REQ-S01-009 (Never Destroy Audit History)."
+    implementation: "tools/lint_state_vocabulary.py"
+    severity: "BLOCKER"
+
+  - linter_id: "LINT-11"
+    name: "GoldenCorpusManifestLinter"
+    target: "benchmarks/golden/**"
+    rule: "benchmarks/golden/manifest.yaml is the canonical corpus registry. Directory names, project.yaml fields and expected dispositions must all agree with it, and every disposition must be a declared FSM terminal state. Enforces REQ-S16-001."
+    implementation: "tools/lint_state_vocabulary.py"
     severity: "BLOCKER"
