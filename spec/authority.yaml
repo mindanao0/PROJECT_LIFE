@@ -39,7 +39,7 @@ authority_hierarchy:
 # ---------------------------------------------------------------------------
 document_precedence:
   - rank: 1
-    source: "spec/*.yaml, schemas/*.json"
+    source: "spec/**/*.yaml, spec/*.json, schemas/*.json"
     role: "Machine-readable canonical data. Single source of truth for state
            vocabularies, the maturity ladder, release gates, the schema registry
            and requirement traceability. Everything else derives from these."

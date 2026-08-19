@@ -1,0 +1,57 @@
+# Sandbox environment allowlist, rank 1. Declared in Active Contract section 4.
+#
+# The only prior list lived in a rank 4 document and was {PATH, PYTHONPATH, LANG}.
+# Passing the host PYTHONPATH into the sandbox is an import-path injection: it lets
+# the host decide which modules the candidate loads, which defeats the point of a
+# minimal rootfs. Removed by CR-0005.
+
+spec_version: "10.2.2"
+model: "deny by default"
+rule: >-
+  The sandbox starts with an empty environment. Only the variables below are set,
+  and each is set to the fixed value here rather than inherited from the host, so
+  two machines produce the same environment.
+
+variables:
+  - name: "PATH"
+    value: "/usr/bin:/bin"
+    reason: "interpreter lookup inside the rootfs"
+  - name: "HOME"
+    value: "/tmp"
+    reason: "some libraries write dotfiles; /tmp is the only writable mount"
+  - name: "TMPDIR"
+    value: "/tmp"
+  - name: "LANG"
+    value: "C.UTF-8"
+  - name: "LC_ALL"
+    value: "C.UTF-8"
+    reason: "locale changes sort order and number formatting; both are hash-critical"
+  - name: "TZ"
+    value: "UTC"
+  - name: "PYTHONHASHSEED"
+    value: "0"
+    reason: "dict and set iteration order must be reproducible (R1)"
+  - name: "PYTHONDONTWRITEBYTECODE"
+    value: "1"
+    reason: "a .pyc written into /workspace would mutate a read-only snapshot"
+  - name: "PYTHONUNBUFFERED"
+    value: "1"
+    reason: "output must be captured even when the process is killed"
+
+explicitly_removed:
+  - name: "PYTHONPATH"
+    reason: >-
+      Injecting a host import path into the sandbox lets the host choose which
+      modules the candidate loads. The candidate's imports must come from the rootfs
+      and /workspace only.
+  - name: "PYTHONSTARTUP"
+    reason: "would execute host-controlled code before the candidate"
+  - name: "LD_PRELOAD"
+    reason: "would inject a host shared object into every process"
+  - name: "LD_LIBRARY_PATH"
+    reason: "same, for library resolution"
+
+project_override: >-
+  A project may not add a variable. Values a candidate needs must arrive through the
+  evolution.yaml command env field, which is validated against
+  schemas/26_engine_config.schema.json and recorded in the environment manifest.

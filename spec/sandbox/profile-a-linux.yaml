@@ -1,0 +1,107 @@
+# PROFILE_A_LINUX — the sandbox profile, rank 1. Declared in Active Contract section 4.
+#
+# Section 12.2 listed seventeen invariants but no numbers, so "kill process tree on
+# timeout" and "record kernel-enforced violation reason" had nothing to enforce and
+# the execution outcomes OOM and RESOURCE_EXCEEDED had no mechanism that could
+# produce them. The concrete values existed only in a rank 4 document. Promoted and
+# completed by CR-0005.
+
+spec_version: "10.2.2"
+profile: "PROFILE_A_LINUX"
+target_runtime: "CPython 3.12 on Linux with cgroups v2 and seccomp BPF"
+
+namespaces:
+  required: ["mount", "pid", "network", "ipc", "uts"]
+  user: "required where the deployment model supports unprivileged user namespaces"
+  note: "The network namespace is empty — no interfaces beyond loopback-down."
+
+privileges:
+  run_as: "unprivileged uid/gid, never 0 inside or outside the namespace"
+  no_new_privs: true
+  capabilities: "drop all ambient, effective, permitted and inheritable"
+  inherited_fds: "close every fd above 2 before exec; 0,1,2 are set by the coordinator"
+
+# cgroups v2 limits. These are the values a violation is measured against, so a
+# candidate cannot be OOM-killed or throttled by an undeclared threshold.
+resource_limits:
+  cgroup_path: "/sys/fs/cgroup/evolution/candidate_<candidate_id>"
+  memory_max_bytes: 536870912          # 512 MiB hard cap -> OOM kill
+  memory_high_bytes: 402653184         # 384 MiB soft cap -> throttle
+  memory_swap_max_bytes: 0             # swapping would make timings meaningless
+  cpu_max: "100000 100000"             # 1.0 core
+  pids_max: 64                         # fork-bomb ceiling, drives MVP-10
+  io_weight: 100
+  rlimit_nofile: 256                   # open file descriptors
+  rlimit_fsize_bytes: 67108864         # matches the writable tmpfs, so neither is the odd one out
+  rlimit_core_bytes: 0                 # no core dumps: they can leak candidate memory
+  wall_clock_timeout_seconds: "from evolution.yaml metrics[].command.timeout_seconds"
+
+  resolution_rule: >-
+    A project may lower any value in evolution.yaml but never raise it. The engine
+    takes min(project_value, profile_value) and records the effective value in the
+    environment manifest, so replay compares like with like.
+
+# How a violation becomes an execution outcome. Without this, SECURITY_VIOLATION
+# was a state nothing could enter.
+violation_detection:
+  seccomp_action: "SECCOMP_RET_KILL_PROCESS for a denied syscall"
+  seccomp_audit_action: "SECCOMP_RET_TRAP for a syscall under observation"
+  channel: >-
+    The supervisor reads the exit status and the cgroup event counters, then maps
+    the cause to exactly one execution outcome. The mapping is total: every abnormal
+    termination lands on one of the six outcomes, never on SUCCESS.
+  mapping:
+    - cause: "seccomp killed the process (SIGSYS, or WIFSIGNALED with SYS_SECCOMP)"
+      outcome: "SECURITY_VIOLATION"
+    - cause: "cgroup memory.events oom_kill incremented"
+      outcome: "OOM"
+    - cause: "pids.events max incremented, or fork/clone returned EAGAIN at the cap"
+      outcome: "RESOURCE_EXCEEDED"
+    - cause: "RLIMIT_FSIZE or the tmpfs quota was hit"
+      outcome: "RESOURCE_EXCEEDED"
+    - cause: "wall clock exceeded and the process tree was killed"
+      outcome: "TIMEOUT"
+    - cause: "any other non-zero exit or fatal signal"
+      outcome: "CRASHED"
+    - cause: "exit status 0 within all limits"
+      outcome: "SUCCESS"
+  process_tree_kill: >-
+    On timeout the whole cgroup is killed via cgroup.kill, not just the direct
+    child, so an orphaned grandchild cannot outlive the evaluation.
+
+# Determinism controls. Without these, flaky detection (17.1) cannot distinguish a
+# flaky test from a non-deterministic candidate, and R1..R4 cannot be measured.
+determinism:
+  pythonhashseed: "0"
+  pythondontwritebytecode: "1"
+  tz: "UTC"
+  lc_all: "C.UTF-8"
+  clock: >-
+    The sandbox clock is the host clock. Candidates must not be scored on wall-clock
+    values; timing metrics are measured by the supervisor outside the sandbox.
+  entropy: >-
+    /dev/urandom is available because CPython needs it at startup. Seeded randomness
+    used by the engine comes from the run master seed, never from the sandbox.
+
+conformance_probes:
+  - id: "PROBE-NET"
+    asserts: "connect() to any address fails"
+    invariant: "deny host network"
+  - id: "PROBE-FS-ESCAPE"
+    asserts: "opening a path outside the rootfs fails with ENOENT or EACCES"
+    invariant: "expose candidate workspace read-only"
+  - id: "PROBE-CRED"
+    asserts: "every path in mounts.yaml assertions_after_setup is absent"
+    invariant: "deny host credential paths"
+  - id: "PROBE-FORK"
+    asserts: "creating more than pids_max processes fails"
+    invariant: "fork-bomb ceiling"
+  - id: "PROBE-MEM"
+    asserts: "allocating beyond memory_max_bytes triggers an OOM kill, not a swap"
+    invariant: "memory ceiling"
+  - id: "PROBE-CAPS"
+    asserts: "CapEff is 0 and no_new_privs is 1 in /proc/self/status"
+    invariant: "drop capabilities, no_new_privs"
+  - id: "PROBE-DEV"
+    asserts: "opening a block device or /proc/kcore fails"
+    invariant: "deny privileged device access"

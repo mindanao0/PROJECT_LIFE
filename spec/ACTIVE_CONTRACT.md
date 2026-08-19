@@ -1335,6 +1335,10 @@ Windows PROFILE_D  Unsupported for secure candidate execution
 
 [REQ][REQ-S12-003] Python socket monkeypatch ไม่ถือเป็น security boundary
 
+[REQ][REQ-S12-021] ค่า resource limit ที่บังคับใช้จริงอยู่ที่ `spec/sandbox/profile-a-linux.yaml` (rank 1) ครอบ `memory.max`, `memory.high`, `cpu.max`, `pids.max`, `RLIMIT_NOFILE`, `RLIMIT_FSIZE` และ wall clock; project ลดค่าได้แต่ห้ามเพิ่ม และค่าที่มีผลจริงต้องบันทึกใน environment manifest
+
+[REQ][REQ-S12-022] การยุติที่ผิดปกติทุกกรณีต้อง map เป็น execution outcome หนึ่งเดียวตาม `violation_detection.mapping` ใน `spec/sandbox/profile-a-linux.yaml`; ห้ามมีกรณีที่ตกเป็น `SUCCESS` โดยปริยาย
+
 ---
 
 ## 12.3 Mount Policy [NORMATIVE]
@@ -1367,6 +1371,10 @@ denied:
 ```
 
 [REQ][REQ-S12-004] symlink/hardlink/path traversal ต้อง resolve หลัง canonical path check ภายใน sandbox root
+
+[REQ][REQ-S12-023] sandbox ใช้โมเดล minimal rootfs ตาม `spec/sandbox/mounts.yaml` (rank 1) ซึ่งระบุ mount ทุกจุดรวม CPython runtime, masked/readonly path ของ `/proc` และรายการที่ต้องไม่มีอยู่หลัง setup; `denied` list ข้างบนถูกแทนด้วย `assertions_after_setup` เพราะ path ที่ไม่เคย mount ปฏิเสธไม่ได้ด้วยกฎ deny
+
+[REQ][REQ-S12-024] environment ของ sandbox เป็น deny-by-default ตาม `spec/sandbox/env-allowlist.yaml`; ห้ามส่ง `PYTHONPATH`, `PYTHONSTARTUP`, `LD_PRELOAD` หรือ `LD_LIBRARY_PATH` จาก host และค่าที่อนุญาตต้องถูกตรึงไม่ใช่สืบทอด
 
 ---
 

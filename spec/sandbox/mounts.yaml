@@ -1,0 +1,115 @@
+# Sandbox filesystem, rank 1. Declared in Active Contract section 4.
+#
+# Section 12.3 declared three mountpoints and a denied list. The two describe
+# different isolation models: a denied list of ~/.ssh and /var/run/docker.sock only
+# means something if the host root is visible, while "แยก Root Filesystem" means a
+# minimal rootfs where those paths never existed. Nothing said which, and nothing
+# mounted the CPython interpreter the candidate needs to run at all.
+#
+# CR-0005 chooses the minimal rootfs. It is the stronger model: a path that was
+# never mounted cannot be reached by a bug in a deny rule. The old denied list
+# becomes assertions_after_setup — checks that those paths really are absent, which
+# is how MVP-08 gets something concrete to assert.
+
+spec_version: "10.2.2"
+model: "minimal_rootfs"
+rootfs: "empty tmpfs, populated only by the mounts below"
+
+mounts:
+  # everything CPython needs, read-only
+  - target: "/usr"
+    source: "host /usr"
+    type: "bind"
+    access: "read-only"
+    flags: ["nosuid", "nodev"]
+    reason: "CPython 3.12 interpreter and stdlib (REQ-S12-006)"
+  - target: "/lib"
+    source: "host /lib"
+    type: "bind"
+    access: "read-only"
+    flags: ["nosuid", "nodev"]
+  - target: "/lib64"
+    source: "host /lib64"
+    type: "bind"
+    access: "read-only"
+    flags: ["nosuid", "nodev"]
+    optional: true
+    reason: "absent on some distributions"
+
+  # the candidate's own code
+  - target: "/workspace"
+    source: "materialised candidate snapshot"
+    type: "bind"
+    access: "read-only"
+    flags: ["nosuid", "nodev"]
+
+  # the only writable surface
+  - target: "/tmp"
+    type: "tmpfs"
+    access: "read-write"
+    max_bytes: 67108864
+    flags: ["noexec", "nosuid", "nodev"]
+
+  - target: "/proc"
+    type: "proc"
+    access: "read-only"
+    hidepid: "2"
+    subset: "pid"
+    masked_paths:
+      - "/proc/kcore"
+      - "/proc/keys"
+      - "/proc/timer_list"
+      - "/proc/sched_debug"
+      - "/proc/scsi"
+    readonly_paths:
+      - "/proc/bus"
+      - "/proc/fs"
+      - "/proc/irq"
+      - "/proc/sys"
+      - "/proc/sysrq-trigger"
+    reason: >-
+      Section 12.3 said mode "restricted" without saying what that meant. hidepid=2
+      hides other processes, subset=pid drops the non-process entries, and the two
+      path lists are named rather than implied.
+
+  - target: "/dev"
+    type: "tmpfs"
+    access: "read-write"
+    devices: ["null", "zero", "full", "random", "urandom", "tty"]
+    reason: "CPython needs urandom at startup; nothing else is exposed"
+
+# /sys is not mounted at all, so cgroup and firmware paths are unreachable
+not_mounted:
+  - "/sys"
+  - "/boot"
+  - "/root"
+  - "/home"
+  - "/var"
+  - "/run"
+  - "/etc"
+
+# Post-setup assertions. Under the minimal rootfs these must all be absent; the
+# check exists so a regression that reintroduces a host mount is caught rather than
+# silently trusted. MVP-08 asserts exactly this list.
+assertions_after_setup:
+  must_not_exist:
+    - "/var/run/docker.sock"
+    - "/run/podman/podman.sock"
+    - "/run/containerd/containerd.sock"
+    - "/root/.ssh"
+    - "/root/.aws"
+    - "/root/.kube"
+    - "/root/.gnupg"
+    - "/proc/kcore"
+    - "/sys/firmware"
+  must_be_readonly:
+    - "/workspace"
+    - "/usr"
+  must_be_writable:
+    - "/tmp"
+
+path_resolution:
+  rule: >-
+    Every path is canonicalised with symlinks resolved before the containment check
+    (REQ-S12-004). A resolved path outside the rootfs is refused, so a symlink in
+    /workspace cannot reach a mount it does not own.
