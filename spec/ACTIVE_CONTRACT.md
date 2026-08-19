@@ -2293,18 +2293,44 @@ Hidden holdout: release-gate only
 
 ## 18.1 Audit Hash Chain [NORMATIVE]
 
-Genesis:
+Chain scope: `run_id` หนึ่งค่าเป็นหนึ่ง chain; `run_id IS NULL` คือ engine scope ซึ่งเป็น chain แยกของตัวเอง
+
+Genesis ของแต่ละ scope:
 
 ```text
-sequence_no = 0
-previous_event_hash = null
+sequence_no          = 0
+previous_event_hash  = NULL          (คอลัมน์ในฐานข้อมูล)
+previous_digest_bytes = 32 zero bytes (ค่าที่ใช้เข้าสูตร)
 ```
 
-Subsequent event:
+Canonical event payload — ตรึง field และลำดับไว้ ไม่ใช่ bytes ของ artifact:
 
 ```text
-event_hash = SHA256(previous_event_hash || canonical_event_payload)
+canonical_event_payload = canonical_bytes({
+    "run_id":              <string หรือ null>,
+    "sequence_no":         <integer>,
+    "actor":               <string>,
+    "event_type":          <string>,
+    "payload_artifact_id": <string>,
+    "created_at_utc":      <RFC3339 UTC>
+})
 ```
+
+`canonical_bytes` คือกฎใน `spec/reproducibility.yaml` (key เรียง lexicographic เสมอ)
+การรวม `sequence_no` และ `run_id` เข้าไปคือสิ่งที่ผูก chain กับลำดับและ scope; ถ้าเอาออก การสลับลำดับ event จะตรวจไม่พบ
+
+Event hash:
+
+```text
+event_hash = SHA-256( previous_digest_bytes || canonical_event_payload )
+```
+
+โดย `||` คือการต่อ **raw bytes**: 32 bytes ของ digest ก่อนหน้า ตามด้วย payload bytes
+ห้ามต่อเป็น hex string และห้ามใส่ prefix `sha256:` เพราะทั้งสองแบบให้ค่าคนละค่า
+
+[REQ][REQ-S18-004] `canonical_event_payload` ต้องเป็น canonical bytes ของหกฟิลด์ข้างบนตามลำดับที่ canonical rules กำหนด; `||` คือ raw byte concatenation ของ digest 32 bytes กับ payload; genesis ใช้ 32 zero bytes เป็น `previous_digest_bytes` ขณะที่คอลัมน์ `previous_event_hash` เก็บ NULL
+
+[REQ][REQ-S18-005] audit chain ต้องมี golden test vectors อย่างน้อยสาม event ต่อ scope เพื่อให้ verifier สอง implementation ให้ผลตรงกัน
 
 [REQ][REQ-S18-001] sequence allocation ต้อง serialize ต่อ run
 

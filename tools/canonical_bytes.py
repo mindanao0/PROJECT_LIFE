@@ -100,3 +100,45 @@ if __name__ == "__main__":
         "empty_object": sha256_hex({}),
         "candidate_baseline": candidate_id(0, "a" * 64, None, None),
     }, indent=2))
+
+
+# --- audit hash chain (section 18.1) ----------------------------------------
+
+GENESIS_DIGEST = bytes(32)  # 32 zero bytes; the DB column stores NULL
+
+
+def audit_event_payload(run_id, sequence_no: int, actor: str, event_type: str,
+                        payload_artifact_id: str, created_at_utc: str) -> bytes:
+    """The six fields the chain binds, in canonical byte form."""
+    return canonical_bytes({
+        "run_id": run_id,
+        "sequence_no": sequence_no,
+        "actor": actor,
+        "event_type": event_type,
+        "payload_artifact_id": payload_artifact_id,
+        "created_at_utc": created_at_utc,
+    })
+
+
+def audit_event_hash(previous_digest: bytes | None, payload: bytes) -> str:
+    """SHA-256(previous_digest_bytes || canonical_event_payload), raw byte concat."""
+    prev = GENESIS_DIGEST if previous_digest is None else previous_digest
+    if len(prev) != 32:
+        raise ValueError("previous digest must be 32 raw bytes, not a hex string")
+    return hashlib.sha256(prev + payload).hexdigest()
+
+
+def verify_audit_chain(events: list[dict]) -> bool:
+    """Recompute a whole scope from genesis. events must be ordered by sequence_no."""
+    previous = None
+    for index, event in enumerate(events):
+        if event["sequence_no"] != index:
+            return False
+        payload = audit_event_payload(
+            event["run_id"], event["sequence_no"], event["actor"],
+            event["event_type"], event["payload_artifact_id"], event["created_at_utc"])
+        expected = audit_event_hash(previous, payload)
+        if expected != event["event_hash"]:
+            return False
+        previous = bytes.fromhex(expected)
+    return True

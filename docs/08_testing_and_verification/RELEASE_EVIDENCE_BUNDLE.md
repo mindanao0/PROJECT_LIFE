@@ -1,7 +1,9 @@
 # Signed Release Evidence Bundling Protocol
 
 > **Subsystem:** Release Evidence & Verification Manifests  
-> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.    
+> **Chain formula:** [`spec/ACTIVE_CONTRACT.md`](../../spec/ACTIVE_CONTRACT.md) section 18.1  
+> ไฟล์นี้เคยเขียน `genesis_hash` เป็น 64 zeros พร้อม prefix `sha256:` ขณะที่ §18.1 เขียนว่า `null` — ตอนนี้ตรงกันแล้วคือคอลัมน์เก็บ NULL ส่วนค่าที่เข้าสูตรคือ 32 zero **bytes** แก้ที่ CR-0006
 > **Scope:** `REQ-S18-001` .. `REQ-S18-003`
 
 ---
@@ -23,7 +25,7 @@
   },
   "audit_hash_chain": {
     "chain_length": 1420,
-    "genesis_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "genesis_previous_digest": "0000000000000000000000000000000000000000000000000000000000000000",
     "head_hash": "sha256:8f4c2e3a1b5d6c7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e"
   },
   "multisig_signatures": [

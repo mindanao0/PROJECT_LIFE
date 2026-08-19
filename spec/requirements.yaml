@@ -13,7 +13,7 @@
 
 spec_version: 10.2.2
 digest_algorithm: SHA-256/NFC
-total_requirements: 183
+total_requirements: 185
 retired_requirements:
 - id: REQ-S00-005
   withdrawn_by: CR-0001
@@ -1335,6 +1335,26 @@ requirements:
   section_title: Flaky Tests, Holdout & Anti-Gaming
   status: REQ
   text_digest: sha256:f54b94677b0fd471449044bb0ff3c650cae9ce32229c0494759d212cbbe97650
+  owner: UNASSIGNED
+  verification_method: PENDING
+  test_refs: []
+  evidence_refs: []
+  release_gates: []
+- id: REQ-S18-004
+  section: 18
+  section_title: Audit & Evidence
+  status: REQ
+  text_digest: sha256:fff79c3e3d2684498208098e93714cf3f26a5c229f88d7756a867465263da644
+  owner: UNASSIGNED
+  verification_method: PENDING
+  test_refs: []
+  evidence_refs: []
+  release_gates: []
+- id: REQ-S18-005
+  section: 18
+  section_title: Audit & Evidence
+  status: REQ
+  text_digest: sha256:ca70febf10dc7a1da4d41e7173bd77ccc5e661805624cd4b594fe6151899a3a4
   owner: UNASSIGNED
   verification_method: PENDING
   test_refs: []
