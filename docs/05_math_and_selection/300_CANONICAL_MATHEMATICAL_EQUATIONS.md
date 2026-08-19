@@ -367,7 +367,7 @@
 - **`EQ-250` [Security Incident Telemetry Alert Latency]:** $t_{\text{alert}} \le 100\text{ ms}$
 
 ### 🔹 Domain 26: Relational SQLite Indexing Algebra (B-Trees)
-- **`EQ-251` [29 SQLite Tables Relational Completeness]:** $|\mathcal{T}_{\text{db}}| \equiv 29$
+- **`EQ-251` [31 SQLite Tables Relational Completeness]:** $|\mathcal{T}_{\text{db}}| \equiv 31$
 - **`EQ-252` [Foreign Key Referential Integrity]:** $\forall r \in R, \quad r.\text{FK} \in \pi_{\text{PK}}(S) \lor r.\text{FK} = \text{NULL}$
 - **`EQ-253` [Polymorphic Trigger Verification Invariant]:** $\text{OwnerType} = T \implies \text{Exists}(T, \text{OwnerID})$
 - **`EQ-254` [Monotonic Audit Sequence Increment]:** $\text{Seq}_{t+1} \equiv \text{Seq}_t + 1$

@@ -5,7 +5,7 @@
 > **Master 300-Dimensional Framework:** 🌐 **[300_DIMENSIONAL_HYPER_SYSTEM_FRAMEWORK.md](300_DIMENSIONAL_HYPER_SYSTEM_FRAMEWORK.md)**  
 > **Master 300 Equations Universe:** 🧮 **[300_CANONICAL_MATHEMATICAL_EQUATIONS.md](05_math_and_selection/300_CANONICAL_MATHEMATICAL_EQUATIONS.md)**  
 > **Dedicated 30 Domains Deep-Dive:** 📁 **[docs/domains/](domains)** (ครบทั้ง 30 ไฟล์เฉพาะทาง)  
-> **Current Maturity:** `M2_REQUIREMENTS_CANONICAL`  
+> **Current Maturity:** `M3_SCHEMAS`  
 > **Default Deployment Mode:** `SAFE_EXPORT_ONLY`  
 
 ยินดีต้อนรับสู่คลังเอกสารข้อกำหนดเชิงโมดูลาร์แบบแยกโฟลเดอร์และแยกไฟล์รายโดเมนสมบูรณ์แบบ (Fully Modular Directory & Domain-Separated Architecture) ของ **Evolution Engine** สเปกชุดนี้ได้รับการวิเคราะห์และแจกแจงครอบคลุม **300 มิติวิศวกรรมเฉพาะทาง (DIM-001 ถึง DIM-300)** และ **300 มหาสมการคณิตศาสตร์แม่บท (EQ-001 ถึง EQ-300)** โดยแบ่งออกเป็น **30 ไฟล์โดเมนเฉพาะทางใน [docs/domains/](domains)** และ **10 โฟลเดอร์หมวดหมู่หลัก**:
@@ -87,7 +87,7 @@
 ---
 
 ### 💾 [03_storage_and_database/](03_storage_and_database) — ฐานข้อมูลและการจัดเก็บข้อมูล
-- 📄 **[SQLITE_DDL_29_TABLES.md](03_storage_and_database/SQLITE_DDL_29_TABLES.md)** : โครงสร้างตารางฐานข้อมูล SQLite 29 ตาราง และ 33 ดัชนี
+- 📄 **[SQLITE_DDL_TABLES.md](03_storage_and_database/SQLITE_DDL_TABLES.md)** : โครงสร้างตารางฐานข้อมูล SQLite 31 ตาราง และ 33 ดัชนี
 - 📄 **[INTEGRITY_TRIGGERS.md](03_storage_and_database/INTEGRITY_TRIGGERS.md)** : SQLite Triggers คุ้มครอง Polymorphic References
 - 📄 **[CAS_STORAGE_ENGINE.md](03_storage_and_database/CAS_STORAGE_ENGINE.md)** : สถาปัตยกรรม Content-Addressed Storage (CAS)
 - 📄 **[GENERATION_COMMIT_PROTOCOL.md](03_storage_and_database/GENERATION_COMMIT_PROTOCOL.md)** : โปรโตคอลการบันทึกข้อมูล 2-Phase Commit (7 States)

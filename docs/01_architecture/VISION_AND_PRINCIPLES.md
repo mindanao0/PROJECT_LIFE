@@ -23,7 +23,7 @@
    [6. Statistical Eval] --> ทดสอบทางสถิติ (Welch's t-test, TOST Equivalence, Holm)
    [7. Pareto Select]    --> จัดอันดับ Pareto Fronts & รักษาความหลากหลาย (Diversity)
    [8. Swarm Migrate]    --> แลกเปลี่ยน Elite ข้าม P2P Islands (Byzantine Verified)
-   [9. Commit & Loop]    --> บันทึก 2PC (SQLite 29 Tables + CAS Blobs) สู่รุ่นถัดไป
+   [9. Commit & Loop]    --> บันทึก 2PC (SQLite 31 Tables + CAS Blobs) สู่รุ่นถัดไป
 ```
 
 ### ขอบเขตการวิวัฒนาการตามระดับความสมบูรณ์ (Evolutionary Scopes):

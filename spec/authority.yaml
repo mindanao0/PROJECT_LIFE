@@ -17,7 +17,7 @@ authority_hierarchy:
     enforcement: "19 Typed Python Protocols (Core v1)"
   - level: "L5"
     name: "Persistence & Recovery Invariants"
-    enforcement: "29-Table SQLite, 2PC Commit, CAS Durability"
+    enforcement: "31-table SQLite, 2PC Commit, CAS Durability"
   - level: "L6"
     name: "Measurement & Selection Semantics"
     enforcement: "Pareto Dominance, Diversity, Welch, TOST, Holm"

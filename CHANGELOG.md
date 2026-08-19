@@ -33,7 +33,7 @@ and this project adheres to the Evolution Engine Canonical Versioning Policy.
 
 ### Added
 - Single-File Canonical structure containing both Active Specification and non-normative Appendix C archive.
-- Exact 26 JSON Schema Registry target and 29 SQLite tables definition.
+- Exact 26 JSON Schema Registry target and 31 SQLite tables definition.
 - 14 Golden Corpus cases (`MVP-01` to `MVP-14`).
 - Strict requirement lifecycle (`REQ` $\rightarrow$ `IMPL` $\rightarrow$ `TEST` $\rightarrow$ `EVID`).
 - Argv-only command model (`shell=false` enforced across all subprocess executions).

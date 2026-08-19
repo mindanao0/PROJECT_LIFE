@@ -18,7 +18,7 @@ import pytest
 from tests.conftest import ROOT
 
 CONTRACT = ROOT / "spec/ACTIVE_CONTRACT.md"
-DDL_DOC = ROOT / "docs/03_storage_and_database/SQLITE_DDL_29_TABLES.md"
+DDL_DOC = ROOT / "docs/03_storage_and_database/SQLITE_DDL_TABLES.md"
 
 OWNER_TABLES = {
     "PROJECT": "projects", "RUN": "runs", "GENERATION": "generations",
@@ -28,6 +28,7 @@ OWNER_TABLES = {
     "ORACLE_RESULT": "oracle_results", "SELECTION_DECISION": "selection_decisions",
     "CHECKPOINT": "checkpoints", "RECOVERY": "recovery_records",
     "EVIDENCE": "evidence_records", "AUDIT": "audit_events", "DEPLOYMENT": "deployments",
+    "MEMORY_RECORD": "memory_records", "BASELINE": "baselines",
 }
 
 

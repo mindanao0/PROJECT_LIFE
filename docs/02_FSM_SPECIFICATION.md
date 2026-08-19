@@ -33,6 +33,6 @@
 
 ## Persistence
 
-State ถูกเก็บใน 29-table SQLite schema — ดู [`SQLITE_DDL_29_TABLES.md`](./03_storage_and_database/SQLITE_DDL_29_TABLES.md)
+State ถูกเก็บใน 31-table SQLite schema — ดู [`SQLITE_DDL_TABLES.md`](./03_storage_and_database/SQLITE_DDL_TABLES.md)
 คอลัมน์ `runs.run_state`, `candidates.candidate_state`, `deployments.deployment_state`
 และ `recovery_records.recovery_status` มี `CHECK` constraint ที่ต้องตรงกับ `spec/fsm_states_57.yaml` เสมอ

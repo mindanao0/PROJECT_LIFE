@@ -4,7 +4,7 @@
 > **Master 300-Dimensional Framework:** 🌐 **[docs/300_DIMENSIONAL_HYPER_SYSTEM_FRAMEWORK.md](docs/300_DIMENSIONAL_HYPER_SYSTEM_FRAMEWORK.md)**  
 > **Master 300 Canonical Equations:** 🧮 **[docs/05_math_and_selection/300_CANONICAL_MATHEMATICAL_EQUATIONS.md](docs/05_math_and_selection/300_CANONICAL_MATHEMATICAL_EQUATIONS.md)**  
 > **Documentation Hub:** 📚 **[docs/README.md](docs/README.md)**  
-> **Version:** `10.2.2` | **Current Maturity:** `M2_REQUIREMENTS_CANONICAL` | **Default Mode:** `SAFE_EXPORT_ONLY`
+> **Version:** `10.2.2` | **Current Maturity:** `M3_SCHEMAS` | **Default Mode:** `SAFE_EXPORT_ONLY`
 
 ---
 
@@ -24,7 +24,7 @@
 - 🧮 **[docs/05_math_and_selection/300_CANONICAL_MATHEMATICAL_EQUATIONS.md](docs/05_math_and_selection/300_CANONICAL_MATHEMATICAL_EQUATIONS.md)** — คลัง 300 มหาสมการคณิตศาสตร์แม่บท
 - 📁 **[docs/01_architecture/](docs/01_architecture)** — วิสัยทัศน์, Concurrency Single-Writer, Exceptions, ADRs
 - 📁 **[docs/02_fsm_and_lifecycles/](docs/02_fsm_and_lifecycles)** — 5 Finite State Machines (Candidate, Run, Recovery, Governance, Deployment)
-- 📁 **[docs/03_storage_and_database/](docs/03_storage_and_database)** — SQLite DDL 29 ตาราง, Triggers, CAS Engine, 2PC Commit
+- 📁 **[docs/03_storage_and_database/](docs/03_storage_and_database)** — SQLite DDL 31 ตาราง, Triggers, CAS Engine, 2PC Commit
 - 📁 **[docs/04_representation_and_mutation/](docs/04_representation_and_mutation)** — AST/CST, Python 3.12, M01-M08, Quantum M09, Polyglot Rust M10
 - 📁 **[docs/05_math_and_selection/](docs/05_math_and_selection)** — Pareto Dominance, Zhang-Shasha, Welch/TOST/Holm, UCB1, Swarm
 - 📁 **[docs/06_security_and_sandboxing/](docs/06_security_and_sandboxing)** — PROFILE_A Linux Namespaces, cgroups v2, Seccomp BPF, Ed25519

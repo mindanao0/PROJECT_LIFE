@@ -22,7 +22,7 @@ maturity_ladder:
     gate: "PROFILE_A_LINUX passes capabilities probes on Linux matrix"
   - level: "M7"
     name: "PERSISTENCE"
-    gate: "29 SQLite tables installable from scratch with zero FK violations"
+    gate: "31 SQLite tables installable from scratch with zero FK violations"
   - level: "M8"
     name: "RECOVERY"
     gate: "2PC Commit crash chaos injection matrix 100% recovered"

@@ -57,7 +57,7 @@
 
 ### Decision Outcome
 **เลือกใช้: สถาปัตยกรรม Dual-Storage**
-- **SQLite (29 Tables):** จัดเก็บ Relational Metadata, Invariants, และ Audit Indices พร้อม Foreign Key Cascade
+- **SQLite (31 Tables):** จัดเก็บ Relational Metadata, Invariants, และ Audit Indices พร้อม Foreign Key Cascade
 - **Content-Addressed Storage (CAS):** จัดเก็บ Immutable Blobs ในโฟลเดอร์แยกโดยใช้ชื่อไฟล์เป็น SHA-256
 
 ### Rationale & Positive Consequences

@@ -19,7 +19,7 @@
 │ M3    │ Physical JSON Schemas             │ สร้างไฟล์ Draft 2020-12 schemas ครบ 26 ไฟล์ใน schemas/                     │
 │ M4    │ Core AST Engine & Visitors        │ อิมพลีเมนต์ AST Parser, CST, และ 8 Static Safety Invariant Visitors       │
 │ M5    │ Atomic Mutations (M01-M04)        │ ตัวดำเนินการ Constants, Operators, Boundaries, Loops                       │
-│ M6    │ Single-Writer SQLite Storage & 2PC│ ตาราง SQLite 29 ตาราง, CAS Sharding, 2PC Commit Protocol 7 สถานะ          │
+│ M6    │ Single-Writer SQLite Storage & 2PC│ ตาราง SQLite 31 ตาราง, CAS Sharding, 2PC Commit Protocol 7 สถานะ          │
 │ M7    │ Hardened Linux Sandbox (PROFILE_A)│ Linux Namespaces 5 ตัว, cgroups v2 Quotas, Seccomp BPF Filter Matrix      │
 │ M8    │ Pareto Multi-Objective & UCB1 MAB │ Fast Non-dominated Sorting, Hypervolume, UCB1 Bandit Allocation           │
 │ M9    │ Quantum Rotation (M09) & Refactor │ M05-M08 Refactoring, M09 Qubit Superposition Search & Annealing           │
@@ -53,7 +53,7 @@ maturity level M0–M13 ที่ใช้ตัดสิน release gate อย
 | **M4** | `PROTOCOLS` | 22 Typed Python Protocols with zero type errors |
 | **M5** | `FSM_AND_CONFIG` | FSM transition matrix reachability & Vertical Slice MVP-01 pass |
 | **M6** | `SECURITY` | PROFILE_A_LINUX passes capabilities probes on Linux matrix |
-| **M7** | `PERSISTENCE` | 29 SQLite tables installable from scratch with zero FK violations |
+| **M7** | `PERSISTENCE` | 31 SQLite tables installable from scratch with zero FK violations |
 | **M8** | `RECOVERY` | 2PC Commit crash chaos injection matrix 100% recovered |
 | **M9** | `CORE_GOLDEN` | Golden Corpus cases MVP-01 to MVP-07 pass |
 | **M10** | `SECURITY_RELIABILITY_GOLDEN` | Negative security (MVP-08..10), reliability (MVP-11..12) and swarm (MVP-13) pass |

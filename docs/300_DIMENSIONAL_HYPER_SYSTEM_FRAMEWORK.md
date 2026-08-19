@@ -50,7 +50,7 @@
   • Domain 25: Threat Vectors, Defense & Automated Quarantine    (DIM-241..250 <=> EQ-241..250)
 
 [ GROUP 6: การจัดเก็บข้อมูล การทดสอบ SRE และธรรมาภิบาล (STORAGE, QA & GOVERNANCE) ]
-  • Domain 26: Relational SQLite 29 Tables & Trigger Integrity   (DIM-251..260 <=> EQ-251..260)
+  • Domain 26: Relational SQLite 31 Tables & Trigger Integrity   (DIM-251..260 <=> EQ-251..260)
   • Domain 27: Content-Addressed Storage & 2PC Durability        (DIM-261..270 <=> EQ-261..270)
   • Domain 28: 7-Tier Testing Matrix & Golden Corpus (MVP-01..14)(DIM-271..280 <=> EQ-271..280)
   • Domain 29: SRE Incident Response, Reason Codes & 34 CI Jobs  (DIM-281..290 <=> EQ-281..290)

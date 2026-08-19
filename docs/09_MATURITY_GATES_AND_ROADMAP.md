@@ -17,7 +17,7 @@
 | **M4** | `PROTOCOLS` | Typed Python protocol package (22 Protocols) สมบูรณ์, Pinned Dependencies |
 | **M5** | `FSM_AND_CONFIG` | FSM conformance tests ผ่าน, Vertical Slice (MVP-01) Replay สำเร็จ |
 | **M6** | `SECURITY` | PROFILE_A ผ่าน capability probes บน Linux kernel matrix และ negative corpus |
-| **M7** | `PERSISTENCE` | 29-table SQLite migrations ติดตั้งได้จาก DB ว่าง, FK/Unique/Index tests ผ่าน |
+| **M7** | `PERSISTENCE` | 31-table SQLite migrations ติดตั้งได้จาก DB ว่าง, FK/Unique/Index tests ผ่าน |
 | **M8** | `RECOVERY` | DB + CAS Crash injection matrix ผ่าน, Audit recovery สำเร็จ |
 | **M9** | `CORE_GOLDEN` | ผ่านการทดสอบกับ CORE golden corpus (MVP-01 .. MVP-07) รวม Quantum/Polyglot Operators |
 | **M10** | `SECURITY_RELIABILITY_GOLDEN` | ผ่าน SECURITY (MVP-08..10) และ RELIABILITY (MVP-11..13) รวม P2P Swarm |
@@ -67,7 +67,7 @@ Load Config -> Parse Fixture -> Create Candidates -> Reject Static-Invalid
 3.  M4: Typed protocols (22 Protocols) + Public SDK/CLI + Pinned dependencies
 4.  M5: FSMs + Config resolution + Mandatory Vertical Slice (MVP-01)
 5.  M6: PROFILE_A capability probes + Linux kernel matrix + Negative security corpus
-6.  M7: 29-table SQLite migrations + Invariants + CAS
+6.  M7: 31-table SQLite migrations + Invariants + CAS
 7.  M8: Atomic generation commit + Checkpoint / Recovery / Audit replay
 8.  Expand mutation engine to M01–M10 (รวม Quantum Rotation และ Polyglot Native Accelerator)
 9.  Tests / Capability / Oracle / Flaky isolation boundary

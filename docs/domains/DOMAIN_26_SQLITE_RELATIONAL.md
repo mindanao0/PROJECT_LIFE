@@ -10,7 +10,7 @@
 
 ## 1. Executive Summary & Domain Scope
 
-Domain 26 กำหนดโครงสร้างฐานข้อมูลเชิงสัมพันธ์ **SQLite 29 Tables**, 33 High-Performance Indices, Foreign Key Constraints & Cascades, Polymorphic Validation Triggers, และ **B-Tree Height Search Complexity Bound**.
+Domain 26 กำหนดโครงสร้างฐานข้อมูลเชิงสัมพันธ์ **SQLite 31 Tables**, 33 High-Performance Indices, Foreign Key Constraints & Cascades, Polymorphic Validation Triggers, และ **B-Tree Height Search Complexity Bound**.
 
 ---
 
@@ -20,7 +20,7 @@ Domain 26 กำหนดโครงสร้างฐานข้อมูล�
 ┌──────────┬──────────┬───────────────────────────────────────────┬─────────────────────────────────────────────────────────────┐
 │ Dim ID   │ Eq ID    │ Engineering Dimension Title               │ Canonical Mathematical Equation                             │
 ├──────────┼──────────┼───────────────────────────────────────────┼─────────────────────────────────────────────────────────────┤
-│ DIM-251  │ EQ-251   │ SQLite 29 Relational Tables Completeness  │ |T_db| === 29                                               │
+│ DIM-251  │ EQ-251   │ SQLite 29 Relational Tables Completeness  │ |T_db| === 31                                               │
 │ DIM-252  │ EQ-252   │ Foreign Key Referential Integrity Relation│ forall r in R, r.FK in pi_PK(S) or r.FK = NULL              │
 │ DIM-253  │ EQ-253   │ Polymorphic Trigger Verification Invariant│ OwnerType = T ==> Exists(T, OwnerID)                        │
 │ DIM-254  │ EQ-254   │ Monotonic Audit Sequence Increment Check  │ Seq_{t+1} === Seq_t + 1                                     │
@@ -38,8 +38,8 @@ Domain 26 กำหนดโครงสร้างฐานข้อมูล�
 ## 3. Detailed Specifications & Implementation Constraints (All 10 Dimensions)
 
 ### `DIM-251` / `EQ-251`: SQLite 29 Relational Tables Completeness
-- โครงสร้างฐานข้อมูลของระบบประกอบด้วย 29 ตารางพอดี:
-  $$|\mathcal{T}_{\text{db}}| \equiv 29$$
+- โครงสร้างฐานข้อมูลของระบบประกอบด้วย 31 ตารางพอดี:
+  $$|\mathcal{T}_{\text{db}}| \equiv 31$$
 
 ### `DIM-252` / `EQ-252`: Foreign Key Referential Integrity Relation
 - ทุกแถวที่อ้างอิง Foreign Key ต้องชี้ไปยัง Primary Key ที่มีอยู่จริง:

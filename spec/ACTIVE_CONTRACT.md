@@ -9,7 +9,7 @@
 > **Core AI Dependency:** None  
 > **LLM Dependency:** None  
 > **Evolution Model:** Population-based evolutionary computation  
-> **Current Maturity:** M2_REQUIREMENTS_CANONICAL  
+> **Current Maturity:** M3_SCHEMAS  
 > **Default Deployment Mode:** SAFE_EXPORT_ONLY  
 > **Active Contract:** Only content between `ACTIVE_SPEC_BEGIN` and `ACTIVE_SPEC_END` is authoritative. The in-file historical archive is non-normative and superseded.
 
@@ -46,7 +46,7 @@
 - fake/example Golden Corpus hashesที่ถูกนำเสนอเหมือนค่าจริง
 - unverified unconditional-success validator stubs
 - legacy completion marks ที่ไม่มี implementation evidence
-- claim ว่ามี 26 schemas / 29 tables / M11 โดยไม่มี artifact รองรับ
+- claim ว่ามี 26 schemas / 31 tables / M11 โดยไม่มี artifact รองรับ
 - generic repeated formulasที่ไม่ได้เปลี่ยน semantics ของ section
 
 Historical content และรายละเอียดเดิมถูกเก็บครบใน **Appendix C — Full Historical & Design Archive** ภายในไฟล์เดียวกัน แต่ archive ไม่มีอำนาจ override Active Specification. Research concepts ที่ยังอาจพัฒนาในอนาคตถูกสรุปไว้ใน Research Backlog ของ active contract ด้วย
@@ -84,7 +84,7 @@ Plan 10.2.2 ปิดช่องว่างก่อนเริ่ม impleme
 2. เพิ่ม Run, Recovery และ Governance FSM ที่ machine-checkable
 3. แยก semantics ของ Pareto dominance, diversity และ metric preference weights
 4. กำหนด canonical owner และ precedence ของ configuration ทุกชั้น
-5. เพิ่ม relational integrity, state constraints และ index requirements ให้ 29-table DDL
+5. เพิ่ม relational integrity, state constraints และ index requirements ให้ 31-table DDL
 6. กำหนด Linux conformance matrix และ cryptographic profile สำหรับ Security/Evidence
 7. เพิ่ม mandatory vertical slice ก่อนสร้างระบบเต็ม
 8. ทำ M3 schema package เป็น implementation deliverable แรก พร้อม fixtures/manifest
@@ -1540,7 +1540,7 @@ CAS:
 
 ---
 
-## 13.2 Canonical 29-Table SQLite DDL [NORMATIVE]
+## 13.2 Canonical 31-table SQLite DDL [NORMATIVE]
 
 ```sql
 PRAGMA foreign_keys = ON;
@@ -1758,7 +1758,8 @@ CREATE TABLE artifact_refs (
     owner_type TEXT NOT NULL CHECK(owner_type IN (
         'PROJECT','RUN','GENERATION','CANDIDATE','MUTATION_ATTEMPT','EVALUATION_ATTEMPT',
         'TEST_RESULT','CAPABILITY_RESULT','METRIC_RESULT','ORACLE_RESULT',
-        'SELECTION_DECISION','CHECKPOINT','RECOVERY','EVIDENCE','AUDIT','DEPLOYMENT'
+        'SELECTION_DECISION','CHECKPOINT','RECOVERY','EVIDENCE','AUDIT','DEPLOYMENT',
+        'MEMORY_RECORD','BASELINE'
     )),
     owner_id TEXT NOT NULL,
     artifact_id TEXT NOT NULL REFERENCES artifacts(artifact_id) ON DELETE RESTRICT,
@@ -1859,8 +1860,38 @@ CREATE TABLE approval_certificates (
     certificate_artifact_id TEXT NOT NULL REFERENCES artifacts(artifact_id) ON DELETE RESTRICT
 );
 
+
+CREATE TABLE memory_records (
+    memory_record_id TEXT PRIMARY KEY,
+    project_id TEXT NOT NULL REFERENCES projects(project_id) ON DELETE RESTRICT,
+    run_id TEXT REFERENCES runs(run_id) ON DELETE RESTRICT,
+    ast_pattern_hash TEXT NOT NULL,
+    reward_score_decimal TEXT NOT NULL,
+    access_count INTEGER NOT NULL DEFAULT 0 CHECK(access_count >= 0),
+    holdout_tainted INTEGER NOT NULL DEFAULT 0 CHECK(holdout_tainted IN (0,1)),
+    embedding_artifact_id TEXT REFERENCES artifacts(artifact_id) ON DELETE RESTRICT,
+    created_at_utc TEXT NOT NULL,
+    updated_at_utc TEXT NOT NULL,
+    UNIQUE(project_id, ast_pattern_hash)
+);
+
+CREATE TABLE baselines (
+    baseline_id TEXT PRIMARY KEY,
+    project_id TEXT NOT NULL REFERENCES projects(project_id) ON DELETE RESTRICT,
+    source_hash TEXT NOT NULL,
+    environment_hash TEXT NOT NULL,
+    measurement_artifact_id TEXT NOT NULL REFERENCES artifacts(artifact_id) ON DELETE RESTRICT,
+    created_at_utc TEXT NOT NULL,
+    UNIQUE(project_id, source_hash, environment_hash)
+);
+
 -- Indices (56 Indices for Query Performance & Invariant Verification)
 CREATE INDEX idx_runs_project ON runs(project_id);
+CREATE INDEX idx_memory_records_project ON memory_records(project_id);
+CREATE INDEX idx_memory_records_run ON memory_records(run_id);
+CREATE INDEX idx_memory_records_embedding_artifact_id ON memory_records(embedding_artifact_id);
+CREATE INDEX idx_baselines_project ON baselines(project_id);
+CREATE INDEX idx_baselines_measurement_artifact_id ON baselines(measurement_artifact_id);
 CREATE INDEX idx_generations_run ON generations(run_id, generation_index);
 CREATE INDEX idx_candidates_generation ON candidates(generation_id);
 CREATE INDEX idx_candidate_parents_parent ON candidate_parents(parent_candidate_id);
@@ -1928,6 +1959,10 @@ CREATE UNIQUE INDEX ux_audit_engine_sequence ON audit_events(sequence_no) WHERE 
 
 [REQ][REQ-S13-003] `artifact_refs.owner_id` เป็น polymorphic reference จึงต้องมี generated integrity triggers หรือ transaction-level verifier ที่ fail commit เมื่อ owner ไม่มีจริง; conformance tests ต้องครอบคลุม owner type ทุกชนิด
 
+[REQ][REQ-S13-011] `memory_records` เก็บ Evolution Memory ที่ REQ-S25-009 บังคับ; เป็นตาราง mutable จึงเก็บใน CAS ไม่ได้ และต้องมี `holdout_tainted` เพื่อบังคับ REQ-S17-002 ที่ห้าม holdout รั่วเข้า memory
+
+[REQ][REQ-S13-012] `baselines` เก็บ baseline ที่ 10.4 better-rule ใช้เปรียบเทียบ; unique ต่อ `(project_id, source_hash, environment_hash)` เพราะ baseline ที่วัดคนละ environment เทียบกันไม่ได้
+
 [REQ][REQ-S13-004] canonical state/verdict/role vocabularies ใน DDL, FSM YAML, schemas และ typed enums ต้อง generate/compare จาก registry เดียว; mismatch = CI failure
 
 [REQ][REQ-S13-005] ทุก migration install/upgrade ต้องรัน `PRAGMA foreign_key_check`, `PRAGMA integrity_check`, state-constraint negative tests และ query-plan assertions สำหรับ indexed foreign-key paths
@@ -1947,7 +1982,7 @@ CREATE UNIQUE INDEX ux_audit_engine_sequence ON audit_events(sequence_no) WHERE 
 -- from the DDL above; the owner_type -> table mapping is read out of the schema so a
 -- trigger cannot reference a table or column that does not exist.
 
--- 1. Polymorphic owner validation for artifact_refs, covering all 16 owner types.
+-- 1. Polymorphic owner validation for artifact_refs, covering all 18 owner types.
 CREATE TRIGGER trg_artifact_refs_owner_exists
 BEFORE INSERT ON artifact_refs
 FOR EACH ROW
@@ -1956,6 +1991,9 @@ BEGIN
         WHEN NEW.owner_type = 'AUDIT' AND NOT EXISTS (
                  SELECT 1 FROM audit_events WHERE audit_event_id = NEW.owner_id)
              THEN RAISE(ABORT, 'artifact_refs: owner_id not found in audit_events')
+        WHEN NEW.owner_type = 'BASELINE' AND NOT EXISTS (
+                 SELECT 1 FROM baselines WHERE baseline_id = NEW.owner_id)
+             THEN RAISE(ABORT, 'artifact_refs: owner_id not found in baselines')
         WHEN NEW.owner_type = 'CANDIDATE' AND NOT EXISTS (
                  SELECT 1 FROM candidates WHERE candidate_id = NEW.owner_id)
              THEN RAISE(ABORT, 'artifact_refs: owner_id not found in candidates')
@@ -1977,6 +2015,9 @@ BEGIN
         WHEN NEW.owner_type = 'GENERATION' AND NOT EXISTS (
                  SELECT 1 FROM generations WHERE generation_id = NEW.owner_id)
              THEN RAISE(ABORT, 'artifact_refs: owner_id not found in generations')
+        WHEN NEW.owner_type = 'MEMORY_RECORD' AND NOT EXISTS (
+                 SELECT 1 FROM memory_records WHERE memory_record_id = NEW.owner_id)
+             THEN RAISE(ABORT, 'artifact_refs: owner_id not found in memory_records')
         WHEN NEW.owner_type = 'METRIC_RESULT' AND NOT EXISTS (
                  SELECT 1 FROM metric_results WHERE metric_result_id = NEW.owner_id)
              THEN RAISE(ABORT, 'artifact_refs: owner_id not found in metric_results')
@@ -2647,7 +2688,7 @@ M6 SECURITY
   negative security corpus passes
 
 M7 PERSISTENCE
-  29-table migration installs from empty DB
+  31-table migration installs from empty DB
   FK/state/polymorphic-owner/invariant tests pass
   required index/query-plan assertions pass
 
@@ -2817,39 +2858,47 @@ Change Proposal
 
 # 28. Current Truth — What Exists vs What Is Required [NORMATIVE]
 
-จากไฟล์ Plan อย่างเดียว สิ่งที่พิสูจน์ได้มีเพียง specification text
-
-ดังนั้นสถานะปัจจุบัน:
+สถานะนี้ derive จาก repository จริง ไม่ใช่คำประกาศ — ตรวจซ้ำด้วย `tools/compute_maturity.py`
 
 ```yaml
 current_evidence_status:
+  # verified by tools/lint_state_vocabulary.py (LINT-09..19)
   active_contract_unique: true
-  historical_append_only_freezes_removed_from_active_contract: true
-  candidate_fsm_unique_in_this_document: true
-  run_fsm_unique_in_this_document: true
-  recovery_fsm_unique_in_this_document: true
-  governance_fsm_unique_in_this_document: true
+  fsm_vocabulary_agrees_across_yaml_schema_ddl_and_prose: true
   cli_unique_in_this_document: true
   sdk_unique_in_this_document: true
   requirement_id_contract_defined: true
-  active_requirement_ids_defined: 179
-  generated_active_view_contract_defined: true
-  db_ddl_count_defined_in_this_document: 29
-  schema_registry_count_defined_in_this_document: 26
-  golden_registry_count_defined_in_this_document: 14
+  declared_counts_match_reality: true
+  core_research_firewall_holds: true
 
-  physical_schema_files_verified: false
+  # verified by tools/validate_schemas.py
+  physical_schema_files_verified: true      # 26/26 Draft 2020-12, two implementations agree
+  schema_fixture_corpus_verified: true      # 52 valid + 244 invalid
+  schema_manifest_digests_verified: true
+
+  # verified by pytest
+  fsm_reachability_verified: true
+  integrity_triggers_verified: true
+  audit_chain_formula_verified: true
+  canonical_bytes_vectors_verified: true
+
+  # not yet built
   protocol_package_verified: false
   migrations_verified: false
-  sandbox_profile_verified: false
+  sandbox_profile_verified: false           # specified, never executed on a kernel
   golden_fixture_hashes_verified: false
   CI_results_verified: false
   release_evidence_verified: false
 
-  maturity_claim: "M2_REQUIREMENTS_CANONICAL"
+  maturity_claim: "M3_SCHEMAS"
 ```
 
+`maturity_claim` ต้องเท่ากับผลลัพธ์ของ `tools/compute_maturity.py` เสมอ ซึ่งคำนวณจาก artifact จริงตาม
+`spec/maturity.yaml` แล้วหยุดที่ระดับแรกที่ยังไม่ผ่าน
+
 [REQ][REQ-S28-001] ห้ามเปลี่ยน `maturity_claim` เป็น M11 จนกว่า required evidence ถูกสร้างและตรวจจริง
+
+[REQ][REQ-S28-002] `maturity_claim` ทุกที่ในรีโปต้องเท่ากับค่าที่ `tools/compute_maturity.py` คำนวณได้จาก artifact จริง; ค่าที่ประกาศสูงกว่าที่คำนวณได้ = CI failure
 
 ---
 
@@ -2864,7 +2913,7 @@ current_evidence_status:
 4  M5: candidate/run/recovery/governance/deployment FSMs + resolved config/argv model
 5  mandatory trusted-fixture vertical slice (Section 29.1)
 6  M6: PROFILE_A capability probes + kernel/backend matrix + negative security corpus
-7  M7: 29-table migrations + FK/state/index tests + CAS
+7  M7: 31-table migrations + FK/state/index tests + CAS
 8  M8: atomic generation commit + checkpoint/recovery/replay/audit
 9  expand source analysis + mutation from vertical M01/M02 to Core M01-M08
 10 tests/capability/oracle + flaky/holdout boundary
@@ -2914,7 +2963,7 @@ load validated config
 
 [REQ][REQ-S29-001] vertical slice ต้องใช้ schema models, typed protocols, Run/Candidate FSM และ canonical serializer จริง ห้ามสร้าง temporary API/data shape ที่ทิ้งภายหลัง
 
-[REQ][REQ-S29-002] in-memory adapter ใช้ได้เฉพาะ slice และห้ามสร้าง M6-M11 evidence; full 29-table persistence ไม่เป็น prerequisite ของ slice
+[REQ][REQ-S29-002] in-memory adapter ใช้ได้เฉพาะ slice และห้ามสร้าง M6-M11 evidence; full 31-table persistence ไม่เป็น prerequisite ของ slice
 
 [REQ][REQ-S29-003] slice อนุญาตเฉพาะ repository-owned trusted fixture และ evaluator; ห้ามรับ arbitrary/untrusted project จน PROFILE_A ผ่าน M6
 
@@ -2942,7 +2991,7 @@ execution outcome semantics
 argv-only command model
 configuration ownership/precedence
 canonical data model target
-29-table relational design
+31-table relational design
 26-schema registry
 measurement protocol
 Pareto/diversity/preference-weight semantics
@@ -2976,8 +3025,8 @@ SPEC CANONICALIZED: YES
 DESIGN DOCUMENTATION SUFFICIENT TO START IMPLEMENTATION: YES
 DOCUMENTATION CLOSED TO SPECULATIVE CORE EXPANSION: YES
 EXECUTION READY: NOT YET
-CURRENT MATURITY: M2
-NEXT TARGET: M3
+CURRENT MATURITY: M3
+NEXT TARGET: M4
 ```
 
 [REQ][REQ-S30-001] หลัง Plan 10.2.2 ห้ามเพิ่ม speculative Core section ก่อน M3; เอกสารแก้ได้เมื่อ implementation/test พบ ambiguity, contradiction, security defect หรือ falsified assumption และต้องผ่าน Section 27
@@ -2998,7 +3047,7 @@ Canonical Recovery FSMs: 1
 Canonical Governance FSMs: 1
 Canonical deployment FSMs: 1
 Active normative Requirement IDs: 179
-Relational tables specified: 29
+Relational tables specified: 31
 Schema registry entries: 26
 Golden corpus cases: 14
 Maturity levels: 14 (M0-M13)

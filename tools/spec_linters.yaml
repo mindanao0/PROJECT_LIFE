@@ -1,5 +1,5 @@
 version: "10.2.2"
-total_linters: 19
+total_linters: 20
 
 linters:
   - linter_id: "LINT-01"
@@ -52,7 +52,7 @@ linters:
 
   - linter_id: "LINT-09"
     name: "StateVocabularyConsistencyLinter"
-    target: "spec/fsm_states_57.yaml, schemas/*.schema.json, docs/**/SQLITE_DDL_29_TABLES.md"
+    target: "spec/fsm_states_57.yaml, schemas/*.schema.json, docs/**/SQLITE_DDL_TABLES.md"
     rule: "Every FSM state vocabulary must be byte-identical across spec/fsm_states_57.yaml, the JSON Schema enums and the SQLite CHECK constraints. Enforces REQ-S13-004 (mismatch = CI failure)."
     implementation: "tools/lint_state_vocabulary.py"
     severity: "BLOCKER"
@@ -125,4 +125,11 @@ linters:
     target: "benchmarks/golden/manifest.yaml, spec/release_gates.yaml, spec/maturity.yaml"
     rule: "Every golden corpus case must declare a maturity_bucket, and nothing in the Core path — GATE_CORE or a Core maturity rung — may require a case in the RESEARCH bucket. Enforces the section 3.1 / section 26 Core-Research firewall."
     implementation: "tools/lint_state_vocabulary.py"
+    severity: "BLOCKER"
+
+  - linter_id: "LINT-20"
+    name: "EarnedMaturityLinter"
+    target: "spec/version_manifest.yaml, spec/maturity.yaml, tools/compute_maturity.py"
+    rule: "The declared current_maturity_level must equal the level tools/compute_maturity.py derives from real artifacts. Every other count in this repo is derived and linted; the project's own progress marker must be too. Enforces REQ-S28-002."
+    implementation: "tools/compute_maturity.py"
     severity: "BLOCKER"

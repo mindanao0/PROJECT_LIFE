@@ -36,6 +36,6 @@
 
 ## 2. Benchmark Conformance Gate Criteria
 
-ทุก Release ก่อนเลื่อนสู่ระดับ `M2_REQUIREMENTS_CANONICAL` ต้องรันผ่านชุดทดสอบทั้ง 14 โปรเจกต์โดยปราศจากข้อผิดพลาด:
+ทุก Release ก่อนเลื่อนสู่ระดับ `M3_SCHEMAS` ต้องรันผ่านชุดทดสอบทั้ง 14 โปรเจกต์โดยปราศจากข้อผิดพลาด:
 $$|\mathcal{C}_{\text{golden}}| \equiv 14, \qquad \text{Pass}(\mathcal{C}) \equiv 14$$
 และบันทึกผลลัพธ์ลงใน `benchmarks/golden/manifest.yaml`

@@ -886,8 +886,8 @@ domains:
     range: "EQ-251..EQ-260"
     equations:
       - id: "EQ-251"
-        name: "29 SQLite Tables Relational Completeness"
-        formula: "$|\\mathcal{T}_{\\text{db}}| \\equiv 29$"
+        name: "31 SQLite Tables Relational Completeness"
+        formula: "$|\\mathcal{T}_{\\text{db}}| \\equiv 31$"
       - id: "EQ-252"
         name: "Foreign Key Referential Integrity"
         formula: "$\\forall r \\in R, \\quad r.\\text{FK} \\in \\pi_{\\text{PK}}(S) \\lor r.\\text{FK} = \\text{NULL}$"

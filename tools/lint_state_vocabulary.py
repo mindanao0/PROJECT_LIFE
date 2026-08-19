@@ -28,6 +28,8 @@ LINT-18 (REQ-S00-009, REQ-S00-010): the recovered archive must match the SHA-256
 LINT-19 (section 3.1, section 26): the Core/Research firewall. A golden corpus case
   in the RESEARCH bucket may not be required by any Core gate, and every case must
   carry a maturity_bucket.
+LINT-20 (REQ-S28-002): the declared maturity level must equal the level the
+  artifacts actually support, computed by tools/compute_maturity.py.
 LINT-12: prose state lists anywhere in the repo must not use a state name that
   spec/fsm_states_57.yaml has retired. Prose drift is what made LINT-09 miss the
   first time: the DDL was fixed while the narrative kept the old vocabulary.
@@ -48,7 +50,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 DDL_FILES = [
     "docs/03_DATABASE_AND_STORAGE.md",
-    "docs/03_storage_and_database/SQLITE_DDL_29_TABLES.md",
+    "docs/03_storage_and_database/SQLITE_DDL_TABLES.md",
     "spec/ACTIVE_CONTRACT.md",
 ]
 
@@ -318,7 +320,7 @@ def main() -> int:
     corpus_cases = yaml.safe_load(
         (ROOT / "benchmarks/golden/manifest.yaml").read_text(encoding="utf-8"))["cases"]
     linters = yaml.safe_load((ROOT / "tools/spec_linters.yaml").read_text(encoding="utf-8"))
-    ddl_sql = sql_blocks(ROOT / "docs/03_storage_and_database/SQLITE_DDL_29_TABLES.md")
+    ddl_sql = sql_blocks(ROOT / "docs/03_storage_and_database/SQLITE_DDL_TABLES.md")
 
     actual = {
         "schemas_count": len(list((ROOT / "schemas").glob("*.json"))),
@@ -552,12 +554,22 @@ def main() -> int:
                 findings.append(
                     f"LINT-19 spec/maturity.yaml names research case {case_id} in a Core rung: {line.strip()}")
 
+    # --- LINT-20: the maturity claim must be earned -----------------------------
+    import os
+    import subprocess
+    if os.environ.get("EE_SKIP_MATURITY_LINT") != "1":
+        maturity = subprocess.run([sys.executable, str(ROOT / "tools/compute_maturity.py")],
+                                  capture_output=True, text=True, cwd=ROOT)
+        if maturity.returncode != 0:
+            tail = [l for l in maturity.stdout.splitlines() if "MISMATCH" in l]
+            findings.append("LINT-20 " + (tail[0] if tail else "maturity computation failed"))
+
     if findings:
         print(f"BLOCKER: {len(findings)} finding(s)\n")
         for f in findings:
             print(f"  - {f}")
         return 1
-    print("LINT-09..19: PASS — vocabularies agree, evidence is retention-safe, corpus matches manifest, CI job names resolve, declared counts are real, config examples validate, EQ/DIM registries are complete, requirement register and FSM specs agree, archive intact, Core/Research firewall holds")
+    print("LINT-09..20: PASS — vocabularies agree, evidence is retention-safe, corpus matches manifest, CI job names resolve, declared counts are real, config examples validate, EQ/DIM registries are complete, requirement register and FSM specs agree, archive intact, Core/Research firewall holds, maturity claim is earned")
     return 0
 
 

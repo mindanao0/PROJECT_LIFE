@@ -1,4 +1,4 @@
-# 03 — Database Schema (29 Tables), Integrity Triggers & CAS Persistence
+# 03 — Database Schema (31 Tables), Integrity Triggers & CAS Persistence
 
 > **Active Requirements Covered:** `REQ-S13-001` .. `REQ-S13-009`, `REQ-S14-001` .. `REQ-S14-002`  
 > **Authority Level:** OVERVIEW — rank 5 in `spec/authority.yaml` document_precedence. Not normative.    
@@ -30,7 +30,7 @@ PREPARING
 
 ---
 
-## 2. Canonical 29-Table SQLite DDL
+## 2. Canonical 31-table SQLite DDL
 
 ```sql
 PRAGMA foreign_keys = ON;
@@ -269,7 +269,8 @@ CREATE TABLE artifact_refs (
     owner_type TEXT NOT NULL CHECK(owner_type IN (
         'PROJECT','RUN','GENERATION','CANDIDATE','MUTATION_ATTEMPT','EVALUATION_ATTEMPT',
         'TEST_RESULT','CAPABILITY_RESULT','METRIC_RESULT','ORACLE_RESULT',
-        'SELECTION_DECISION','CHECKPOINT','RECOVERY','EVIDENCE','AUDIT','DEPLOYMENT'
+        'SELECTION_DECISION','CHECKPOINT','RECOVERY','EVIDENCE','AUDIT','DEPLOYMENT',
+        'MEMORY_RECORD','BASELINE'
     )),
     owner_id TEXT NOT NULL,
     artifact_id TEXT NOT NULL REFERENCES artifacts(artifact_id) ON DELETE RESTRICT,
@@ -378,8 +379,38 @@ CREATE TABLE approval_certificates (
     certificate_artifact_id TEXT NOT NULL REFERENCES artifacts(artifact_id) ON DELETE RESTRICT
 );
 
+
+CREATE TABLE memory_records (
+    memory_record_id TEXT PRIMARY KEY,
+    project_id TEXT NOT NULL REFERENCES projects(project_id) ON DELETE RESTRICT,
+    run_id TEXT REFERENCES runs(run_id) ON DELETE RESTRICT,
+    ast_pattern_hash TEXT NOT NULL,
+    reward_score_decimal TEXT NOT NULL,
+    access_count INTEGER NOT NULL DEFAULT 0 CHECK(access_count >= 0),
+    holdout_tainted INTEGER NOT NULL DEFAULT 0 CHECK(holdout_tainted IN (0,1)),
+    embedding_artifact_id TEXT REFERENCES artifacts(artifact_id) ON DELETE RESTRICT,
+    created_at_utc TEXT NOT NULL,
+    updated_at_utc TEXT NOT NULL,
+    UNIQUE(project_id, ast_pattern_hash)
+);
+
+CREATE TABLE baselines (
+    baseline_id TEXT PRIMARY KEY,
+    project_id TEXT NOT NULL REFERENCES projects(project_id) ON DELETE RESTRICT,
+    source_hash TEXT NOT NULL,
+    environment_hash TEXT NOT NULL,
+    measurement_artifact_id TEXT NOT NULL REFERENCES artifacts(artifact_id) ON DELETE RESTRICT,
+    created_at_utc TEXT NOT NULL,
+    UNIQUE(project_id, source_hash, environment_hash)
+);
+
 -- Indices (56 Indices for Query Performance & Invariant Verification)
 CREATE INDEX idx_runs_project ON runs(project_id);
+CREATE INDEX idx_memory_records_project ON memory_records(project_id);
+CREATE INDEX idx_memory_records_run ON memory_records(run_id);
+CREATE INDEX idx_memory_records_embedding_artifact_id ON memory_records(embedding_artifact_id);
+CREATE INDEX idx_baselines_project ON baselines(project_id);
+CREATE INDEX idx_baselines_measurement_artifact_id ON baselines(measurement_artifact_id);
 CREATE INDEX idx_generations_run ON generations(run_id, generation_index);
 CREATE INDEX idx_candidates_generation ON candidates(generation_id);
 CREATE INDEX idx_candidate_parents_parent ON candidate_parents(parent_candidate_id);

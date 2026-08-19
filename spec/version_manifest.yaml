@@ -2,17 +2,17 @@ engine_version: "10.2.2"
 spec_lineage: "Plan 10.2.2 Unified Release"
 canonical_release_date: "2026-08-18"
 default_deployment_mode: "SAFE_EXPORT_ONLY"
-current_maturity_level: "M2_REQUIREMENTS_CANONICAL"
+current_maturity_level: "M3_SCHEMAS"
 
 subsystems:
   schemas_count: 26
   protocols_count: 19
-  sqlite_tables_count: 29
-  sqlite_indices_count: 57
+  sqlite_tables_count: 31
+  sqlite_indices_count: 62
   fsm_count: 5
   total_fsm_states: 57
   mutation_operators_count: 10
   golden_corpus_cases: 14
-  requirement_ids_count: 185
+  requirement_ids_count: 188
   ci_jobs_count: 38
-  spec_linters_count: 19
+  spec_linters_count: 20

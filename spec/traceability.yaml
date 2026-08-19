@@ -6,7 +6,7 @@
 
 spec_version: 10.2.2
 digest_algorithm: SHA-256/NFC
-total_requirements: 185
+total_requirements: 188
 requirements:
 - id: REQ-S00-001
   section: 0
@@ -1324,6 +1324,30 @@ requirements:
   test_refs: []
   evidence_refs: []
   release_gates: []
+- id: REQ-S13-011
+  section: 13
+  section_title: Persistence Model
+  status: REQ
+  text_digest: sha256:d5e74649381a4f17a49e766de58f861f82d79ab50d1a659c3767a46ebb32ac0d
+  schema_refs: []
+  protocol_refs: []
+  implementation_refs: []
+  fsm_refs: []
+  test_refs: []
+  evidence_refs: []
+  release_gates: []
+- id: REQ-S13-012
+  section: 13
+  section_title: Persistence Model
+  status: REQ
+  text_digest: sha256:6cb28f19506803b2222d8cc36cde2be334b4e7a03e4c701e3b61ec297d466a0d
+  schema_refs: []
+  protocol_refs: []
+  implementation_refs: []
+  fsm_refs: []
+  test_refs: []
+  evidence_refs: []
+  release_gates: []
 - id: REQ-S13-004
   section: 13
   section_title: Persistence Model
@@ -1389,7 +1413,7 @@ requirements:
   section: 13
   section_title: Persistence Model
   status: REQ
-  text_digest: sha256:6929bb843762ab4815ba9f3b4968db044fb74f57d060dee4fcfdba3db1d13ce0
+  text_digest: sha256:b2f59ea69dd16cfc40c5e59a6bf3ed2b927e77779bbb61a8d7008efae3d6ea04
   schema_refs: []
   protocol_refs: []
   implementation_refs: []
@@ -2181,6 +2205,18 @@ requirements:
   test_refs: []
   evidence_refs: []
   release_gates: []
+- id: REQ-S28-002
+  section: 28
+  section_title: Current Truth — What Exists vs What Is Required
+  status: REQ
+  text_digest: sha256:99768a1d24c26f906ec949c98e968dfcf110a4bd35bee058bd98bc90638d1509
+  schema_refs: []
+  protocol_refs: []
+  implementation_refs: []
+  fsm_refs: []
+  test_refs: []
+  evidence_refs: []
+  release_gates: []
 - id: REQ-S29-001
   section: 29
   section_title: Implementation Order
@@ -2197,7 +2233,7 @@ requirements:
   section: 29
   section_title: Implementation Order
   status: REQ
-  text_digest: sha256:4b4faca6134e03abf6082b4f96a74c917cda4a0bee531851f13c9f7bfc1816d1
+  text_digest: sha256:666a67e4bd0f9369bce5c9ade886ab1a283c48acc821355699fb6cfe39af8aee
   schema_refs: []
   protocol_refs: []
   implementation_refs: []
