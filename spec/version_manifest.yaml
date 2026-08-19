@@ -6,7 +6,7 @@ current_maturity_level: "M2_REQUIREMENTS_CANONICAL"
 
 subsystems:
   schemas_count: 26
-  protocols_count: 22
+  protocols_count: 19
   sqlite_tables_count: 29
   sqlite_indices_count: 57
   fsm_count: 5

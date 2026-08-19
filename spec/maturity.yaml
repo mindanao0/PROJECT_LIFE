@@ -13,7 +13,7 @@ maturity_ladder:
     gate: "26 JSON Schemas Draft 2020-12 valid with test fixtures"
   - level: "M4"
     name: "PROTOCOLS"
-    gate: "22 Typed Python Protocols with zero type errors"
+    gate: "19 Typed Python Protocols with zero type errors"
   - level: "M5"
     name: "FSM_AND_CONFIG"
     gate: "FSM transition matrix reachability & Vertical Slice MVP-01 pass"

@@ -1,7 +1,10 @@
 # The 22 Core Architecture Protocols Specification
 
 > **Subsystem:** Subsystem Interface Protocols  
-> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
+> **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.    
+> **Canonical roster:** [`spec/protocols.yaml`](../../spec/protocols.yaml) — Core v1 คือ **19 protocol**  
+> ไฟล์นี้เคยระบุ 22 ตัวโดย *ตัด* `AuditLog` ออกและ *เพิ่ม* `QuantumSearchAdapter`, `PolyglotBridge`, `EcosystemManager`, `SwarmCoordinator` ซึ่ง section 3.1 ระบุว่าอยู่นอก Core v1 — แก้ที่ CR-0002  
+> 4 ตัวนั้นยังอยู่ในไฟล์นี้ได้ในฐานะ research backlog แต่ไม่นับใน M4
 > **Scope:** `REQ-S07-001` .. `REQ-S07-003`
 
 ---
@@ -107,4 +110,24 @@ class PolicyEngine(Protocol):
 @runtime_checkable
 class DeploymentManager(Protocol):
     def export_candidate(self, candidate_id: str, destination: Path, mode: str) -> dict: ...
+```
+
+---
+
+## AuditLog (Core v1 — คืนกลับที่ CR-0002)
+
+`AuditLog` เป็น 1 ใน 19 protocol ของ Core v1 ตาม section 7.2 และ CI job
+`audit_chain_verification` ใน `GATE_CORE` ต้องใช้ ห้ามตัดออก
+
+```python
+class AuditLog(Protocol):
+    """Append-only audit chain (section 18.1)."""
+
+    def append(self, event_type: str, actor: str, payload_artifact_id: str) -> str:
+        """Append one event and return its event_hash. Never rewrites an earlier event."""
+        ...
+
+    def verify_chain(self, run_id: str | None) -> bool:
+        """Recompute the chain for one scope. run_id None is the engine scope."""
+        ...
 ```

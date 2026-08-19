@@ -1,0 +1,79 @@
+# Canonical protocol roster (rank 1).
+# Derived from spec/ACTIVE_CONTRACT.md section 7.2. Do not hand-edit.
+#
+# The Core v1 roster is 19. docs/ previously carried a 22-entry list that dropped
+# AuditLog and added four research protocols; section 3.1 places all four outside
+# Core v1 and section 26 confirms they are not a dependency of M11. Building from
+# that list would have produced research adapters and no AuditLog, which the
+# audit_chain_verification gate requires. Corrected by CR-0002.
+
+spec_version: 10.2.2
+source: spec/ACTIVE_CONTRACT.md section 7.2
+core_v1_protocol_count: 19
+core_v1_protocols:
+- protocol: ProjectAdapter
+  required_input: project path
+  required_output: ProjectManifest
+- protocol: SourceAnalyzer
+  required_input: immutable source snapshot
+  required_output: ProgramRepresentation
+- protocol: MutationStrategy
+  required_input: parent representation + MutationContext + RNG
+  required_output: MutationResult
+- protocol: MutationEngine
+  required_input: parent population + registry
+  required_output: CandidateDrafts
+- protocol: PopulationManager
+  required_input: candidates + selection decisions
+  required_output: PopulationSnapshot
+- protocol: SandboxManager
+  required_input: CandidateArtifact + SandboxRequest
+  required_output: SandboxExecutionResult
+- protocol: TestRunner
+  required_input: execution artifact + TestPlan
+  required_output: TestSuiteResult
+- protocol: CapabilityVerifier
+  required_input: test results + contract
+  required_output: CapabilityVerdict
+- protocol: OracleRunner
+  required_input: candidate + oracle plan
+  required_output: OracleVerdict
+- protocol: MetricRunner
+  required_input: candidate + objective
+  required_output: MetricMeasurement
+- protocol: ParetoSelector
+  required_input: eligible candidates + objectives
+  required_output: SelectionDecision
+- protocol: EvidenceStore
+  required_input: evidence inputs
+  required_output: EvidenceRecord
+- protocol: ArtifactStore
+  required_input: bytes + metadata
+  required_output: ArtifactRef
+- protocol: LineageRepository
+  required_input: lineage events
+  required_output: LineageSnapshot
+- protocol: CheckpointManager
+  required_input: run state
+  required_output: CheckpointRef
+- protocol: RecoveryManager
+  required_input: checkpoint + durable manifests
+  required_output: RecoveryResult
+- protocol: PolicyEngine
+  required_input: candidate context
+  required_output: PolicyVerdict
+- protocol: DeploymentManager
+  required_input: approved artifact + mode
+  required_output: DeploymentResult
+- protocol: AuditLog
+  required_input: audit event
+  required_output: AuditReceipt
+research_protocols_out_of_core_v1:
+- name: QuantumSearchAdapter
+  reason: section 3.1 excludes it from Core v1
+- name: PolyglotBridge
+  reason: section 3.1 excludes it from Core v1
+- name: EcosystemManager
+  reason: section 3.1 excludes it from Core v1
+- name: SwarmCoordinator
+  reason: section 3.1 excludes it from Core v1

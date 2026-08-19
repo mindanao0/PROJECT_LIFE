@@ -14,7 +14,7 @@ authority_hierarchy:
     enforcement: "26 JSON Schemas Draft 2020-12"
   - level: "L4"
     name: "Active Architecture Protocol Contracts"
-    enforcement: "22 Typed Python Protocols"
+    enforcement: "19 Typed Python Protocols (Core v1)"
   - level: "L5"
     name: "Persistence & Recovery Invariants"
     enforcement: "29-Table SQLite, 2PC Commit, CAS Durability"

@@ -128,7 +128,7 @@
 
 ### 📐 [07_schemas_and_protocols/](07_schemas_and_protocols) — สัญญาข้อมูลและอินเทอร์เฟซ
 - 📄 **[SCHEMA_BLUEPRINT_26.md](07_schemas_and_protocols/SCHEMA_BLUEPRINT_26.md)** : พิมพ์เขียวรายละเอียดฟิลด์ของไฟล์ JSON Schemas ทั้ง 26 ตัว
-- 📄 **[TYPED_PROTOCOLS_22.md](07_schemas_and_protocols/TYPED_PROTOCOLS_22.md)** : รายละเอียดโปรโตคอลระบบครบทั้ง 22 โปรโตคอล
+- 📄 **[TYPED_PROTOCOLS.md](07_schemas_and_protocols/TYPED_PROTOCOLS.md)** : รายละเอียดโปรโตคอลระบบครบทั้ง 22 โปรโตคอล
 - 📄 **[PYTHON_SDK_REFERENCE.md](07_schemas_and_protocols/PYTHON_SDK_REFERENCE.md)** : คู่มือการเรียกใช้ SDK คลาส `EvolutionEngine`
 - 📄 **[CLI_COMMAND_SURFACE.md](07_schemas_and_protocols/CLI_COMMAND_SURFACE.md)** : คำสั่งและ Flags ของ CLI `evolve` ทั้งหมด
 

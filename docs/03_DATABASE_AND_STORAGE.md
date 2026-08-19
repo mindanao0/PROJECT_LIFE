@@ -1,7 +1,9 @@
 # 03 — Database Schema (29 Tables), Integrity Triggers & CAS Persistence
 
 > **Active Requirements Covered:** `REQ-S13-001` .. `REQ-S13-009`, `REQ-S14-001` .. `REQ-S14-002`  
-> **Authority Level:** OVERVIEW — rank 5 in `spec/authority.yaml` document_precedence. Not normative.  
+> **Authority Level:** OVERVIEW — rank 5 in `spec/authority.yaml` document_precedence. Not normative.    
+> **Integrity triggers ตัวจริงอยู่ที่** [`spec/ACTIVE_CONTRACT.md`](../spec/ACTIVE_CONTRACT.md) section 13.2 ระหว่าง marker `INTEGRITY_TRIGGERS_BEGIN`/`END`  
+> SQL ที่เคยอยู่ในไฟล์นี้เป็นร่างคู่ขนานที่ขัดกับอีกฉบับ จึงถูกถอดออกที่ CR-0002
 > **Canonical source:** [`docs/03_storage_and_database/`](./03_storage_and_database/) — เมื่อขัดกัน ให้ยึดฝั่งนั้น
 
 สถาปัตยกรรมการจัดเก็บข้อมูลของ Evolution Engine แบ่งหน้าที่ออกเป็น 2 ชั้นอย่างชัดเจน:
@@ -445,34 +447,4 @@ CREATE UNIQUE INDEX ux_audit_engine_sequence ON audit_events(sequence_no) WHERE 
 
 ตามข้อกำหนด `[REQ-S13-003]` ตาราง `artifact_refs` มี Foreign Key แบบ Polymorphic (`owner_type`, `owner_id`) ระบบต้องสร้าง SQLite Triggers เพื่อป้องกัน Dangling References:
 
-```sql
--- ป้องกันการ Insert artifact_ref ที่ชี้ไปยัง Candidate ที่ไม่มีอยู่จริง
-CREATE TRIGGER trg_artifact_refs_validate_candidate
-BEFORE INSERT ON artifact_refs
-WHEN NEW.owner_type = 'CANDIDATE'
-BEGIN
-    SELECT RAISE(ABORT, 'Integrity Error: Target candidate_id does not exist in candidates table')
-    WHERE NOT EXISTS (SELECT 1 FROM candidates WHERE candidate_id = NEW.owner_id);
-END;
 
--- ป้องกันการ Insert artifact_ref ที่ชี้ไปยัง Run ที่ไม่มีอยู่จริง
-CREATE TRIGGER trg_artifact_refs_validate_run
-BEFORE INSERT ON artifact_refs
-WHEN NEW.owner_type = 'RUN'
-BEGIN
-    SELECT RAISE(ABORT, 'Integrity Error: Target run_id does not exist in runs table')
-    WHERE NOT EXISTS (SELECT 1 FROM runs WHERE run_id = NEW.owner_id);
-END;
-
--- ป้องกันการ Insert Audit Event ข้ามลำดับ Sequence
-CREATE TRIGGER trg_audit_events_sequence_monotonic
-BEFORE INSERT ON audit_events
-WHEN NEW.sequence_no > 0
-BEGIN
-    SELECT RAISE(ABORT, 'Audit Integrity Error: Previous sequence number must exist')
-    WHERE NOT EXISTS (
-        SELECT 1 FROM audit_events 
-        WHERE run_id = NEW.run_id AND sequence_no = NEW.sequence_no - 1
-    );
-END;
-```

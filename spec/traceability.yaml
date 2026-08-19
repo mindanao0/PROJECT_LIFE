@@ -1305,7 +1305,7 @@ requirements:
   section: 13
   section_title: Persistence Model
   status: REQ
-  text_digest: sha256:4bac4a0e0245b4ea4130efbac7f3abbe8efec0ba0b58b94d4288c8d6ee3e6552
+  text_digest: sha256:6929bb843762ab4815ba9f3b4968db044fb74f57d060dee4fcfdba3db1d13ce0
   schema_refs: []
   protocol_refs: []
   implementation_refs: []

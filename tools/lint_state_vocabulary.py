@@ -310,7 +310,8 @@ def main() -> int:
     # --- LINT-14: declared counts must equal real counts -----------------------
     manifest_counts = yaml.safe_load(
         (ROOT / "spec/version_manifest.yaml").read_text(encoding="utf-8"))["subsystems"]
-    protocols_doc = (ROOT / "docs/07_schemas_and_protocols/TYPED_PROTOCOLS_22.md").read_text(encoding="utf-8")
+    protocol_registry = yaml.safe_load(
+        (ROOT / "spec/protocols.yaml").read_text(encoding="utf-8"))
     corpus_cases = yaml.safe_load(
         (ROOT / "benchmarks/golden/manifest.yaml").read_text(encoding="utf-8"))["cases"]
     linters = yaml.safe_load((ROOT / "tools/spec_linters.yaml").read_text(encoding="utf-8"))
@@ -318,7 +319,7 @@ def main() -> int:
 
     actual = {
         "schemas_count": len(list((ROOT / "schemas").glob("*.json"))),
-        "protocols_count": len(set(re.findall(r"class ([A-Z]\w+)\(Protocol\)", protocols_doc))),
+        "protocols_count": protocol_registry["core_v1_protocol_count"],
         "sqlite_tables_count": len(re.findall(r"CREATE TABLE", ddl_sql)),
         "sqlite_indices_count": len(re.findall(r"CREATE (?:UNIQUE )?INDEX", ddl_sql)),
         "fsm_count": len(fsms),
@@ -496,6 +497,23 @@ def main() -> int:
     for record in register_data.get("retired_requirements", []):
         if not (ROOT / "spec/change_records").glob(f"{record['withdrawn_by']}*"):
             findings.append(f"LINT-18 {record['id']} cites missing change record {record['withdrawn_by']}")
+
+    # --- protocol registry must equal Active Contract section 7.2 ---------------
+    section72 = spec_md[spec_md.index("## 7.2 Required Protocols"):]
+    section72 = section72[:section72.index("# 8.")]
+    table_names = {row.split("|")[1].strip().strip("*` ")
+                   for row in section72.split("\n")
+                   if row.startswith("|")} - {"Protocol", "---", ""}
+    registry_names = {p["protocol"] for p in protocol_registry["core_v1_protocols"]}
+    if table_names != registry_names:
+        findings.append(
+            f"LINT-14 spec/protocols.yaml disagrees with section 7.2 — "
+            f"registry-only={sorted(registry_names - table_names)} "
+            f"section-only={sorted(table_names - registry_names)}")
+    research = {r["name"] for r in protocol_registry["research_protocols_out_of_core_v1"]}
+    if research & registry_names:
+        findings.append(
+            f"LINT-14 research protocols counted in Core v1: {sorted(research & registry_names)}")
 
     if findings:
         print(f"BLOCKER: {len(findings)} finding(s)\n")
