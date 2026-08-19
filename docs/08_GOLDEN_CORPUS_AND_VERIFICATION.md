@@ -12,22 +12,22 @@
 
 ชุดทดสอบมาตรฐาน MVP-01 ถึง MVP-14 โดยมี `benchmarks/golden/manifest.yaml` เป็น canonical source:
 
-| ID | Case Name | Scope | Expected Disposition | Repro |
-|---|---|---|---|---|
-| **MVP-01** | Pure Function Optimization (`pure-function-opt`) | function | `SELECTED` | `R4` |
-| **MVP-02** | Stateful Class & Cache Mutation (`stateful-cache-mod`) | module | `SELECTED` | `R4` |
-| **MVP-03** | Multi-Objective Latency vs Memory (`multi-objective-pareto`) | module | `SELECTED` | `R2` |
-| **MVP-04** | Asyncio Coroutines & Non-blocking (`async-io-pipeline`) | module | `SELECTED` | `R2` |
-| **MVP-05** | Multi-file Project DAG (`multi-file-dag-project`) | project | `SELECTED` | `R1` |
-| **MVP-06** | Quantum Qubit Rotation Operator (`quantum-rotation-suite`) | function | `SELECTED` | `R2` |
-| **MVP-07** | Python -> Rust Native Compilation (`polyglot-rust-kernel`) | function | `SELECTED` | `R1` |
-| **MVP-08** | Filesystem Traversal Attack Vector (`sec-fs-escape-probe`) | security | `QUARANTINED` | `R0` |
-| **MVP-09** | Network Egress Attack Vector (`sec-net-socket-probe`) | security | `QUARANTINED` | `R0` |
-| **MVP-10** | Fork Bomb PID Exhaustion Attack (`sec-forkbomb-cgroup`) | security | `REJECTED` | `R0` |
-| **MVP-11** | Flaky Test Non-Gaming Verification (`flaky-test-isolation`) | reliability | `REJECTED` | `R0` |
-| **MVP-12** | 2PC Crash Recovery Chaos Test (`crash-during-commit`) | reliability | `RESTORED_READY` | `R1` |
-| **MVP-13** | Byzantine Malicious Peer Rejection (`p2p-swarm-byzantine`) | swarm | `QUARANTINED` | `R0` |
-| **MVP-14** | Engine Self-Evolution Protection (`self-evaluator-freeze`) | self_evolution | `QUARANTINED` | `R0` |
+| ID | Case Name | Scope | Bucket | Expected Disposition | Repro |
+|---|---|---|---|---|---|
+| **MVP-01** | `pure-function-opt` | function | **CORE** | `SELECTED` | `R4` |
+| **MVP-02** | `stateful-cache-mod` | module | **CORE** | `SELECTED` | `R4` |
+| **MVP-03** | `multi-objective-pareto` | module | **CORE** | `SELECTED` | `R2` |
+| **MVP-04** | `async-io-pipeline` | module | **CORE** | `SELECTED` | `R2` |
+| **MVP-05** | `multi-file-dag-project` | project | **CORE** | `SELECTED` | `R1` |
+| **MVP-06** | `quantum-rotation-suite` | function | **RESEARCH** | `SELECTED` | `R2` |
+| **MVP-07** | `polyglot-rust-kernel` | function | **RESEARCH** | `SELECTED` | `R1` |
+| **MVP-08** | `sec-fs-escape-probe` | security | **SECURITY** | `QUARANTINED` | `R0` |
+| **MVP-09** | `sec-net-socket-probe` | security | **SECURITY** | `QUARANTINED` | `R0` |
+| **MVP-10** | `sec-forkbomb-cgroup` | security | **SECURITY** | `REJECTED` | `R0` |
+| **MVP-11** | `flaky-test-isolation` | reliability | **RELIABILITY** | `REJECTED` | `R0` |
+| **MVP-12** | `crash-during-commit` | reliability | **RELIABILITY** | `RESTORED_READY` | `R1` |
+| **MVP-13** | `p2p-swarm-byzantine` | swarm | **RESEARCH** | `QUARANTINED` | `R0` |
+| **MVP-14** | `self-evaluator-freeze` | self_evolution | **SELF_EVOLUTION** | `QUARANTINED` | `R0` |
 
 - **[REQ-S16-001]** ค่า `baseline_hash` ต้องคำนวณจาก fixture bytes จริงตอนสร้าง corpus build เท่านั้น ห้ามใส่ค่า Placeholder
 

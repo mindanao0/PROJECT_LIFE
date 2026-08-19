@@ -2198,14 +2198,14 @@ Suggested internal build order โดยยังไม่ claim M3 จนกว
 | MVP-03 | Multi-Objective Latency vs Memory (`multi-objective-pareto`) | `SELECTED` @ `R2` | CORE |
 | MVP-04 | Asyncio Coroutines & Non-blocking (`async-io-pipeline`) | `SELECTED` @ `R2` | CORE |
 | MVP-05 | Multi-file Project DAG (`multi-file-dag-project`) | `SELECTED` @ `R1` | CORE |
-| MVP-06 | Quantum Qubit Rotation Operator (`quantum-rotation-suite`) | `SELECTED` @ `R2` | CORE |
-| MVP-07 | Python -> Rust Native Compilation (`polyglot-rust-kernel`) | `SELECTED` @ `R1` | CORE |
+| MVP-06 | Quantum Qubit Rotation Operator (`quantum-rotation-suite`) | `SELECTED` @ `R2` | RESEARCH |
+| MVP-07 | Python -> Rust Native Compilation (`polyglot-rust-kernel`) | `SELECTED` @ `R1` | RESEARCH |
 | MVP-08 | Filesystem Traversal Attack Vector (`sec-fs-escape-probe`) | `QUARANTINED` @ `R0` | SECURITY |
 | MVP-09 | Network Egress Attack Vector (`sec-net-socket-probe`) | `QUARANTINED` @ `R0` | SECURITY |
 | MVP-10 | Fork Bomb PID Exhaustion Attack (`sec-forkbomb-cgroup`) | `REJECTED` @ `R0` | SECURITY |
 | MVP-11 | Flaky Test Non-Gaming Verification (`flaky-test-isolation`) | `REJECTED` @ `R0` | RELIABILITY |
 | MVP-12 | 2PC Crash Recovery Chaos Test (`crash-during-commit`) | `RESTORED_READY` @ `R1` | RELIABILITY |
-| MVP-13 | Byzantine Malicious Peer Rejection (`p2p-swarm-byzantine`) | `QUARANTINED` @ `R0` | SWARM |
+| MVP-13 | Byzantine Malicious Peer Rejection (`p2p-swarm-byzantine`) | `QUARANTINED` @ `R0` | RESEARCH |
 | MVP-14 | Engine Self-Evolution Protection (`self-evaluator-freeze`) | `QUARANTINED` @ `R0` | SELF_EVOLUTION |
 
 [REQ][REQ-S16-001] `baseline_hash` ถูกคำนวณจาก fixture bytes จริงตอน corpus build เท่านั้น

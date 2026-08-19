@@ -25,6 +25,9 @@ LINT-17 (REQ-S02-008, REQ-S08-012, REQ-S19-003): spec/requirements.yaml and
   with spec/fsm_states_57.yaml.
 LINT-18 (REQ-S00-009, REQ-S00-010): the recovered archive must match the SHA-256
   in spec/archive/manifest.json, and every retired requirement ID must stay retired.
+LINT-19 (section 3.1, section 26): the Core/Research firewall. A golden corpus case
+  in the RESEARCH bucket may not be required by any Core gate, and every case must
+  carry a maturity_bucket.
 LINT-12: prose state lists anywhere in the repo must not use a state name that
   spec/fsm_states_57.yaml has retired. Prose drift is what made LINT-09 miss the
   first time: the DDL was fixed while the narrative kept the old vocabulary.
@@ -515,12 +518,46 @@ def main() -> int:
         findings.append(
             f"LINT-14 research protocols counted in Core v1: {sorted(research & registry_names)}")
 
+    # --- LINT-19: Core/Research firewall ---------------------------------------
+    CORE_BUCKETS = {"CORE", "SECURITY", "RELIABILITY"}
+    VALID_BUCKETS = CORE_BUCKETS | {"RESEARCH", "SELF_EVOLUTION"}
+    BUCKET_JOB = {"CORE": "golden_core", "SECURITY": "golden_security",
+                  "RELIABILITY": "golden_reliability", "SELF_EVOLUTION": "golden_self_evolution"}
+    by_bucket: dict[str, list[str]] = {}
+    for case in corpus_cases:
+        bucket = case.get("maturity_bucket")
+        if bucket is None:
+            findings.append(f"LINT-19 {case['id']}: no maturity_bucket")
+            continue
+        if bucket not in VALID_BUCKETS:
+            findings.append(f"LINT-19 {case['id']}: unknown maturity_bucket {bucket!r}")
+            continue
+        by_bucket.setdefault(bucket, []).append(case["id"])
+
+    core_gate = next((g for g in gates if g["name"] == "GATE_CORE"), None)
+    if core_gate is not None:
+        research_job = BUCKET_JOB.get("RESEARCH")
+        if research_job and research_job in core_gate["mandatory_checks"]:
+            findings.append("LINT-19 GATE_CORE requires the research corpus")
+        # a Core gate must not name a job that runs a research case
+        for case_id in by_bucket.get("RESEARCH", []):
+            if any(case_id.lower().replace("-", "") in check for check in core_gate["mandatory_checks"]):
+                findings.append(f"LINT-19 GATE_CORE names research case {case_id}")
+
+    # the ladder must not describe a Core rung using a research case
+    ladder_text = (ROOT / "spec/maturity.yaml").read_text(encoding="utf-8")
+    for case_id in by_bucket.get("RESEARCH", []):
+        for line in ladder_text.splitlines():
+            if case_id in line and ("M9" in line or "M10" in line or "CORE" in line.upper()):
+                findings.append(
+                    f"LINT-19 spec/maturity.yaml names research case {case_id} in a Core rung: {line.strip()}")
+
     if findings:
         print(f"BLOCKER: {len(findings)} finding(s)\n")
         for f in findings:
             print(f"  - {f}")
         return 1
-    print("LINT-09..18: PASS — vocabularies agree, evidence is retention-safe, corpus matches manifest, CI job names resolve, declared counts are real, config examples validate, EQ/DIM registries are complete, requirement register and FSM specs agree, archive intact")
+    print("LINT-09..19: PASS — vocabularies agree, evidence is retention-safe, corpus matches manifest, CI job names resolve, declared counts are real, config examples validate, EQ/DIM registries are complete, requirement register and FSM specs agree, archive intact, Core/Research firewall holds")
     return 0
 
 

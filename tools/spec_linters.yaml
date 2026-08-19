@@ -1,5 +1,5 @@
 version: "10.2.2"
-total_linters: 18
+total_linters: 19
 
 linters:
   - linter_id: "LINT-01"
@@ -117,5 +117,12 @@ linters:
     name: "ArchiveIntegrityAndRetiredIdLinter"
     target: "spec/archive/, spec/requirements.yaml, spec/change_records/"
     rule: "The recovered historical archive must hash to the value recorded in spec/archive/manifest.json, no retired requirement ID may reappear in the Active Contract, and every retirement must cite an existing change record. Enforces REQ-S00-009 and Section 2.4 immutability."
+    implementation: "tools/lint_state_vocabulary.py"
+    severity: "BLOCKER"
+
+  - linter_id: "LINT-19"
+    name: "CoreResearchFirewallLinter"
+    target: "benchmarks/golden/manifest.yaml, spec/release_gates.yaml, spec/maturity.yaml"
+    rule: "Every golden corpus case must declare a maturity_bucket, and nothing in the Core path — GATE_CORE or a Core maturity rung — may require a case in the RESEARCH bucket. Enforces the section 3.1 / section 26 Core-Research firewall."
     implementation: "tools/lint_state_vocabulary.py"
     severity: "BLOCKER"

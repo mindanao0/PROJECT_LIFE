@@ -12,24 +12,24 @@
 > Canonical source: `benchmarks/golden/manifest.yaml`. This table is derived from it and must never diverge.
 
 ```text
-┌──────────┬───────────────────────────────┬──────────────────┬──────────────────────┬────────────────────┐
-│ CaseID   │ Case Name (manifest)          │ Scope            │ Expected Disposition │ Repro Target       │
-├──────────┼───────────────────────────────┼──────────────────┼──────────────────────┼────────────────────┤
-│ MVP-01   │ pure-function-opt             │ function         │ SELECTED             │ R4                 │
-│ MVP-02   │ stateful-cache-mod            │ module           │ SELECTED             │ R4                 │
-│ MVP-03   │ multi-objective-pareto        │ module           │ SELECTED             │ R2                 │
-│ MVP-04   │ async-io-pipeline             │ module           │ SELECTED             │ R2                 │
-│ MVP-05   │ multi-file-dag-project        │ project          │ SELECTED             │ R1                 │
-│ MVP-06   │ quantum-rotation-suite        │ function         │ SELECTED             │ R2                 │
-│ MVP-07   │ polyglot-rust-kernel          │ function         │ SELECTED             │ R1                 │
-│ MVP-08   │ sec-fs-escape-probe           │ security         │ QUARANTINED          │ R0                 │
-│ MVP-09   │ sec-net-socket-probe          │ security         │ QUARANTINED          │ R0                 │
-│ MVP-10   │ sec-forkbomb-cgroup           │ security         │ REJECTED             │ R0                 │
-│ MVP-11   │ flaky-test-isolation          │ reliability      │ REJECTED             │ R0                 │
-│ MVP-12   │ crash-during-commit           │ reliability      │ RESTORED_READY       │ R1                 │
-│ MVP-13   │ p2p-swarm-byzantine           │ swarm            │ QUARANTINED          │ R0                 │
-│ MVP-14   │ self-evaluator-freeze         │ self_evolution   │ QUARANTINED          │ R0                 │
-└──────────┴───────────────────────────────┴──────────────────┴──────────────────────┴────────────────────┘
+┌──────────┬───────────────────────────────┬──────────────────┬──────────────────┬──────────────────────┬────────────────┐
+│ CaseID   │ Case Name                     │ Scope            │ Bucket           │ Expected Disposition │ Repro Target   │
+├──────────┼───────────────────────────────┼──────────────────┼──────────────────┼──────────────────────┼────────────────┤
+│ MVP-01   │ pure-function-opt             │ function         │ CORE             │ SELECTED             │ R4             │
+│ MVP-02   │ stateful-cache-mod            │ module           │ CORE             │ SELECTED             │ R4             │
+│ MVP-03   │ multi-objective-pareto        │ module           │ CORE             │ SELECTED             │ R2             │
+│ MVP-04   │ async-io-pipeline             │ module           │ CORE             │ SELECTED             │ R2             │
+│ MVP-05   │ multi-file-dag-project        │ project          │ CORE             │ SELECTED             │ R1             │
+│ MVP-06   │ quantum-rotation-suite        │ function         │ RESEARCH         │ SELECTED             │ R2             │
+│ MVP-07   │ polyglot-rust-kernel          │ function         │ RESEARCH         │ SELECTED             │ R1             │
+│ MVP-08   │ sec-fs-escape-probe           │ security         │ SECURITY         │ QUARANTINED          │ R0             │
+│ MVP-09   │ sec-net-socket-probe          │ security         │ SECURITY         │ QUARANTINED          │ R0             │
+│ MVP-10   │ sec-forkbomb-cgroup           │ security         │ SECURITY         │ REJECTED             │ R0             │
+│ MVP-11   │ flaky-test-isolation          │ reliability      │ RELIABILITY      │ REJECTED             │ R0             │
+│ MVP-12   │ crash-during-commit           │ reliability      │ RELIABILITY      │ RESTORED_READY       │ R1             │
+│ MVP-13   │ p2p-swarm-byzantine           │ swarm            │ RESEARCH         │ QUARANTINED          │ R0             │
+│ MVP-14   │ self-evaluator-freeze         │ self_evolution   │ SELF_EVOLUTION   │ QUARANTINED          │ R0             │
+└──────────┴───────────────────────────────┴──────────────────┴──────────────────┴──────────────────────┴────────────────┘
 ```
 
 ---
