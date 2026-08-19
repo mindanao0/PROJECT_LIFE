@@ -1,0 +1,45 @@
+{
+  "project": {
+    "name": "example",
+    "language": "example",
+    "version": "example"
+  },
+  "evolution": {
+    "level": "function",
+    "population_size": 2,
+    "seed": 1
+  },
+  "selection": {
+    "method": "pareto",
+    "preference_weights_usage": "example",
+    "tie_break_order": [
+      "example"
+    ]
+  },
+  "constraints": {
+    "capability_commands": [
+      {
+        "argv": [
+          "example"
+        ],
+        "cwd": "example",
+        "env": {},
+        "timeout_seconds": 2
+      }
+    ]
+  },
+  "sandbox": {
+    "profile": "PROFILE_A_LINUX",
+    "network": "deny",
+    "writable_tmp_bytes": 1
+  },
+  "deployment": {
+    "mode": "SAFE_EXPORT_ONLY"
+  },
+  "stopping": {
+    "target_rule": "example",
+    "max_generations": 2,
+    "max_stagnation": 2,
+    "max_runtime_seconds": 2
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "mutation_attempt_id": "018e1234-5678-7abc-8def-0123456789ab",
+  "mutation_id": "018e2222-3333-7444-8555-666677778888",
+  "status": "SUCCESS",
+  "source_before_hash": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+  "source_after_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "ast_delta_bytes": 1,
+  "duration_ms": 1.0
+}

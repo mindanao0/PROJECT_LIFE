@@ -1,0 +1,8 @@
+{
+  "recovery_id": "018e1234-5678-7abc-8def-0123456789ab",
+  "recovery_status": "SUCCESS",
+  "recovered_generation_index": 1,
+  "cas_objects_rebuilt": 1,
+  "resumed_state": "example",
+  "recovered_at": "2026-08-19T12:00:00.000000Z"
+}

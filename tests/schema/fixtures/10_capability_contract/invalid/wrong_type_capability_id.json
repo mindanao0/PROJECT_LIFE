@@ -1,0 +1,8 @@
+{
+  "capability_id": [],
+  "project_id": "018e2222-3333-7444-8555-666677778888",
+  "required_capabilities": [
+    "example"
+  ],
+  "enforcement_mode": "STRICT"
+}

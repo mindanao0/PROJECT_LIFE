@@ -1,0 +1,11 @@
+{
+  "project_id": "018e1234-5678-7abc-8def-0123456789ab",
+  "name": "example_value",
+  "language": "python",
+  "project_version": "example",
+  "source_root": "example",
+  "entrypoint_files": [
+    "example"
+  ],
+  "not_a_declared_field": "x"
+}

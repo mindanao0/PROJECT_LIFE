@@ -1,0 +1,10 @@
+{
+  "run_id": "018e1234-5678-7abc-8def-0123456789ab",
+  "project_id": "018e2222-3333-7444-8555-666677778888",
+  "master_seed": 1,
+  "config_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "run_state": "INITIATED",
+  "current_generation": 1,
+  "created_at": "2026-08-19T12:00:00.000000Z",
+  "completed_at": "2026-08-19T12:00:00.000000Z"
+}

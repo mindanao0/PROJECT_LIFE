@@ -1,0 +1,243 @@
+{
+  "manifest_version": "10.2.2",
+  "generated_by": "tools/generate_schema_manifest.py",
+  "digest_algorithm": "SHA-256",
+  "digest_source": "raw file bytes on disk",
+  "total_schemas": 26,
+  "schemas": [
+    {
+      "registry_order": 1,
+      "filename": "01_candidate.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/01_candidate.schema.json",
+      "title": "CandidateManifest",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 1382,
+      "sha256": "df0d17a833ea7a2e1912a39ec963122cede0b3a55bc8663d4c0908ac2e22079d"
+    },
+    {
+      "registry_order": 2,
+      "filename": "02_candidate_state.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/02_candidate_state.schema.json",
+      "title": "CandidateStateEnum",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 557,
+      "sha256": "8800522db29b3c064010a7ded8ef8818a8ffd867865d10315e387b1de74fd3cf"
+    },
+    {
+      "registry_order": 3,
+      "filename": "03_mutation.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/03_mutation.schema.json",
+      "title": "MutationDescriptor",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 1156,
+      "sha256": "0e77d122129a4d3602a4b7acd237ea125194dd3fc41bb0d4758ca31546d07b3d"
+    },
+    {
+      "registry_order": 4,
+      "filename": "04_mutation_result.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/04_mutation_result.schema.json",
+      "title": "MutationResult",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 1022,
+      "sha256": "d55ad399ebfc73940c98e077efd77f33a1b32c25f3f9502f4b9943a2e77fd058"
+    },
+    {
+      "registry_order": 5,
+      "filename": "05_population.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/05_population.schema.json",
+      "title": "PopulationManifest",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 909,
+      "sha256": "db2285f400de6e1be3385437d2f389880dced14837402ac04173353261f331ed"
+    },
+    {
+      "registry_order": 6,
+      "filename": "06_generation.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/06_generation.schema.json",
+      "title": "GenerationManifest",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 1091,
+      "sha256": "5babc98e9ad61c610a75dc7e1ad810124b704c39f6acb7f688dd923835e06fb4"
+    },
+    {
+      "registry_order": 7,
+      "filename": "07_run.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/07_run.schema.json",
+      "title": "RunManifest",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 1335,
+      "sha256": "bc6c4fc5a6410bc15e894bf152665898b0b0d105325581d47d6d62c5bfd6c5ec"
+    },
+    {
+      "registry_order": 8,
+      "filename": "08_baseline.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/08_baseline.schema.json",
+      "title": "BaselineMeasurement",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 1240,
+      "sha256": "bd19e95a0451b2104e1d449873e519460b6ebd46d670b9566fbf3302ff2d02cc"
+    },
+    {
+      "registry_order": 9,
+      "filename": "09_project_manifest.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/09_project_manifest.schema.json",
+      "title": "ProjectManifest",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 854,
+      "sha256": "13b5654d1b3247065142ea1aa00870925ae14271049fe0ad9b5600d4f56910d9"
+    },
+    {
+      "registry_order": 10,
+      "filename": "10_capability_contract.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/10_capability_contract.schema.json",
+      "title": "CapabilityContract",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 726,
+      "sha256": "359738e49586ef68c8dc80c3bbf104f5e1f3e15409f86c99b15f4632dc417ea0"
+    },
+    {
+      "registry_order": 11,
+      "filename": "11_objective.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/11_objective.schema.json",
+      "title": "ObjectiveDefinition",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 717,
+      "sha256": "acc683aaec35480fa6ae6533c4913c227812408d1b167113c6e42c5a9effb2b3"
+    },
+    {
+      "registry_order": 12,
+      "filename": "12_metric_result.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/12_metric_result.schema.json",
+      "title": "MetricResult",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 994,
+      "sha256": "49058cd82b3ab32137241b6e8de66e671b02c17719bb5c2e4a002c6937f405bd"
+    },
+    {
+      "registry_order": 13,
+      "filename": "13_oracle_result.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/13_oracle_result.schema.json",
+      "title": "OracleResult",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 952,
+      "sha256": "5f485f22de97cef3df380db210bf868c6d17f666766fed30e6ed4924989f84e1"
+    },
+    {
+      "registry_order": 14,
+      "filename": "14_environment.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/14_environment.schema.json",
+      "title": "EnvironmentFingerprint",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 643,
+      "sha256": "0c1c5c38c3a701a387d96261958e1089c2a22cc35281e126cfd972f94b41c24d"
+    },
+    {
+      "registry_order": 15,
+      "filename": "15_lineage_node.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/15_lineage_node.schema.json",
+      "title": "LineageNode",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 643,
+      "sha256": "3c4fb137c83a166cef673645b9f9bccc64b3717928f3e5fb30886bcc70cf057b"
+    },
+    {
+      "registry_order": 16,
+      "filename": "16_lineage_edge.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/16_lineage_edge.schema.json",
+      "title": "LineageEdge",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 722,
+      "sha256": "54e8249b011f8e2f7bc4b4b4b905d590a00d3e32b8fe24856b05360552684cea"
+    },
+    {
+      "registry_order": 17,
+      "filename": "17_selection_decision.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/17_selection_decision.schema.json",
+      "title": "SelectionDecision",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 944,
+      "sha256": "de2420def7e3ced38470c8bddcdb1d2df8620bade99f21f9f2a15e40135cf5ff"
+    },
+    {
+      "registry_order": 18,
+      "filename": "18_policy_snapshot.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/18_policy_snapshot.schema.json",
+      "title": "PolicySnapshot",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 790,
+      "sha256": "fb346f9ba71acd2653fb8562740f620ff77feacecc735c1916520ffa20c78b66"
+    },
+    {
+      "registry_order": 19,
+      "filename": "19_provenance_certificate.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/19_provenance_certificate.schema.json",
+      "title": "ProvenanceCertificate",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 1203,
+      "sha256": "64b7b7727cbe59f8427c00565333e385bd1b1a3f6bf6875d733324d079f545f7"
+    },
+    {
+      "registry_order": 20,
+      "filename": "20_reproducibility_certificate.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/20_reproducibility_certificate.schema.json",
+      "title": "ReproducibilityCertificate",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 990,
+      "sha256": "a099c916cc13f852bd44e15dabf59820dd4c96730d08e336255638fc117ab96f"
+    },
+    {
+      "registry_order": 21,
+      "filename": "21_checkpoint.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/21_checkpoint.schema.json",
+      "title": "CheckpointManifest",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 943,
+      "sha256": "a7f4bf3ef8652f8580c47646af6f428eb7cda1c410cc207278d5909d5d586533"
+    },
+    {
+      "registry_order": 22,
+      "filename": "22_recovery_manifest.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/22_recovery_manifest.schema.json",
+      "title": "RecoveryManifest",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 992,
+      "sha256": "ff6dd602438c5e3613f5191e933e17da333c8989338f0ef5021b054da8268aeb"
+    },
+    {
+      "registry_order": 23,
+      "filename": "23_release_gate.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/23_release_gate.schema.json",
+      "title": "ReleaseGateRecord",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 936,
+      "sha256": "8c65ba7987b68b04abb60c4801a7d57a3d68529f7c9c27af2703a0409f1b786e"
+    },
+    {
+      "registry_order": 24,
+      "filename": "24_quarantine_record.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/24_quarantine_record.schema.json",
+      "title": "QuarantineRecord",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 899,
+      "sha256": "f0a01296f771500c5cceea501a5ce47b49a8c9d63b4286e98655a7f7455dd78d"
+    },
+    {
+      "registry_order": 25,
+      "filename": "25_memory_record.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/25_memory_record.schema.json",
+      "title": "HippocampalMemoryRecord",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 961,
+      "sha256": "4160b960dfb2afdfb2e1b171d0b9995c82d674a25a7b3a808626ef6a851f2f32"
+    },
+    {
+      "registry_order": 26,
+      "filename": "26_engine_config.schema.json",
+      "schema_id": "https://evolution-engine.org/schemas/26_engine_config.schema.json",
+      "title": "EngineConfig",
+      "schema_version": "https://json-schema.org/draft/2020-12/schema",
+      "size_bytes": 7987,
+      "sha256": "390a8e46493779f0a7215c9a50136f6f6f4f7572d60280f2600917af94771914"
+    }
+  ]
+}

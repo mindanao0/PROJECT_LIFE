@@ -1,0 +1,7 @@
+{
+  "gate_id": "018e1234-5678-7abc-8def-0123456789ab",
+  "gate_name": "example",
+  "decision": "PASS",
+  "evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "verified_at": "2026-08-19T12:00:00.000000Z"
+}

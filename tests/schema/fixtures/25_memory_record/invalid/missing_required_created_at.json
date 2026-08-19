@@ -1,0 +1,24 @@
+{
+  "memory_id": "018e1234-5678-7abc-8def-0123456789ab",
+  "ast_pattern_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "embedding_vector": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "reward_score_decimal": "1.000000",
+  "access_count": 1
+}

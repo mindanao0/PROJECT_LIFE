@@ -1,0 +1,7 @@
+{
+  "candidate_id": "018e2222-3333-7444-8555-666677778888",
+  "reason_code": "example",
+  "severity": "LOW",
+  "evidence_snapshot_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "quarantined_at": "2026-08-19T12:00:00.000000Z"
+}

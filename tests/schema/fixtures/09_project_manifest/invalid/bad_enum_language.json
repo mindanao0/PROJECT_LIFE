@@ -1,0 +1,10 @@
+{
+  "project_id": "018e1234-5678-7abc-8def-0123456789ab",
+  "name": "example_value",
+  "language": "NOT_A_MEMBER_OF_THE_ENUM",
+  "project_version": "example",
+  "source_root": "example",
+  "entrypoint_files": [
+    "example"
+  ]
+}

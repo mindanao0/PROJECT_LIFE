@@ -1,0 +1,7 @@
+{
+  "objective_id": [],
+  "name": "example",
+  "direction": "MINIMIZE",
+  "unit": "example",
+  "tolerance_margin_decimal": "1.000000"
+}

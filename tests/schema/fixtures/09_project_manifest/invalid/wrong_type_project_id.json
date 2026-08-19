@@ -1,0 +1,10 @@
+{
+  "project_id": [],
+  "name": "example_value",
+  "language": "python",
+  "project_version": "example",
+  "source_root": "example",
+  "entrypoint_files": [
+    "example"
+  ]
+}

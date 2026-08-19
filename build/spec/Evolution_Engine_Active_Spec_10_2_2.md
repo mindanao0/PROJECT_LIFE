@@ -2015,14 +2015,24 @@ measured RTO
 26 engine_config.schema.json
 ```
 
-Current status in this plan:
+Current status:
 
 ```text
-Schema registry defined: REQ
-26 physical schema files supplied with this document: NO
-Schema test vectors supplied with this document: NO
-Therefore schema maturity: NOT M3 YET
+Schema registry defined:                        YES
+26 physical schema files present:               YES  schemas/01..26
+Draft 2020-12 validity:                         YES  26/26 compile
+Offline $ref resolution:                        YES  no network required
+spec/schema_manifest.json with real SHA-256:    YES  REQ-S15-003
+Valid fixtures pass:                            YES  52 fixtures
+Invalid fixtures fail:                          YES  244 fixtures
+Two validator implementations agree:            YES  jsonschema + jsonschema-rs
+Therefore schema maturity: M3 CONDITIONS MET
 ```
+
+ตรวจซ้ำได้ด้วย `python3 tools/validate_schemas.py` หรือ `pytest tests/schema`
+
+M3 ในบันได Section 23.1 ยังต้องรอ gate อื่นของระดับเดียวกันด้วย สถานะนี้ยืนยันเฉพาะเงื่อนไข
+schema package ตาม REQ-S15-001 ถึง REQ-S15-006 เท่านั้น
 
 [REQ][REQ-S15-001] M3 requires exactly 26 files, no missing/extra canonical schema name, Draft 2020-12 validity, valid fixtures pass และ invalid fixtures fail
 

@@ -1,0 +1,6 @@
+{
+  "objective_id": "018e1234-5678-7abc-8def-0123456789ab",
+  "direction": "MINIMIZE",
+  "unit": "example",
+  "tolerance_margin_decimal": "1.000000"
+}

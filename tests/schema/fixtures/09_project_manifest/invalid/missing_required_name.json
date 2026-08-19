@@ -1,0 +1,9 @@
+{
+  "project_id": "018e1234-5678-7abc-8def-0123456789ab",
+  "language": "python",
+  "project_version": "example",
+  "source_root": "example",
+  "entrypoint_files": [
+    "example"
+  ]
+}

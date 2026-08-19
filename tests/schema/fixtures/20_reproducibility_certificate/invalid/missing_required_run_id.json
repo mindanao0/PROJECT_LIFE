@@ -1,0 +1,7 @@
+{
+  "certificate_id": "018e1234-5678-7abc-8def-0123456789ab",
+  "reproducibility_level": "R0_NONE",
+  "master_seed": 1,
+  "replay_match_ratio": "1.000000",
+  "verified_at": "2026-08-19T12:00:00.000000Z"
+}

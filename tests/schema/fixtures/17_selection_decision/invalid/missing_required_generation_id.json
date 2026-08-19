@@ -1,0 +1,7 @@
+{
+  "decision_id": "018e1234-5678-7abc-8def-0123456789ab",
+  "candidate_id": "018e9999-aaaa-7bbb-8ccc-ddddeeeeffff",
+  "decision": "SELECTED_ELITE",
+  "rank_index": 2,
+  "crowding_distance_decimal": "1.000000"
+}
