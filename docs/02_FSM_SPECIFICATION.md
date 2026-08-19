@@ -3,7 +3,7 @@
 > **Authority Level:** POINTER — this file is not normative.
 > **Canonical machine-readable source:** [`spec/fsm_states_57.yaml`](../spec/fsm_states_57.yaml)
 > **Canonical narrative source:** [`docs/02_fsm_and_lifecycles/`](./02_fsm_and_lifecycles/)
-> **Binding requirements:** [`build/spec/Evolution_Engine_Active_Spec_10_2_2.md`](../build/spec/Evolution_Engine_Active_Spec_10_2_2.md) sections 8.1–8.5, 14.1 and 19.2
+> **Binding requirements:** [`spec/ACTIVE_CONTRACT.md`](../spec/ACTIVE_CONTRACT.md) sections 8.1–8.5, 14.1 and 19.2
 
 ---
 

@@ -1,6 +1,6 @@
 # Evolution Engine — Next-Generation Autonomous Software Optimization System
 
-> **Specification Authority:** [build/spec/Evolution_Engine_Active_Spec_10_2_2.md](build/spec/Evolution_Engine_Active_Spec_10_2_2.md)  
+> **Specification Authority:** [spec/ACTIVE_CONTRACT.md](spec/ACTIVE_CONTRACT.md)  
 > **Master 300-Dimensional Framework:** 🌐 **[docs/300_DIMENSIONAL_HYPER_SYSTEM_FRAMEWORK.md](docs/300_DIMENSIONAL_HYPER_SYSTEM_FRAMEWORK.md)**  
 > **Master 300 Canonical Equations:** 🧮 **[docs/05_math_and_selection/300_CANONICAL_MATHEMATICAL_EQUATIONS.md](docs/05_math_and_selection/300_CANONICAL_MATHEMATICAL_EQUATIONS.md)**  
 > **Documentation Hub:** 📚 **[docs/README.md](docs/README.md)**  
@@ -31,4 +31,4 @@
 - 📁 **[docs/07_schemas_and_protocols/](docs/07_schemas_and_protocols)** — 26 JSON Schemas Blueprint, 22 Typed Protocols, SDK, CLI
 - 📁 **[docs/08_testing_and_verification/](docs/08_testing_and_verification)** — QA 7 Tiers, Hypothesis PBT, 14 Golden Cases, Signed Evidence
 - 📁 **[docs/09_operations_and_sre/](docs/09_operations_and_sre)** — Reason Codes, Latency Budgets, WAL Recovery, 34 CI Jobs
-- 📁 **[docs/10_governance_and_roadmap/](docs/10_governance_and_roadmap)** — Maturity M0-M13, Governed Change, 179 Requirement Traceability
+- 📁 **[docs/10_governance_and_roadmap/](docs/10_governance_and_roadmap)** — Maturity M0-M13, Governed Change, 176 Requirement Traceability

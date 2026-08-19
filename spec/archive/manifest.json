@@ -1,0 +1,17 @@
+{
+  "archive_version": "10.2.0",
+  "authority": "NON-NORMATIVE / SUPERSEDED",
+  "file": "spec/archive/Plan_10_2_0_Historical_Archive.md",
+  "recovered_from_commit": "26493b3",
+  "deleted_at_commit": "cac1d52",
+  "withdrawn_by": "CR-0001",
+  "digest_algorithm": "SHA-256",
+  "original_span_sha256": "7891eb037a1535e6986787e48d316fc3db0791ee2985c2430706a548b6fd5c34",
+  "original_span_line_count": 11845,
+  "file_sha256": "b46ec500938bd68898d50e355f8b7666f129bbe7d0d08baa37520d7c1366ee13",
+  "file_line_count": 11864,
+  "file_size_bytes": 845845,
+  "transformations": [
+    "Absolute file:///Users/... links were flattened to plain text; they pointed at the original author's machine and resolved nowhere. This is why file_sha256 differs from original_span_sha256."
+  ]
+}

@@ -13,6 +13,6 @@ subsystems:
   total_fsm_states: 57
   mutation_operators_count: 10
   golden_corpus_cases: 14
-  requirement_ids_count: 179
-  ci_jobs_count: 39
-  spec_linters_count: 17
+  requirement_ids_count: 176
+  ci_jobs_count: 38
+  spec_linters_count: 18

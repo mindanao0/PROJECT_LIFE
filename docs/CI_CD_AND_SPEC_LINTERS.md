@@ -21,7 +21,7 @@
 │ 4. spec_no_historical_normative    : ตรวจห้ามมี freeze เก่าใน Active│
 │ 5. spec_active_view_byte_match     : ตรวจ Byte-match ของ Active View│
 │ 6. spec_archive_checksum_match     : ตรวจ SHA-256 ของ Archive ไม่หาย│
-│ 7. spec_req_id_unique_complete     : ตรวจ 179 IDs เรียง 001..N ไม่ซ้ำ│
+│ 7. spec_req_id_unique_complete     : ตรวจ 176 IDs เรียง 001..N ไม่ซ้ำ│
 │ 8. spec_req_digest_change_guard    : ตรวจ Text Digest ป้องกันแก้เงียบ │
 └─────────────────────────────────────────────────────────────┘
 ```

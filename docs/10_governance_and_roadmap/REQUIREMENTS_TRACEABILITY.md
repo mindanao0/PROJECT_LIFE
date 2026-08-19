@@ -1,4 +1,4 @@
-# Canonical 179 Requirements Traceability Matrix
+# Canonical 176 Requirements Traceability Matrix
 
 > **Subsystem:** Requirement Management & Verification Mapping  
 > **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.  
@@ -42,5 +42,5 @@
 | **S28** | Current Truth — What Exists vs What Is Required | `REQ-S28-001` .. `REQ-S28-001` | 1 |
 | **S29** | Implementation Order | `REQ-S29-001` .. `REQ-S29-005` | 5 |
 | **S30** | Final Canonical Freeze Rule | `REQ-S30-001` .. `REQ-S30-002` | 2 |
-| | **รวม** | | **179** |
+| | **รวม** | | **176** |
 ```

@@ -7,7 +7,7 @@
 
 ---
 
-> รายชื่อ job เป็น canonical ที่ [`build/spec/Evolution_Engine_Active_Spec_10_2_2.md`](../../build/spec/Evolution_Engine_Active_Spec_10_2_2.md) section 21
+> รายชื่อ job เป็น canonical ที่ [`spec/ACTIVE_CONTRACT.md`](../../spec/ACTIVE_CONTRACT.md) section 21
 > การจัดกลุ่มเป็น stage อยู่ที่ [`tools/ci_matrix.yaml`](../../tools/ci_matrix.yaml) — ตารางนี้ derive จากสองไฟล์นั้น ห้ามแก้มือ
 
 ## Pipeline stages

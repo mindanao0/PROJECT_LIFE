@@ -94,25 +94,27 @@ Plan 10.2.2 ปิดช่องว่างก่อนเริ่ม impleme
 
 ---
 
-## 0.5 Generated Active-Spec View [NORMATIVE]
+## 0.5 Active Contract Location & Historical Archive [NORMATIVE]
 
-เพื่อให้มนุษย์และเครื่องมือใช้งานไฟล์ขนาดใหญ่ได้ง่ายขึ้น ต้องสร้าง derived view:
+ไฟล์นี้ **เป็น canonical source เอง** ไม่ใช่ derived view
 
 ```text
-source:    Evolution_Engine_Plan_10_2_2_Complete_Single_File_Canonical_Release.md
-generated: build/spec/Evolution_Engine_Active_Spec_10_2_2.md
-generator: tools/render_active_spec.py
+active contract:  spec/ACTIVE_CONTRACT.md          (rank 2 ใน spec/authority.yaml)
+canonical data:   spec/*.yaml, spec/**/*.yaml, schemas/*.json   (rank 1)
+historical:       spec/archive/Plan_10_2_0_Historical_Archive.md (NON-NORMATIVE)
 ```
 
-[REQ][REQ-S00-005] generator ต้องยอมรับ marker `ACTIVE_SPEC_BEGIN` และ `ACTIVE_SPEC_END` อย่างละหนึ่งตำแหน่งเท่านั้น และ fail เมื่อ marker ขาด ซ้ำ หรือเรียงผิด
+เดิม section นี้กำหนดโมเดล single-file master + generator (`tools/render_active_spec.py`)
+โดยให้ไฟล์นี้เป็น read-only build artifact ที่ห้ามแก้ด้วยมือ โมเดลนั้นถูกยกเลิกที่
+[`CR-0001`](change_records/CR-0001-active-contract-becomes-source.md) เพราะทั้ง master และ generator
+ไม่มีอยู่จริง ทำให้ไม่มีวิธีแก้สเปกอย่างถูกกฎแม้แต่วิธีเดียว
 
-[REQ][REQ-S00-006] generated view ต้องเป็น byte-preserving extraction ของช่วง Active Specification รวม marker โดยห้าม rewrite, normalize หรือสรุปเนื้อหา
+`REQ-S00-005`, `REQ-S00-006`, `REQ-S00-007` และ `REQ-S00-008` ถูกถอนที่ CR-0001
+ID ทั้งสี่สงวนถาวรและห้ามนำกลับมาใช้ใหม่ตาม Section 2.4
 
-[REQ][REQ-S00-007] generated view เป็น read-only build artifact ไม่ใช่ authority แยก และห้ามแก้ด้วยมือ
+[REQ][REQ-S00-009] archive manifest ต้องบันทึก SHA-256 ของ archive ที่กู้คืนไว้ เพื่อพิสูจน์ว่า archive ไม่สูญหาย; manifest อยู่ที่ `spec/archive/manifest.json` และ CI job `spec_archive_checksum_match` ต้องคำนวณซ้ำแล้วเทียบ
 
-[REQ][REQ-S00-008] CI ต้อง regenerate แล้วเปรียบเทียบแบบ byte-for-byte; stale generated view หรือ archive checksum mismatch = failure
-
-[REQ][REQ-S00-009] archive manifest ต้องบันทึก SHA-256 ของช่วง `ARCHIVE_BEGIN ... ARCHIVE_END` เพื่อพิสูจน์ว่า archive ไม่สูญหาย
+[REQ][REQ-S00-010] การแก้ `spec/ACTIVE_CONTRACT.md` ต้องผ่าน Section 27 governed change และบันทึกเป็นไฟล์ใน `spec/change_records/`; commit ที่แก้ contract โดยไม่มี change record = CI failure
 
 ---
 
@@ -2393,7 +2395,6 @@ spec_utf8_control_char_lint
 spec_heading_classification_lint
 spec_single_active_version_lint
 spec_no_historical_normative_freeze_lint
-spec_active_view_byte_match
 spec_archive_checksum_match
 spec_requirement_id_unique_and_complete
 spec_requirement_digest_change_guard
@@ -2431,7 +2432,7 @@ root_of_trust_bootstrap_ceremony
 ```
 
 5 job ท้าย (`golden_self_evolution` ถึง `root_of_trust_bootstrap_ceremony`) รองรับ `GATE_PRODUCTION`
-และ `GATE_SELF_EVOLUTION` ซึ่งเดิมไม่มี job ใดผลิตหลักฐานให้เลย รวมทั้งหมด 39 required jobs
+และ `GATE_SELF_EVOLUTION` ซึ่งเดิมไม่มี job ใดผลิตหลักฐานให้เลย รวมทั้งหมด 38 required jobs
 
 [REQ][REQ-S21-001] Active plan itself ต้องผ่าน spec linters ก่อน implementation release
 
@@ -2688,7 +2689,7 @@ current_evidence_status:
   cli_unique_in_this_document: true
   sdk_unique_in_this_document: true
   requirement_id_contract_defined: true
-  active_requirement_ids_defined: 179
+  active_requirement_ids_defined: 176
   generated_active_view_contract_defined: true
   db_ddl_count_defined_in_this_document: 29
   schema_registry_count_defined_in_this_document: 26
@@ -2853,7 +2854,7 @@ Canonical Run FSMs: 1
 Canonical Recovery FSMs: 1
 Canonical Governance FSMs: 1
 Canonical deployment FSMs: 1
-Active normative Requirement IDs: 179
+Active normative Requirement IDs: 176
 Relational tables specified: 29
 Schema registry entries: 26
 Golden corpus cases: 14

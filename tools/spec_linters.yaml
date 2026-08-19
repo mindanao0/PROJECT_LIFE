@@ -1,5 +1,5 @@
 version: "10.2.2"
-total_linters: 17
+total_linters: 18
 
 linters:
   - linter_id: "LINT-01"
@@ -11,7 +11,7 @@ linters:
   - linter_id: "LINT-02"
     name: "MonotonicTraceabilityLinter"
     target: "docs/10_governance_and_roadmap/REQUIREMENTS_TRACEABILITY.md"
-    rule: "Verify exactly 179 monotonic requirement IDs without gaps or duplicates"
+    rule: "Verify exactly 176 monotonic requirement IDs without gaps or duplicates"
     severity: "BLOCKER"
 
   - linter_id: "LINT-03"
@@ -73,7 +73,7 @@ linters:
 
   - linter_id: "LINT-12"
     name: "RetiredStateNameLinter"
-    target: "build/spec/*.md, docs/**/*.md, spec/*.yaml, schemas/*.json"
+    target: "spec/ACTIVE_CONTRACT.md, docs/**/*.md, spec/*.yaml, schemas/*.json"
     rule: "No state name retired from spec/fsm_states_57.yaml may still appear as a state token in prose, YAML or JSON. Catches the narrative-vs-DDL drift that LINT-09 alone does not see."
     implementation: "tools/lint_state_vocabulary.py"
     severity: "BLOCKER"
@@ -94,7 +94,7 @@ linters:
 
   - linter_id: "LINT-15"
     name: "ConfigExampleValidationLinter"
-    target: "docs/**/*.md, build/spec/*.md, schemas/26_engine_config.schema.json"
+    target: "docs/**/*.md, spec/ACTIVE_CONTRACT.md, schemas/26_engine_config.schema.json"
     rule: "Every evolution.yaml example printed anywhere in the repo must validate against schemas/26_engine_config.schema.json, so an example copied by a user cannot be rejected by `evolve validate`."
     implementation: "tools/lint_state_vocabulary.py"
     severity: "BLOCKER"
@@ -110,5 +110,12 @@ linters:
     name: "RequirementRegisterAndFsmSpecLinter"
     target: "spec/requirements.yaml, spec/traceability.yaml, spec/fsm/*.yaml"
     rule: "spec/requirements.yaml must cover every requirement in the Active Contract with all REQ-S02-008 fields and digests identical to spec/traceability.yaml, and spec/fsm/*.yaml must exist for all five FSMs, agree with spec/fsm_states_57.yaml and keep terminal states edge-free."
+    implementation: "tools/lint_state_vocabulary.py"
+    severity: "BLOCKER"
+
+  - linter_id: "LINT-18"
+    name: "ArchiveIntegrityAndRetiredIdLinter"
+    target: "spec/archive/, spec/requirements.yaml, spec/change_records/"
+    rule: "The recovered historical archive must hash to the value recorded in spec/archive/manifest.json, no retired requirement ID may reappear in the Active Contract, and every retirement must cite an existing change record. Enforces REQ-S00-009 and Section 2.4 immutability."
     implementation: "tools/lint_state_vocabulary.py"
     severity: "BLOCKER"

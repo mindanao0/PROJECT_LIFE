@@ -18,7 +18,7 @@ import sys
 import yaml
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SPEC = ROOT / "build/spec/Evolution_Engine_Active_Spec_10_2_2.md"
+SPEC = ROOT / "spec/ACTIVE_CONTRACT.md"
 OUT_DIR = ROOT / "spec/fsm"
 
 SECTIONS = {
@@ -92,7 +92,7 @@ def parse(name: str) -> dict:
 
     return {
         "fsm": name,
-        "source": f"build/spec/Evolution_Engine_Active_Spec_10_2_2.md section {section_no}",
+        "source": f"spec/ACTIVE_CONTRACT.md section {section_no}",
         "state_registry": f"spec/fsm_states_57.yaml -> fsms.{fsm_key}",
         "initial_state": initial,
         "states_count": len(states),

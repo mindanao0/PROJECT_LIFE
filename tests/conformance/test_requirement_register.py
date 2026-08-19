@@ -8,7 +8,7 @@ import yaml
 
 from tests.conftest import ROOT
 
-CONTRACT = ROOT / "build/spec/Evolution_Engine_Active_Spec_10_2_2.md"
+CONTRACT = ROOT / "spec/ACTIVE_CONTRACT.md"
 REQUIRED_FIELDS = {"id", "section", "status", "text_digest", "owner",
                    "verification_method", "test_refs", "evidence_refs", "release_gates"}
 ID_PATTERN = re.compile(r"^REQ-S[0-9]{2}-[0-9]{3}$")

@@ -1030,7 +1030,7 @@ domains:
         name: "Requirement Lifecycle Formal Transition"
       - id: "DIM-292"
         equation: "EQ-292"
-        name: "179 Unique Requirement IDs Monotonicity"
+        name: "176 Unique Requirement IDs Monotonicity"
       - id: "DIM-293"
         equation: "EQ-293"
         name: "Governed Spec Change Multi-Party Quorum"

@@ -30,7 +30,16 @@ import unicodedata
 import yaml
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SPEC = ROOT / "build/spec/Evolution_Engine_Active_Spec_10_2_2.md"
+SPEC = ROOT / "spec/ACTIVE_CONTRACT.md"
+
+# Withdrawn by a governed change. Section 2.4 makes published IDs immutable and
+# forbids reuse even after withdrawal, so they are recorded rather than freed.
+RETIRED = {
+    "REQ-S00-005": "CR-0001",
+    "REQ-S00-006": "CR-0001",
+    "REQ-S00-007": "CR-0001",
+    "REQ-S00-008": "CR-0001",
+}
 
 DELIMITER = re.compile(r"^(\[(?:REQ|IMPL|TEST|EVID)\]\[REQ-S\d{2}-\d{3}\]|#{1,6}\s|---\s*$)")
 DECLARATION = re.compile(r"^\[(REQ|IMPL|TEST|EVID)\]\[(REQ-S(\d{2})-\d{3})\]\s*(.*)$")
@@ -113,7 +122,7 @@ def main() -> int:
     header = (
         "# Requirement register — one entry per active normative requirement (REQ-S02-008).\n"
         "# Generated with spec/traceability.yaml by tools/generate_requirements.py from\n"
-        "# build/spec/Evolution_Engine_Active_Spec_10_2_2.md. Do not hand-edit either file.\n"
+        "# spec/ACTIVE_CONTRACT.md. Do not hand-edit either file.\n"
         "#\n"
         "# text_digest = SHA-256(UTF-8 bytes of the NFC-normalized requirement text), taken\n"
         "# from the first character after the \"[STATUS][ID] \" prefix to the line before the\n"
@@ -123,10 +132,19 @@ def main() -> int:
         "# owner is UNASSIGNED because no owner data exists yet, and verification_method is\n"
         "# PENDING unless a test in this repo exercises the requirement today. REQ-S22-004\n"
         "# requires the honest status rather than an auto-PASS.\n\n")
+    live = {r["id"] for r in records}
+    clashes = sorted(live & set(RETIRED))
+    if clashes:
+        raise SystemExit(f"retired requirement IDs reused: {clashes} — Section 2.4 forbids this")
+
     (ROOT / "spec/requirements.yaml").write_text(
         header + yaml.safe_dump(
             {"spec_version": "10.2.2", "digest_algorithm": "SHA-256/NFC",
-             "total_requirements": len(records), "requirements": records},
+             "total_requirements": len(records),
+             "retired_requirements": [
+                 {"id": rid, "withdrawn_by": cr, "reusable": False}
+                 for rid, cr in sorted(RETIRED.items())],
+             "requirements": records},
             sort_keys=False, allow_unicode=True, width=100),
         encoding="utf-8")
 

@@ -1,7 +1,7 @@
 # Python SDK Reference Specification
 
 > **Authority Level:** NARRATIVE — rank 4 in `spec/authority.yaml` document_precedence. Explains the canonical sources; must not contradict them.    
-> **Canonical surface:** [`build/spec/Evolution_Engine_Active_Spec_10_2_2.md`](../../build/spec/Evolution_Engine_Active_Spec_10_2_2.md) §6.2 — synchronous, 12 operations.  
+> **Canonical surface:** [`spec/ACTIVE_CONTRACT.md`](../../spec/ACTIVE_CONTRACT.md) §6.2 — synchronous, 12 operations.  
 > เมธอด async ในไฟล์นี้เป็น **ข้อเสนอ** ที่ยังไม่อยู่ใน Active Contract ต้องผ่าน Section 27 governed spec change ก่อนจึงจะบังคับใช้ได้
 > **Scope:** PUBLIC SDK SPECIFICATION (L4 Authority)
 > **Target Subsystem:** Public Client Interface (`evolution_engine.sdk`)  

@@ -45,7 +45,7 @@
 ### 1.1 Formal State Definitions
 1. `PROPOSAL_SUBMITTED`: ยื่นคำขอแก้ไขสเปก (RFC / Spec Change Request)
 2. `LINTERS_PASSED`: สเปกผ่านการตรวจสอบรูปแบบจาก Spec Linters ทั้ง 8 ตัว
-3. `IMPACT_ANALYZED`: วิเคราะห์ผลกระทบต่อ 179 Requirements และ 300 Dimensions
+3. `IMPACT_ANALYZED`: วิเคราะห์ผลกระทบต่อ 176 Requirements และ 300 Dimensions
 4. `MULTI_PARTY_REVIEW`: ตรวจสอบโดยคณะกรรมการวิศวกรรม (อย่างน้อย 2 คนที่ไม่ใช่ผู้เขียน)
 5. `VOTING_OPEN`: เปิดให้ลงคะแนนเสียง
 6. `QUORUM_REACHED`: คะแนนเสียงผ่านเกณฑ์ Quorum $\ge 75\%$
@@ -64,4 +64,4 @@
    $$\text{Author}(\text{RFC}) \notin \text{Approvers}(\text{RFC})$$
 2. **2-of-3 Cryptographic Multisig:** บันทึกสเปกต้องลงนามด้วยกุญแจ Ed25519 อย่างน้อย 2 ใน 3:
    $$\sum_{i=1}^3 \text{VerifySig}(K_i, M_{\text{spec}}, S_i) \ge 2$$
-3. **Monotonic Requirement Traceability:** รหัส Requirement IDs ครบ 179 ข้อ ห้ามถูกลบทิ้งโดยไม่ผ่านขั้นตอน Deprecation Cycle
+3. **Monotonic Requirement Traceability:** รหัส Requirement IDs ครบ 176 ข้อ ห้ามถูกลบทิ้งโดยไม่ผ่านขั้นตอน Deprecation Cycle

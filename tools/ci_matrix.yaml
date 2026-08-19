@@ -1,66 +1,60 @@
-# CI job names are canonical in build/spec/Evolution_Engine_Active_Spec_10_2_2.md section 21.
+# CI job names are canonical in spec/ACTIVE_CONTRACT.md section 21.
 # This file only groups them into pipeline stages. Adding or renaming a job here without
 # changing section 21 is a REQ-S21-002 violation.
 
-version: "10.2.2"
-total_pipeline_jobs: 39
-
+version: 10.2.2
+total_pipeline_jobs: 38
 stages:
-  - stage: "spec_verification"
-    jobs_count: 8
-    jobs:
-      - spec_utf8_control_char_lint
-      - spec_heading_classification_lint
-      - spec_single_active_version_lint
-      - spec_no_historical_normative_freeze_lint
-      - spec_active_view_byte_match
-      - spec_archive_checksum_match
-      - spec_requirement_id_unique_and_complete
-      - spec_requirement_digest_change_guard
-
-  - stage: "schema_and_protocol"
-    jobs_count: 4
-    jobs:
-      - schema_registry_exact_26
-      - schema_meta_validation
-      - schema_valid_invalid_vectors
-      - protocol_type_check
-
-  - stage: "fsm_config_and_unit"
-    jobs_count: 6
-    jobs:
-      - fsm_reachability_and_terminal_tests
-      - config_argv_only_validation
-      - config_resolution_precedence_validation
-      - config_decimal_and_weight_semantics
-      - vertical_slice_deterministic_replay
-      - unit_tests
-
-  - stage: "security_and_persistence"
-    jobs_count: 10
-    jobs:
-      - integration_tests
-      - sandbox_profile_a_capability_probes
-      - sandbox_profile_a_kernel_backend_matrix
-      - sandbox_negative_security_corpus
-      - crypto_profile_test_vectors
-      - golden_core
-      - golden_security
-      - golden_reliability
-      - replay_tests
-      - db_migration_tests
-
-  - stage: "golden_and_release"
-    jobs_count: 11
-    jobs:
-      - db_foreign_key_and_state_constraints
-      - db_index_query_plan_assertions
-      - db_cas_crash_injection
-      - audit_chain_verification
-      - traceability_completeness
-      - release_evidence_bundle_validation
-      - golden_self_evolution
-      - canary_traffic_validation
-      - rollback_demonstration
-      - immutable_evaluator_checksum_proof
-      - root_of_trust_bootstrap_ceremony
+- stage: spec_verification
+  jobs_count: 7
+  jobs:
+  - spec_utf8_control_char_lint
+  - spec_heading_classification_lint
+  - spec_single_active_version_lint
+  - spec_no_historical_normative_freeze_lint
+  - spec_archive_checksum_match
+  - spec_requirement_id_unique_and_complete
+  - spec_requirement_digest_change_guard
+- stage: schema_and_protocol
+  jobs_count: 4
+  jobs:
+  - schema_registry_exact_26
+  - schema_meta_validation
+  - schema_valid_invalid_vectors
+  - protocol_type_check
+- stage: fsm_config_and_unit
+  jobs_count: 6
+  jobs:
+  - fsm_reachability_and_terminal_tests
+  - config_argv_only_validation
+  - config_resolution_precedence_validation
+  - config_decimal_and_weight_semantics
+  - vertical_slice_deterministic_replay
+  - unit_tests
+- stage: security_and_persistence
+  jobs_count: 10
+  jobs:
+  - integration_tests
+  - sandbox_profile_a_capability_probes
+  - sandbox_profile_a_kernel_backend_matrix
+  - sandbox_negative_security_corpus
+  - crypto_profile_test_vectors
+  - golden_core
+  - golden_security
+  - golden_reliability
+  - replay_tests
+  - db_migration_tests
+- stage: golden_and_release
+  jobs_count: 11
+  jobs:
+  - db_foreign_key_and_state_constraints
+  - db_index_query_plan_assertions
+  - db_cas_crash_injection
+  - audit_chain_verification
+  - traceability_completeness
+  - release_evidence_bundle_validation
+  - golden_self_evolution
+  - canary_traffic_validation
+  - rollback_demonstration
+  - immutable_evaluator_checksum_proof
+  - root_of_trust_bootstrap_ceremony

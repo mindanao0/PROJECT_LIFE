@@ -1,7 +1,7 @@
 # Evolution Engine — Complete Modular Specifications Suite
 
 > **Specification Lineage:** Plan 10.2.2 Unified Architecture  
-> **Source Authority:** [build/spec/Evolution_Engine_Active_Spec_10_2_2.md](../build/spec/Evolution_Engine_Active_Spec_10_2_2.md)  
+> **Source Authority:** [spec/ACTIVE_CONTRACT.md](../spec/ACTIVE_CONTRACT.md)  
 > **Master 300-Dimensional Framework:** 🌐 **[300_DIMENSIONAL_HYPER_SYSTEM_FRAMEWORK.md](300_DIMENSIONAL_HYPER_SYSTEM_FRAMEWORK.md)**  
 > **Master 300 Equations Universe:** 🧮 **[300_CANONICAL_MATHEMATICAL_EQUATIONS.md](05_math_and_selection/300_CANONICAL_MATHEMATICAL_EQUATIONS.md)**  
 > **Dedicated 30 Domains Deep-Dive:** 📁 **[docs/domains/](domains)** (ครบทั้ง 30 ไฟล์เฉพาะทาง)  
@@ -155,5 +155,5 @@
 ### 🤝 [10_governance_and_roadmap/](10_governance_and_roadmap) — ธรรมาภิบาลและการกำกับดูแล
 - 📄 **[MATURITY_LADDER_M0_M13.md](10_governance_and_roadmap/MATURITY_LADDER_M0_M13.md)** : บันไดความสมบูรณ์ 14 ขั้น (M0 ถึง M13) และ Release Gates
 - 📄 **[GOVERNED_SPEC_CHANGE.md](10_governance_and_roadmap/GOVERNED_SPEC_CHANGE.md)** : กระบวนการขอแก้ไขสเปกอย่างเป็นทางการ
-- 📄 **[REQUIREMENTS_TRACEABILITY.md](10_governance_and_roadmap/REQUIREMENTS_TRACEABILITY.md)** : ตารางแจกแจง Requirement ครบทั้ง 179 ข้อ
+- 📄 **[REQUIREMENTS_TRACEABILITY.md](10_governance_and_roadmap/REQUIREMENTS_TRACEABILITY.md)** : ตารางแจกแจง Requirement ครบทั้ง 176 ข้อ
 - 📄 **[GLOSSARY_AND_TERMINOLOGY.md](10_governance_and_roadmap/GLOSSARY_AND_TERMINOLOGY.md)** : พจนานุกรมคำศัพท์เฉพาะทางมาตรฐาน

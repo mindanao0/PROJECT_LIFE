@@ -23,6 +23,8 @@ LINT-17 (REQ-S02-008, REQ-S08-012, REQ-S19-003): spec/requirements.yaml and
   spec/traceability.yaml must cover every requirement with the mandated fields and
   identical digests, and spec/fsm/*.yaml must exist for all five FSMs and agree
   with spec/fsm_states_57.yaml.
+LINT-18 (REQ-S00-009, REQ-S00-010): the recovered archive must match the SHA-256
+  in spec/archive/manifest.json, and every retired requirement ID must stay retired.
 LINT-12: prose state lists anywhere in the repo must not use a state name that
   spec/fsm_states_57.yaml has retired. Prose drift is what made LINT-09 miss the
   first time: the DDL was fixed while the narrative kept the old vocabulary.
@@ -31,6 +33,7 @@ Exit code 0 = pass, 1 = BLOCKER findings.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import pathlib
 import re
@@ -43,7 +46,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 DDL_FILES = [
     "docs/03_DATABASE_AND_STORAGE.md",
     "docs/03_storage_and_database/SQLITE_DDL_29_TABLES.md",
-    "build/spec/Evolution_Engine_Active_Spec_10_2_2.md",
+    "spec/ACTIVE_CONTRACT.md",
 ]
 
 # DDL CHECK column -> fsm key in spec/fsm_states_57.yaml
@@ -186,7 +189,7 @@ def main() -> int:
         # deployment
         "STAGED", "CANARY", "VALIDATED", "APPROVED", "ACTIVE", "PROMOTED",
     } - live
-    scan_globs = ["build/spec/*.md", "docs/**/*.md", "spec/*.yaml", "schemas/*.json"]
+    scan_globs = ["spec/*.md", "docs/**/*.md", "spec/*.yaml", "schemas/*.json"]
     for pattern in scan_globs:
         for path in sorted(ROOT.glob(pattern)):
             if path.name == "lint_state_vocabulary.py":
@@ -250,7 +253,7 @@ def main() -> int:
             )
 
     # --- LINT-13: CI job names must resolve, and gates must not cycle ----------
-    spec_md = (ROOT / "build/spec/Evolution_Engine_Active_Spec_10_2_2.md").read_text(encoding="utf-8")
+    spec_md = (ROOT / "spec/ACTIVE_CONTRACT.md").read_text(encoding="utf-8")
     start = spec_md.find("# 21. CI")
     end = spec_md.find("# 22.", start)
     canonical_jobs = set(re.findall(r"^([a-z][a-z0-9_]{6,})$", spec_md[start:end], re.M))
@@ -360,7 +363,7 @@ def main() -> int:
         Draft202012Validator.check_schema(cfg_schema)
         validator = Draft202012Validator(cfg_schema)
         sources = sorted(ROOT.glob("docs/**/*.md")) + sorted(ROOT.glob("*.md"))
-        sources.append(ROOT / "build/spec/Evolution_Engine_Active_Spec_10_2_2.md")
+        sources.append(ROOT / "spec/ACTIVE_CONTRACT.md")
         checked = 0
         for path in sources:
             for block in re.findall(r"```yaml\n(.*?)```", path.read_text(encoding="utf-8"), re.S):
@@ -467,12 +470,39 @@ def main() -> int:
             if graph.get(terminal):
                 findings.append(f"LINT-17 spec/fsm/{fsm_name}.yaml: terminal {terminal} has outgoing edges")
 
+    # --- LINT-18: archive integrity and retired-ID reuse ------------------------
+    manifest_path = ROOT / "spec/archive/manifest.json"
+    if not manifest_path.exists():
+        findings.append("LINT-18 spec/archive/manifest.json is missing (REQ-S00-009)")
+    else:
+        archive_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        archive_file = ROOT / archive_manifest["file"]
+        if not archive_file.exists():
+            findings.append(f"LINT-18 archive {archive_manifest['file']} is missing")
+        else:
+            digest = hashlib.sha256(archive_file.read_bytes()).hexdigest()
+            if digest != archive_manifest["file_sha256"]:
+                findings.append(
+                    f"LINT-18 archive digest mismatch: manifest says "
+                    f"{archive_manifest['file_sha256'][:16]}..., file is {digest[:16]}...")
+
+    register_data = yaml.safe_load((ROOT / "spec/requirements.yaml").read_text(encoding="utf-8"))
+    retired = {r["id"] for r in register_data.get("retired_requirements", [])}
+    reused = sorted(retired & canonical_req_ids)
+    if reused:
+        findings.append(
+            f"LINT-18 retired requirement IDs reappeared in the Active Contract: {reused} — "
+            f"Section 2.4 forbids reuse")
+    for record in register_data.get("retired_requirements", []):
+        if not (ROOT / "spec/change_records").glob(f"{record['withdrawn_by']}*"):
+            findings.append(f"LINT-18 {record['id']} cites missing change record {record['withdrawn_by']}")
+
     if findings:
         print(f"BLOCKER: {len(findings)} finding(s)\n")
         for f in findings:
             print(f"  - {f}")
         return 1
-    print("LINT-09..17: PASS — vocabularies agree, evidence is retention-safe, corpus matches manifest, CI job names resolve, declared counts are real, config examples validate, EQ/DIM registries are complete, requirement register and FSM specs agree")
+    print("LINT-09..18: PASS — vocabularies agree, evidence is retention-safe, corpus matches manifest, CI job names resolve, declared counts are real, config examples validate, EQ/DIM registries are complete, requirement register and FSM specs agree, archive intact")
     return 0
 
 

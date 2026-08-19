@@ -6,7 +6,7 @@
 
 spec_version: 10.2.2
 digest_algorithm: SHA-256/NFC
-total_requirements: 179
+total_requirements: 176
 requirements:
 - id: REQ-S00-001
   section: 0
@@ -56,59 +56,23 @@ requirements:
   test_refs: []
   evidence_refs: []
   release_gates: []
-- id: REQ-S00-005
-  section: 0
-  section_title: Document Control & Active-Spec Generation
-  status: REQ
-  text_digest: sha256:6dccd06175279976d663ba60254d5f77fae18fd1fe6ee2a2fbeee85ef2ce9c04
-  schema_refs: []
-  protocol_refs: []
-  implementation_refs: []
-  fsm_refs: []
-  test_refs: []
-  evidence_refs: []
-  release_gates: []
-- id: REQ-S00-006
-  section: 0
-  section_title: Document Control & Active-Spec Generation
-  status: REQ
-  text_digest: sha256:5b024e31b9145ff52fc3a6d1ef717154e321e283d715ee99e8b93bad1e3570bb
-  schema_refs: []
-  protocol_refs: []
-  implementation_refs: []
-  fsm_refs: []
-  test_refs: []
-  evidence_refs: []
-  release_gates: []
-- id: REQ-S00-007
-  section: 0
-  section_title: Document Control & Active-Spec Generation
-  status: REQ
-  text_digest: sha256:2ccca88c1edd3425b66e60ffe1915dc2ba7314cc1393576fdc194691af1523ac
-  schema_refs: []
-  protocol_refs: []
-  implementation_refs: []
-  fsm_refs: []
-  test_refs: []
-  evidence_refs: []
-  release_gates: []
-- id: REQ-S00-008
-  section: 0
-  section_title: Document Control & Active-Spec Generation
-  status: REQ
-  text_digest: sha256:720ce1d85e2b71d0535e9e9c9a4594fed1cf1fa0d24e86e24aa94c97c0fef3d2
-  schema_refs: []
-  protocol_refs: []
-  implementation_refs: []
-  fsm_refs: []
-  test_refs: []
-  evidence_refs: []
-  release_gates: []
 - id: REQ-S00-009
   section: 0
   section_title: Document Control & Active-Spec Generation
   status: REQ
-  text_digest: sha256:3af2097f6dbae554dab05baabed1d5579840e23b9c051b0f1275e2849b3e17e0
+  text_digest: sha256:d23cb90f02420dd00fd97a152fe4fbc0506dcb0a1246289086c9433eb0b0b20c
+  schema_refs: []
+  protocol_refs: []
+  implementation_refs: []
+  fsm_refs: []
+  test_refs: []
+  evidence_refs: []
+  release_gates: []
+- id: REQ-S00-010
+  section: 0
+  section_title: Document Control & Active-Spec Generation
+  status: REQ
+  text_digest: sha256:a10509cfedb541dca1f6b2bad057430573ad821ac75743362d05813ca7aad923
   schema_refs: []
   protocol_refs: []
   implementation_refs: []
