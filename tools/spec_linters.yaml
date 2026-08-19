@@ -11,7 +11,7 @@ linters:
   - linter_id: "LINT-02"
     name: "MonotonicTraceabilityLinter"
     target: "docs/10_governance_and_roadmap/REQUIREMENTS_TRACEABILITY.md"
-    rule: "Verify exactly 176 monotonic requirement IDs without gaps or duplicates"
+    rule: "Verify exactly 179 monotonic requirement IDs without gaps or duplicates"
     severity: "BLOCKER"
 
   - linter_id: "LINT-03"

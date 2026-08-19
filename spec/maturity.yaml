@@ -7,7 +7,7 @@ maturity_ladder:
     gate: "Architecture interfaces and single-writer concurrency defined"
   - level: "M2"
     name: "REQUIREMENTS_CANONICAL"
-    gate: "All 176 Requirement IDs monotonically checked and compliant"
+    gate: "All 179 Requirement IDs monotonically checked and compliant"
   - level: "M3"
     name: "SCHEMAS"
     gate: "26 JSON Schemas Draft 2020-12 valid with test fixtures"

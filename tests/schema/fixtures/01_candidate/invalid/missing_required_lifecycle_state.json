@@ -1,8 +1,8 @@
 {
-  "candidate_id": "018e1234-5678-7abc-8def-0123456789ab",
-  "generation_id": "018e2222-3333-7444-8555-666677778888",
+  "candidate_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "generation_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
   "source_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-  "parent_candidate_id": "018e1234-5678-7abc-8def-0123456789ab",
+  "parent_candidate_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
   "mutation_id": "018e2222-3333-7444-8555-666677778888",
   "ast_delta_summary": {
     "nodes_added": 1,

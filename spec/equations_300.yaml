@@ -1029,7 +1029,7 @@ domains:
         name: "Requirement Lifecycle Formal Transition"
         formula: "$\\text{Status} \\in \\{\\text{REQ}, \\text{IMP}, \\text{TEST}, \\text{EVID}\\}$"
       - id: "EQ-292"
-        name: "176 Unique Requirement IDs Monotonicity"
+        name: "179 Unique Requirement IDs Monotonicity"
         formula: "$|\\mathcal{R}| \\equiv 176, \\quad \\text{Index}(R_k) = k$"
       - id: "EQ-293"
         name: "Governed Spec Change Multi-Party Quorum"

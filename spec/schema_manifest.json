@@ -11,8 +11,8 @@
       "schema_id": "https://evolution-engine.org/schemas/01_candidate.schema.json",
       "title": "CandidateManifest",
       "schema_version": "https://json-schema.org/draft/2020-12/schema",
-      "size_bytes": 1382,
-      "sha256": "df0d17a833ea7a2e1912a39ec963122cede0b3a55bc8663d4c0908ac2e22079d"
+      "size_bytes": 1889,
+      "sha256": "749bb7f1c1ae6eb3905566e03f2c0ea08eb79a312ec1e5af19f007162638867f"
     },
     {
       "registry_order": 2,

@@ -1,0 +1,124 @@
+# Canonical byte rules, identifier derivation and reproducibility levels (rank 1).
+#
+# Section 11.1 pinned eight serialization rules but left four degrees of freedom
+# that each break cross-machine hash equality; section 11.3 named R0..R4 without
+# defining any of them; and CandidateId had no derivation at all even though
+# REQ-S10-010 makes it the final tie-break and REQ-S29-004 makes replay compare it.
+# Closed by CR-0004.
+
+spec_version: "10.2.2"
+
+canonical_bytes:
+  encoding: "UTF-8"
+  unicode_normalization: "NFC"
+  key_order: "lexicographic by UTF-8 code unit, ascending"
+  duplicate_keys: "forbidden"
+  non_finite_numbers: "forbidden (no NaN, no Infinity)"
+  timestamps: "RFC 3339 UTC with a literal Z and exactly 6 fractional digits"
+  paths: "relative POSIX, forward slash, no leading ./"
+  insignificant_whitespace: "none — no space after ':' or ','"
+
+  # the four that were open
+  null_vs_absent:
+    rule: "A field that is absent and a field explicitly set to null are DIFFERENT bytes."
+    detail: >-
+      Optional fields that carry no value MUST be omitted entirely. null is
+      reserved for a value that is present and known to be empty, and only where a
+      schema declares the null type. Serializers must not insert nulls for missing
+      keys, and must not drop an explicit null.
+  integer_bounds:
+    rule: "Integers are signed 64-bit."
+    minimum: -9223372036854775808
+    maximum: 9223372036854775807
+    detail: "A value outside this range is a serialization error, never a float."
+  string_escaping:
+    rule: "Minimal JSON escaping only."
+    escaped: ['"', "\\", "\b", "\f", "\n", "\r", "\t"]
+    other_control_chars: "\\u00XX with lowercase hex"
+    detail: >-
+      Never escape a character that does not require it. Non-ASCII is emitted as
+      literal UTF-8, never as a \\u escape, so NFC normalization is what fixes the
+      bytes.
+  decimal_form:
+    rule: "Canonical decimal string (REQ-S05-011)."
+    pattern: "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?$"
+    detail: >-
+      No leading zeros, no leading +, no exponent, no trailing zeros beyond the
+      declared scale, and -0 is written 0. Division that does not terminate is
+      rounded half-even to the scale the metric declares, and the scale is part of
+      the hashed value.
+  trailing_newline:
+    rule: "Canonical bytes end WITHOUT a trailing newline."
+    detail: "A file on disk may add one; the hashed byte string must not include it."
+
+identifiers:
+  # content-derived: the same content always yields the same id, so replay reproduces it
+  - name: "CandidateId"
+    kind: "content-derived"
+    formula: "SHA-256(canonical bytes of the candidate identity envelope)"
+    envelope_fields: ["generation_index", "source_hash", "parent_candidate_id", "mutation_id"]
+    representation: "lowercase hex, 64 characters"
+    ordering: "lexicographic over the hex string; total and stable across machines"
+    rationale: >-
+      REQ-S10-010 makes CandidateId the final tie-break and REQ-S29-004 makes the
+      vertical slice compare it across two replays. A random UUID cannot satisfy
+      either. parent_candidate_id and mutation_id are null for a baseline candidate.
+  - name: "ArtifactId"
+    kind: "content-derived"
+    formula: "SHA-256(artifact bytes)"
+    representation: "lowercase hex, 64 characters"
+  - name: "GenerationId"
+    kind: "content-derived"
+    formula: "SHA-256(canonical bytes of {run_id, generation_index})"
+    representation: "lowercase hex, 64 characters"
+
+  # event-derived: identifies an occurrence, not a value; never compared across replays
+  - name: "RunId"
+    kind: "event-derived"
+    formula: "UUIDv7"
+    replay_note: "A replay is a new run and gets a new RunId. Never part of a compared digest."
+  - name: "ProjectId"
+    kind: "event-derived"
+    formula: "UUIDv7"
+  - name: "EvaluationAttemptId"
+    kind: "event-derived"
+    formula: "UUIDv7"
+  - name: "AuditEventId"
+    kind: "event-derived"
+    formula: "UUIDv7"
+
+reproducibility_levels:
+  ordering: "R4 implies R2 implies R1 implies R0. R3 implies R1. R3 and R2 are not ordered."
+  storage: "The achieved level is recorded per run in runs.reproducibility_level."
+  levels:
+    - level: "R0"
+      name: "Replayable"
+      definition: >-
+        The run can be re-executed from its recorded config, seed and environment
+        manifest without error. No output equality is claimed.
+      verification: "Re-run from the checkpoint; the run reaches a terminal state."
+    - level: "R1"
+      name: "Logical Deterministic"
+      definition: >-
+        Two replays produce the same candidate set, the same lineage graph and the
+        same selection decision. Metric values may differ.
+      verification: "Compare the CandidateId set, the lineage digest and the selection digest."
+    - level: "R2"
+      name: "Metric Reproducible"
+      definition: >-
+        R1, and every metric value falls within that metric's declared
+        practical_margin_decimal of the recorded value.
+      verification: "R1 checks, then per metric |replay - recorded| <= practical_margin_decimal."
+    - level: "R3"
+      name: "Statistically Equivalent"
+      definition: >-
+        R1, and each metric is statistically equivalent to the recorded distribution
+        under the TOST rule of section 10.3 at equivalence_alpha_decimal.
+      verification: "R1 checks, then TOST per metric against the recorded samples."
+    - level: "R4"
+      name: "Bit-Identical Artifact"
+      definition: >-
+        R1, and the canonical bytes of source, manifests, selected candidate identity
+        and exported artifacts are byte equal. Wall-clock timings and host timestamps
+        are excluded.
+      verification: "R1 checks, then SHA-256 equality over each artifact in the R4 scope."

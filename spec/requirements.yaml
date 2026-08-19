@@ -13,7 +13,7 @@
 
 spec_version: 10.2.2
 digest_algorithm: SHA-256/NFC
-total_requirements: 176
+total_requirements: 179
 retired_requirements:
 - id: REQ-S00-005
   withdrawn_by: CR-0001
@@ -818,6 +818,36 @@ requirements:
   section_title: Canonical Serialization, Identity & Reproducibility
   status: REQ
   text_digest: sha256:58c31f7c2d42a8949c64d800577ff1f07023ffe8f44f6b6961f623ba76a4e9e8
+  owner: UNASSIGNED
+  verification_method: PENDING
+  test_refs: []
+  evidence_refs: []
+  release_gates: []
+- id: REQ-S11-003
+  section: 11
+  section_title: Canonical Serialization, Identity & Reproducibility
+  status: REQ
+  text_digest: sha256:ade8a6df3f92cc79c6b2acb575cc61ad1933faccd7e71514cc5cf472b1549752
+  owner: UNASSIGNED
+  verification_method: PENDING
+  test_refs: []
+  evidence_refs: []
+  release_gates: []
+- id: REQ-S11-004
+  section: 11
+  section_title: Canonical Serialization, Identity & Reproducibility
+  status: REQ
+  text_digest: sha256:89c7e2e62339a3a6a4321df7f979f7e21aa0ee7da1eb6ca90c33c6c0e3bb6f8f
+  owner: UNASSIGNED
+  verification_method: PENDING
+  test_refs: []
+  evidence_refs: []
+  release_gates: []
+- id: REQ-S11-005
+  section: 11
+  section_title: Canonical Serialization, Identity & Reproducibility
+  status: REQ
+  text_digest: sha256:61ac1c442761ec360cec5c9ca813cb27991c1e1906e1126d9f8d720fac8400bb
   owner: UNASSIGNED
   verification_method: PENDING
   test_refs: []

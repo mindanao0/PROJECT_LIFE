@@ -47,7 +47,7 @@ document_precedence:
 
   - rank: 2
     source: "spec/ACTIVE_CONTRACT.md"
-    role: "The Active Contract. Sole home of the 176 [REQ] declarations. Where it
+    role: "The Active Contract. Sole home of the 179 [REQ] declarations. Where it
            describes data that rank 1 also holds, rank 1 wins and the contract
            must be corrected."
     normative: true

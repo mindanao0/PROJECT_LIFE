@@ -81,7 +81,7 @@ def seed_owner(con, owner_type) -> str:
     con.execute("INSERT OR IGNORE INTO projects VALUES('p1','n','1','t')")
     if owner_type == "PROJECT":
         return "p1"
-    con.execute("INSERT OR IGNORE INTO runs VALUES('r1','p1','c','po','e','INITIATED','00','t')")
+    con.execute("INSERT OR IGNORE INTO runs VALUES('r1','p1','c','po','e','INITIATED','00','R1',NULL,'t')")
     if owner_type == "RUN":
         return "r1"
     con.execute("INSERT OR IGNORE INTO generations VALUES('g1','r1',0,NULL,'COMMITTED')")
@@ -123,7 +123,7 @@ def test_dangling_owner_reference_is_rejected(db, owner_type):
 
 def test_audit_sequence_must_be_gapless(db):
     db.execute("INSERT INTO projects VALUES('p1','n','1','t')")
-    db.execute("INSERT INTO runs VALUES('r1','p1','c','po','e','INITIATED','00','t')")
+    db.execute("INSERT INTO runs VALUES('r1','p1','c','po','e','INITIATED','00','R1',NULL,'t')")
     db.execute("INSERT INTO audit_events VALUES('e0','r1',0,NULL,'h0','sys','G','a1','t')")
     db.execute("INSERT INTO audit_events VALUES('e1','r1',1,'h0','h1','sys','E','a1','t')")
     with pytest.raises(sqlite3.IntegrityError):
@@ -133,14 +133,14 @@ def test_audit_sequence_must_be_gapless(db):
 def test_engine_scoped_audit_sequence_is_counted_separately(db):
     """run_id IS NULL is its own chain, so it starts at 0 rather than continuing a run."""
     db.execute("INSERT INTO projects VALUES('p1','n','1','t')")
-    db.execute("INSERT INTO runs VALUES('r1','p1','c','po','e','INITIATED','00','t')")
+    db.execute("INSERT INTO runs VALUES('r1','p1','c','po','e','INITIATED','00','R1',NULL,'t')")
     db.execute("INSERT INTO audit_events VALUES('e0','r1',0,NULL,'h0','sys','G','a1','t')")
     db.execute("INSERT INTO audit_events VALUES('x0',NULL,0,NULL,'hx','sys','G','a1','t')")
 
 
 def test_terminal_candidate_is_immutable(db):
     db.execute("INSERT INTO projects VALUES('p1','n','1','t')")
-    db.execute("INSERT INTO runs VALUES('r1','p1','c','po','e','INITIATED','00','t')")
+    db.execute("INSERT INTO runs VALUES('r1','p1','c','po','e','INITIATED','00','R1',NULL,'t')")
     db.execute("INSERT INTO generations VALUES('g1','r1',0,NULL,'COMMITTED')")
     db.execute("INSERT INTO candidates VALUES('c1','g1',NULL,'h','SELECTED',NULL,'t')")
     with pytest.raises(sqlite3.IntegrityError):
@@ -149,7 +149,7 @@ def test_terminal_candidate_is_immutable(db):
 
 def test_lineage_self_loop_is_rejected(db):
     db.execute("INSERT INTO projects VALUES('p1','n','1','t')")
-    db.execute("INSERT INTO runs VALUES('r1','p1','c','po','e','INITIATED','00','t')")
+    db.execute("INSERT INTO runs VALUES('r1','p1','c','po','e','INITIATED','00','R1',NULL,'t')")
     db.execute("INSERT INTO generations VALUES('g1','r1',0,NULL,'COMMITTED')")
     db.execute("INSERT INTO candidates VALUES('c1','g1',NULL,'h','CREATED',NULL,'t')")
     with pytest.raises(sqlite3.IntegrityError):

@@ -31,6 +31,8 @@ CREATE TABLE runs (
         'ABORTED','RECOVERING'
     )),
     seed_hex TEXT NOT NULL,
+    reproducibility_target TEXT NOT NULL CHECK(reproducibility_target IN ('R0','R1','R2','R3','R4')),
+    reproducibility_level TEXT CHECK(reproducibility_level IN ('R0','R1','R2','R3','R4')),
     created_at_utc TEXT NOT NULL
 );
 

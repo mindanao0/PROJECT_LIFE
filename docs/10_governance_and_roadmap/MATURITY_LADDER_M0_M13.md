@@ -15,7 +15,7 @@
 ├───────┼───────────────────────────────────┼───────────────────────────────────────────────────────────────────────────┤
 │ M0    │ Genesis & Invariant Principles    │ กำหนดหลักการ 7 ข้อ, L0-L8 Authority, Threat Models                        │
 │ M1    │ Plan Canonical Release            │ รวมศูนย์เอกสารสเปก Master Single-File Plan 10.2.2                         │
-│ M2    │ Modular Specs & Requirements Hub  │ แยกเอกสาร 10 โฟลเดอร์, 30 โดเมน, 300 มิติ, 300 สมการ, 176 ข้อบังคับ       │
+│ M2    │ Modular Specs & Requirements Hub  │ แยกเอกสาร 10 โฟลเดอร์, 30 โดเมน, 300 มิติ, 300 สมการ, 179 ข้อบังคับ       │
 │ M3    │ Physical JSON Schemas             │ สร้างไฟล์ Draft 2020-12 schemas ครบ 26 ไฟล์ใน schemas/                     │
 │ M4    │ Core AST Engine & Visitors        │ อิมพลีเมนต์ AST Parser, CST, และ 8 Static Safety Invariant Visitors       │
 │ M5    │ Atomic Mutations (M01-M04)        │ ตัวดำเนินการ Constants, Operators, Boundaries, Loops                       │
@@ -48,7 +48,7 @@ maturity level M0–M13 ที่ใช้ตัดสิน release gate อย
 |---|---|---|
 | **M0** | `DRAFT` | UTF-8 encoding valid, no corrupted control characters |
 | **M1** | `ARCHITECTURE` | Architecture interfaces and single-writer concurrency defined |
-| **M2** | `REQUIREMENTS_CANONICAL` | All 176 Requirement IDs monotonically checked and compliant |
+| **M2** | `REQUIREMENTS_CANONICAL` | All 179 Requirement IDs monotonically checked and compliant |
 | **M3** | `SCHEMAS` | 26 JSON Schemas Draft 2020-12 valid with test fixtures |
 | **M4** | `PROTOCOLS` | 22 Typed Python Protocols with zero type errors |
 | **M5** | `FSM_AND_CONFIG` | FSM transition matrix reachability & Vertical Slice MVP-01 pass |

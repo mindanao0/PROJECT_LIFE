@@ -1252,6 +1252,8 @@ no insignificant whitespace
 
 [REQ][REQ-S11-002] canonical serializer ต้องมี golden byte test vectors
 
+[REQ][REQ-S11-003] กฎ canonical bytes ทั้งชุดอยู่ที่ `spec/reproducibility.yaml` (rank 1) ซึ่งตรึง null-vs-absent, integer bound, escaping, decimal form และ trailing newline เพิ่มจากแปดข้อข้างบน; reference implementation คือ `tools/canonical_bytes.py` และ golden vectors อยู่ที่ `tests/golden/canonical_bytes_vectors.json`
+
 ---
 
 ## 11.2 Content Identity [NORMATIVE]
@@ -1262,7 +1264,11 @@ ConfigHash = SHA-256(canonical config)
 EnvironmentHash = SHA-256(canonical environment manifest)
 PolicyHash = SHA-256(canonical policy snapshot)
 EvidenceDigest = SHA-256(canonical evidence envelope)
+CandidateId = SHA-256(canonical bytes ของ candidate identity envelope)
+GenerationId = SHA-256(canonical bytes ของ {run_id, generation_index})
 ```
+
+[REQ][REQ-S11-004] identifier ทุกตัวต้องประกาศใน `spec/reproducibility.yaml` ว่าเป็น content-derived หรือ event-derived; content-derived ต้องมีสูตรและ representation ที่ตรึงแล้ว และห้ามใช้ค่าสุ่ม เพราะ REQ-S10-010 ใช้ลำดับของ `CandidateId` เป็น tie-break สุดท้าย
 
 ---
 
@@ -1286,6 +1292,8 @@ artifact bytes
 ```
 
 R4 **ไม่** หมายถึง wall-clock timing และ host timestamps ต้องตรงทุกบิต
+
+[REQ][REQ-S11-005] R0–R4 ต้องมีนิยามเชิงปฏิบัติและวิธีตรวจต่อระดับใน `spec/reproducibility.yaml`; ระดับที่ทำได้จริงต่อ run ต้องบันทึกที่คอลัมน์ `runs.reproducibility_level` และเป้าหมายที่ประกาศไว้ที่ `runs.reproducibility_target`
 
 ---
 
@@ -1548,6 +1556,8 @@ CREATE TABLE runs (
         'ABORTED','RECOVERING'
     )),
     seed_hex TEXT NOT NULL,
+    reproducibility_target TEXT NOT NULL CHECK(reproducibility_target IN ('R0','R1','R2','R3','R4')),
+    reproducibility_level TEXT CHECK(reproducibility_level IN ('R0','R1','R2','R3','R4')),
     created_at_utc TEXT NOT NULL
 );
 
@@ -2788,7 +2798,7 @@ current_evidence_status:
   cli_unique_in_this_document: true
   sdk_unique_in_this_document: true
   requirement_id_contract_defined: true
-  active_requirement_ids_defined: 176
+  active_requirement_ids_defined: 179
   generated_active_view_contract_defined: true
   db_ddl_count_defined_in_this_document: 29
   schema_registry_count_defined_in_this_document: 26
@@ -2953,7 +2963,7 @@ Canonical Run FSMs: 1
 Canonical Recovery FSMs: 1
 Canonical Governance FSMs: 1
 Canonical deployment FSMs: 1
-Active normative Requirement IDs: 176
+Active normative Requirement IDs: 179
 Relational tables specified: 29
 Schema registry entries: 26
 Golden corpus cases: 14

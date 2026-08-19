@@ -16,22 +16,31 @@
   "properties": {
     "candidate_id": {
       "type": "string",
-      "format": "uuid"
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "Content-derived SHA-256 (spec/reproducibility.yaml identifiers). Not a UUID: REQ-S10-010 uses its order as the final tie-break."
     },
     "generation_id": {
       "type": "string",
-      "format": "uuid"
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "Content-derived SHA-256 of {run_id, generation_index}."
     },
     "source_hash": {
       "type": "string",
       "pattern": "^[0-9a-f]{64}$"
     },
     "parent_candidate_id": {
-      "type": ["string", "null"],
-      "format": "uuid"
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "Content-derived SHA-256, or null for a baseline candidate."
     },
     "mutation_id": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "uuid"
     },
     "lifecycle_state": {
@@ -41,10 +50,22 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "nodes_added": { "type": "integer", "minimum": 0 },
-        "nodes_removed": { "type": "integer", "minimum": 0 },
-        "nodes_modified": { "type": "integer", "minimum": 0 },
-        "tree_edit_distance": { "type": "string", "pattern": "^[0-9]+\\.[0-9]{6}$" }
+        "nodes_added": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "nodes_removed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "nodes_modified": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tree_edit_distance": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]{6}$"
+        }
       }
     },
     "created_at": {

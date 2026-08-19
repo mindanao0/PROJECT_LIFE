@@ -12,7 +12,7 @@
 |:---:|---|---|
 | **M0** | `DRAFT` | เอกสารผ่านการ Parse เป็น UTF-8 และไม่มี Control Characters ผิดรูป |
 | **M1** | `ARCHITECTURE` | นิยามสถาปัตยกรรมและอินเทอร์เฟซครบถ้วน |
-| **M2** | `REQUIREMENTS_CANONICAL` | **[สถานะปัจจุบัน]** สเปกบูรณาการสมบูรณ์, 176 IDs ครบ, FSM/DDL ตรวจสอบแล้ว |
+| **M2** | `REQUIREMENTS_CANONICAL` | **[สถานะปัจจุบัน]** สเปกบูรณาการสมบูรณ์, 179 IDs ครบ, FSM/DDL ตรวจสอบแล้ว |
 | **M3** | `SCHEMAS` | มีไฟล์ physical schemas 26/26 ตัว พร้อม fixtures (valid/invalid) ผ่าน 100% |
 | **M4** | `PROTOCOLS` | Typed Python protocol package (22 Protocols) สมบูรณ์, Pinned Dependencies |
 | **M5** | `FSM_AND_CONFIG` | FSM conformance tests ผ่าน, Vertical Slice (MVP-01) Replay สำเร็จ |
