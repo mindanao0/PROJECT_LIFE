@@ -6,7 +6,7 @@
 
 spec_version: 10.2.2
 digest_algorithm: SHA-256/NFC
-total_requirements: 188
+total_requirements: 189
 requirements:
 - id: REQ-S00-001
   section: 0
@@ -65,7 +65,9 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tools/generate_archive_manifest.py
+  - tools/lint_state_vocabulary.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S00-010
@@ -77,7 +79,8 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tools/lint_state_vocabulary.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S01-001
@@ -186,7 +189,7 @@ requirements:
   implementation_refs: []
   fsm_refs: []
   test_refs:
-  - tests/conformance/test_spec_consistency.py::test_no_finding_for_rule[LINT-10]
+  - tools/lint_state_vocabulary.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S01-010
@@ -295,7 +298,7 @@ requirements:
   implementation_refs: []
   fsm_refs: []
   test_refs:
-  - tests/conformance/test_spec_consistency.py::test_no_finding_for_rule[LINT-14]
+  - tests/conformance/test_requirement_register.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S02-008
@@ -307,7 +310,9 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tests/conformance/test_requirement_register.py
+  - tools/lint_state_vocabulary.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S02-009
@@ -535,8 +540,7 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs:
-  - tests/conformance/test_spec_consistency.py::test_no_finding_for_rule[LINT-15]
+  test_refs: []
   evidence_refs: []
   release_gates: []
 - id: REQ-S05-012
@@ -758,6 +762,8 @@ requirements:
   - spec/fsm/governance.yaml
   test_refs:
   - tests/conformance/test_fsm_specs.py
+  - tools/generate_fsm_specs.py
+  - tools/lint_state_vocabulary.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S09-001
@@ -937,7 +943,8 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tests/golden/test_canonical_bytes.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S11-001
@@ -949,7 +956,9 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tests/golden/test_canonical_bytes.py
+  - tools/canonical_bytes.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S11-002
@@ -961,7 +970,10 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tests/golden/test_canonical_bytes.py
+  - tools/canonical_bytes.py
+  - tools/generate_golden_vectors.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S11-003
@@ -1033,7 +1045,8 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tests/security/test_sandbox_profile.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S12-021
@@ -1045,7 +1058,8 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tests/security/test_sandbox_profile.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S12-022
@@ -1084,6 +1098,19 @@ requirements:
   test_refs: []
   evidence_refs: []
   release_gates: []
+- id: REQ-S12-025
+  section: 12
+  section_title: Sandbox & Security
+  status: REQ
+  text_digest: sha256:37f0a78f56355047f611e4d78134b582239b136408b15fecfa3b63482ae4872c
+  schema_refs: []
+  protocol_refs: []
+  implementation_refs: []
+  fsm_refs: []
+  test_refs:
+  - tests/security/test_sandbox_profile.py
+  evidence_refs: []
+  release_gates: []
 - id: REQ-S12-024
   section: 12
   section_title: Sandbox & Security
@@ -1093,7 +1120,8 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tests/security/test_sandbox_profile.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S12-005
@@ -1321,7 +1349,9 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tests/conformance/test_db_integrity_triggers.py
+  - tools/generate_integrity_triggers.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S13-011
@@ -1358,7 +1388,7 @@ requirements:
   implementation_refs: []
   fsm_refs: []
   test_refs:
-  - tests/conformance/test_spec_consistency.py::test_no_finding_for_rule[LINT-09]
+  - tools/lint_state_vocabulary.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S13-005
@@ -1456,6 +1486,7 @@ requirements:
   implementation_refs: []
   fsm_refs: []
   test_refs:
+  - tests/conformance/test_spec_consistency.py
   - tests/schema/test_schema_registry.py
   - tools/validate_schemas.py
   evidence_refs: []
@@ -1487,6 +1518,7 @@ requirements:
   fsm_refs: []
   test_refs:
   - tests/schema/test_schema_registry.py
+  - tools/generate_schema_manifest.py
   - tools/validate_schemas.py
   evidence_refs: []
   release_gates: []
@@ -1502,6 +1534,7 @@ requirements:
   fsm_refs: []
   test_refs:
   - tests/schema/test_schema_registry.py
+  - tools/generate_schema_fixtures.py
   - tools/validate_schemas.py
   evidence_refs: []
   release_gates: []
@@ -1516,6 +1549,7 @@ requirements:
   implementation_refs: []
   fsm_refs: []
   test_refs:
+  - tests/conftest.py
   - tests/schema/test_schema_registry.py
   - tools/validate_schemas.py
   evidence_refs: []
@@ -1546,9 +1580,7 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs:
-  - tests/schema/test_schema_registry.py
-  - tools/validate_schemas.py
+  test_refs: []
   evidence_refs: []
   release_gates: []
 - id: REQ-S16-001
@@ -1561,7 +1593,7 @@ requirements:
   implementation_refs: []
   fsm_refs: []
   test_refs:
-  - tests/conformance/test_spec_consistency.py::test_no_finding_for_rule[LINT-11]
+  - tools/lint_state_vocabulary.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S16-002
@@ -1573,7 +1605,8 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tools/generate_schema_manifest.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S17-001
@@ -1633,7 +1666,8 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tests/conformance/test_audit_chain.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S18-001
@@ -1645,7 +1679,8 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tests/conformance/test_audit_chain.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S18-002
@@ -1657,7 +1692,8 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tests/conformance/test_audit_chain.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S18-003
@@ -1669,7 +1705,8 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tests/conformance/test_audit_chain.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S19-001
@@ -1681,8 +1718,7 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs:
-  - tests/conformance/test_fsm_specs.py
+  test_refs: []
   evidence_refs: []
   release_gates: []
 - id: REQ-S19-002
@@ -1710,6 +1746,8 @@ requirements:
   - spec/fsm/deployment.yaml
   test_refs:
   - tests/conformance/test_fsm_specs.py
+  - tools/generate_fsm_specs.py
+  - tools/lint_state_vocabulary.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S19-004
@@ -1806,7 +1844,7 @@ requirements:
   implementation_refs: []
   fsm_refs: []
   test_refs:
-  - tests/conformance/test_spec_consistency.py::test_no_finding_for_rule[LINT-13]
+  - tools/lint_state_vocabulary.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S22-001
@@ -1818,7 +1856,8 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tests/conformance/test_requirement_register.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S22-002
@@ -1842,7 +1881,8 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tests/conformance/test_requirement_register.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S22-004
@@ -1854,7 +1894,8 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tests/conformance/test_requirement_register.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S24-001
@@ -2214,7 +2255,9 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tools/compute_maturity.py
+  - tools/lint_state_vocabulary.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S29-001
@@ -2262,7 +2305,8 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tests/golden/test_canonical_bytes.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S29-005

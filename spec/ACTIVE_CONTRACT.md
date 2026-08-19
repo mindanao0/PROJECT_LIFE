@@ -407,14 +407,20 @@ evolution-engine/
 │   │   ├── deployment.yaml
 │   │   ├── recovery.yaml
 │   │   └── governance.yaml
+│   ├── reproducibility.yaml
+│   ├── protocols.yaml
 │   ├── measurement/
-│   │   ├── protocol.yaml
-│   │   └── reproducibility.yaml
-│   └── sandbox/
-│       ├── profile-a-linux.yaml
-│       ├── mounts.yaml
-│       ├── env-allowlist.yaml
-│       └── negative-tests.yaml
+│   │   └── protocol.yaml
+│   ├── sandbox/
+│   │   ├── profile-a-linux.yaml
+│   │   ├── mounts.yaml
+│   │   ├── env-allowlist.yaml
+│   │   └── negative-tests.yaml
+│   ├── archive/
+│   │   ├── Plan_10_2_0_Historical_Archive.md
+│   │   └── manifest.json
+│   └── change_records/
+│       └── CR-NNNN-*.md
 │
 ├── schemas/
 │   └── <26 canonical schemas>
@@ -440,8 +446,11 @@ evolution-engine/
 ├── migrations/
 ├── benchmarks/golden/
 ├── tools/
-│   ├── render_active_spec.py
-│   └── validate_schemas.py
+│   ├── validate_schemas.py
+│   ├── lint_state_vocabulary.py
+│   ├── compute_maturity.py
+│   ├── canonical_bytes.py
+│   └── generate_*.py
 ├── tests/
 │   ├── unit/
 │   ├── integration/
@@ -1373,6 +1382,8 @@ denied:
 [REQ][REQ-S12-004] symlink/hardlink/path traversal ต้อง resolve หลัง canonical path check ภายใน sandbox root
 
 [REQ][REQ-S12-023] sandbox ใช้โมเดล minimal rootfs ตาม `spec/sandbox/mounts.yaml` (rank 1) ซึ่งระบุ mount ทุกจุดรวม CPython runtime, masked/readonly path ของ `/proc` และรายการที่ต้องไม่มีอยู่หลัง setup; `denied` list ข้างบนถูกแทนด้วย `assertions_after_setup` เพราะ path ที่ไม่เคย mount ปฏิเสธไม่ได้ด้วยกฎ deny
+
+[REQ][REQ-S12-025] negative security corpus ต้องนิยามที่ `spec/sandbox/negative-tests.yaml` (rank 1) โดยแต่ละเคสระบุ attack, กลไกที่หยุดมัน, observable ที่พิสูจน์ และ negative control; เคสที่ attack ไม่ได้ถูกลองจริงหรือถูกหยุดด้วยเหตุอื่นถือว่า FAILED ไม่ใช่ผ่าน
 
 [REQ][REQ-S12-024] environment ของ sandbox เป็น deny-by-default ตาม `spec/sandbox/env-allowlist.yaml`; ห้ามส่ง `PYTHONPATH`, `PYTHONSTARTUP`, `LD_PRELOAD` หรือ `LD_LIBRARY_PATH` จาก host และค่าที่อนุญาตต้องถูกตรึงไม่ใช่สืบทอด
 

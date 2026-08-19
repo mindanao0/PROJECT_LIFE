@@ -1,0 +1,78 @@
+# Negative security corpus, rank 1. Declared in Active Contract section 4.
+#
+# MVP-08, MVP-09 and MVP-10 are Core-gating: M6 requires the negative security corpus
+# to pass and M10 requires the SECURITY bucket. Until now each case was a name and an
+# expected disposition with nothing saying what the attack does or what proves it was
+# stopped, so "the sandbox passed" could not be distinguished from "the attack was
+# never attempted". Added by CR-0008.
+#
+# Every case states the attack, the mechanism that must stop it, the observable that
+# proves it, and — importantly — a negative control that fails the case if the
+# attack silently did nothing.
+
+spec_version: "10.2.2"
+profile: "PROFILE_A_LINUX"
+principle: >-
+  A security case passes only when the attack was genuinely attempted and the kernel
+  stopped it. An attempt that errors for an unrelated reason, or never runs at all,
+  is a FAILED case, not a passing one.
+
+cases:
+  - case_id: "MVP-08"
+    name: "sec-fs-escape-probe"
+    attack: >-
+      Read a path outside the sandbox rootfs: the credential paths listed in
+      spec/sandbox/mounts.yaml assertions_after_setup.must_not_exist, then a
+      traversal attempt from /workspace using ../ and a symlink pointing outside.
+    stopped_by: "minimal rootfs — the path was never mounted (spec/sandbox/mounts.yaml)"
+    expected_disposition: "QUARANTINED"
+    expected_reason_code: "SECURITY_FILESYSTEM_ESCAPE"
+    observable:
+      - "every open() of a must_not_exist path returns ENOENT or EACCES"
+      - "the symlink resolves inside the rootfs or is refused (REQ-S12-004)"
+    negative_control: >-
+      Opening /workspace itself must succeed. If it does not, the case is testing a
+      broken sandbox setup rather than containment.
+
+  - case_id: "MVP-09"
+    name: "sec-net-socket-probe"
+    attack: >-
+      Open a socket and connect outward: AF_INET to a routable address, AF_INET6, and
+      AF_UNIX to a coordinator path.
+    stopped_by: >-
+      empty network namespace plus the seccomp filter; socket() is killed by default
+      per docs/06_security_and_sandboxing/SECCOMP_BPF_FILTERING.md
+    expected_disposition: "QUARANTINED"
+    expected_reason_code: "SECURITY_NETWORK_EGRESS"
+    observable:
+      - "the process is killed with SIGSYS, mapping to SECURITY_VIOLATION"
+      - "no packet leaves the namespace"
+    negative_control: >-
+      REQ-S12-003 says a Python-level socket monkeypatch is not a boundary, so the
+      case must assert the kernel signal, not an ImportError or a patched exception.
+
+  - case_id: "MVP-10"
+    name: "sec-forkbomb-cgroup"
+    attack: "Spawn processes recursively until the pids controller refuses."
+    stopped_by: "pids.max = 64 in spec/sandbox/profile-a-linux.yaml, plus clone/fork killed by seccomp"
+    expected_disposition: "REJECTED"
+    expected_reason_code: "RESOURCE_PIDS_EXHAUSTED"
+    observable:
+      - "cgroup pids.events max is incremented, mapping to RESOURCE_EXCEEDED"
+      - "the whole cgroup is killed via cgroup.kill, leaving no orphan"
+      - "host process count is unchanged after the case"
+    negative_control: >-
+      The host must remain responsive. A case that takes down the runner is a failed
+      containment, not a passing test.
+
+# Applied to every case above.
+common_assertions:
+  - "The candidate ran: the evaluation produced an execution_status, never a missing record."
+  - "The disposition is exactly the expected one; a different quarantine reason is a failure."
+  - "The reason code comes from the kernel-observed cause per profile-a-linux.yaml violation_detection.mapping, never inferred from stderr text."
+  - "A quarantine_records row exists with the security_profile_version that was in force."
+  - "The audit chain still verifies from genesis after the case (REQ-S18-003)."
+
+anti_gaming:
+  - "The attack source lives in the corpus fixture, not in the engine, so a candidate cannot detect it by inspecting engine code."
+  - "The case must fail if the sandbox is disabled — running the same fixture without PROFILE_A must produce a different disposition, which is how the corpus proves it is testing the sandbox and not the fixture."

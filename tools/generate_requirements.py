@@ -44,23 +44,29 @@ RETIRED = {
 DELIMITER = re.compile(r"^(\[(?:REQ|IMPL|TEST|EVID)\]\[REQ-S\d{2}-\d{3}\]|#{1,6}\s|---\s*$)")
 DECLARATION = re.compile(r"^\[(REQ|IMPL|TEST|EVID)\]\[(REQ-S(\d{2})-\d{3})\]\s*(.*)$")
 
-# Requirements a test in this repo actually exercises today. Anything not listed
-# stays PENDING — a requirement is not verified because it sounds covered.
-VERIFIED_BY = {
-    **{f"REQ-S15-{n:03d}": ["tests/schema/test_schema_registry.py", "tools/validate_schemas.py"]
-       for n in range(1, 8)},
-    "REQ-S08-012": ["tests/conformance/test_fsm_specs.py"],
-    "REQ-S19-001": ["tests/conformance/test_fsm_specs.py"],
-    "REQ-S19-002": ["tests/conformance/test_fsm_specs.py"],
-    "REQ-S19-003": ["tests/conformance/test_fsm_specs.py"],
-    "REQ-S08-006": ["tests/conformance/test_fsm_specs.py"],
-    "REQ-S01-009": ["tests/conformance/test_spec_consistency.py::test_no_finding_for_rule[LINT-10]"],
-    "REQ-S13-004": ["tests/conformance/test_spec_consistency.py::test_no_finding_for_rule[LINT-09]"],
-    "REQ-S16-001": ["tests/conformance/test_spec_consistency.py::test_no_finding_for_rule[LINT-11]"],
-    "REQ-S21-002": ["tests/conformance/test_spec_consistency.py::test_no_finding_for_rule[LINT-13]"],
-    "REQ-S02-007": ["tests/conformance/test_spec_consistency.py::test_no_finding_for_rule[LINT-14]"],
-    "REQ-S05-011": ["tests/conformance/test_spec_consistency.py::test_no_finding_for_rule[LINT-15]"],
-}
+# Which requirements a test exercises is DISCOVERED, not typed by hand.
+#
+# A hand-maintained map is the same hand-asserted-count disease this repo keeps
+# fixing everywhere else. Tests were written covering sixteen requirements and the
+# map was not updated, so those stayed PENDING while being covered — the map was
+# wrong in the safe direction that time, but nothing guaranteed it would be.
+#
+# A test claims coverage by naming the requirement id in its own source, usually in
+# the module or function docstring. That claim is checked: tests/conformance/
+# test_requirement_register.py asserts every referenced file exists, and the test
+# itself has to actually pass for the suite to be green.
+def discover_test_refs() -> dict[str, list[str]]:
+    found: dict[str, list[str]] = {}
+    for folder in ("tests", "tools"):
+        for path in sorted((ROOT / folder).rglob("*.py")):
+            rel = str(path.relative_to(ROOT))
+            if rel == "tools/generate_requirements.py":
+                continue  # this file names ids in comments, not as coverage
+            text = path.read_text(encoding="utf-8")
+            for rid in sorted(set(re.findall(r"REQ-S\d{2}-\d{3}", text))):
+                if rel not in found.setdefault(rid, []):
+                    found[rid].append(rel)
+    return found
 SCHEMA_REFS = {f"REQ-S15-{n:03d}": ["spec/schema_manifest.json"] for n in range(1, 8)}
 FSM_REFS = {
     "REQ-S08-012": ["spec/fsm/run.yaml", "spec/fsm/recovery.yaml", "spec/fsm/governance.yaml"],
@@ -91,6 +97,7 @@ def main() -> int:
     ci_jobs = set(re.findall(r"^([a-z][a-z0-9_]{6,})$", contract[start:end], re.M))
     gates = yaml.safe_load((ROOT / "spec/release_gates.yaml").read_text(encoding="utf-8"))["release_gates"]
 
+    verified_by = discover_test_refs()
     records = []
     for i, line in enumerate(lines):
         m = DECLARATION.match(line)
@@ -105,7 +112,7 @@ def main() -> int:
         text = "\n".join(x.rstrip() for x in "\n".join(body).strip().split("\n")).strip()
         text = unicodedata.normalize("NFC", text)
         named_jobs = sorted(j for j in ci_jobs if j in text)
-        tests = VERIFIED_BY.get(rid, [])
+        tests = verified_by.get(rid, [])
         records.append({
             "id": rid,
             "section": int(section),

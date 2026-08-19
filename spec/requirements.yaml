@@ -13,7 +13,7 @@
 
 spec_version: 10.2.2
 digest_algorithm: SHA-256/NFC
-total_requirements: 188
+total_requirements: 189
 retired_requirements:
 - id: REQ-S00-005
   withdrawn_by: CR-0001
@@ -74,8 +74,10 @@ requirements:
   status: REQ
   text_digest: sha256:d23cb90f02420dd00fd97a152fe4fbc0506dcb0a1246289086c9433eb0b0b20c
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tools/generate_archive_manifest.py
+  - tools/lint_state_vocabulary.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S00-010
@@ -84,8 +86,9 @@ requirements:
   status: REQ
   text_digest: sha256:a10509cfedb541dca1f6b2bad057430573ad821ac75743362d05813ca7aad923
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tools/lint_state_vocabulary.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S01-001
@@ -176,7 +179,7 @@ requirements:
   owner: UNASSIGNED
   verification_method: AUTOMATED_TEST
   test_refs:
-  - tests/conformance/test_spec_consistency.py::test_no_finding_for_rule[LINT-10]
+  - tools/lint_state_vocabulary.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S01-010
@@ -267,7 +270,7 @@ requirements:
   owner: UNASSIGNED
   verification_method: AUTOMATED_TEST
   test_refs:
-  - tests/conformance/test_spec_consistency.py::test_no_finding_for_rule[LINT-14]
+  - tests/conformance/test_requirement_register.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S02-008
@@ -276,8 +279,10 @@ requirements:
   status: REQ
   text_digest: sha256:fd1afd54d45870190691665d3d71435f1717a21d6fc1ee70259c01d2f586d984
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/conformance/test_requirement_register.py
+  - tools/lint_state_vocabulary.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S02-009
@@ -466,9 +471,8 @@ requirements:
   status: REQ
   text_digest: sha256:ab4c865a6865226e05ab88a4608f628bdda5fd4c1eeaf843157c4eafd1e0e5db
   owner: UNASSIGNED
-  verification_method: AUTOMATED_TEST
-  test_refs:
-  - tests/conformance/test_spec_consistency.py::test_no_finding_for_rule[LINT-15]
+  verification_method: PENDING
+  test_refs: []
   evidence_refs: []
   release_gates: []
 - id: REQ-S05-012
@@ -651,6 +655,8 @@ requirements:
   verification_method: AUTOMATED_TEST
   test_refs:
   - tests/conformance/test_fsm_specs.py
+  - tools/generate_fsm_specs.py
+  - tools/lint_state_vocabulary.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S09-001
@@ -799,8 +805,9 @@ requirements:
   status: REQ
   text_digest: sha256:b876948fc34fcef1cb0657140224b0a04f09ccc9f01561268ca74bf668d7b97b
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/golden/test_canonical_bytes.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S11-001
@@ -809,8 +816,10 @@ requirements:
   status: REQ
   text_digest: sha256:6ab67a4edcb90cdf142c443327d3d988d8c091e0acb5252ef69bb61cc68faedd
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/golden/test_canonical_bytes.py
+  - tools/canonical_bytes.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S11-002
@@ -819,8 +828,11 @@ requirements:
   status: REQ
   text_digest: sha256:58c31f7c2d42a8949c64d800577ff1f07023ffe8f44f6b6961f623ba76a4e9e8
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/golden/test_canonical_bytes.py
+  - tools/canonical_bytes.py
+  - tools/generate_golden_vectors.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S11-003
@@ -879,8 +891,9 @@ requirements:
   status: REQ
   text_digest: sha256:76e879d9a8bb9f123d4c7038712b05a0232443eccf13bfd207f4017d07c29106
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/security/test_sandbox_profile.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S12-021
@@ -889,8 +902,9 @@ requirements:
   status: REQ
   text_digest: sha256:213b3da18dbd27851a1fa02d0114544b28ebfd6cfb1ac3522fefc6af07cbd2e5
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/security/test_sandbox_profile.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S12-022
@@ -923,14 +937,26 @@ requirements:
   test_refs: []
   evidence_refs: []
   release_gates: []
+- id: REQ-S12-025
+  section: 12
+  section_title: Sandbox & Security
+  status: REQ
+  text_digest: sha256:37f0a78f56355047f611e4d78134b582239b136408b15fecfa3b63482ae4872c
+  owner: UNASSIGNED
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/security/test_sandbox_profile.py
+  evidence_refs: []
+  release_gates: []
 - id: REQ-S12-024
   section: 12
   section_title: Sandbox & Security
   status: REQ
   text_digest: sha256:9b3b9fa092f824c5238294992adc570975d4a1e7716557a967136720d833895b
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/security/test_sandbox_profile.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S12-005
@@ -1119,8 +1145,10 @@ requirements:
   status: REQ
   text_digest: sha256:35ea232db4e8a8a862e2d029e590bb204c79d491706a2279568c175d0bf657d0
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/conformance/test_db_integrity_triggers.py
+  - tools/generate_integrity_triggers.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S13-011
@@ -1151,7 +1179,7 @@ requirements:
   owner: UNASSIGNED
   verification_method: AUTOMATED_TEST
   test_refs:
-  - tests/conformance/test_spec_consistency.py::test_no_finding_for_rule[LINT-09]
+  - tools/lint_state_vocabulary.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S13-005
@@ -1232,6 +1260,7 @@ requirements:
   owner: UNASSIGNED
   verification_method: AUTOMATED_TEST
   test_refs:
+  - tests/conformance/test_spec_consistency.py
   - tests/schema/test_schema_registry.py
   - tools/validate_schemas.py
   evidence_refs: []
@@ -1257,6 +1286,7 @@ requirements:
   verification_method: AUTOMATED_TEST
   test_refs:
   - tests/schema/test_schema_registry.py
+  - tools/generate_schema_manifest.py
   - tools/validate_schemas.py
   evidence_refs: []
   release_gates: []
@@ -1269,6 +1299,7 @@ requirements:
   verification_method: AUTOMATED_TEST
   test_refs:
   - tests/schema/test_schema_registry.py
+  - tools/generate_schema_fixtures.py
   - tools/validate_schemas.py
   evidence_refs: []
   release_gates: []
@@ -1280,6 +1311,7 @@ requirements:
   owner: UNASSIGNED
   verification_method: AUTOMATED_TEST
   test_refs:
+  - tests/conftest.py
   - tests/schema/test_schema_registry.py
   - tools/validate_schemas.py
   evidence_refs: []
@@ -1303,10 +1335,8 @@ requirements:
   status: REQ
   text_digest: sha256:666eccccfcf4ab34d0c4941074a14f8d260a176c21b345566508d7bf6ff554a2
   owner: UNASSIGNED
-  verification_method: AUTOMATED_TEST
-  test_refs:
-  - tests/schema/test_schema_registry.py
-  - tools/validate_schemas.py
+  verification_method: PENDING
+  test_refs: []
   evidence_refs: []
   release_gates: []
 - id: REQ-S16-001
@@ -1317,7 +1347,7 @@ requirements:
   owner: UNASSIGNED
   verification_method: AUTOMATED_TEST
   test_refs:
-  - tests/conformance/test_spec_consistency.py::test_no_finding_for_rule[LINT-11]
+  - tools/lint_state_vocabulary.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S16-002
@@ -1326,8 +1356,9 @@ requirements:
   status: REQ
   text_digest: sha256:f5c3eaa917566afbb18a2ee3cc68f32cf091446506c5d93587920d94a74f379e
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tools/generate_schema_manifest.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S17-001
@@ -1376,8 +1407,9 @@ requirements:
   status: REQ
   text_digest: sha256:ca70febf10dc7a1da4d41e7173bd77ccc5e661805624cd4b594fe6151899a3a4
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/conformance/test_audit_chain.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S18-001
@@ -1386,8 +1418,9 @@ requirements:
   status: REQ
   text_digest: sha256:4fe762f2af42172551b257f19e2c1975beccedbe44c36cc5467c02559dad86bf
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/conformance/test_audit_chain.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S18-002
@@ -1396,8 +1429,9 @@ requirements:
   status: REQ
   text_digest: sha256:a8182545b46fdcb13ba555b43dfd53db05e89d04f6896d55770950afd9a5debd
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/conformance/test_audit_chain.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S18-003
@@ -1406,8 +1440,9 @@ requirements:
   status: REQ
   text_digest: sha256:0d6769a8c586c1e60ae3bdd21a1ce00ff1b77963f1d11f67795390aeb62f15ff
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/conformance/test_audit_chain.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S19-001
@@ -1416,9 +1451,8 @@ requirements:
   status: REQ
   text_digest: sha256:9bd10eecbf4522a9220d8e606ef712d9f0032220d937a9a683cd6dacaec79488
   owner: UNASSIGNED
-  verification_method: AUTOMATED_TEST
-  test_refs:
-  - tests/conformance/test_fsm_specs.py
+  verification_method: PENDING
+  test_refs: []
   evidence_refs: []
   release_gates: []
 - id: REQ-S19-002
@@ -1441,6 +1475,8 @@ requirements:
   verification_method: AUTOMATED_TEST
   test_refs:
   - tests/conformance/test_fsm_specs.py
+  - tools/generate_fsm_specs.py
+  - tools/lint_state_vocabulary.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S19-004
@@ -1521,7 +1557,7 @@ requirements:
   owner: UNASSIGNED
   verification_method: AUTOMATED_TEST
   test_refs:
-  - tests/conformance/test_spec_consistency.py::test_no_finding_for_rule[LINT-13]
+  - tools/lint_state_vocabulary.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S22-001
@@ -1530,8 +1566,9 @@ requirements:
   status: REQ
   text_digest: sha256:93f3c5db841f1ed714dd98edb63cc52be6538328c1f5e4a9eff569411e0cc8c1
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/conformance/test_requirement_register.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S22-002
@@ -1550,8 +1587,9 @@ requirements:
   status: REQ
   text_digest: sha256:67704b64b4beb88263f2c648fd8b729425b7f2124971736f574584f5931d435f
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/conformance/test_requirement_register.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S22-004
@@ -1560,8 +1598,9 @@ requirements:
   status: REQ
   text_digest: sha256:f8e731fc5acba27650736326dd4e89c513cd56c98973e0e60364dfceef3cc76e
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/conformance/test_requirement_register.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S24-001
@@ -1860,8 +1899,10 @@ requirements:
   status: REQ
   text_digest: sha256:99768a1d24c26f906ec949c98e968dfcf110a4bd35bee058bd98bc90638d1509
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tools/compute_maturity.py
+  - tools/lint_state_vocabulary.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S29-001
@@ -1900,8 +1941,9 @@ requirements:
   status: REQ
   text_digest: sha256:0402858f5f4b43b2c0309424ca1cbead799d0fcb36a5c1d3ae4ab7b8815a8241
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/golden/test_canonical_bytes.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S29-005

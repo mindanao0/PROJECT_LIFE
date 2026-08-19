@@ -147,3 +147,52 @@ def test_profile_and_env_agree_on_determinism(profile, env):
     assert values["PYTHONHASHSEED"] == determinism["pythonhashseed"]
     assert values["TZ"] == determinism["tz"]
     assert values["LC_ALL"] == determinism["lc_all"]
+
+
+# --- negative security corpus (REQ-S12-025) ---------------------------------
+
+@pytest.fixture(scope="module")
+def negative() -> dict:
+    return yaml.safe_load((SANDBOX / "negative-tests.yaml").read_text(encoding="utf-8"))
+
+
+def test_every_security_corpus_case_has_a_negative_test_definition(negative):
+    """MVP-08..10 are Core-gating; each needs more than a name and a disposition."""
+    manifest = yaml.safe_load(
+        (ROOT / "benchmarks/golden/manifest.yaml").read_text(encoding="utf-8"))["cases"]
+    security = {c["id"] for c in manifest if c["maturity_bucket"] == "SECURITY"}
+    defined = {c["case_id"] for c in negative["cases"]}
+    assert security == defined, f"undefined security cases: {security - defined}"
+
+
+def test_negative_cases_agree_with_the_manifest(negative):
+    manifest = {c["id"]: c for c in yaml.safe_load(
+        (ROOT / "benchmarks/golden/manifest.yaml").read_text(encoding="utf-8"))["cases"]}
+    for case in negative["cases"]:
+        entry = manifest[case["case_id"]]
+        assert case["name"] == entry["name"]
+        assert case["expected_disposition"] == entry["expected_disposition"]
+
+
+@pytest.mark.parametrize("field", ["attack", "stopped_by", "observable", "negative_control"])
+def test_each_case_is_specified_end_to_end(negative, field):
+    for case in negative["cases"]:
+        assert case.get(field), f"{case['case_id']} has no {field}"
+
+
+def test_each_case_names_a_kernel_mechanism(profile, negative):
+    """A Python-level guard is not a boundary (REQ-S12-003)."""
+    kernel_terms = ("seccomp", "namespace", "cgroup", "rootfs", "pids")
+    for case in negative["cases"]:
+        assert any(term in case["stopped_by"].lower() for term in kernel_terms), case["case_id"]
+
+
+def test_reason_codes_are_distinct(negative):
+    codes = [c["expected_reason_code"] for c in negative["cases"]]
+    assert len(codes) == len(set(codes))
+
+
+def test_corpus_proves_it_tests_the_sandbox(negative):
+    """Without this, the corpus could pass on a fixture that never attacks anything."""
+    joined = " ".join(negative["anti_gaming"])
+    assert "without PROFILE_A" in joined
