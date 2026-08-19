@@ -19,7 +19,7 @@
     },
     "candidate_id": {
       "type": "string",
-      "format": "uuid"
+      "pattern": "^[0-9a-f]{64}$"
     },
     "root_source_hash": {
       "type": "string",
@@ -34,10 +34,19 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["key_id", "signature_hex"],
+        "required": [
+          "key_id",
+          "signature_hex"
+        ],
         "properties": {
-          "key_id": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
-          "signature_hex": { "type": "string", "pattern": "^[0-9a-f]{128}$" }
+          "key_id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "signature_hex": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{128}$"
+          }
         }
       }
     },

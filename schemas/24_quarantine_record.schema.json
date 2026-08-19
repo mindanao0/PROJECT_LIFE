@@ -19,14 +19,19 @@
     },
     "candidate_id": {
       "type": "string",
-      "format": "uuid"
+      "pattern": "^[0-9a-f]{64}$"
     },
     "reason_code": {
       "type": "string"
     },
     "severity": {
       "type": "string",
-      "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL"
+      ]
     },
     "evidence_snapshot_hash": {
       "type": "string",

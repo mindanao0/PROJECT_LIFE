@@ -1,7 +1,7 @@
 {
   "decision_id": "018e1234-5678-7abc-8def-0123456789ab",
-  "generation_id": "018e2222-3333-7444-8555-666677778888",
-  "candidate_id": "018e9999-aaaa-7bbb-8ccc-ddddeeeeffff",
+  "generation_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "candidate_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
   "rank_index": 2,
   "crowding_distance_decimal": "1.000000"
 }

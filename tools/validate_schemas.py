@@ -24,7 +24,7 @@ import json
 import pathlib
 import sys
 
-from jsonschema import Draft202012Validator
+from jsonschema import Draft202012Validator, FormatChecker
 from referencing import Registry, Resource
 
 try:
@@ -161,9 +161,15 @@ def main() -> int:
         if not invalid_files:
             problems.append(f"REQ-S15-004 {stem}: no invalid fixtures")
 
-        py_validator = Draft202012Validator(schema, registry=py_registry)
+        # A validator built without a format checker treats "format" as a comment.
+        # That is why the identifier split-brain survived the M3 gate: eleven schemas
+        # declared format: uuid on fields the rank 1 rules make 64-hex, and nothing
+        # ever evaluated it (REQ-S15-002).
+        py_validator = Draft202012Validator(
+            schema, registry=py_registry, format_checker=FormatChecker())
         rs_validator = (
-            jsonschema_rs.Draft202012Validator(schema, registry=rs_registry)
+            jsonschema_rs.Draft202012Validator(
+                schema, registry=rs_registry, validate_formats=True)
             if rs_registry is not None else None)
 
         for path in valid_files + invalid_files:

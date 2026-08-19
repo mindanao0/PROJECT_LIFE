@@ -18,14 +18,15 @@
     },
     "generation_id": {
       "type": "string",
-      "format": "uuid"
+      "pattern": "^[0-9a-f]{64}$"
     },
     "candidate_ids": {
       "type": "array",
       "items": {
         "type": "string",
-        "format": "uuid"
-      }
+        "pattern": "^[0-9a-f]{64}$"
+      },
+      "pattern": "^[0-9a-f]{64}$"
     },
     "population_size": {
       "type": "integer",

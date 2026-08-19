@@ -13,7 +13,7 @@
   "properties": {
     "candidate_id": {
       "type": "string",
-      "format": "uuid"
+      "pattern": "^[0-9a-f]{64}$"
     },
     "generation_index": {
       "type": "integer",

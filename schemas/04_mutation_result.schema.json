@@ -19,18 +19,26 @@
     },
     "mutation_id": {
       "type": "string",
-      "format": "uuid"
+      "pattern": "^[0-9a-f]{64}$"
     },
     "status": {
       "type": "string",
-      "enum": ["SUCCESS", "SYNTAX_INVALID", "INVARIANT_VIOLATION", "NOOP"]
+      "enum": [
+        "SUCCESS",
+        "SYNTAX_INVALID",
+        "INVARIANT_VIOLATION",
+        "NOOP"
+      ]
     },
     "source_before_hash": {
       "type": "string",
       "pattern": "^[0-9a-f]{64}$"
     },
     "source_after_hash": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "pattern": "^[0-9a-f]{64}$"
     },
     "ast_delta_bytes": {

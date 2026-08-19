@@ -41,7 +41,7 @@
         "string",
         "null"
       ],
-      "format": "uuid"
+      "pattern": "^[0-9a-f]{64}$"
     },
     "lifecycle_state": {
       "$ref": "02_candidate_state.schema.json"

@@ -1,0 +1,10 @@
+{
+  "population_id": "018e1234-5678-7abc-8def-0123456789ab",
+  "generation_id": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+  "candidate_ids": [
+    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  ],
+  "population_size": 2,
+  "mean_diversity_score": "1.000000",
+  "created_at": "2026-08-19T12:00:00.000000Z"
+}

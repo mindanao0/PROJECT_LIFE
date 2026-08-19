@@ -99,11 +99,6 @@ class EvolutionEngine:
         :return: ExportManifest พร้อม SHA-256 Digest
         """
         ...
-
-    def connect_swarm(self, peer_addresses: List[str]) -> SwarmStatus:
-        """
-        เชื่อมต่อเข้าร่วมเครือข่าย Distributed P2P Evolutionary Swarm.
-        """
         ...
 ```
 
@@ -160,10 +155,8 @@ evolve report [--run-id <id>] [--format json|markdown|html] [--output <file>]
 evolve export --candidate-id <id> --destination <path> [--mode SAFE_EXPORT_ONLY]
 ```
 
-#### `evolve swarm join`
 เชื่อมต่อเข้าเครือข่าย Swarm
 ```bash
-evolve swarm join --peer <ip:port> [--peer <ip:port> ...]
 ```
 
 #### `evolve doctor`

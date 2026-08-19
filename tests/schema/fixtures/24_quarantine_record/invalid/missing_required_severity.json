@@ -1,6 +1,6 @@
 {
   "quarantine_record_id": "018e1234-5678-7abc-8def-0123456789ab",
-  "candidate_id": "018e2222-3333-7444-8555-666677778888",
+  "candidate_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
   "reason_code": "example",
   "evidence_snapshot_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
   "quarantined_at": "2026-08-19T12:00:00.000000Z"

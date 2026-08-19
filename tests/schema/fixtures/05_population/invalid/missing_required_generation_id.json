@@ -1,7 +1,7 @@
 {
   "population_id": "018e1234-5678-7abc-8def-0123456789ab",
   "candidate_ids": [
-    "018e9999-aaaa-7bbb-8ccc-ddddeeeeffff"
+    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
   ],
   "population_size": 2,
   "mean_diversity_score": "1.000000",

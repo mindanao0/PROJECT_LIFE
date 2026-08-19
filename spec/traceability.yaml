@@ -384,7 +384,9 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tools/compute_maturity.py
+  - tools/generate_lock.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S03-005
@@ -1551,6 +1553,7 @@ requirements:
   test_refs:
   - tests/conftest.py
   - tests/schema/test_schema_registry.py
+  - tools/generate_lock.py
   - tools/validate_schemas.py
   evidence_refs: []
   release_gates: []

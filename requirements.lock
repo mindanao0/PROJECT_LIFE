@@ -1,0 +1,15 @@
+# Pinned runtime for the specification toolchain (REQ-S03-004).
+#
+# The M4 gate requires exact package versions in a lock artifact. pyproject.toml
+# uses >= ranges, which is a dependency declaration, not a lock: two machines
+# resolving it can install different versions and produce different validator
+# verdicts on the same schema corpus, which would break REQ-S15-005.
+#
+# Regenerate with tools/generate_lock.py after changing pyproject.toml.
+
+# pyproject.toml sha256: 8ac81c51ccd84105659cd0c9b4117a453201558b2e7980bec97473e51ce3dc19
+
+jsonschema==4.26.0
+jsonschema-rs==0.49.9
+pyyaml==6.0.3
+pytest==9.1.1

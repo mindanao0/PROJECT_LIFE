@@ -16,7 +16,7 @@
   "properties": {
     "generation_id": {
       "type": "string",
-      "format": "uuid"
+      "pattern": "^[0-9a-f]{64}$"
     },
     "run_id": {
       "type": "string",
@@ -28,7 +28,11 @@
     },
     "status": {
       "type": "string",
-      "enum": ["ACTIVE", "COMMITTED", "FAILED"]
+      "enum": [
+        "ACTIVE",
+        "COMMITTED",
+        "FAILED"
+      ]
     },
     "population_manifest_hash": {
       "type": "string",

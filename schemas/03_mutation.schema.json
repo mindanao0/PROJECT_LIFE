@@ -15,15 +15,26 @@
   "properties": {
     "mutation_id": {
       "type": "string",
-      "format": "uuid"
+      "pattern": "^[0-9a-f]{64}$"
     },
     "strategy_id": {
       "type": "string",
-      "enum": ["M01", "M02", "M03", "M04", "M05", "M06", "M07", "M08", "M09", "M10"]
+      "enum": [
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05",
+        "M06",
+        "M07",
+        "M08",
+        "M09",
+        "M10"
+      ]
     },
     "parent_candidate_id": {
       "type": "string",
-      "format": "uuid"
+      "pattern": "^[0-9a-f]{64}$"
     },
     "seed": {
       "type": "integer",
@@ -36,9 +47,17 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "file_path": { "type": "string" },
-        "lineno": { "type": "integer", "minimum": 1 },
-        "col_offset": { "type": "integer", "minimum": 0 }
+        "file_path": {
+          "type": "string"
+        },
+        "lineno": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "col_offset": {
+          "type": "integer",
+          "minimum": 0
+        }
       }
     },
     "created_at": {

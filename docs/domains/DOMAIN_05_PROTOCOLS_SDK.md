@@ -10,7 +10,7 @@
 
 ## 1. Executive Summary & Domain Scope
 
-Domain 05 กำหนดสัญญาอินเทอร์เฟซเชิงสถาปัตยกรรม (Architecture Protocols) ผ่าน **22 Typed Python Protocols (`typing.Protocol`)**, พื้นผิว SDK สาธารณะ (Class `EvolutionEngine`), คำสั่ง CLI `evolve`, และการส่งออกผลลัพธ์ผ่าน Structured JSON Envelopes.
+Domain 05 กำหนดสัญญาอินเทอร์เฟซเชิงสถาปัตยกรรม (Architecture Protocols) ผ่าน **19 Typed Python Protocols (`typing.Protocol`)**, พื้นผิว SDK สาธารณะ (Class `EvolutionEngine`), คำสั่ง CLI `evolve`, และการส่งออกผลลัพธ์ผ่าน Structured JSON Envelopes.
 
 ---
 
@@ -38,7 +38,7 @@ Domain 05 กำหนดสัญญาอินเทอร์เฟซเช�
 ## 3. Detailed Specifications & Implementation Constraints (All 10 Dimensions)
 
 ### `DIM-041` / `EQ-041`: Typed Python Protocol Package Soundness
-- **Requirement:** โมดูลทั้ง 22 ตัวในระบบต้องสื่อสารกันผ่าน `typing.Protocol` ที่มีการระบุ Type Hints แบบ Strict (MyPy/Pyright Pass 100%)
+- **Requirement:** โมดูลทั้ง 19 ตัวในระบบต้องสื่อสารกันผ่าน `typing.Protocol` ที่มีการระบุ Type Hints แบบ Strict (MyPy/Pyright Pass 100%)
 - **Mathematical Form (Liskov Substitution Principle):**
   $$S \le T \implies \forall x: S, \quad P(x) \implies P(x: T)$$
 
@@ -82,7 +82,7 @@ Domain 05 กำหนดสัญญาอินเทอร์เฟซเช�
 
 ## 4. Verification Assertions & Conformance Tests
 
-1. **Test `TC-D05-01` [Strict Type Checking]:** รัน `mypy --strict` บน Protocol Package ทั้ง 22 ตัว ต้องไม่มี Type Error แม้แต่จุดเดียว
+1. **Test `TC-D05-01` [Strict Type Checking]:** รัน `mypy --strict` บน Protocol Package ทั้ง 19 ตัว ต้องไม่มี Type Error แม้แต่จุดเดียว
 2. **Test `TC-D05-02` [CLI JSON Envelope]:** รันคำสั่ง `evolve validate --json` ตรวจสอบว่า stdout สามารถถูก Parse เป็น JSON ตาม Schema ได้อย่างถูกต้อง
 3. **Test `TC-D05-03` [SDK Method Idempotency]:** เรียก `engine.pause()` สองครั้งติดต่อกัน ยืนยันว่าคืนค่า `PAUSED` ทั้งสองครั้ง
 4. **Test `TC-D05-04` [Argv Array Injection Attack]:** ส่งคำสั่งที่มี `"; rm -rf /"` ใน Argument ตัวที่สอง ยืนยันว่าถูกส่งเป็น Argument ตัวอักษรธรรมดาและไม่ถูกรันโดยเชลล์

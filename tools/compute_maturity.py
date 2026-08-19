@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import os
 import pathlib
+import re
 import subprocess
 import sys
 
@@ -53,13 +54,38 @@ def m3_schemas() -> bool:
 
 
 def m4_protocols() -> bool:
-    """Typed protocol package importable with zero type errors."""
+    """spec/maturity.yaml: "19 Typed Python Protocols with zero type errors",
+    plus section 12's "Python runtime/dependencies pinned" and REQ-S03-004's lock
+    artifact.
+
+    The first version of this predicate counted .py files, so nineteen empty files
+    passed it — weaker than the gate in two directions at once. It now requires the
+    named classes to exist as real typing.Protocol subclasses, mypy --strict to be
+    clean, and the lock artifact to be present.
+    """
     registry = yaml.safe_load((ROOT / "spec/protocols.yaml").read_text(encoding="utf-8"))
     package = ROOT / "src/evolution_engine/protocols"
     if not package.is_dir():
         return False
-    found = {p.stem for p in package.glob("*.py")}
-    return len(found) >= registry["core_v1_protocol_count"]
+
+    if not (ROOT / "requirements.lock").is_file():
+        return False  # REQ-S03-004
+
+    wanted = {entry["protocol"] for entry in registry["core_v1_protocols"]}
+    source = "\n".join(p.read_text(encoding="utf-8") for p in package.rglob("*.py"))
+    declared = set(re.findall(r"class\s+(\w+)\s*\(\s*Protocol\s*[,)]", source))
+    if not wanted <= declared:
+        return False
+
+    # every method must be annotated; an unannotated def is not a typed protocol
+    if re.search(r"^\s+def\s+\w+\s*\([^)]*\)\s*:", source, re.M):
+        return False
+
+    mypy = subprocess.run(
+        [sys.executable, "-m", "mypy", "--strict", str(package)],
+        capture_output=True, cwd=ROOT,
+        env=dict(os.environ, EE_SKIP_MATURITY_LINT="1"))
+    return mypy.returncode == 0
 
 
 def m5_fsm_and_config() -> bool:
@@ -83,10 +109,37 @@ def m9_core_golden() -> bool:
     return any((ROOT / "tests/golden").glob("test_corpus_core*.py"))
 
 
+def m10_security_reliability_golden() -> bool:
+    return any((ROOT / "tests/golden").glob("test_corpus_security*.py")) and \
+        any((ROOT / "tests/golden").glob("test_corpus_reliability*.py"))
+
+
+def m11_execution_ready() -> bool:
+    """GATE_CORE passed, complete traceability, signed evidence bundle."""
+    register = yaml.safe_load((ROOT / "spec/requirements.yaml").read_text(encoding="utf-8"))
+    every_requirement_verified = all(
+        r["verification_method"] != "PENDING" for r in register["requirements"])
+    return every_requirement_verified and (ROOT / "build/evidence").is_dir()
+
+
+def m12_production() -> bool:
+    return any((ROOT / "tests/integration").glob("test_canary*.py")) and \
+        any((ROOT / "tests/integration").glob("test_rollback*.py"))
+
+
+def m13_self_evolution() -> bool:
+    return any((ROOT / "tests/golden").glob("test_corpus_self_evolution*.py"))
+
+
+# Every rung in spec/maturity.yaml needs a predicate. Stopping the ladder at M9 made
+# every release gate unreachable: GATE_CORE requires M10, so declaring it would always
+# have failed LINT-20. Fixed in CR-0009.
 LADDER = [
     ("M0", m0_utf8), ("M1", m1_architecture), ("M2", m2_requirements), ("M3", m3_schemas),
     ("M4", m4_protocols), ("M5", m5_fsm_and_config), ("M6", m6_security),
     ("M7", m7_persistence), ("M8", m8_recovery), ("M9", m9_core_golden),
+    ("M10", m10_security_reliability_golden), ("M11", m11_execution_ready),
+    ("M12", m12_production), ("M13", m13_self_evolution),
 ]
 
 

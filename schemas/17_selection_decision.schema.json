@@ -19,15 +19,20 @@
     },
     "generation_id": {
       "type": "string",
-      "format": "uuid"
+      "pattern": "^[0-9a-f]{64}$"
     },
     "candidate_id": {
       "type": "string",
-      "format": "uuid"
+      "pattern": "^[0-9a-f]{64}$"
     },
     "decision": {
       "type": "string",
-      "enum": ["SELECTED_ELITE", "SELECTED_DIVERSE", "REJECTED_DOMINATED", "QUARANTINED"]
+      "enum": [
+        "SELECTED_ELITE",
+        "SELECTED_DIVERSE",
+        "REJECTED_DOMINATED",
+        "QUARANTINED"
+      ]
     },
     "rank_index": {
       "type": "integer",

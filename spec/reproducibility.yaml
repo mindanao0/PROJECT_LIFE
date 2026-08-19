@@ -4,7 +4,7 @@
 # that each break cross-machine hash equality; section 11.3 named R0..R4 without
 # defining any of them; and CandidateId had no derivation at all even though
 # REQ-S10-010 makes it the final tie-break and REQ-S29-004 makes replay compare it.
-# Closed by CR-0004.
+# Closed by CR-0004, completed by CR-0009.
 
 spec_version: "10.2.2"
 
@@ -18,7 +18,7 @@ canonical_bytes:
   paths: "relative POSIX, forward slash, no leading ./"
   insignificant_whitespace: "none — no space after ':' or ','"
 
-  # the four that were open
+  # the five that were open
   null_vs_absent:
     rule: "A field that is absent and a field explicitly set to null are DIFFERENT bytes."
     detail: >-
@@ -51,6 +51,33 @@ canonical_bytes:
     rule: "Canonical bytes end WITHOUT a trailing newline."
     detail: "A file on disk may add one; the hashed byte string must not include it."
 
+# Which schema properties carry which kind of identifier. CR-0004 declared the model
+# but changed only one schema, leaving eleven others on format: uuid for the same
+# fields. tools/sync_identifier_formats.py rewrites every schema from this list and
+# LINT-21 fails the build if any drift back.
+identifier_rules:
+  content_derived_pattern: "^[0-9a-f]{64}$"
+  event_derived_format: "uuid"
+  content_derived_properties:
+    - "candidate_id"
+    - "parent_candidate_id"
+    - "child_candidate_id"
+    - "candidate_ids"
+    - "generation_id"
+    - "mutation_id"
+    - "artifact_id"
+    - "source_artifact_id"
+    - "manifest_artifact_id"
+    - "payload_artifact_id"
+    - "evidence_artifact_id"
+    - "measurement_artifact_id"
+    - "parameters_artifact_id"
+    - "certificate_artifact_id"
+    - "random_state_artifact_id"
+    - "stdout_artifact_id"
+    - "stderr_artifact_id"
+    - "embedding_artifact_id"
+
 identifiers:
   # content-derived: the same content always yields the same id, so replay reproduces it
   - name: "CandidateId"
@@ -71,6 +98,17 @@ identifiers:
     kind: "content-derived"
     formula: "SHA-256(canonical bytes of {run_id, generation_index})"
     representation: "lowercase hex, 64 characters"
+  - name: "MutationId"
+    kind: "content-derived"
+    formula: >-
+      SHA-256(canonical bytes of {parent_candidate_id, strategy_id, operator_name,
+      rng_seed_hex, target_location})
+    representation: "lowercase hex, 64 characters"
+    rationale: >-
+      MutationId sits inside CandidateId's envelope. If it were a random UUID then
+      CandidateId would not be content-derived either and two replays would produce
+      different ids — the exact defect CR-0004 set out to close. Made content-derived
+      by CR-0009 so the envelope actually closes.
 
   # event-derived: identifies an occurrence, not a value; never compared across replays
   - name: "RunId"

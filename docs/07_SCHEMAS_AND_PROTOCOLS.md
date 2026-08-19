@@ -20,7 +20,6 @@ evolve resume        # ดำเนินการต่อจากจุดท
 evolve abort         # ยกเลิกการรันและเข้าสู่สถานะ ABORTED
 evolve report        # สร้างรายงานผลการวิวัฒนาการและ Pareto Frontier
 evolve export        # ส่งออก Candidate โค้ด (รองรับทั้ง Pure Python และ Rust/C Native Extension)
-evolve swarm join    # เชื่อมต่อเข้าร่วม P2P Evolutionary Swarm Network
 evolve db migrate    # รันการอัปเกรดฐานข้อมูล SQLite
 evolve doctor        # ตรวจสอบความพร้อมของระบบ, Sandbox และ Native Toolchain
 ```
@@ -40,12 +39,11 @@ class EvolutionEngine:
     def get_status(self, run_id: RunId) -> RunStatus: ...
     def get_report(self, run_id: RunId) -> EvolutionReport: ...
     def export_candidate(self, candidate_id: CandidateId, destination: str) -> ExportManifest: ...
-    def connect_swarm(self, peer_addresses: list[str]) -> SwarmStatus: ...
 ```
 
 ---
 
-## 3. Complete Typed Protocol Suite (22 Protocols)
+## 3. Complete Typed Protocol Suite (19 Core v1 Protocols)
 
 | Protocol | หน้าที่รับผิดชอบ | Input หลัก | Output หลัก |
 |---|---|---|---|

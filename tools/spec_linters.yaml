@@ -1,5 +1,5 @@
 version: "10.2.2"
-total_linters: 20
+total_linters: 22
 
 linters:
   - linter_id: "LINT-01"
@@ -132,4 +132,18 @@ linters:
     target: "spec/version_manifest.yaml, spec/maturity.yaml, tools/compute_maturity.py"
     rule: "The declared current_maturity_level must equal the level tools/compute_maturity.py derives from real artifacts. Every other count in this repo is derived and linted; the project's own progress marker must be too. Enforces REQ-S28-002."
     implementation: "tools/compute_maturity.py"
+    severity: "BLOCKER"
+
+  - linter_id: "LINT-21"
+    name: "IdentifierFormAgreementLinter"
+    target: "spec/reproducibility.yaml, schemas/*.json, tools/validate_schemas.py"
+    rule: "Every schema property carrying a content-derived identifier must use the 64-hex pattern declared in spec/reproducibility.yaml with no competing format; every identifier must have a derivation formula; anything inside CandidateId's envelope must itself be content-derived; and the M3 validator must evaluate formats rather than treat them as comments."
+    implementation: "tools/lint_state_vocabulary.py"
+    severity: "BLOCKER"
+
+  - linter_id: "LINT-22"
+    name: "DocsAgreeWithRankOneLinter"
+    target: "docs/**/*.md, *.md"
+    rule: "Documentation must not claim a count that contradicts spec/version_manifest.yaml, must not place a RESEARCH corpus case on a Core maturity rung, and must not offer a CLI verb the Active Contract section 6.1 does not declare. Every other linter reads spec/ only; this one reads what people actually open."
+    implementation: "tools/lint_state_vocabulary.py"
     severity: "BLOCKER"

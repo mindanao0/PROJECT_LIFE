@@ -1,6 +1,6 @@
 {
   "checkpoint_id": "018e1234-5678-7abc-8def-0123456789ab",
-  "generation_id": "018e9999-aaaa-7bbb-8ccc-ddddeeeeffff",
+  "generation_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
   "generation_index": 1,
   "db_wal_lsn": 1,
   "manifest_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",

@@ -10,20 +10,22 @@
 
 | ระดับ | ชื่อระดับ (Level Name) | เกณฑ์การผ่าน (Verification Criteria) |
 |:---:|---|---|
-| **M0** | `DRAFT` | เอกสารผ่านการ Parse เป็น UTF-8 และไม่มี Control Characters ผิดรูป |
-| **M1** | `ARCHITECTURE` | นิยามสถาปัตยกรรมและอินเทอร์เฟซครบถ้วน |
-| **M2** | `REQUIREMENTS_CANONICAL` | **[สถานะปัจจุบัน]** สเปกบูรณาการสมบูรณ์, 179 IDs ครบ, FSM/DDL ตรวจสอบแล้ว |
-| **M3** | `SCHEMAS` | มีไฟล์ physical schemas 26/26 ตัว พร้อม fixtures (valid/invalid) ผ่าน 100% |
-| **M4** | `PROTOCOLS` | Typed Python protocol package (22 Protocols) สมบูรณ์, Pinned Dependencies |
-| **M5** | `FSM_AND_CONFIG` | FSM conformance tests ผ่าน, Vertical Slice (MVP-01) Replay สำเร็จ |
-| **M6** | `SECURITY` | PROFILE_A ผ่าน capability probes บน Linux kernel matrix และ negative corpus |
-| **M7** | `PERSISTENCE` | 31-table SQLite migrations ติดตั้งได้จาก DB ว่าง, FK/Unique/Index tests ผ่าน |
-| **M8** | `RECOVERY` | DB + CAS Crash injection matrix ผ่าน, Audit recovery สำเร็จ |
-| **M9** | `CORE_GOLDEN` | ผ่านการทดสอบกับ CORE golden corpus (MVP-01 .. MVP-07) รวม Quantum/Polyglot Operators |
-| **M10** | `SECURITY_RELIABILITY_GOLDEN` | ผ่าน SECURITY (MVP-08..10) และ RELIABILITY (MVP-11..13) รวม P2P Swarm |
-| **M11** | `EXECUTION_READY` | GATE_CORE ผ่าน, Traceability ครบถ้วน, Evidence bundle ถูกสร้าง |
-| **M12** | `PRODUCTION` | Governed canary, Multisig approval verification (2-of-3 Ed25519) |
-| **M13** | `SELF_EVOLUTION` | Root-of-trust bootstrap, Immutable evaluator, Self-evolution corpus |
+| Level | Name | Gate |
+|---|---|---|
+| **M0** | `DRAFT` | UTF-8 encoding valid, no corrupted control characters |
+| **M1** | `ARCHITECTURE` | Architecture interfaces and single-writer concurrency defined |
+| **M2** | `REQUIREMENTS_CANONICAL` | All 179 Requirement IDs monotonically checked and compliant |
+| **M3** | `SCHEMAS` | 26 JSON Schemas Draft 2020-12 valid with test fixtures |
+| **M4** | `PROTOCOLS` | 19 Typed Python Protocols with zero type errors |
+| **M5** | `FSM_AND_CONFIG` | FSM transition matrix reachability & Vertical Slice MVP-01 pass |
+| **M6** | `SECURITY` | PROFILE_A_LINUX passes capabilities probes on Linux matrix |
+| **M7** | `PERSISTENCE` | 31 SQLite tables installable from scratch with zero FK violations |
+| **M8** | `RECOVERY` | 2PC Commit crash chaos injection matrix 100% recovered |
+| **M9** | `CORE_GOLDEN` | Golden Corpus CORE bucket (MVP-01..MVP-05) passes |
+| **M10** | `SECURITY_RELIABILITY_GOLDEN` | Golden Corpus SECURITY (MVP-08..10) and RELIABILITY (MVP-11..12) buckets pass |
+| **M11** | `EXECUTION_READY` | GATE_CORE passed, traceability complete, evidence bundle signed |
+| **M12** | `PRODUCTION` | Governed canary deployment, 2-of-3 Ed25519 multisig quorum |
+| **M13** | `SELF_EVOLUTION` | Immutable evaluator root-of-trust bootstrap verified and MVP-14 self-evolution corpus passes |
 
 ---
 
@@ -64,12 +66,12 @@ Load Config -> Parse Fixture -> Create Candidates -> Reject Static-Invalid
 ```text
 1.  M2 Closure: Spec linters + Requirement IDs + Active-Spec View
 2.  M3: 26-schema package + manifest + valid/invalid fixtures
-3.  M4: Typed protocols (22 Protocols) + Public SDK/CLI + Pinned dependencies
+3.  M4: Typed protocols (19 Core v1 Protocols) + Public SDK/CLI + Pinned dependencies
 4.  M5: FSMs + Config resolution + Mandatory Vertical Slice (MVP-01)
 5.  M6: PROFILE_A capability probes + Linux kernel matrix + Negative security corpus
 6.  M7: 31-table SQLite migrations + Invariants + CAS
 7.  M8: Atomic generation commit + Checkpoint / Recovery / Audit replay
-8.  Expand mutation engine to M01–M10 (รวม Quantum Rotation และ Polyglot Native Accelerator)
+8.  Expand mutation engine to M01–M08 (รวม Quantum Rotation และ Polyglot Native Accelerator)
 9.  Tests / Capability / Oracle / Flaky isolation boundary
 10. Multi-objective Pareto / Diversity / ALife Ecosystem / P2P Swarm Migration
 11. Lineage graph / Evolution memory / Report / SAFE export

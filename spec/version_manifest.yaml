@@ -15,4 +15,4 @@ subsystems:
   golden_corpus_cases: 14
   requirement_ids_count: 189
   ci_jobs_count: 38
-  spec_linters_count: 20
+  spec_linters_count: 22

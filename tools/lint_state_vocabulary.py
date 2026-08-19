@@ -30,6 +30,13 @@ LINT-19 (section 3.1, section 26): the Core/Research firewall. A golden corpus c
   carry a maturity_bucket.
 LINT-20 (REQ-S28-002): the declared maturity level must equal the level the
   artifacts actually support, computed by tools/compute_maturity.py.
+LINT-21: every schema property carrying a content-derived identifier must use the
+  64-hex pattern from spec/reproducibility.yaml, and every id in the identifiers list
+  must have a derivation formula. This is the check whose absence let CR-0004 change
+  one schema while declaring the rule for all of them.
+LINT-22: docs/ must not contradict rank 1 on counts, on the Core/Research firewall,
+  or on the public surface. Half the regressions in CR-0002..0007 survived because
+  every linter read spec/ and none read docs/ — which is where people actually look.
 LINT-12: prose state lists anywhere in the repo must not use a state name that
   spec/fsm_states_57.yaml has retired. Prose drift is what made LINT-09 miss the
   first time: the DDL was fixed while the narrative kept the old vocabulary.
@@ -564,12 +571,108 @@ def main() -> int:
             tail = [l for l in maturity.stdout.splitlines() if "MISMATCH" in l]
             findings.append("LINT-20 " + (tail[0] if tail else "maturity computation failed"))
 
+    # --- LINT-21: identifier form must match the rank 1 declaration -------------
+    repro = yaml.safe_load((ROOT / "spec/reproducibility.yaml").read_text(encoding="utf-8"))
+    id_rules = repro["identifier_rules"]
+    content_props = set(id_rules["content_derived_properties"])
+    want_pattern = id_rules["content_derived_pattern"]
+
+    def walk_props(node, key=None):
+        if isinstance(node, dict):
+            if key and "type" in node and not node.get("properties"):
+                yield key, node
+            for child, value in node.items():
+                if child in ("properties", "$defs", "patternProperties"):
+                    for prop, sub in (value or {}).items():
+                        yield from walk_props(sub, prop)
+                elif child == "items":
+                    yield from walk_props(value, key)
+                elif child not in ("enum", "const", "required"):
+                    yield from walk_props(value, key)
+        elif isinstance(node, list):
+            for value in node:
+                yield from walk_props(value, key)
+
+    for path in sorted((ROOT / "schemas").glob("*.schema.json")):
+        schema = json.loads(path.read_text(encoding="utf-8"))
+        for prop, node in walk_props(schema):
+            if prop in content_props:
+                if node.get("pattern") != want_pattern:
+                    findings.append(
+                        f"LINT-21 schemas/{path.name}: {prop} is content-derived but declares "
+                        f"pattern={node.get('pattern')!r} format={node.get('format')!r}")
+                if "format" in node:
+                    findings.append(
+                        f"LINT-21 schemas/{path.name}: {prop} keeps a format alongside the pattern")
+
+    for entry in repro["identifiers"]:
+        if not entry.get("formula"):
+            findings.append(f"LINT-21 {entry['name']} has no derivation formula")
+        if entry["kind"] == "content-derived" and not entry.get("representation"):
+            findings.append(f"LINT-21 {entry['name']} is content-derived with no representation")
+    envelope = next(e for e in repro["identifiers"] if e["name"] == "CandidateId")["envelope_fields"]
+    declared = {e["name"] for e in repro["identifiers"] if e["kind"] == "content-derived"}
+    for field in envelope:
+        derived_name = "".join(part.capitalize() for part in field.split("_")).replace("Candidate", "Candidate")
+        if field.endswith("_id") and field not in ("parent_candidate_id",):
+            wanted = {"mutation_id": "MutationId"}.get(field)
+            if wanted and wanted not in declared:
+                findings.append(
+                    f"LINT-21 CandidateId's envelope contains {field} but {wanted} is not "
+                    f"content-derived — CandidateId would not be reproducible")
+
+    # the validator must actually evaluate formats, or none of the above is enforced
+    gate_source = (ROOT / "tools/validate_schemas.py").read_text(encoding="utf-8")
+    if "format_checker=FormatChecker()" not in gate_source:
+        findings.append("LINT-21 tools/validate_schemas.py builds validators without a format checker")
+
+    # --- LINT-22: docs/ must not contradict rank 1 ------------------------------
+    docs = sorted(ROOT.glob("docs/**/*.md")) + sorted(ROOT.glob("*.md"))
+    counts = manifest_counts
+    count_claims = [
+        (rf"(\d+)\s+(?:Core v1 )?(?:Typed )?Protocols?\b", counts["protocols_count"], "protocols"),
+        (rf"(\d+)[- ](?:SQLite )?[Tt]ables?\b", counts["sqlite_tables_count"], "tables"),
+        (rf"(\d+)\s+(?:canonical )?[Ss]chemas?\b", counts["schemas_count"], "schemas"),
+    ]
+    research_ids = {c["id"] for c in corpus_cases if c.get("maturity_bucket") == "RESEARCH"}
+    core_words = ("CORE", "M9", "M10", "GATE_CORE")
+
+    for path in docs:
+        if "/archive/" in str(path) or "change_records" in str(path):
+            continue
+        rel = path.relative_to(ROOT)
+        text = path.read_text(encoding="utf-8")
+        for pattern, real, label in count_claims:
+            for value in re.findall(pattern, text):
+                if int(value) != real and int(value) in (19, 22, 26, 29, 31):
+                    findings.append(
+                        f"LINT-22 {rel}: claims {value} {label} but rank 1 says {real}")
+        for line in text.splitlines():
+            if any(case in line for case in research_ids) and any(w in line for w in core_words):
+                findings.append(
+                    f"LINT-22 {rel}: puts a RESEARCH corpus case on a Core rung — {line.strip()[:90]}")
+
+    # the public surface in docs must be a subset of the contract's
+    surface = spec_md[spec_md.index("## 6.1 Canonical CLI"):]
+    surface = surface[:surface.index("# 7.")]
+    cli_verbs = set(re.findall(r"^evolve ([a-z]+)", surface, re.M))
+    sdk_ops = set(re.findall(r"^\| (\w+) \|", surface, re.M))
+    for path in docs:
+        if "/archive/" in str(path) or "change_records" in str(path):
+            continue
+        text = path.read_text(encoding="utf-8")
+        for verb in set(re.findall(r"`?evolve ([a-z]+)", text)):
+            if verb not in cli_verbs:
+                findings.append(
+                    f"LINT-22 {path.relative_to(ROOT)}: offers `evolve {verb}`, "
+                    f"which section 6.1 does not declare")
+
     if findings:
         print(f"BLOCKER: {len(findings)} finding(s)\n")
         for f in findings:
             print(f"  - {f}")
         return 1
-    print("LINT-09..20: PASS — vocabularies agree, evidence is retention-safe, corpus matches manifest, CI job names resolve, declared counts are real, config examples validate, EQ/DIM registries are complete, requirement register and FSM specs agree, archive intact, Core/Research firewall holds, maturity claim is earned")
+    print("LINT-09..22: PASS — vocabularies agree, evidence is retention-safe, corpus matches manifest, CI job names resolve, declared counts are real, config examples validate, EQ/DIM registries are complete, requirement register and FSM specs agree, archive intact, Core/Research firewall holds, maturity claim is earned, identifier forms agree, docs match rank 1")
     return 0
 
 

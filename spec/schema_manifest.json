@@ -11,8 +11,8 @@
       "schema_id": "https://evolution-engine.org/schemas/01_candidate.schema.json",
       "title": "CandidateManifest",
       "schema_version": "https://json-schema.org/draft/2020-12/schema",
-      "size_bytes": 1889,
-      "sha256": "749bb7f1c1ae6eb3905566e03f2c0ea08eb79a312ec1e5af19f007162638867f"
+      "size_bytes": 1900,
+      "sha256": "2d918a201fcf8f267417478ee5dd1552ba5119b0e09d400c647758d4a48ce3ce"
     },
     {
       "registry_order": 2,
@@ -29,8 +29,8 @@
       "schema_id": "https://evolution-engine.org/schemas/03_mutation.schema.json",
       "title": "MutationDescriptor",
       "schema_version": "https://json-schema.org/draft/2020-12/schema",
-      "size_bytes": 1156,
-      "sha256": "0e77d122129a4d3602a4b7acd237ea125194dd3fc41bb0d4758ca31546d07b3d"
+      "size_bytes": 1340,
+      "sha256": "c3c7c1e85f08ab7fded69e419ee5b14e3b2426816b595c0fb80b1cd1e07619d3"
     },
     {
       "registry_order": 4,
@@ -38,8 +38,8 @@
       "schema_id": "https://evolution-engine.org/schemas/04_mutation_result.schema.json",
       "title": "MutationResult",
       "schema_version": "https://json-schema.org/draft/2020-12/schema",
-      "size_bytes": 1022,
-      "sha256": "d55ad399ebfc73940c98e077efd77f33a1b32c25f3f9502f4b9943a2e77fd058"
+      "size_bytes": 1097,
+      "sha256": "147972611ebb3815e428b06112430c28ae978f8abc2630796c3d6e613c5735f5"
     },
     {
       "registry_order": 5,
@@ -47,8 +47,8 @@
       "schema_id": "https://evolution-engine.org/schemas/05_population.schema.json",
       "title": "PopulationManifest",
       "schema_version": "https://json-schema.org/draft/2020-12/schema",
-      "size_bytes": 909,
-      "sha256": "db2285f400de6e1be3385437d2f389880dced14837402ac04173353261f331ed"
+      "size_bytes": 966,
+      "sha256": "a8cbd60d5c88ce1e610e34a0366d9f39d5810f91fdf0b2cd96b51cfb8ca97e93"
     },
     {
       "registry_order": 6,
@@ -56,8 +56,8 @@
       "schema_id": "https://evolution-engine.org/schemas/06_generation.schema.json",
       "title": "GenerationManifest",
       "schema_version": "https://json-schema.org/draft/2020-12/schema",
-      "size_bytes": 1091,
-      "sha256": "5babc98e9ad61c610a75dc7e1ad810124b704c39f6acb7f688dd923835e06fb4"
+      "size_bytes": 1134,
+      "sha256": "01e218952f1b14b3e3d48e82065fde8e4ec171ace2c630394b40b797e1b1ee18"
     },
     {
       "registry_order": 7,
@@ -110,8 +110,8 @@
       "schema_id": "https://evolution-engine.org/schemas/12_metric_result.schema.json",
       "title": "MetricResult",
       "schema_version": "https://json-schema.org/draft/2020-12/schema",
-      "size_bytes": 994,
-      "sha256": "49058cd82b3ab32137241b6e8de66e671b02c17719bb5c2e4a002c6937f405bd"
+      "size_bytes": 1005,
+      "sha256": "af8a98ae7f396175d73b52c5923a574933a8ac8225cee7879f68e275bc5c8b9a"
     },
     {
       "registry_order": 13,
@@ -119,8 +119,8 @@
       "schema_id": "https://evolution-engine.org/schemas/13_oracle_result.schema.json",
       "title": "OracleResult",
       "schema_version": "https://json-schema.org/draft/2020-12/schema",
-      "size_bytes": 952,
-      "sha256": "5f485f22de97cef3df380db210bf868c6d17f666766fed30e6ed4924989f84e1"
+      "size_bytes": 1011,
+      "sha256": "21f7c8173b0d89375d777e0bff12b0036786a5fa9028d34e2e08870d777e3173"
     },
     {
       "registry_order": 14,
@@ -137,8 +137,8 @@
       "schema_id": "https://evolution-engine.org/schemas/15_lineage_node.schema.json",
       "title": "LineageNode",
       "schema_version": "https://json-schema.org/draft/2020-12/schema",
-      "size_bytes": 643,
-      "sha256": "3c4fb137c83a166cef673645b9f9bccc64b3717928f3e5fb30886bcc70cf057b"
+      "size_bytes": 654,
+      "sha256": "62896fbba2d0328b7fc99117cb6c67e134a81763d0b6143c2db396e690575e8e"
     },
     {
       "registry_order": 16,
@@ -146,8 +146,8 @@
       "schema_id": "https://evolution-engine.org/schemas/16_lineage_edge.schema.json",
       "title": "LineageEdge",
       "schema_version": "https://json-schema.org/draft/2020-12/schema",
-      "size_bytes": 722,
-      "sha256": "54e8249b011f8e2f7bc4b4b4b905d590a00d3e32b8fe24856b05360552684cea"
+      "size_bytes": 795,
+      "sha256": "eff696de6ac08cd7a8c2fd741fef124992d0629ea9503129a0ac6168848eae14"
     },
     {
       "registry_order": 17,
@@ -155,8 +155,8 @@
       "schema_id": "https://evolution-engine.org/schemas/17_selection_decision.schema.json",
       "title": "SelectionDecision",
       "schema_version": "https://json-schema.org/draft/2020-12/schema",
-      "size_bytes": 944,
-      "sha256": "de2420def7e3ced38470c8bddcdb1d2df8620bade99f21f9f2a15e40135cf5ff"
+      "size_bytes": 1006,
+      "sha256": "6660717c04901ed3de70501bf18a5c056f4f69d7a2fd3830489b14f5198b37a4"
     },
     {
       "registry_order": 18,
@@ -173,8 +173,8 @@
       "schema_id": "https://evolution-engine.org/schemas/19_provenance_certificate.schema.json",
       "title": "ProvenanceCertificate",
       "schema_version": "https://json-schema.org/draft/2020-12/schema",
-      "size_bytes": 1203,
-      "sha256": "64b7b7727cbe59f8427c00565333e385bd1b1a3f6bf6875d733324d079f545f7"
+      "size_bytes": 1312,
+      "sha256": "9d9e4a3b685fb2edb01e1aa83b22ec9155dc7cc47dbf0797c3d81e0cc04e2e05"
     },
     {
       "registry_order": 20,
@@ -191,8 +191,8 @@
       "schema_id": "https://evolution-engine.org/schemas/21_checkpoint.schema.json",
       "title": "CheckpointManifest",
       "schema_version": "https://json-schema.org/draft/2020-12/schema",
-      "size_bytes": 943,
-      "sha256": "a7f4bf3ef8652f8580c47646af6f428eb7cda1c410cc207278d5909d5d586533"
+      "size_bytes": 954,
+      "sha256": "51a27699e75fbcee7d87145dbea34a1930688bf0f3c179cb47a048d3543894ad"
     },
     {
       "registry_order": 22,
@@ -218,8 +218,8 @@
       "schema_id": "https://evolution-engine.org/schemas/24_quarantine_record.schema.json",
       "title": "QuarantineRecord",
       "schema_version": "https://json-schema.org/draft/2020-12/schema",
-      "size_bytes": 899,
-      "sha256": "f0a01296f771500c5cceea501a5ce47b49a8c9d63b4286e98655a7f7455dd78d"
+      "size_bytes": 950,
+      "sha256": "6891b783a6d8c84b365c9c1c6d5b13bb77222eae48f58fdf23fb2ef7b3e3486c"
     },
     {
       "registry_order": 25,

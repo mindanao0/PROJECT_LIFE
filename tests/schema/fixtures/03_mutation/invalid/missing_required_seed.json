@@ -1,7 +1,7 @@
 {
-  "mutation_id": "018e1234-5678-7abc-8def-0123456789ab",
+  "mutation_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
   "strategy_id": "M01",
-  "parent_candidate_id": "018e9999-aaaa-7bbb-8ccc-ddddeeeeffff",
+  "parent_candidate_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
   "operator_name": "example",
   "target_ast_location": {
     "file_path": "example",

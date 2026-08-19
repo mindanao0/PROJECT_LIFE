@@ -50,16 +50,16 @@ maturity level M0–M13 ที่ใช้ตัดสิน release gate อย
 | **M1** | `ARCHITECTURE` | Architecture interfaces and single-writer concurrency defined |
 | **M2** | `REQUIREMENTS_CANONICAL` | All 179 Requirement IDs monotonically checked and compliant |
 | **M3** | `SCHEMAS` | 26 JSON Schemas Draft 2020-12 valid with test fixtures |
-| **M4** | `PROTOCOLS` | 22 Typed Python Protocols with zero type errors |
+| **M4** | `PROTOCOLS` | 19 Typed Python Protocols with zero type errors |
 | **M5** | `FSM_AND_CONFIG` | FSM transition matrix reachability & Vertical Slice MVP-01 pass |
 | **M6** | `SECURITY` | PROFILE_A_LINUX passes capabilities probes on Linux matrix |
 | **M7** | `PERSISTENCE` | 31 SQLite tables installable from scratch with zero FK violations |
 | **M8** | `RECOVERY` | 2PC Commit crash chaos injection matrix 100% recovered |
-| **M9** | `CORE_GOLDEN` | Golden Corpus cases MVP-01 to MVP-07 pass |
-| **M10** | `SECURITY_RELIABILITY_GOLDEN` | Negative security (MVP-08..10), reliability (MVP-11..12) and swarm (MVP-13) pass |
+| **M9** | `CORE_GOLDEN` | Golden Corpus CORE bucket (MVP-01..MVP-05) passes |
+| **M10** | `SECURITY_RELIABILITY_GOLDEN` | Golden Corpus SECURITY (MVP-08..10) and RELIABILITY (MVP-11..12) buckets pass |
 | **M11** | `EXECUTION_READY` | GATE_CORE passed, traceability complete, evidence bundle signed |
 | **M12** | `PRODUCTION` | Governed canary deployment, 2-of-3 Ed25519 multisig quorum |
-| **M13** | `SELF_EVOLUTION` | Immutable evaluator root-of-trust bootstrap verified |
+| **M13** | `SELF_EVOLUTION` | Immutable evaluator root-of-trust bootstrap verified and MVP-14 self-evolution corpus passes |
 
 `GATE_CORE`, `GATE_PRODUCTION` และ `GATE_SELF_EVOLUTION` อยู่ใน [`spec/release_gates.yaml`](../../spec/release_gates.yaml)
 

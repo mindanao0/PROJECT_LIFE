@@ -13,19 +13,24 @@
   "properties": {
     "parent_candidate_id": {
       "type": "string",
-      "format": "uuid"
+      "pattern": "^[0-9a-f]{64}$"
     },
     "child_candidate_id": {
       "type": "string",
-      "format": "uuid"
+      "pattern": "^[0-9a-f]{64}$"
     },
     "mutation_id": {
       "type": "string",
-      "format": "uuid"
+      "pattern": "^[0-9a-f]{64}$"
     },
     "relationship_type": {
       "type": "string",
-      "enum": ["MUTATION", "CROSSOVER", "IMMIGRANT", "RECOVERY"]
+      "enum": [
+        "MUTATION",
+        "CROSSOVER",
+        "IMMIGRANT",
+        "RECOVERY"
+      ]
     }
   }
 }
