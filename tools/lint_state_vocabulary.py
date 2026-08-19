@@ -19,6 +19,10 @@ LINT-15: every evolution.yaml example printed in the docs must validate against
 LINT-16: spec/equations_300.yaml and spec/dimensions_300.yaml must hold every
   EQ and DIM that the docs define, with no dangling reference and one padding
   convention. They previously declared 300 while holding 50 and 0.
+LINT-17 (REQ-S02-008, REQ-S08-012, REQ-S19-003): spec/requirements.yaml and
+  spec/traceability.yaml must cover every requirement with the mandated fields and
+  identical digests, and spec/fsm/*.yaml must exist for all five FSMs and agree
+  with spec/fsm_states_57.yaml.
 LINT-12: prose state lists anywhere in the repo must not use a state name that
   spec/fsm_states_57.yaml has retired. Prose drift is what made LINT-09 miss the
   first time: the DDL was fixed while the narrative kept the old vocabulary.
@@ -416,12 +420,59 @@ def main() -> int:
         if eq_of not in eq_ids:
             findings.append(f"LINT-16 {orphan} maps to {eq_of}, which is not in the equation registry")
 
+    # --- LINT-17: requirement register and FSM specs ---------------------------
+    REQUIRED_FIELDS = {"id", "section", "status", "text_digest", "owner",
+                       "verification_method", "test_refs", "evidence_refs", "release_gates"}
+    register_path = ROOT / "spec/requirements.yaml"
+    if not register_path.exists():
+        findings.append("LINT-17 spec/requirements.yaml is missing (REQ-S02-008)")
+    else:
+        register = yaml.safe_load(register_path.read_text(encoding="utf-8"))
+        entries = {r["id"]: r for r in register["requirements"]}
+        if set(entries) != canonical_req_ids:
+            missing = sorted(canonical_req_ids - set(entries))
+            extra = sorted(set(entries) - canonical_req_ids)
+            findings.append(
+                f"LINT-17 spec/requirements.yaml does not cover the contract — "
+                f"missing={missing[:5]} extra={extra[:5]}")
+        for rid, entry in sorted(entries.items()):
+            absent = REQUIRED_FIELDS - set(entry)
+            if absent:
+                findings.append(f"LINT-17 spec/requirements.yaml {rid}: missing fields {sorted(absent)}")
+        chain = {r["id"]: r for r in trace["requirements"]}
+        for rid, entry in sorted(entries.items()):
+            if rid in chain and chain[rid]["text_digest"] != entry["text_digest"]:
+                findings.append(
+                    f"LINT-17 {rid}: requirements.yaml and traceability.yaml disagree on text_digest")
+
+    fsm_dir = ROOT / "spec/fsm"
+    key_for = {"candidate": "candidate_lifecycle_fsm", "run": "run_lifecycle_fsm",
+               "recovery": "recovery_fsm", "governance": "governance_fsm",
+               "deployment": "deployment_fsm"}
+    for fsm_name, key in key_for.items():
+        path = fsm_dir / f"{fsm_name}.yaml"
+        if not path.exists():
+            findings.append(f"LINT-17 spec/fsm/{fsm_name}.yaml is missing")
+            continue
+        encoded = yaml.safe_load(path.read_text(encoding="utf-8"))
+        declared = fsms[key]
+        if set(encoded["states"]) != set(declared["states"]):
+            findings.append(f"LINT-17 spec/fsm/{fsm_name}.yaml states differ from spec/fsm_states_57.yaml")
+        if encoded["initial_state"] != declared["initial_state"]:
+            findings.append(f"LINT-17 spec/fsm/{fsm_name}.yaml initial_state differs from the registry")
+        if set(encoded["terminal_states"]) != set(declared["terminal_states"]):
+            findings.append(f"LINT-17 spec/fsm/{fsm_name}.yaml terminal_states differ from the registry")
+        graph = {tr["from"]: tr["to"] for tr in encoded["transitions"]}
+        for terminal in encoded["terminal_states"]:
+            if graph.get(terminal):
+                findings.append(f"LINT-17 spec/fsm/{fsm_name}.yaml: terminal {terminal} has outgoing edges")
+
     if findings:
         print(f"BLOCKER: {len(findings)} finding(s)\n")
         for f in findings:
             print(f"  - {f}")
         return 1
-    print("LINT-09..16: PASS — vocabularies agree, evidence is retention-safe, corpus matches manifest, CI job names resolve, declared counts are real, config examples validate, EQ/DIM registries are complete")
+    print("LINT-09..17: PASS — vocabularies agree, evidence is retention-safe, corpus matches manifest, CI job names resolve, declared counts are real, config examples validate, EQ/DIM registries are complete, requirement register and FSM specs agree")
     return 0
 
 

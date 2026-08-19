@@ -25,7 +25,9 @@
 | `validate_schemas.py` | M3 schema gate: registry, declarations, offline `$ref`, fixtures, two-implementation agreement, manifest digests | `REQ-S15-001` .. `REQ-S15-006` |
 | `generate_schema_fixtures.py` | Regenerates `tests/schema/fixtures/`; verifies each fixture actually passes or fails as named before writing it | `REQ-S15-004` |
 | `generate_schema_manifest.py` | Regenerates `spec/schema_manifest.json` from real file bytes | `REQ-S15-003` |
-| `lint_state_vocabulary.py` | LINT-09 .. LINT-16 cross-source consistency | `REQ-S13-004`, `REQ-S01-009`, `REQ-S16-001`, `REQ-S21-002` |
+| `generate_fsm_specs.py` | Regenerates `spec/fsm/*.yaml` from the Active Contract FSM sections | `REQ-S08-012`, `REQ-S19-003` |
+| `generate_requirements.py` | Regenerates `spec/requirements.yaml` and `spec/traceability.yaml` together | `REQ-S02-008`, `REQ-S22-001` |
+| `lint_state_vocabulary.py` | LINT-09 .. LINT-17 cross-source consistency | `REQ-S13-004`, `REQ-S01-009`, `REQ-S16-001`, `REQ-S21-002`, `REQ-S02-008` |
 
 ```bash
 python3 tools/validate_schemas.py      # M3 gate

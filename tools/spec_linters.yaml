@@ -1,5 +1,5 @@
 version: "10.2.2"
-total_linters: 16
+total_linters: 17
 
 linters:
   - linter_id: "LINT-01"
@@ -103,5 +103,12 @@ linters:
     name: "EquationDimensionRegistryLinter"
     target: "spec/equations_300.yaml, spec/dimensions_300.yaml, docs/**/*.md"
     rule: "Both registries must contain every EQ and DIM referenced anywhere in the docs, declare counts equal to their entry counts, use a single zero-padding convention, and every dimension must map to an equation that exists."
+    implementation: "tools/lint_state_vocabulary.py"
+    severity: "BLOCKER"
+
+  - linter_id: "LINT-17"
+    name: "RequirementRegisterAndFsmSpecLinter"
+    target: "spec/requirements.yaml, spec/traceability.yaml, spec/fsm/*.yaml"
+    rule: "spec/requirements.yaml must cover every requirement in the Active Contract with all REQ-S02-008 fields and digests identical to spec/traceability.yaml, and spec/fsm/*.yaml must exist for all five FSMs, agree with spec/fsm_states_57.yaml and keep terminal states edge-free."
     implementation: "tools/lint_state_vocabulary.py"
     severity: "BLOCKER"

@@ -1,0 +1,145 @@
+#!/usr/bin/env python3
+"""Generate spec/fsm/*.yaml from the Active Contract (REQ-S08-012, REQ-S19-003).
+
+Each file encodes the state, transition and terminal sets of one FSM exactly as
+the Active Contract declares them, in a machine-checkable form. The contract is
+the source; this script never invents a transition.
+
+The Run FSM's contract text contains one wildcard, `<any non-terminal state> ->
+RECOVERING`, which is expanded here into an explicit edge per non-terminal state
+so reachability and illegal-transition tests have something concrete to check.
+"""
+from __future__ import annotations
+
+import pathlib
+import re
+import sys
+
+import yaml
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+SPEC = ROOT / "build/spec/Evolution_Engine_Active_Spec_10_2_2.md"
+OUT_DIR = ROOT / "spec/fsm"
+
+SECTIONS = {
+    "candidate": ("## 8.1 Canonical Candidate State Machine", "8.1", "candidate_lifecycle_fsm"),
+    "run": ("## 8.3 Canonical Run State Machine", "8.3", "run_lifecycle_fsm"),
+    "recovery": ("## 8.4 Canonical Recovery State Machine", "8.4", "recovery_fsm"),
+    "governance": ("## 8.5 Canonical Governance State Machine", "8.5", "governance_fsm"),
+    "deployment": ("## 19.2 Deployment FSM", "19.2", "deployment_fsm"),
+}
+WILDCARD = "<any non-terminal state>"
+
+
+def section_text(heading: str) -> str:
+    body = SPEC.read_text(encoding="utf-8")
+    start = body.index(heading)
+    ends = [body.find(marker, start + 1) for marker in ("\n## ", "\n# ")]
+    end = min([e for e in ends if e > 0] + [len(body)])
+    return body[start:end]
+
+
+def fenced_blocks(text: str) -> list[str]:
+    return re.findall(r"```text\n(.*?)```", text, re.S)
+
+
+def parse(name: str) -> dict:
+    heading, section_no, fsm_key = SECTIONS[name]
+    text = section_text(heading)
+
+    # transitions live in the block that follows "Canonical transitions:", except
+    # for 19.2 where the first text block is the transition table itself
+    blocks = fenced_blocks(text)
+    if "Canonical transitions:" in text:
+        after = text.split("Canonical transitions:", 1)[1]
+        transition_block = fenced_blocks(after)[0]
+    else:
+        transition_block = blocks[0]
+
+    terminal_block = fenced_blocks(text.split("Terminal states:", 1)[1])[0]
+    terminals = terminal_block.split()
+
+    edges: list[tuple[str, list[str]]] = []
+    for line in transition_block.strip().splitlines():
+        if "->" not in line:
+            continue
+        source, targets = line.split("->", 1)
+        edges.append((source.strip(), [t.strip() for t in targets.split("|")]))
+
+    states = sorted({s for s, _ in edges if s != WILDCARD} | {t for _, ts in edges for t in ts})
+    initial = edges[0][0]
+
+    # expand the Run FSM wildcard into explicit edges
+    expanded: list[tuple[str, list[str]]] = []
+    wildcard_targets: list[str] = []
+    for source, targets in edges:
+        if source == WILDCARD:
+            wildcard_targets = targets
+        else:
+            expanded.append((source, targets))
+    if wildcard_targets:
+        merged = {s: list(t) for s, t in expanded}
+        for state in states:
+            if state in terminals:
+                continue
+            for target in wildcard_targets:
+                if state == target:
+                    continue
+                merged.setdefault(state, [])
+                if target not in merged[state]:
+                    merged[state].append(target)
+        expanded = [(s, merged[s]) for s in sorted(merged)]
+
+    return {
+        "fsm": name,
+        "source": f"build/spec/Evolution_Engine_Active_Spec_10_2_2.md section {section_no}",
+        "state_registry": f"spec/fsm_states_57.yaml -> fsms.{fsm_key}",
+        "initial_state": initial,
+        "states_count": len(states),
+        "states": states,
+        "terminal_states": sorted(terminals),
+        "transitions": [{"from": s, "to": t} for s, t in expanded],
+    }
+
+
+def main() -> int:
+    registry = yaml.safe_load((ROOT / "spec/fsm_states_57.yaml").read_text(encoding="utf-8"))["fsms"]
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    problems = []
+
+    for name in SECTIONS:
+        spec = parse(name)
+        fsm_key = SECTIONS[name][2]
+        declared = set(registry[fsm_key]["states"])
+        if set(spec["states"]) != declared:
+            problems.append(
+                f"{name}: states from section {SECTIONS[name][1]} differ from spec/fsm_states_57.yaml — "
+                f"section-only={sorted(set(spec['states']) - declared)} "
+                f"registry-only={sorted(declared - set(spec['states']))}")
+        if spec["initial_state"] != registry[fsm_key]["initial_state"]:
+            problems.append(
+                f"{name}: initial_state {spec['initial_state']} != "
+                f"{registry[fsm_key]['initial_state']} in the registry")
+        if set(spec["terminal_states"]) != set(registry[fsm_key]["terminal_states"]):
+            problems.append(f"{name}: terminal_states differ from the registry")
+
+        header = (
+            f"# {name} FSM — generated by tools/generate_fsm_specs.py\n"
+            f"# Source of truth: {spec['source']}\n"
+            f"# State vocabulary: {spec['state_registry']}\n"
+            f"# Do not hand-edit. Change the Active Contract, then regenerate.\n\n")
+        (OUT_DIR / f"{name}.yaml").write_text(
+            header + yaml.safe_dump(spec, sort_keys=False, allow_unicode=True, width=100),
+            encoding="utf-8")
+
+    if problems:
+        print("FSM generation found contract/registry disagreement:\n")
+        for problem in problems:
+            print(f"  - {problem}")
+        return 1
+    print(f"wrote {len(SECTIONS)} FSM specs to spec/fsm/ — all agree with spec/fsm_states_57.yaml")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
