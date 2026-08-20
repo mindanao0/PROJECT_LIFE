@@ -385,6 +385,7 @@ requirements:
   implementation_refs: []
   fsm_refs: []
   test_refs:
+  - tests/conformance/test_maturity_predicates.py
   - tools/compute_maturity.py
   - tools/generate_lock.py
   evidence_refs: []
@@ -2259,6 +2260,7 @@ requirements:
   implementation_refs: []
   fsm_refs: []
   test_refs:
+  - tests/conformance/test_maturity_predicates.py
   - tools/compute_maturity.py
   - tools/lint_state_vocabulary.py
   evidence_refs: []

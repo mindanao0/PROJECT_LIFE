@@ -28,6 +28,31 @@ def _run(script: str) -> bool:
                           capture_output=True, cwd=ROOT, env=env).returncode == 0
 
 
+def _suite_passes(pattern: str, minimum_tests: int) -> bool:
+    """True only when the matching tests exist, collect at least `minimum_tests`, and pass.
+
+    The first version of every rung below asked whether a file matching a glob existed.
+    Eight of the thirteen therefore passed on empty files — `touch` ten paths and the
+    ladder reported M13. That is the same defect CR-0009 fixed for M4 while writing
+    M10..M13 with it intact. A predicate has to run the thing it claims to check.
+
+    Scoped to directories that contain no conformance test, so this cannot re-enter the
+    linter that called it.
+    """
+    matches = sorted(ROOT.glob(pattern))
+    if not matches:
+        return False
+    env = dict(os.environ, EE_SKIP_MATURITY_LINT="1")
+    result = subprocess.run(
+        [sys.executable, "-m", "pytest", "-q", "--no-header", "-p", "no:cacheprovider",
+         *[str(p) for p in matches]],
+        capture_output=True, text=True, cwd=ROOT, env=env)
+    if result.returncode != 0:
+        return False
+    collected = re.search(r"(\d+) passed", result.stdout)
+    return bool(collected) and int(collected.group(1)) >= minimum_tests
+
+
 def m0_utf8() -> bool:
     for path in list(ROOT.glob("spec/**/*.yaml")) + [ROOT / "spec/ACTIVE_CONTRACT.md"]:
         try:
@@ -89,29 +114,34 @@ def m4_protocols() -> bool:
 
 
 def m5_fsm_and_config() -> bool:
-    return (ROOT / "src/evolution_engine").is_dir() and (ROOT / "tests/replay").is_dir() and \
-        any((ROOT / "tests/replay").glob("test_*.py"))
+    """FSM tests pass and the trusted-fixture vertical slice replays deterministically."""
+    return (ROOT / "src/evolution_engine").is_dir() and _suite_passes("tests/replay/test_*.py", 1)
 
 
 def m6_security() -> bool:
-    return any((ROOT / "tests/security").glob("test_profile_a_on_kernel*.py"))
+    """PROFILE_A executes on a real kernel and the negative security corpus is defeated.
+    Three cases (MVP-08..10) means at least three assertions."""
+    return _suite_passes("tests/security/test_profile_a_on_kernel*.py", 3)
 
 
 def m7_persistence() -> bool:
-    return any((ROOT / "tests/integration").glob("test_migration*.py"))
+    return _suite_passes("tests/integration/test_migration*.py", 1)
 
 
 def m8_recovery() -> bool:
-    return any((ROOT / "tests/recovery").glob("test_*.py"))
+    """The DB and CAS crash matrix, so more than one crash point."""
+    return _suite_passes("tests/recovery/test_*.py", 2)
 
 
 def m9_core_golden() -> bool:
-    return any((ROOT / "tests/golden").glob("test_corpus_core*.py"))
+    """The CORE bucket is MVP-01..MVP-05 after CR-0003, so at least five cases."""
+    return _suite_passes("tests/golden/test_corpus_core*.py", 5)
 
 
 def m10_security_reliability_golden() -> bool:
-    return any((ROOT / "tests/golden").glob("test_corpus_security*.py")) and \
-        any((ROOT / "tests/golden").glob("test_corpus_reliability*.py"))
+    """SECURITY is MVP-08..10 and RELIABILITY is MVP-11..12."""
+    return _suite_passes("tests/golden/test_corpus_security*.py", 3) and \
+        _suite_passes("tests/golden/test_corpus_reliability*.py", 2)
 
 
 def m11_execution_ready() -> bool:
@@ -119,16 +149,19 @@ def m11_execution_ready() -> bool:
     register = yaml.safe_load((ROOT / "spec/requirements.yaml").read_text(encoding="utf-8"))
     every_requirement_verified = all(
         r["verification_method"] != "PENDING" for r in register["requirements"])
-    return every_requirement_verified and (ROOT / "build/evidence").is_dir()
+    bundle = ROOT / "build/evidence/evidence_bundle.json"
+    return every_requirement_verified and bundle.is_file() and bundle.stat().st_size > 0
 
 
 def m12_production() -> bool:
-    return any((ROOT / "tests/integration").glob("test_canary*.py")) and \
-        any((ROOT / "tests/integration").glob("test_rollback*.py"))
+    return _suite_passes("tests/integration/test_canary*.py", 1) and \
+        _suite_passes("tests/integration/test_rollback*.py", 1)
 
 
 def m13_self_evolution() -> bool:
-    return any((ROOT / "tests/golden").glob("test_corpus_self_evolution*.py"))
+    """MVP-14 plus the root-of-trust and immutable-evaluator proofs."""
+    return _suite_passes("tests/golden/test_corpus_self_evolution*.py", 1) and \
+        _suite_passes("tests/security/test_root_of_trust*.py", 1)
 
 
 # Every rung in spec/maturity.yaml needs a predicate. Stopping the ladder at M9 made
