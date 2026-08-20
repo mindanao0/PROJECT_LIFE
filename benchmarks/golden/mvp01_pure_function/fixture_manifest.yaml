@@ -1,0 +1,52 @@
+# MVP-01 fixture manifest — the eleven items Active Contract section 16.2 requires.
+#
+# Before this file the case directory held only project.yaml and a README, so the
+# vertical slice had nothing to hash, nothing to run and no expected outcome. Written
+# by CR-0012.
+#
+# baseline_hash is computed from the real fixture bytes, never a placeholder
+# (REQ-S16-001, REQ-S16-002). Regenerate with tools/generate_fixture_manifest.py.
+
+case_id: "MVP-01"
+fixture_version: "1.0.0"
+
+fixture_source:
+  entry_point: "src/math_kernel.py:compute_series"
+  source_file: "src/math_kernel.py"
+  test_suite: "tests/test_math_kernel.py"
+  config: "evolution.yaml"
+
+canonical_baseline_hash: "618cbf092bdb9739a812860ca9a59db258277ee7a0236b725f7e44482ff1352f"
+test_suite_hash: "46e06e2131aed15412316f532be6ec1b10a9f8b9f861246d116a34b725066663"
+config_hash: "1a6847db1702e57e5dc011cf3918b373ba5683c6f6efd8b34c72cfd4517d83b2"
+
+seed: 12345
+
+environment_manifest:
+  cpython_version: "3.12"
+  os: "linux"
+  cpu_architecture: "x86_64"
+  sandbox_profile: "none"
+  note: >-
+    The slice executes the trusted fixture directly. REQ-S29-003 forbids entering
+    PROFILE_A for an arbitrary project before M6, and this fixture is repository-owned.
+
+expected_lifecycle_disposition: "SELECTED"
+expected_reason_code: null
+
+expected_metrics:
+  - name: "correctness"
+    expected_decimal: "1"
+    bound_decimal: "0.001"
+
+expected_security_verdict: "NOT_APPLICABLE"
+
+expected_evidence_records: []
+
+# What the slice must observe, so a green run cannot mean "nothing happened".
+expected_slice_observations:
+  population_size: 4
+  generations: 1
+  candidates_static_rejected_minimum: 1
+  candidates_capability_rejected_minimum: 1
+  selected_candidates: 1

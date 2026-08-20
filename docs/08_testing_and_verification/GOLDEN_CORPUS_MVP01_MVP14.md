@@ -36,6 +36,6 @@
 
 ## 2. Benchmark Conformance Gate Criteria
 
-ทุก Release ก่อนเลื่อนสู่ระดับ `M4_PROTOCOLS` ต้องรันผ่านชุดทดสอบทั้ง 14 โปรเจกต์โดยปราศจากข้อผิดพลาด:
+ทุก Release ก่อนเลื่อนสู่ระดับ `M5_FSM_AND_CONFIG` ต้องรันผ่านชุดทดสอบทั้ง 14 โปรเจกต์โดยปราศจากข้อผิดพลาด:
 $$|\mathcal{C}_{\text{golden}}| \equiv 14, \qquad \text{Pass}(\mathcal{C}) \equiv 14$$
 และบันทึกผลลัพธ์ลงใน `benchmarks/golden/manifest.yaml`

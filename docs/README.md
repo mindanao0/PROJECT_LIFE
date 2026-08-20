@@ -5,7 +5,7 @@
 > **Master 300-Dimensional Framework:** 🌐 **[300_DIMENSIONAL_HYPER_SYSTEM_FRAMEWORK.md](300_DIMENSIONAL_HYPER_SYSTEM_FRAMEWORK.md)**  
 > **Master 300 Equations Universe:** 🧮 **[300_CANONICAL_MATHEMATICAL_EQUATIONS.md](05_math_and_selection/300_CANONICAL_MATHEMATICAL_EQUATIONS.md)**  
 > **Dedicated 30 Domains Deep-Dive:** 📁 **[docs/domains/](domains)** (ครบทั้ง 30 ไฟล์เฉพาะทาง)  
-> **Current Maturity:** `M4_PROTOCOLS`  
+> **Current Maturity:** `M5_FSM_AND_CONFIG`  
 > **Default Deployment Mode:** `SAFE_EXPORT_ONLY`  
 
 ยินดีต้อนรับสู่คลังเอกสารข้อกำหนดเชิงโมดูลาร์แบบแยกโฟลเดอร์และแยกไฟล์รายโดเมนสมบูรณ์แบบ (Fully Modular Directory & Domain-Separated Architecture) ของ **Evolution Engine** สเปกชุดนี้ได้รับการวิเคราะห์และแจกแจงครอบคลุม **300 มิติวิศวกรรมเฉพาะทาง (DIM-001 ถึง DIM-300)** และ **300 มหาสมการคณิตศาสตร์แม่บท (EQ-001 ถึง EQ-300)** โดยแบ่งออกเป็น **30 ไฟล์โดเมนเฉพาะทางใน [docs/domains/](domains)** และ **10 โฟลเดอร์หมวดหมู่หลัก**:

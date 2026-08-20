@@ -188,8 +188,9 @@ requirements:
   status: REQ
   text_digest: sha256:7dffeda6ee13afe80be753c7346c8b04823a2c5ccb42c336987cd26657bae309
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/replay/test_vertical_slice.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S01-011
@@ -556,8 +557,9 @@ requirements:
   status: REQ
   text_digest: sha256:a5676c8ff0739c814a1b0a2a6f3f25a76e8e6084d5af1ee5bd7bba0a06473ef9
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/replay/test_vertical_slice.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S08-003
@@ -824,7 +826,6 @@ requirements:
   verification_method: AUTOMATED_TEST
   test_refs:
   - tests/golden/test_canonical_bytes.py
-  - tools/canonical_bytes.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S11-002
@@ -836,7 +837,6 @@ requirements:
   verification_method: AUTOMATED_TEST
   test_refs:
   - tests/golden/test_canonical_bytes.py
-  - tools/canonical_bytes.py
   - tools/generate_golden_vectors.py
   evidence_refs: []
   release_gates: []
@@ -1918,8 +1918,9 @@ requirements:
   status: REQ
   text_digest: sha256:d3d39f5af9e6c10f8335a79ec5ade145663430866c80080920ecedfec4f49c34
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/replay/test_vertical_slice.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S29-002
@@ -1938,8 +1939,9 @@ requirements:
   status: REQ
   text_digest: sha256:2b6109d24e99d77e52779ee79f2c006058a1d4f832f7a9a1946c244759b9288b
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/replay/test_vertical_slice.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S29-004
@@ -1951,6 +1953,7 @@ requirements:
   verification_method: AUTOMATED_TEST
   test_refs:
   - tests/golden/test_canonical_bytes.py
+  - tests/replay/test_vertical_slice.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S29-005
@@ -1961,6 +1964,7 @@ requirements:
   owner: UNASSIGNED
   verification_method: AUTOMATED_TEST
   test_refs:
+  - tests/replay/test_vertical_slice.py
   - tools/generate_protocols.py
   evidence_refs: []
   release_gates: []

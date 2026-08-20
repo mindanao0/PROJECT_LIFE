@@ -5,5 +5,5 @@ scope: "function"
 entry_point: "src/math_kernel.py:compute_series"
 expected_disposition: "SELECTED"
 reproducibility_target: "R4"
-sandbox_profile: "PROFILE_A_LINUX"
+sandbox_profile: "none"   # REQ-S29-003: the slice may not enter PROFILE_A before M6
 test_suite: "tests/test_math_kernel.py"

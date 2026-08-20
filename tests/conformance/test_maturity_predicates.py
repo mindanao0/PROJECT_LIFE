@@ -51,10 +51,19 @@ UNEARNED_RUNGS = [
 
 @pytest.fixture(scope="module")
 def decoy_repo(tmp_path_factory) -> pathlib.Path:
-    """A copy of the repo with an empty file at every path a predicate looks for."""
+    """A copy of the repo where the only tests a predicate can find are empty.
+
+    Real suites are removed first rather than added alongside. Once a rung is genuinely
+    earned — M5 is, since the vertical slice landed — leaving its real tests in place
+    would let the predicate pass on those and the decoy would prove nothing.
+    """
     target = tmp_path_factory.mktemp("decoy") / "repo"
     shutil.copytree(ROOT, target, ignore=shutil.ignore_patterns(
         ".git", "__pycache__", ".pytest_cache", "*.pyc"))
+    for directory in ("tests/replay", "tests/security", "tests/integration",
+                      "tests/recovery", "tests/golden"):
+        for existing in (target / directory).glob("test_*.py"):
+            existing.unlink()
     for rel in DECOY_FILES:
         path = target / rel
         path.parent.mkdir(parents=True, exist_ok=True)

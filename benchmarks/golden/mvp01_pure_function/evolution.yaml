@@ -1,0 +1,58 @@
+# MVP-01 project contract. Validates against schemas/26_engine_config.schema.json.
+# Values marked below are fixed by Active Contract section 29.1 and may not drift.
+
+project:
+  name: "mvp01-pure-function"
+  language: "python"
+  version: "1.0"
+
+evolution:
+  level: "function"        # section 29.1
+  population_size: 4       # section 29.1
+  seed: 12345              # section 29.1
+
+metrics:
+  - name: "correctness"
+    direction: "maximize"
+    unit: "ratio"
+    valid_range:
+      minimum_decimal: "0"
+      maximum_decimal: "1"
+    practical_margin_decimal: "0.001"
+    failure_policy: "invalidate_candidate"
+    preference_weight_decimal: "1.0"
+    command:
+      argv: ["python", "-m", "pytest", "tests/test_math_kernel.py"]
+      cwd: "."
+      env: {}
+      timeout_seconds: 30
+
+selection:
+  method: "pareto"
+  preference_weights_usage: "same_front_tie_break_only"
+  tie_break_order:
+    - "pareto_rank"
+    - "diversity_score"
+    - "preference_score"
+    - "canonical_candidate_id"
+
+constraints:
+  capability_commands:
+    - argv: ["python", "-m", "pytest", "tests/test_math_kernel.py"]
+      cwd: "."
+      env: {}
+      timeout_seconds: 30
+
+sandbox:
+  profile: "PROFILE_A_LINUX"
+  network: "deny"
+  writable_tmp_bytes: 67108864
+
+deployment:
+  mode: "SAFE_EXPORT_ONLY"   # section 29.1
+
+stopping:
+  target_rule: null
+  max_generations: 1         # section 29.1
+  max_stagnation: 1
+  max_runtime_seconds: 60

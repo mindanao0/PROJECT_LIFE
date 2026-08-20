@@ -201,7 +201,8 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tests/replay/test_vertical_slice.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S01-011
@@ -641,7 +642,8 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tests/replay/test_vertical_slice.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S08-003
@@ -963,7 +965,6 @@ requirements:
   fsm_refs: []
   test_refs:
   - tests/golden/test_canonical_bytes.py
-  - tools/canonical_bytes.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S11-002
@@ -977,7 +978,6 @@ requirements:
   fsm_refs: []
   test_refs:
   - tests/golden/test_canonical_bytes.py
-  - tools/canonical_bytes.py
   - tools/generate_golden_vectors.py
   evidence_refs: []
   release_gates: []
@@ -2276,7 +2276,8 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tests/replay/test_vertical_slice.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S29-002
@@ -2300,7 +2301,8 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tests/replay/test_vertical_slice.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S29-004
@@ -2314,6 +2316,7 @@ requirements:
   fsm_refs: []
   test_refs:
   - tests/golden/test_canonical_bytes.py
+  - tests/replay/test_vertical_slice.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S29-005
@@ -2326,6 +2329,7 @@ requirements:
   implementation_refs: []
   fsm_refs: []
   test_refs:
+  - tests/replay/test_vertical_slice.py
   - tools/generate_protocols.py
   evidence_refs: []
   release_gates: []

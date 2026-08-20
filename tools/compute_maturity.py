@@ -43,14 +43,22 @@ def _suite_passes(pattern: str, minimum_tests: int) -> bool:
     if not matches:
         return False
     env = dict(os.environ, EE_SKIP_MATURITY_LINT="1")
+    # No -q here. pytest.ini already sets it, and a second -q collapses to -qq, which
+    # suppresses the summary line this function reads — the predicate then reports
+    # "not yet" for a suite that passed.
     result = subprocess.run(
-        [sys.executable, "-m", "pytest", "-q", "--no-header", "-p", "no:cacheprovider",
+        [sys.executable, "-m", "pytest", "--no-header", "-p", "no:cacheprovider",
          *[str(p) for p in matches]],
         capture_output=True, text=True, cwd=ROOT, env=env)
     if result.returncode != 0:
         return False
     collected = re.search(r"(\d+) passed", result.stdout)
-    return bool(collected) and int(collected.group(1)) >= minimum_tests
+    if collected is None:
+        # Passing but unreadable output is a broken predicate, not a passing rung.
+        raise RuntimeError(
+            f"pytest for {pattern!r} exited 0 but printed no summary; "
+            f"the predicate cannot count tests:\n{result.stdout[-400:]}")
+    return int(collected.group(1)) >= minimum_tests
 
 
 def m0_utf8() -> bool:
