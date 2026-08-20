@@ -15,7 +15,7 @@ import pathlib
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-PACKAGES = ["jsonschema", "jsonschema-rs", "pyyaml", "pytest"]
+PACKAGES = ["jsonschema", "jsonschema-rs", "pyyaml", "pytest", "mypy"]
 
 
 def main() -> int:

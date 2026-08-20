@@ -579,7 +579,8 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tests/unit/test_protocol_package.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S07-001
@@ -615,7 +616,8 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tests/unit/test_protocol_package.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S08-001
@@ -2323,7 +2325,8 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tools/generate_protocols.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S30-001

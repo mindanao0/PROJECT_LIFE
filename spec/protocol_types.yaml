@@ -1,0 +1,213 @@
+# Type resolution for the protocol and SDK surfaces (rank 1).
+#
+# Sections 7.2 and 6.2 name 26 types between them. Three resolved to a schema title;
+# the rest resolved to nothing, and several were near-misses for an existing title —
+# OracleVerdict beside OracleResult, CheckpointRef beside CheckpointManifest,
+# PopulationSnapshot beside PopulationManifest. There was no way to tell whether those
+# were the same thing under two names or two different things, so any protocol written
+# from section 7.2 would have invented 20 signatures and then had to rewrite them.
+#
+# Every name is resolved here into exactly one of three kinds:
+#
+#   ALIAS        the name is a second spelling of an existing schema title. The schema
+#                is canonical; the protocol signature uses the schema's model.
+#   IN_PROCESS   a value that never crosses a process boundary. It has a dataclass and
+#                no schema, because a schema would imply a wire form that does not exist.
+#                Where the value is persisted, the table that holds it is named.
+#   NEW_SCHEMA   a value that DOES cross a boundary — every SDK return type reachable
+#                through `evolve <cmd> --json` — and therefore needs a schema. These are
+#                listed but not yet created; see open_question below.
+#
+# Decided by CR-0011.
+
+spec_version: "10.2.2"
+sources:
+  protocol_outputs: "spec/ACTIVE_CONTRACT.md section 7.2"
+  sdk_returns: "spec/ACTIVE_CONTRACT.md section 6.2"
+
+# ---------------------------------------------------------------------------
+# Section 7.2 — protocol inputs and outputs
+# ---------------------------------------------------------------------------
+protocol_types:
+  - name: "ProjectManifest"
+    kind: "ALIAS"
+    schema: "schemas/09_project_manifest.schema.json"
+    note: "Exact title match."
+
+  - name: "ProgramRepresentation"
+    kind: "IN_PROCESS"
+    fields: ["module_path", "ast", "source_bytes", "source_hash"]
+    note: >-
+      A parsed AST plus its source. Holds live Python AST objects, which have no
+      serialised form; what is persisted is source_hash on the candidates row.
+
+  - name: "MutationResult"
+    kind: "ALIAS"
+    schema: "schemas/04_mutation_result.schema.json"
+
+  - name: "CandidateDrafts"
+    kind: "IN_PROCESS"
+    fields: ["drafts"]
+    element: "CandidateManifest"
+    note: "A batch of candidates before persistence. The element already has schema 01."
+
+  - name: "PopulationSnapshot"
+    kind: "ALIAS"
+    schema: "schemas/05_population.schema.json"
+    schema_title: "PopulationManifest"
+    note: "Two names for the same value. The schema title wins; section 7.2 is the alias."
+
+  - name: "SandboxExecutionResult"
+    kind: "IN_PROCESS"
+    fields: ["execution_status", "exit_code", "duration_ms", "stdout_artifact_id",
+             "stderr_artifact_id", "reason_code"]
+    persisted_as: "evaluation_attempts"
+    note: >-
+      execution_status is the six-value vocabulary from section 8.1, produced by the
+      violation mapping in spec/sandbox/profile-a-linux.yaml.
+
+  - name: "TestSuiteResult"
+    kind: "IN_PROCESS"
+    fields: ["results"]
+    element: "one test_results row"
+    persisted_as: "test_results"
+
+  - name: "CapabilityVerdict"
+    kind: "IN_PROCESS"
+    fields: ["capability_id", "verdict", "evidence_artifact_id"]
+    persisted_as: "capability_results"
+    note: >-
+      NOT schema 10. That is CapabilityContract, the declaration being checked; this is
+      the outcome of checking it.
+
+  - name: "OracleVerdict"
+    kind: "ALIAS"
+    schema: "schemas/13_oracle_result.schema.json"
+    schema_title: "OracleResult"
+
+  - name: "MetricMeasurement"
+    kind: "ALIAS"
+    schema: "schemas/12_metric_result.schema.json"
+    schema_title: "MetricResult"
+
+  - name: "SelectionDecision"
+    kind: "ALIAS"
+    schema: "schemas/17_selection_decision.schema.json"
+
+  - name: "EvidenceRecord"
+    kind: "IN_PROCESS"
+    fields: ["evidence_id", "evidence_type", "evidence_digest", "artifact_id", "status"]
+    persisted_as: "evidence_records"
+
+  - name: "ArtifactRef"
+    kind: "IN_PROCESS"
+    fields: ["artifact_id", "owner_type", "owner_id", "ref_role"]
+    persisted_as: "artifact_refs"
+
+  - name: "LineageSnapshot"
+    kind: "IN_PROCESS"
+    fields: ["nodes", "edges"]
+    note: >-
+      Assembled from lineage_nodes and lineage_edges, which have schemas 15 and 16. The
+      assembled graph is a query result, not a stored document.
+
+  - name: "CheckpointRef"
+    kind: "ALIAS"
+    schema: "schemas/21_checkpoint.schema.json"
+    schema_title: "CheckpointManifest"
+
+  - name: "RecoveryResult"
+    kind: "ALIAS"
+    schema: "schemas/22_recovery_manifest.schema.json"
+    schema_title: "RecoveryManifest"
+
+  - name: "PolicyVerdict"
+    kind: "IN_PROCESS"
+    fields: ["allowed", "reason_code", "policy_hash"]
+    note: >-
+      NOT schema 18. That is PolicySnapshot, the policy itself; this is the decision a
+      policy produced.
+
+  - name: "DeploymentResult"
+    kind: "IN_PROCESS"
+    fields: ["deployment_id", "deployment_state", "deployment_mode"]
+    persisted_as: "deployments"
+
+  - name: "AuditReceipt"
+    kind: "IN_PROCESS"
+    fields: ["audit_event_id", "sequence_no", "event_hash"]
+    persisted_as: "audit_events"
+    note: "What AuditLog.append returns; event_hash follows section 18.1."
+
+  # named inputs that also resolved to nothing
+  - name: "MutationContext"
+    kind: "IN_PROCESS"
+    fields: ["generation_index", "rng_seed_hex", "strategy_id", "policy_hash"]
+
+  - name: "CandidateArtifact"
+    kind: "IN_PROCESS"
+    fields: ["candidate_id", "source_artifact_id", "source_hash"]
+
+  - name: "SandboxRequest"
+    kind: "IN_PROCESS"
+    fields: ["candidate_id", "command_argv", "timeout_seconds", "sandbox_profile"]
+
+  - name: "TestPlan"
+    kind: "IN_PROCESS"
+    fields: ["test_ids", "holdout_excluded"]
+    note: "holdout_excluded enforces the section 17.2 boundary at the call site."
+
+# ---------------------------------------------------------------------------
+# Section 6.2 — SDK return types
+# ---------------------------------------------------------------------------
+sdk_return_types:
+  - name: "RunState"
+    kind: "ALIAS"
+    schema: "schemas/07_run.schema.json"
+    json_pointer: "#/properties/run_state"
+    note: "The eleven-value enum, not a document."
+
+  - name: "ReproducibilityCertificate"
+    kind: "ALIAS"
+    schema: "schemas/20_reproducibility_certificate.schema.json"
+
+  - name: "RunId"
+    kind: "ALIAS"
+    schema: "spec/reproducibility.yaml"
+    note: "An identifier, not a type. Event-derived UUIDv7."
+
+  - name: "ValidationReport"
+    kind: "NEW_SCHEMA"
+    reached_by: "evolve validate --json"
+  - name: "PreflightReport"
+    kind: "NEW_SCHEMA"
+    reached_by: "evolve preflight --json"
+  - name: "GenerationSummary"
+    kind: "NEW_SCHEMA"
+    reached_by: "evolve step --json"
+  - name: "RunStatus"
+    kind: "NEW_SCHEMA"
+    reached_by: "evolve status --json"
+  - name: "EvolutionReport"
+    kind: "NEW_SCHEMA"
+    reached_by: "evolve report --json"
+  - name: "ExportManifest"
+    kind: "NEW_SCHEMA"
+    reached_by: "evolve export"
+
+open_question:
+  what: "The six NEW_SCHEMA types have no schema yet."
+  why_deferred: >-
+    REQ-S15-001 pins the registry at exactly 26 files and REQ-S15-006 forbids a 27th
+    being counted, so adding them is a governed change with wide reach: REQ-S15-001,
+    REQ-S15-006, the CI job named schema_registry_exact_26, version_manifest
+    schemas_count, LINT-14, the EXPECTED_FILES list in tools/validate_schemas.py, the
+    manifest, and a fixture pair each.
+  why_it_does_not_block_M4: >-
+    No protocol in section 7.2 returns one of these. The 19 protocols can be written
+    and type-checked without them. They are the SDK surface, which section 29 step 3
+    pairs with M4 but the M4 gate text does not name.
+  decision_needed: >-
+    Either raise the registry to 32 through a change record, or declare the CLI JSON
+    envelope a single additional schema with a discriminated union over the six. The
+    first keeps one schema per document; the second keeps the registry closer to 26.

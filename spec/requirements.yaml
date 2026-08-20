@@ -504,8 +504,9 @@ requirements:
   status: REQ
   text_digest: sha256:f47de685ca245ac9a59d7b86e85b4729ce444fd66f6dc6cb5868c769b17bfa09
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/unit/test_protocol_package.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S07-001
@@ -534,8 +535,9 @@ requirements:
   status: REQ
   text_digest: sha256:127764e916d1ff344805555d0f3f198f99bb724dd3683a90fda5d6a8022b7641
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/unit/test_protocol_package.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S08-001
@@ -1957,8 +1959,9 @@ requirements:
   status: REQ
   text_digest: sha256:3bfc3a3a95b7ae88a09b600803a566d264dcb6b2de2a221da24134eb1df19eff
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tools/generate_protocols.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S30-001
