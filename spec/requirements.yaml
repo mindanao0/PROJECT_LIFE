@@ -898,6 +898,7 @@ requirements:
   owner: UNASSIGNED
   verification_method: AUTOMATED_TEST
   test_refs:
+  - tests/security/test_profile_a_on_kernel.py
   - tests/security/test_sandbox_profile.py
   evidence_refs: []
   release_gates: []
@@ -928,8 +929,9 @@ requirements:
   status: REQ
   text_digest: sha256:2341b3f1ca483441fbe35ed15c1db5002c81e0effbea411b48dd42ac3a495fe4
   owner: UNASSIGNED
-  verification_method: PENDING
-  test_refs: []
+  verification_method: AUTOMATED_TEST
+  test_refs:
+  - tests/security/test_profile_a_on_kernel.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S12-023
@@ -1908,6 +1910,7 @@ requirements:
   verification_method: AUTOMATED_TEST
   test_refs:
   - tests/conformance/test_maturity_predicates.py
+  - tests/security/test_profile_a_on_kernel.py
   - tools/compute_maturity.py
   - tools/lint_state_vocabulary.py
   evidence_refs: []

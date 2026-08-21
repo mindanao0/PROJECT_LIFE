@@ -2,7 +2,7 @@ engine_version: "10.2.2"
 spec_lineage: "Plan 10.2.2 Unified Release"
 canonical_release_date: "2026-08-18"
 default_deployment_mode: "SAFE_EXPORT_ONLY"
-current_maturity_level: "M5_FSM_AND_CONFIG"
+current_maturity_level: "M6_SECURITY"
 
 subsystems:
   schemas_count: 26

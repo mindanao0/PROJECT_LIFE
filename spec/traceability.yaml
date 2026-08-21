@@ -1051,6 +1051,7 @@ requirements:
   implementation_refs: []
   fsm_refs: []
   test_refs:
+  - tests/security/test_profile_a_on_kernel.py
   - tests/security/test_sandbox_profile.py
   evidence_refs: []
   release_gates: []
@@ -1088,7 +1089,8 @@ requirements:
   protocol_refs: []
   implementation_refs: []
   fsm_refs: []
-  test_refs: []
+  test_refs:
+  - tests/security/test_profile_a_on_kernel.py
   evidence_refs: []
   release_gates: []
 - id: REQ-S12-023
@@ -2263,6 +2265,7 @@ requirements:
   fsm_refs: []
   test_refs:
   - tests/conformance/test_maturity_predicates.py
+  - tests/security/test_profile_a_on_kernel.py
   - tools/compute_maturity.py
   - tools/lint_state_vocabulary.py
   evidence_refs: []

@@ -9,7 +9,7 @@
 > **Core AI Dependency:** None  
 > **LLM Dependency:** None  
 > **Evolution Model:** Population-based evolutionary computation  
-> **Current Maturity:** M5_FSM_AND_CONFIG  
+> **Current Maturity:** M6_SECURITY  
 > **Default Deployment Mode:** SAFE_EXPORT_ONLY  
 > **Active Contract:** Only content between `ACTIVE_SPEC_BEGIN` and `ACTIVE_SPEC_END` is authoritative. The in-file historical archive is non-normative and superseded.
 
@@ -2901,7 +2901,7 @@ current_evidence_status:
   CI_results_verified: false
   release_evidence_verified: false
 
-  maturity_claim: "M5_FSM_AND_CONFIG"
+  maturity_claim: "M6_SECURITY"
 ```
 
 `maturity_claim` ต้องเท่ากับผลลัพธ์ของ `tools/compute_maturity.py` เสมอ ซึ่งคำนวณจาก artifact จริงตาม
@@ -3036,8 +3036,8 @@ SPEC CANONICALIZED: YES
 DESIGN DOCUMENTATION SUFFICIENT TO START IMPLEMENTATION: YES
 DOCUMENTATION CLOSED TO SPECULATIVE CORE EXPANSION: YES
 EXECUTION READY: NOT YET
-CURRENT MATURITY: M5
-NEXT TARGET: M6
+CURRENT MATURITY: M6
+NEXT TARGET: M7
 ```
 
 [REQ][REQ-S30-001] หลัง Plan 10.2.2 ห้ามเพิ่ม speculative Core section ก่อน M3; เอกสารแก้ได้เมื่อ implementation/test พบ ambiguity, contradiction, security defect หรือ falsified assumption และต้องผ่าน Section 27

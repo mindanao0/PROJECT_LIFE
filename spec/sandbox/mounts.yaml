@@ -92,6 +92,10 @@ not_mounted:
 # check exists so a regression that reintroduces a host mount is caught rather than
 # silently trusted. MVP-08 asserts exactly this list.
 assertions_after_setup:
+  # Two different guarantees, and conflating them made the M6 test wrong. A path under
+  # a tree that was never mounted is ABSENT. A path inside /proc cannot be absent —
+  # CPython needs /proc — so it is MASKED: it still exists and reveals nothing, which is
+  # the standard container technique and what masked_paths above actually does.
   must_not_exist:
     - "/var/run/docker.sock"
     - "/run/podman/podman.sock"
@@ -100,8 +104,12 @@ assertions_after_setup:
     - "/root/.aws"
     - "/root/.kube"
     - "/root/.gnupg"
-    - "/proc/kcore"
     - "/sys/firmware"
+  must_be_masked:
+    - "/proc/kcore"
+    - "/proc/keys"
+    - "/proc/timer_list"
+    - "/proc/sched_debug"
   must_be_readonly:
     - "/workspace"
     - "/usr"
